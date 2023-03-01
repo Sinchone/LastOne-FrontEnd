@@ -5,10 +5,9 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "next/core-web-vitals"],
   "env": {
     "browser": true,
     "es6": true
-  },
-  "import/no-unresolved": "off"
+  }
 }
