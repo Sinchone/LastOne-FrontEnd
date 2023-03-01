@@ -1,14 +1,12 @@
-const CracoAlias = require('craco-alias');
+import CracoAlias from 'craco-alias';
 
-module.exports = {
-  plugins: [
-    {
-      plugin: CracoAlias,
-      options: {
-        source: 'tsconfig',
-        baseUrl: './src',
-        tsConfigPath: 'tsconfig.path',
-      },
+export const plugins = [
+  {
+    plugin: CracoAlias,
+    options: {
+      source: 'tsconfig',
+      baseUrl: './src',
+      tsConfigPath: 'tsconfig.path',
     },
-  ],
-};
+  },
+];
