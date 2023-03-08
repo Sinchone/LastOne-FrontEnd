@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import { Header } from '@components/Common';
 import * as S from './style';
+import { Header } from '@components/Common';
 
 interface Props {
   children: ReactNode;
