@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider, Hydrate } from '@tanstack/react-query
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import GlobalStyle from '@styles/globalStyles';
 import { RecoilRoot } from 'recoil';
-import { Layout } from '@components/Common';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(
@@ -29,9 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </Head>
         <GlobalStyle />
         <RecoilRoot>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Component {...pageProps} />
         </RecoilRoot>
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>
