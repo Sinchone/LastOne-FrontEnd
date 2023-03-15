@@ -7,12 +7,7 @@ interface Props {
 }
 
 const Layout = ({ children }: Props) => {
-  return (
-    <S.Wrapper>
-      <Header />
-      {children}
-    </S.Wrapper>
-  );
+  return <S.Wrapper>{children}</S.Wrapper>;
 };
 
 export default Layout;
