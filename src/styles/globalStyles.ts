@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     width: 100%;
+    font-family: 'Pretendard';
     margin: 0 auto;
    
   }

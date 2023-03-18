@@ -32,12 +32,11 @@ export default class MyDocument extends Document {
       <Html lang="ko">
         <Head>
           <meta charSet="utf-8" />
-          <meta name="description" content="My First Static Website" />
-          <meta name="keywords" content="nextjs,static,website" />
           <link
-            href="https://fonts.googleapis.com/css2?family=Catamaran:wght@700&family=Poppins:wght@600&display=swap"
             rel="stylesheet"
-          ></link>
+            as="style"
+            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
+          />
           <link rel="shortcut icon" href="/favicon.ico" />
           {/* <Favicon /> */}
         </Head>
