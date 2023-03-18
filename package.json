@@ -5,10 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "postinstall": "husky install",
-    "format": "prettier --cache --write .",
-    "lint": "eslint --cache ."
+    "start": "next start"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.24.10",
@@ -33,7 +30,6 @@
     "eslint": "^8.35.0",
     "eslint-config-next": "^13.2.1",
     "eslint-config-prettier": "^8.6.0",
-    "husky": "^8.0.3",
     "prettier": "^2.8.4"
   }
 }
