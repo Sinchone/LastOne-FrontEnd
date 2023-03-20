@@ -1,18 +1,19 @@
 import React from 'react';
+import Logo from '@assets/icon/logo.svg';
+import Alarm from '@assets/icon/alarm.svg';
+import User from '@assets/icon/user.svg';
 import * as S from './style';
 
 const Header = () => {
   return (
     <S.Header>
       <S.NavContainer>
-        <S.Nav>라스트원</S.Nav>
-        <S.Nav>파트너 찾기</S.Nav>
-        <S.Nav>채팅</S.Nav>
-        <S.Nav>신청 목록</S.Nav>
+        <Logo />
       </S.NavContainer>
       <S.UserNav>
-        <span>알림</span>
-        <span>로그인</span>
+        <S.Button>글쓰기</S.Button>
+        <Alarm />
+        <span>프로필</span>
       </S.UserNav>
     </S.Header>
   );

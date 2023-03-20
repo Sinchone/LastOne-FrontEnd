@@ -81,6 +81,11 @@ const GlobalStyle = createGlobalStyle`
   
   //Black
     --color-black: #070616;
+<<<<<<< HEAD
+  //White
+    --color-white: #FEFEFE;
+=======
+>>>>>>> 1430c1fa2d313fa68705f93282df4823ad79ca42
   }
  
 `;
