@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from '@components/Common';
+import { Header, Navigation } from '@components/Common';
 import { Banner, Contents } from '@components/Main';
 
 const Main = () => {
@@ -8,6 +8,7 @@ const Main = () => {
       <Header />
       <Banner />
       <Contents />
+      <Navigation />
     </>
   );
 };
