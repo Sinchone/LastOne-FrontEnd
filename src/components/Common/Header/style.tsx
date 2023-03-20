@@ -1,4 +1,3 @@
-import theme from '@styles/theme';
 import styled from 'styled-components';
 
 export const Header = styled.header`
@@ -9,6 +8,10 @@ export const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--color-gray3);
+  background-color: var(--color-white);
+  position: sticky;
+  top: 0;
+  z-index: 100000;
 `;
 
 export const NavContainer = styled.ul`
