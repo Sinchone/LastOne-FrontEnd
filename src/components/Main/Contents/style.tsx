@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.section`
   width: 100%;
-  background-color: var(--color-gray1);
-  padding: 0px 45px;
+  padding-left: 30px;
+  padding-right: 30px;
 `;
 
 export const Content = styled.section`
@@ -68,5 +68,5 @@ export const CardList = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 13px;
 `;
