@@ -7,6 +7,7 @@ export const Wrapper = styled.article`
   width: 32%;
   height: 310px;
   gap: 15px;
+  margin-bottom: 15px;
 `;
 
 export const ImgBox = styled.div`
