@@ -1,7 +1,13 @@
 import React from 'react';
 
 const Login = () => {
-  return <div>Login</div>;
+  const kakaoLoginHandler = () => {};
+
+  return (
+    <>
+      <button onClick={kakaoLoginHandler}>카카오 로그인</button>
+    </>
+  );
 };
 
 export default Login;
