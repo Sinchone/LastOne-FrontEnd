@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import HomeIcon from '@assets/icon/home.svg';
 import PartnerIcon from '@assets/icon/partner.svg';
 import ChattingIcon from '@assets/icon/chatting.svg';
 import ApplyIcon from '@assets/icon/apply.svg';
+import { MATCHING_PAGE } from '@constants/route';
 import * as S from './style';
 
 const Navigation = () => {
@@ -16,10 +18,12 @@ const Navigation = () => {
           <HomeIcon />
           <span>홈</span>
         </S.HomeNav>
-        <S.Nav>
-          <PartnerIcon />
-          <span>파트너 찾기</span>
-        </S.Nav>
+        <Link href={MATCHING_PAGE}>
+          <S.Nav>
+            <PartnerIcon />
+            <span>파트너 찾기</span>
+          </S.Nav>
+        </Link>
         <S.Nav>
           <ChattingIcon />
           <span>채팅</span>
