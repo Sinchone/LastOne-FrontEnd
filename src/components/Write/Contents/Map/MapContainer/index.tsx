@@ -5,7 +5,7 @@ import * as S from './style';
 const MapContainer = () => {
   const [address, setAddress] = useState('');
 
-  const onChangeMap = (e) => {
+  const onChangeMap = (e: any) => {
     setAddress(e.target.value);
   };
 
