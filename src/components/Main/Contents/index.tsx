@@ -40,7 +40,7 @@ const Contents = () => {
         </S.Title>
         <S.CardList>
           {Array.from({ length: 9 }, (_, index) => index).map((el) => (
-            <Card key={el} />
+            <Card key={el} size={'main'} />
           ))}
         </S.CardList>
       </S.Content>

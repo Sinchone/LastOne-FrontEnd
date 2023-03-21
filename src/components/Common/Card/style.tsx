@@ -1,10 +1,10 @@
 import theme from '@styles/theme';
 import styled from 'styled-components';
 
-export const Wrapper = styled.article`
+export const Wrapper = styled.article<{ size: string }>`
   display: flex;
   flex-direction: column;
-  width: 32%;
+  width: ${(props) => (props.size === 'main' ? '32%' : '48%')};
   height: 310px;
   gap: 15px;
   margin-bottom: 15px;

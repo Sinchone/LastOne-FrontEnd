@@ -1,12 +1,14 @@
 import React from 'react';
-import { Header } from '@components/Common';
-import { MatchingHeader } from '@components/Matching';
+import { Header, Navigation } from '@components/Common';
+import { MatchingHeader, MatchingPosts } from '@components/Matching';
 
 const Matching = () => {
   return (
     <>
       <Header />
       <MatchingHeader />
+      <MatchingPosts />
+      <Navigation />
     </>
   );
 };

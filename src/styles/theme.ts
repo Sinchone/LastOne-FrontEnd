@@ -44,11 +44,7 @@ const font = {
     },
     body1: () => {
       return css`
-<<<<<<< HEAD
         font-weight: 400;
-=======
-        font-weight: 400px;
->>>>>>> 1430c1fa2d313fa68705f93282df4823ad79ca42
         font-size: 16px;
         line-height: 20px;
         letter-spacing: -1%;
@@ -56,11 +52,7 @@ const font = {
     },
     body2: () => {
       return css`
-<<<<<<< HEAD
         font-weight: 400;
-=======
-        font-weight: 400px;
->>>>>>> 1430c1fa2d313fa68705f93282df4823ad79ca42
         font-size: 16px;
         line-height: 18px;
         letter-spacing: -1%;
@@ -68,26 +60,15 @@ const font = {
     },
     button: () => {
       return css`
-<<<<<<< HEAD
         font-weight: 400;
         font-size: 14px;
         line-height: 24px;
         letter-spacing: 1%;
-=======
-        font-weight: 500px;
-        font-size: 14px;
-        line-height: 16px;
-        letter-spacing: -1%;
->>>>>>> 1430c1fa2d313fa68705f93282df4823ad79ca42
       `;
     },
     caption: () => {
       return css`
-<<<<<<< HEAD
         font-weight: 400;
-=======
-        font-weight: 400px;
->>>>>>> 1430c1fa2d313fa68705f93282df4823ad79ca42
         font-size: 12px;
         line-height: 16px;
         letter-spacing: -1%;
@@ -137,7 +118,7 @@ const font = {
     },
     body1: () => {
       return css`
-        font-weight: 300px;
+        font-weight: 300;
         font-size: 20px;
         line-height: 25px;
         letter-spacing: 0%;
@@ -145,7 +126,7 @@ const font = {
     },
     body2: () => {
       return css`
-        font-weight: 300px;
+        font-weight: 300;
         font-size: 16px;
         line-height: 22px;
         letter-spacing: 0%;
@@ -153,7 +134,7 @@ const font = {
     },
     button: () => {
       return css`
-        font-weight: 400px;
+        font-weight: 400;
         font-size: 18px;
         line-height: 19px;
         letter-spacing: 0%;
@@ -161,7 +142,7 @@ const font = {
     },
     caption: () => {
       return css`
-        font-weight: 300px;
+        font-weight: 300;
         font-size: 14px;
         line-height: 15px;
         letter-spacing: 0%;
