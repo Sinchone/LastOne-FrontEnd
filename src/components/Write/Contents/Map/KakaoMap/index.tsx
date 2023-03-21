@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import GreyMarker from '../../../../../public/nomalMarker.png';
-import BlueMarker from './checkMarker.png';
+import CheckMarker from '@assets/checkMarker.png';
 
 declare global {
   interface Window {
@@ -8,16 +7,10 @@ declare global {
   }
 }
 
-const ContentsMap = () => {
-  const [address, setAddress] = useState('');
+const KakaoMap = () => {
   const container = useRef();
   const [kakaoMap, setKakaoMap] = useState(null);
-
   const [markerInfo, setMarkerInfo] = useState('');
-
-  const onChangeMap = (e) => {
-    setAddress(e.target.value);
-  };
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -35,8 +28,8 @@ const ContentsMap = () => {
 
         const map = new window.kakao.maps.Map(container, options);
 
-        const icon = new window.kakao.maps.MarkerImage('GreyMarker', new window.kakao.maps.Size(31, 35), {
-          offset: new window.kakao.maps.Point(16, 16),
+        const Icon = new window.kakao.maps.MarkerImage(CheckMarker, new window.kakao.maps.Size(31, 35), {
+          offset: new window.kakao.maps.Point(16, 34),
           alt: '마커 이미지 예제',
           shape: 'poly',
           coords: '1,20,1,9,5,2,10,0,21,0,27,3,30,9,30,20,17,33,14,33',
@@ -45,7 +38,7 @@ const ContentsMap = () => {
         const marker = new window.kakao.maps.Marker({
           map: map,
           position: new window.kakao.maps.LatLng(33.450701, 126.570667),
-          image: icon,
+          image: Icon,
         });
 
         setKakaoMap(map);
@@ -151,15 +144,7 @@ const ContentsMap = () => {
   //   // }
   // }, [kakaoMap, address]);
 
-  return (
-    <div>
-      <div>헬스장 위치</div>
-      <div>
-        <input placeholder="헬스장 위치검색" onChange={onChangeMap} />
-        <div id="map" style={{ width: '100%', height: 312 }} />;
-      </div>
-    </div>
-  );
+  return <div id="map" style={{ width: '100%', height: 312, borderRadius: '8px' }} />;
 };
 
-export default ContentsMap;
+export default KakaoMap;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const WriteContainer = styled.div`
-  background-color: palegoldenrod;
+  /* background-color: palegoldenrod; */
   padding: 40px 24px;
 `;
 
