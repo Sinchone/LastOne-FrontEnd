@@ -2,9 +2,13 @@ import React from 'react';
 import MapMarkerIcon from '@assets/icon/mapmarker.svg';
 import * as S from './style';
 
-const Card = () => {
+interface Props {
+  size: 'main' | 'matching';
+}
+
+const Card = ({ size }: Props) => {
   return (
-    <S.Wrapper>
+    <S.Wrapper size={size}>
       <S.ImgBox>
         <S.Badge>
           <S.Recruit>모집중</S.Recruit>
