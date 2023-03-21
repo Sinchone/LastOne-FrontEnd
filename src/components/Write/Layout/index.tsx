@@ -1,12 +1,12 @@
 import { Layout } from '@components/Common';
-import WriteContents from '../Contents';
+import { ContentsContainer } from '../Contents';
 import WriteNav from '../Nav';
 
 const WriteLayout = () => {
   return (
     <Layout>
       <WriteNav />
-      <WriteContents />
+      <ContentsContainer />
     </Layout>
   );
 };

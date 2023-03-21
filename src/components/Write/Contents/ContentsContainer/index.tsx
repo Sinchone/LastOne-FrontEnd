@@ -1,8 +1,8 @@
 import React from 'react';
-import ContentsMap from './ContentsMap';
 import * as S from './style';
+import { MapContainer } from '../Map';
 
-const WriteContents = () => {
+const ContentsContainer = () => {
   return (
     <S.WriteContainer>
       <S.TitleContainer>
@@ -20,9 +20,9 @@ const WriteContents = () => {
         </S.TimeWrapper>
       </S.TimeContainer>
 
-      <ContentsMap />
+      <MapContainer />
     </S.WriteContainer>
   );
 };
 
-export default WriteContents;
+export default ContentsContainer;
