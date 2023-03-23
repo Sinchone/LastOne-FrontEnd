@@ -2,7 +2,7 @@ import { Layout } from '@components/Common';
 import { ContentsContainer } from '../Contents';
 import WriteNav from '../Nav';
 
-const WriteLayout = () => {
+const UploadLayout = () => {
   return (
     <Layout>
       <WriteNav />
@@ -11,4 +11,4 @@ const WriteLayout = () => {
   );
 };
 
-export default WriteLayout;
+export default UploadLayout;

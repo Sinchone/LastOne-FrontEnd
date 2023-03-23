@@ -11,9 +11,10 @@ export const InputWrapper = styled.div`
   width: 100%;
   height: 48px;
 
-  background-color: #e5e5e7;
+  background-color: var(--color-gray2);
 
   display: flex;
+  align-items: center;
 
   border: 0px;
   border-radius: 6px;
@@ -21,6 +22,8 @@ export const InputWrapper = styled.div`
   margin-bottom: 12px;
 
   svg {
+    width: 25px;
+    height: 23.32px;
     margin: 8px;
   }
 `;
@@ -31,6 +34,8 @@ export const PlaceInput = styled.input`
   width: 100%;
   border: 0px;
   background-color: transparent;
+  color: var(--color-gary8);
 
-  font-size: 20px;
+  ${theme.font.ko.subTitle1}
+  font-weight:400;
 `;
