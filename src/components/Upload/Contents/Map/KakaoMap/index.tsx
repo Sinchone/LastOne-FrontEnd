@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import CheckMarker from '@assets/checkMarker.png';
+import CheckMarker from '@assets/png/checkMarker.png';
+import NomalMarker from '@assets/png/nomalMarker.png';
 
 declare global {
   interface Window {
@@ -7,9 +8,10 @@ declare global {
   }
 }
 
-const KakaoMap = () => {
+const KakaoMap = ({ address }: any) => {
   const container = useRef();
   const [kakaoMap, setKakaoMap] = useState(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [markerInfo, setMarkerInfo] = useState('');
 
   useEffect(() => {
@@ -27,19 +29,6 @@ const KakaoMap = () => {
         };
 
         const map = new window.kakao.maps.Map(container, options);
-
-        const Icon = new window.kakao.maps.MarkerImage(CheckMarker, new window.kakao.maps.Size(31, 35), {
-          offset: new window.kakao.maps.Point(16, 34),
-          alt: '마커 이미지 예제',
-          shape: 'poly',
-          coords: '1,20,1,9,5,2,10,0,21,0,27,3,30,9,30,20,17,33,14,33',
-        });
-
-        const marker = new window.kakao.maps.Marker({
-          map: map,
-          position: new window.kakao.maps.LatLng(33.450701, 126.570667),
-          image: Icon,
-        });
 
         setKakaoMap(map);
       });
@@ -59,30 +48,30 @@ const KakaoMap = () => {
 
   //   // //검색어따라 지도에서 찾기
 
-  //   const placesSearchCB = (data, status, pagination) => {
+  //   const placesSearchCB = (data: string | any[], status: any, pagination: any) => {
   //     if (status === window.kakao.maps.services.Status.OK) {
-  //       let bounds = new window.kakao.maps.LatLngBounds();
+  //       const bounds = new window.kakao.maps.LatLngBounds();
 
   //       for (let i = 0; i < data.length; i++) {
   //         displayMarker(data[i]);
   //         bounds.extend(new window.kakao.maps.LatLng(data[i].y, data[i].x));
   //       }
 
-  //       kakaoMap.setBounds(bounds);
+  //       // kakaoMap.setBounds(bounds);
   //     }
   //   };
   //   ps.keywordSearch(address, placesSearchCB);
 
-  //   let selectedMarker: any = null;
+  //   let selectedMarker: unknown = null;
 
-  //   function displayMarker(place) {
+  //   function displayMarker(place: React.SetStateAction<string>) {
   //     const nomalMarker = new window.kakao.maps.MarkerImage(
-  //       GreyMarker,
+  //       NomalMarker,
   //       new window.kakao.maps.Size(36, 36),
   //       new window.kakao.maps.Point(13, 34)
   //     );
   //     const checkMarker = new window.kakao.maps.MarkerImage(
-  //       BlueMarker,
+  //       CheckMarker,
   //       new window.kakao.maps.Size(36, 36),
   //       new window.kakao.maps.Point(13, 34)
   //     );
@@ -94,50 +83,50 @@ const KakaoMap = () => {
   //       image: nomalMarker,
   //     });
 
-  //     // window.kakao.maps.event.addListener(marker, 'click', function () {
-  //     //   // 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
-  //     //   // 마커의 이미지를 클릭 이미지로 변경합니다
-  //     //   if (!selectedMarker || selectedMarker !== marker) {
-  //     //     // 클릭된 마커 객체가 null이 아니면
-  //     //     // 클릭된 마커의 이미지를 기본 이미지로 변경하고
-  //     //     !!selectedMarker && selectedMarker.setImage(markerImage);
+  //     window.kakao.maps.event.addListener(marker, 'click', function () {
+  //       // 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
+  //       // 마커의 이미지를 클릭 이미지로 변경합니다
+  //       if (!selectedMarker || selectedMarker !== marker) {
+  //         // 클릭된 마커 객체가 null이 아니면
+  //         // 클릭된 마커의 이미지를 기본 이미지로 변경하고
+  //         !!selectedMarker && selectedMarker.setImage(nomalMarker);
 
-  //     //     // 현재 클릭된 마커의 이미지는 클릭 이미지로 변경합니다
-  //     //     marker.setImage(checkMarker);
-  //     //     selectedMarker = marker;
+  //         // 현재 클릭된 마커의 이미지는 클릭 이미지로 변경합니다
+  //         marker.setImage(checkMarker);
+  //         selectedMarker = marker;
 
-  //     //     setMarkerInfo(place);
-  //     //   } else {
-  //     //     marker.setImage(nomalMarker);
-  //     //     // 클릭된 마커를 빈값으로 설정합니다
-  //     //     selectedMarker = null;
+  //         setMarkerInfo(place);
+  //       } else {
+  //         marker.setImage(nomalMarker);
+  //         // 클릭된 마커를 빈값으로 설정합니다
+  //         selectedMarker = null;
 
-  //     //     setMarkerInfo(null);
-  //     //   }
-  //     // });
+  //         setMarkerInfo(null);
+  //       }
+  //     });
 
-  //     // window.kakao.maps.event.addListener(kakaoMap, 'click', function () {
-  //     //   marker.setImage(nomalMarker);
-  //     //   selectedMarker = null;
+  //     window.kakao.maps.event.addListener(kakaoMap, 'click', function () {
+  //       marker.setImage(nomalMarker);
+  //       selectedMarker = null;
 
-  //     //   setMarkerInfo(null);
-  //     // });
+  //       setMarkerInfo(null);
+  //     });
   //   }
 
   //   // function displayMarker(place) {
-  //   //   const nomalMarker = new kakao.maps.MarkerImage(
-  //   //     GreyMarker,
-  //   //     new kakao.maps.Size(36, 36),
-  //   //     new kakao.maps.Point(13, 34)
+  //   //   const nomalMarker = new window.kakao.maps.MarkerImage(
+  //   //     NomalMarker,
+  //   //     new window.kakao.maps.Size(36, 36),
+  //   //     new window.kakao.maps.Point(13, 34)
   //   //   );
 
-  //   //   let marker = new kakao.maps.Marker({
+  //   //   let marker = new window.kakao.maps.Marker({
   //   //     map: kakaoMap,
-  //   //     position: new kakao.maps.LatLng(place.y, place.x),
+  //   //     position: new window.kakao.maps.LatLng(place.y, place.x),
   //   //     image: nomalMarker,
   //   //   });
 
-  //   //   kakao.maps.event.addListener(marker, 'click', function () {
+  //   //   window.kakao.maps.event.addListener(marker, 'click', function () {
   //   //     infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
   //   //     infowindow.open(map, marker);
   //   //   });

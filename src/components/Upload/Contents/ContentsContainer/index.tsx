@@ -1,6 +1,9 @@
 import React from 'react';
 import * as S from './style';
 import { MapContainer } from '../Map';
+import CalendarIcon from '@assets/icon/calendar.svg';
+import ClockIcon from '@assets/icon/clock.svg';
+import ImgContainer from '../ContentsImg';
 
 const ContentsContainer = () => {
   return (
@@ -11,16 +14,19 @@ const ContentsContainer = () => {
 
       <S.TimeContainer>
         <S.DateWrapper>
-          <div>달력</div>
-          <div>운동 날짜</div>
+          <CalendarIcon />
+          <p>운동 날짜</p>
         </S.DateWrapper>
         <S.TimeWrapper>
-          <div>시계</div>
-          <div>운동 시간</div>
+          <ClockIcon />
+          <p>운동 시간</p>
         </S.TimeWrapper>
       </S.TimeContainer>
 
       <MapContainer />
+      <ImgContainer />
+
+      <S.UploadBtn>업로드</S.UploadBtn>
     </S.WriteContainer>
   );
 };
