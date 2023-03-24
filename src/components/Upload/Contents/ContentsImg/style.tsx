@@ -17,6 +17,7 @@ export const ImgTitle = styled.div`
 `;
 
 export const AddImgContainer = styled.div`
+  position: relative;
   width: 100%;
   height: 212px;
 
@@ -34,8 +35,10 @@ export const AddImg = styled.div`
 `;
 
 export const AddMessageWrapper = styled.div`
+  position: absolute;
   width: 100%;
   height: 100%;
+
   border-radius: 8px;
 
   display: flex;
@@ -43,5 +46,5 @@ export const AddMessageWrapper = styled.div`
   justify-content: center;
 
   background-color: black;
-  opacity: 0.1;
+  opacity: 0.2;
 `;

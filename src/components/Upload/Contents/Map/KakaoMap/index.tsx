@@ -35,103 +35,103 @@ const KakaoMap = ({ address }: any) => {
     };
   }, [container]);
 
-  // useEffect(() => {
-  //   if (kakaoMap === null) {
-  //     return;
-  //   }
+  useEffect(() => {
+    if (kakaoMap === null) {
+      return;
+    }
 
-  //   if (address === '') {
-  //     return;
-  //   }
+    if (address === '') {
+      return;
+    }
 
-  //   const ps = new window.kakao.maps.services.Places();
+    const ps = new window.kakao.maps.services.Places();
 
-  //   // //검색어따라 지도에서 찾기
+    // //검색어따라 지도에서 찾기
 
-  //   const placesSearchCB = (data: string | any[], status: any, pagination: any) => {
-  //     if (status === window.kakao.maps.services.Status.OK) {
-  //       const bounds = new window.kakao.maps.LatLngBounds();
+    const placesSearchCB = (data: string | any[], status: any, pagination: any) => {
+      if (status === window.kakao.maps.services.Status.OK) {
+        const bounds = new window.kakao.maps.LatLngBounds();
 
-  //       for (let i = 0; i < data.length; i++) {
-  //         displayMarker(data[i]);
-  //         bounds.extend(new window.kakao.maps.LatLng(data[i].y, data[i].x));
-  //       }
+        for (let i = 0; i < data.length; i++) {
+          displayMarker(data[i]);
+          bounds.extend(new window.kakao.maps.LatLng(data[i].y, data[i].x));
+        }
 
-  //       // kakaoMap.setBounds(bounds);
-  //     }
-  //   };
-  //   ps.keywordSearch(address, placesSearchCB);
+        kakaoMap.setBounds(bounds);
+      }
+    };
+    ps.keywordSearch(address, placesSearchCB);
 
-  //   let selectedMarker: unknown = null;
+    let selectedMarker: unknown = null;
 
-  //   function displayMarker(place: React.SetStateAction<string>) {
-  //     const nomalMarker = new window.kakao.maps.MarkerImage(
-  //       NomalMarker,
-  //       new window.kakao.maps.Size(36, 36),
-  //       new window.kakao.maps.Point(13, 34)
-  //     );
-  //     const checkMarker = new window.kakao.maps.MarkerImage(
-  //       CheckMarker,
-  //       new window.kakao.maps.Size(36, 36),
-  //       new window.kakao.maps.Point(13, 34)
-  //     );
+    function displayMarker(place: React.SetStateAction<string>) {
+      const nomalMarker = new window.kakao.maps.MarkerImage(
+        NomalMarker,
+        new window.kakao.maps.Size(36, 36),
+        new window.kakao.maps.Point(13, 34)
+      );
+      const checkMarker = new window.kakao.maps.MarkerImage(
+        CheckMarker,
+        new window.kakao.maps.Size(36, 36),
+        new window.kakao.maps.Point(13, 34)
+      );
 
-  //     // 마커를 생성하고 지도에 표시
-  //     const marker = new window.kakao.maps.Marker({
-  //       map: kakaoMap,
-  //       position: new window.kakao.maps.LatLng(place.y, place.x),
-  //       image: nomalMarker,
-  //     });
+      // 마커를 생성하고 지도에 표시
+      const marker = new window.kakao.maps.Marker({
+        map: kakaoMap,
+        position: new window.kakao.maps.LatLng(place.y, place.x),
+        image: nomalMarker,
+      });
 
-  //     window.kakao.maps.event.addListener(marker, 'click', function () {
-  //       // 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
-  //       // 마커의 이미지를 클릭 이미지로 변경합니다
-  //       if (!selectedMarker || selectedMarker !== marker) {
-  //         // 클릭된 마커 객체가 null이 아니면
-  //         // 클릭된 마커의 이미지를 기본 이미지로 변경하고
-  //         !!selectedMarker && selectedMarker.setImage(nomalMarker);
+      window.kakao.maps.event.addListener(marker, 'click', function () {
+        // 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
+        // 마커의 이미지를 클릭 이미지로 변경합니다
+        if (!selectedMarker || selectedMarker !== marker) {
+          // 클릭된 마커 객체가 null이 아니면
+          // 클릭된 마커의 이미지를 기본 이미지로 변경하고
+          !!selectedMarker && selectedMarker.setImage(nomalMarker);
 
-  //         // 현재 클릭된 마커의 이미지는 클릭 이미지로 변경합니다
-  //         marker.setImage(checkMarker);
-  //         selectedMarker = marker;
+          // 현재 클릭된 마커의 이미지는 클릭 이미지로 변경합니다
+          marker.setImage(checkMarker);
+          selectedMarker = marker;
 
-  //         setMarkerInfo(place);
-  //       } else {
-  //         marker.setImage(nomalMarker);
-  //         // 클릭된 마커를 빈값으로 설정합니다
-  //         selectedMarker = null;
+          setMarkerInfo(place);
+        } else {
+          marker.setImage(nomalMarker);
+          // 클릭된 마커를 빈값으로 설정합니다
+          selectedMarker = null;
 
-  //         setMarkerInfo(null);
-  //       }
-  //     });
+          setMarkerInfo(null);
+        }
+      });
 
-  //     window.kakao.maps.event.addListener(kakaoMap, 'click', function () {
-  //       marker.setImage(nomalMarker);
-  //       selectedMarker = null;
+      window.kakao.maps.event.addListener(kakaoMap, 'click', function () {
+        marker.setImage(nomalMarker);
+        selectedMarker = null;
 
-  //       setMarkerInfo(null);
-  //     });
-  //   }
+        setMarkerInfo(null);
+      });
+    }
 
-  //   // function displayMarker(place) {
-  //   //   const nomalMarker = new window.kakao.maps.MarkerImage(
-  //   //     NomalMarker,
-  //   //     new window.kakao.maps.Size(36, 36),
-  //   //     new window.kakao.maps.Point(13, 34)
-  //   //   );
+    // function displayMarker(place) {
+    //   const nomalMarker = new window.kakao.maps.MarkerImage(
+    //     NomalMarker,
+    //     new window.kakao.maps.Size(36, 36),
+    //     new window.kakao.maps.Point(13, 34)
+    //   );
 
-  //   //   let marker = new window.kakao.maps.Marker({
-  //   //     map: kakaoMap,
-  //   //     position: new window.kakao.maps.LatLng(place.y, place.x),
-  //   //     image: nomalMarker,
-  //   //   });
+    //   let marker = new window.kakao.maps.Marker({
+    //     map: kakaoMap,
+    //     position: new window.kakao.maps.LatLng(place.y, place.x),
+    //     image: nomalMarker,
+    //   });
 
-  //   //   window.kakao.maps.event.addListener(marker, 'click', function () {
-  //   //     infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-  //   //     infowindow.open(map, marker);
-  //   //   });
-  //   // }
-  // }, [kakaoMap, address]);
+    //   window.kakao.maps.event.addListener(marker, 'click', function () {
+    //     infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+    //     infowindow.open(map, marker);
+    //   });
+    // }
+  }, [kakaoMap, address]);
 
   return <div id="map" style={{ width: '100%', height: 312, borderRadius: '8px' }} />;
 };

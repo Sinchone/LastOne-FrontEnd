@@ -3,23 +3,22 @@ import * as S from './style';
 import AddMessage from '@assets/icon/addImg.svg';
 
 const ImgContainer = () => {
-  const isImg = false;
+  const isImg = true;
 
   return (
     <S.ImgWrapper>
       <S.ImgTitle>상세설명</S.ImgTitle>
       <S.AddImgContainer>
         {isImg ? (
-          <>
-            <S.AddImg />
-            <S.AddImg />
-            <S.AddImg />
-          </>
+          <></>
         ) : (
           <S.AddMessageWrapper>
             <AddMessage />
           </S.AddMessageWrapper>
         )}
+        <S.AddImg />
+        <S.AddImg />
+        <S.AddImg />
       </S.AddImgContainer>
     </S.ImgWrapper>
   );

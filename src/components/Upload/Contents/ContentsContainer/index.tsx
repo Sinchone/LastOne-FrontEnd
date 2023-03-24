@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import * as S from './style';
 import { MapContainer } from '../Map';
+
 import CalendarIcon from '@assets/icon/calendar.svg';
 import ClockIcon from '@assets/icon/clock.svg';
 import ImgContainer from '../ContentsImg';
 
 const ContentsContainer = () => {
+  const textRef = useRef();
+  const handleResizeHeight = useCallback(() => {
+    textRef.current.style.height = textRef.current.scrollHeight + 'px';
+  }, []);
+
   return (
     <S.WriteContainer>
       <S.TitleContainer>
@@ -25,6 +31,8 @@ const ContentsContainer = () => {
 
       <MapContainer />
       <ImgContainer />
+
+      <S.Description placeholder="내용을 입력해주세요." ref={textRef} onInput={handleResizeHeight} />
 
       <S.UploadBtn>업로드</S.UploadBtn>
     </S.WriteContainer>

@@ -82,3 +82,21 @@ export const UploadBtn = styled.button`
   border: 0px;
   border-radius: 6px;
 `;
+
+export const Description = styled.textarea`
+  background-color: transparent;
+  width: 100%;
+
+  margin: 16px 0px 60px 0px;
+
+  ${theme.font.ko.body1}
+  color: var(--color-black);
+
+  ::placeholder {
+    color: var(--color-gray9);
+  }
+
+  border: 0px;
+  outline: none;
+  resize: none;
+`;
