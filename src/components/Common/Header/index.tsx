@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '@assets/icon/logo.svg';
 import Alarm from '@assets/icon/alarm.svg';
-import User from '@assets/icon/user.svg';
+import Profile from '@assets/icon/profile.svg';
 import * as S from './style';
 
 const Header = () => {
@@ -13,7 +13,7 @@ const Header = () => {
       <S.UserNav>
         <S.Button>글쓰기</S.Button>
         <Alarm />
-        <span>프로필</span>
+        <Profile />
       </S.UserNav>
     </S.Header>
   );

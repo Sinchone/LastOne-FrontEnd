@@ -151,8 +151,28 @@ const font = {
   },
 };
 
+const breakpoints = {
+  mobile1: '375px',
+  mobile2: '480px',
+  tablet: '768px',
+  laptop: '1200px',
+  desktop: '1200px',
+  large: '1700px',
+} as const;
+
+const mediaQuery = (maxWidth: string) => `@media (max-width: ${maxWidth})`;
+
+const media = {
+  mobile1: mediaQuery(breakpoints.mobile1),
+  mobile2: mediaQuery(breakpoints.mobile2),
+  tablet: mediaQuery(breakpoints.tablet),
+  laptop: mediaQuery(breakpoints.laptop),
+  desktop: mediaQuery(breakpoints.desktop),
+} as const;
+
 const theme: DefaultTheme = {
   font,
+  media,
 };
 
 export default theme;
