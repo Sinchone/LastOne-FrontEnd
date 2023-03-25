@@ -1,10 +1,11 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import * as S from './style';
 import { MapContainer } from '../Map';
 
 import CalendarIcon from '@assets/icon/calendar.svg';
 import ClockIcon from '@assets/icon/clock.svg';
 import ImgContainer from '../ContentsImg';
+import BottomSheet from '../BottomSheet/BottomSheetContainer';
 
 const ContentsContainer = () => {
   const textRef = useRef();
@@ -12,13 +13,19 @@ const ContentsContainer = () => {
     textRef.current.style.height = textRef.current.scrollHeight + 'px';
   }, []);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <S.WriteContainer>
       <S.TitleContainer>
         <S.TitleInput placeholder="제목" />
       </S.TitleContainer>
 
-      <S.TimeContainer>
+      <S.TimeContainer
+        onClick={() => {
+          setIsModalOpen(true);
+        }}
+      >
         <S.DateWrapper>
           <CalendarIcon />
           <p>운동 날짜</p>
@@ -28,6 +35,8 @@ const ContentsContainer = () => {
           <p>운동 시간</p>
         </S.TimeWrapper>
       </S.TimeContainer>
+
+      {isModalOpen && <BottomSheet setIsModalOpen={setIsModalOpen} />}
 
       <MapContainer />
       <ImgContainer />
