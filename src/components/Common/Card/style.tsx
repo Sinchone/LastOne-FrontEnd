@@ -8,6 +8,10 @@ export const Wrapper = styled.article<{ size: string }>`
   height: 310px;
   gap: 15px;
   margin-bottom: 15px;
+
+  ${theme.media.mobile2} {
+    width: 48%;
+  }
 `;
 
 export const ImgBox = styled.div`
@@ -26,12 +30,19 @@ export const Description = styled.div`
 
   .title {
     ${theme.font.ko.subTitle1}
+
+    ${theme.media.mobile2} {
+      font-size: 17px;
+    }
   }
   span {
     ${theme.font.ko.body1}
     display: flex;
     align-items: center;
     gap: 6px;
+    ${theme.media.mobile2} {
+      font-size: 13px;
+    }
   }
 `;
 
@@ -50,6 +61,8 @@ export const Recruit = styled.div`
   background-color: var(--color-secondary-main);
   color: var(--color-white);
   ${theme.font.ko.button}
+  display: flex;
+  align-items: center;
 `;
 
 export const Gender = styled.div`
@@ -60,4 +73,6 @@ export const Gender = styled.div`
   background-color: var(--color-primary-main);
   color: var(--color-white);
   ${theme.font.ko.button}
+  display: flex;
+  align-items: center;
 `;

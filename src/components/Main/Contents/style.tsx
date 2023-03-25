@@ -7,6 +7,11 @@ export const Wrapper = styled.section`
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 150px;
+
+  ${theme.media.mobile2} {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 `;
 
 export const Content = styled.section`
@@ -36,6 +41,11 @@ export const PromiseContents = styled.div`
   background-color: var(--color-white);
   filter: drop-shadow(0px 0px 10px rgba(111, 120, 130, 0.15));
   margin-bottom: 42px;
+
+  ${theme.media.mobile2} {
+    gap: 5px;
+    padding: 24px 5px 24px 5px;
+  }
 `;
 
 export const PromiseContent = styled.div`
@@ -46,8 +56,17 @@ export const PromiseContent = styled.div`
   width: 130px;
   gap: 16px;
 
+  ${theme.media.mobile2} {
+    width: 100%;
+    gap: 0;
+  }
+
   span {
     ${theme.font.ko.subTitle1}
+
+    ${theme.media.mobile2} {
+      font-size: 3px;
+    }
   }
 
   .description {
@@ -56,6 +75,10 @@ export const PromiseContent = styled.div`
     line-height: 20px;
     letter-spacing: -1%;
     color: var(--color-gray8);
+
+    ${theme.media.mobile2} {
+      font-size: 2px;
+    }
   }
 `;
 
@@ -71,4 +94,8 @@ export const CardList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 13px;
+
+  ${theme.media.mobile2} {
+    gap: 13px;
+  }
 `;
