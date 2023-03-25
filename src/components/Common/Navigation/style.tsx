@@ -9,7 +9,6 @@ export const Wrapper = styled.footer`
   background-color: var(--color-white);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  margin-top: 34px;
   position: sticky;
   bottom: 0;
 `;

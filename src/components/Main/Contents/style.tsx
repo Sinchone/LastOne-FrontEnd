@@ -3,8 +3,11 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.section`
   width: 100%;
+  height: auto;
+  min-height: 100%;
   padding-left: 30px;
   padding-right: 30px;
+  padding-bottom: 126px;
 `;
 
 export const Content = styled.section`
