@@ -48,7 +48,7 @@ const GlobalStyle = createGlobalStyle`
 
   :root {
     //Primary
-    --color-primary-main: #1A234D;
+    --color-primary-main: #000C4A;
     --color-primary-light: #333D6E;
     --color-primary-dark: #000834;
    
@@ -83,6 +83,8 @@ const GlobalStyle = createGlobalStyle`
     --color-black: #070616;
   //White
     --color-white: #FEFEFE;
+  //Yellow
+    --color-yellow: #FAE407;  
   }
  
 `;
