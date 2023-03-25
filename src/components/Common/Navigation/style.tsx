@@ -2,6 +2,7 @@ import theme from '@styles/theme';
 import styled from 'styled-components';
 
 export const Wrapper = styled.footer`
+  max-width: 768px;
   width: 100%;
   height: 126px;
   padding: 24px 40px 24px 40px;
@@ -9,7 +10,7 @@ export const Wrapper = styled.footer`
   background-color: var(--color-white);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  position: sticky;
+  position: fixed;
   bottom: 0;
 `;
 
