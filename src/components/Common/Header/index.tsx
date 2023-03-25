@@ -3,6 +3,7 @@ import Logo from '@assets/icon/logo.svg';
 import Alarm from '@assets/icon/alarm.svg';
 import Profile from '@assets/icon/profile.svg';
 import * as S from './style';
+import Link from 'next/link';
 
 const Header = () => {
   return (
@@ -11,7 +12,9 @@ const Header = () => {
         <Logo />
       </S.NavContainer>
       <S.UserNav>
-        <S.Button>글쓰기</S.Button>
+        <Link href={'/upload'}>
+          <S.Button>글쓰기</S.Button>
+        </Link>
         <Alarm />
         <Profile />
       </S.UserNav>
