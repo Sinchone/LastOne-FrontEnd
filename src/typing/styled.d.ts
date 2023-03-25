@@ -7,5 +7,12 @@ declare module 'styled-components' {
       ko: fontThemeType;
       eng: fontThemeType;
     };
+    media: {
+      readonly mobile1: string;
+      readonly mobile2: string;
+      readonly tablet: string;
+      readonly laptop: string;
+      readonly desktop: string;
+    };
   }
 }

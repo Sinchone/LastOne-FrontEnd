@@ -41,4 +41,16 @@ export const Button = styled.button`
   padding: 12px 14px 12px 14px;
   background-color: var(--color-primary-main);
   color: var(--color-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: var(--color-primary-light);
+  }
+
+  &:active {
+    background-color: var(--color-primary-dark);
+  }
 `;

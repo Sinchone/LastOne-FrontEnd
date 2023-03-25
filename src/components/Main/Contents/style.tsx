@@ -71,4 +71,8 @@ export const CardList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 13px;
+
+  ${theme.media.mobile2} {
+    gap: 20px;
+  }
 `;

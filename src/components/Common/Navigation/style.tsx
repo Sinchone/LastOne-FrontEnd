@@ -20,7 +20,7 @@ export const NavList = styled.ul`
   align-items: center;
   width: 100%;
 `;
-export const HomeNav = styled.li`
+export const HomeNav = styled.li<{ isLocated: boolean }>`
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -29,11 +29,12 @@ export const HomeNav = styled.li`
 
   span {
     ${theme.font.ko.subTitle1}
-    color: var(--color-primary-main)
+    color: ${(props) =>
+      props.isLocated ? `var(--color-primary-main)` : `var(--color-gray7)`}//var(--color-primary-main)
   }
 `;
 
-export const Nav = styled.li`
+export const Nav = styled.li<{ isLocated: boolean }>`
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -43,6 +44,6 @@ export const Nav = styled.li`
 
   span {
     ${theme.font.ko.subTitle1}
-    color: var(--color-gray7)
+    color: ${(props) => (props.isLocated ? `var(--color-gray7)` : `var(--color-primary-main)`)}
   }
 `;

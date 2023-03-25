@@ -28,12 +28,17 @@ export const LocationAndSearch = styled.div`
   }
 `;
 
+export const CheckboxContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
 export const Checkbox = styled.div`
   width: 18px;
   height: 18px;
   border: solid var(--color-gray8);
   display: flex;
-  margin-right: 5px;
 `;
 
 export const SearchInput = styled.div`

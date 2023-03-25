@@ -10,10 +10,14 @@ const MatchingHeader = () => {
       <S.LocationAndSearch>
         <span className="location">전체</span>
         <BottomArrowIcon />
-        <S.Checkbox />
-        <span className="checkbox_title">헬스장</span>
-        <S.Checkbox />
-        <span className="checkbox_title">제목</span>
+        <S.CheckboxContainer>
+          <S.Checkbox />
+          <span className="checkbox_title">헬스장</span>
+        </S.CheckboxContainer>
+        <S.CheckboxContainer>
+          <S.Checkbox />
+          <span className="checkbox_title">제목</span>
+        </S.CheckboxContainer>
       </S.LocationAndSearch>
       <S.SearchInput>
         <SearchIcon />
@@ -34,8 +38,10 @@ const MatchingHeader = () => {
             <span>날짜 설정</span> <BottomArrowSmallIcon />
           </S.Filter>
         </S.FilterContainer>
-        <S.Checkbox />
-        <span className="checkbox_title">모집중만 보기</span>
+        <S.CheckboxContainer>
+          <S.Checkbox />
+          <span className="checkbox_title">모집중만 보기</span>
+        </S.CheckboxContainer>
       </S.FilterAndCheckbox>
     </S.Wrapper>
   );
