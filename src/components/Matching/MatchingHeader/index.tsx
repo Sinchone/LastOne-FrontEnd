@@ -3,17 +3,14 @@ import BottomArrowIcon from '@assets/icon/bottom-arrow.svg';
 import BottomArrowSmallIcon from '@assets/icon/bottom-arrow-small.svg';
 import SearchIcon from '@assets/icon/search.svg';
 import { Checkbox } from '@components/Common';
+import { ExerciseArea, Gender, FitnessClub } from '@components/Matching/MatchingFilter';
 import * as S from './style';
 import { useBottomSheet } from '@hooks/common';
 
 const MatchingHeader = () => {
-  const { showBottomSheet } = useBottomSheet();
   return (
     <S.Wrapper>
-      <S.LocationAndSearch>
-        <span className="location">전체</span>
-        <BottomArrowIcon className="arrow_icon" onClick={() => showBottomSheet('FitnessClub')} />
-      </S.LocationAndSearch>
+      <FitnessClub />
       <S.SearchInput>
         <SearchIcon />
         <input placeholder="제목과 헬스장을 검색해보세요." />
@@ -23,12 +20,8 @@ const MatchingHeader = () => {
           <S.Filter>
             <span>최신순</span>
           </S.Filter>
-          <S.Filter onClick={() => showBottomSheet('ExerciseArea')}>
-            <span>운동부위</span> <BottomArrowSmallIcon />
-          </S.Filter>
-          <S.Filter onClick={() => showBottomSheet('Gender')}>
-            <span>성별</span> <BottomArrowSmallIcon />
-          </S.Filter>
+          <ExerciseArea />
+          <Gender />
           <S.Filter>
             <span>날짜 설정</span> <BottomArrowSmallIcon />
           </S.Filter>
