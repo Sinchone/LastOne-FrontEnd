@@ -2,6 +2,7 @@ import React from 'react';
 import BottomArrowIcon from '@assets/icon/bottom-arrow.svg';
 import BottomArrowSmallIcon from '@assets/icon/bottom-arrow-small.svg';
 import SearchIcon from '@assets/icon/search.svg';
+import { Checkbox } from '@components/Common';
 import * as S from './style';
 
 const MatchingHeader = () => {
@@ -9,13 +10,13 @@ const MatchingHeader = () => {
     <S.Wrapper>
       <S.LocationAndSearch>
         <span className="location">전체</span>
-        <BottomArrowIcon />
+        <BottomArrowIcon className="arrow_icon" />
         <S.CheckboxContainer>
-          <S.Checkbox />
+          <Checkbox />
           <span className="checkbox_title">헬스장</span>
         </S.CheckboxContainer>
         <S.CheckboxContainer>
-          <S.Checkbox />
+          <Checkbox />
           <span className="checkbox_title">제목</span>
         </S.CheckboxContainer>
       </S.LocationAndSearch>
@@ -39,7 +40,7 @@ const MatchingHeader = () => {
           </S.Filter>
         </S.FilterContainer>
         <S.CheckboxContainer>
-          <S.Checkbox />
+          <Checkbox />
           <span className="checkbox_title">모집중만 보기</span>
         </S.CheckboxContainer>
       </S.FilterAndCheckbox>
