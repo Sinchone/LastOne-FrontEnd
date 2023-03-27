@@ -10,7 +10,8 @@
       "@pages/*": ["src/pages/*"],
       "@recoil/*": ["src/recoil/*"],
       "@styles/*": ["src/styles/*"],
-      "@constants/*": ["src/constants/*"]
+      "@constants/*": ["src/constants/*"],
+      "@typing/*": ["src/typing/*"]
     }
   }
 }

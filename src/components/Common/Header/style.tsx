@@ -11,7 +11,7 @@ export const Header = styled.header`
   background-color: var(--color-white);
   position: sticky;
   top: 0;
-  z-index: 100000;
+  z-index: 100;
 `;
 
 export const NavContainer = styled.ul`

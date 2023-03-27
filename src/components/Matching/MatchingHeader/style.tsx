@@ -16,8 +16,8 @@ export const LocationAndSearch = styled.div`
   align-items: center;
   gap: 10px;
 
-  svg {
-    margin-right: 20px;
+  .arrow_icon {
+    margin-right: 12px;
   }
 
   .location {
