@@ -1,41 +1,21 @@
 import React from 'react';
 import * as S from './style';
-import PlusIcon from '@assets/icon/plus.svg';
+import * as BottomSheet from './BottomSheetList';
+import BottomSheetPortal from './BottomSheetPortal';
 import BottomSheetIcon from '@assets/icon/bottomsheet.svg';
 
-const BottomSheet = () => {
+const BottomSheetContainer = () => {
+  const Component = BottomSheet['FitnessClub'];
+
   return (
-    <>
+    <BottomSheetPortal>
       <S.ModalBackground />
-      <S.BottomSheet>
+      <S.Wrapper>
         <BottomSheetIcon className="icon" />
-        <S.BottomSheetContent>
-          <S.BottomSheetHeader>
-            <span className="select_pitness">헬스장 선택</span>
-            <span className="register_pitness">
-              <PlusIcon />
-              헬스장 등록
-            </span>
-          </S.BottomSheetHeader>
-          <S.Content>
-            <S.ContentBox>
-              <span>전체</span>
-            </S.ContentBox>
-            <S.ContentBox>
-              <span>스포애니 성산점</span>
-            </S.ContentBox>
-            <S.ContentBox>
-              <span>수원 바디피트</span>
-            </S.ContentBox>
-          </S.Content>
-          <S.ButtonGroup>
-            <S.CancelButton>취소</S.CancelButton>
-            <S.Button>적용</S.Button>
-          </S.ButtonGroup>
-        </S.BottomSheetContent>
-      </S.BottomSheet>
-    </>
+        <Component />
+      </S.Wrapper>
+    </BottomSheetPortal>
   );
 };
 
-export default BottomSheet;
+export default BottomSheetContainer;
