@@ -6,15 +6,19 @@ import { Checkbox } from '@components/Common';
 import { ExerciseArea, Gender, FitnessClub } from '@components/Matching/MatchingFilter';
 import * as S from './style';
 import { useBottomSheet } from '@hooks/common';
+import { SEARCH_PAGE } from '@constants/route';
+import Link from 'next/link';
 
 const MatchingHeader = () => {
   return (
     <S.Wrapper>
       <FitnessClub />
-      <S.SearchInput>
-        <SearchIcon />
-        <input placeholder="제목과 헬스장을 검색해보세요." />
-      </S.SearchInput>
+      <Link href={SEARCH_PAGE}>
+        <S.SearchInput>
+          <SearchIcon />
+          <input placeholder="제목과 헬스장을 검색해보세요." />
+        </S.SearchInput>
+      </Link>
       <S.FilterAndCheckbox>
         <S.FilterContainer>
           <S.Filter>
