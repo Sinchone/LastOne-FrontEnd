@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Navigation } from '@components/Common';
+import { Header, Navigation, BottomSheet } from '@components/Common';
 import { MatchingHeader, MatchingPosts } from '@components/Matching';
 
 const Matching = () => {
@@ -9,6 +9,7 @@ const Matching = () => {
       <MatchingHeader />
       <MatchingPosts />
       <Navigation />
+      <BottomSheet />
     </>
   );
 };
