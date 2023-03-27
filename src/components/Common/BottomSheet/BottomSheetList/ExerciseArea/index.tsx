@@ -3,26 +3,31 @@ import * as S from './style';
 import PlusIcon from '@assets/icon/plus.svg';
 import { useBottomSheet } from '@hooks/common';
 
-const FitnessClub = () => {
+const ExerciseArea = () => {
   const { closeBottomSheet } = useBottomSheet();
   return (
     <S.BottomSheetContent>
       <S.BottomSheetHeader>
-        <span className="select_pitness">헬스장 선택</span>
-        <span className="register_pitness">
-          <PlusIcon />
-          헬스장 등록
-        </span>
+        <span className="select_pitness">운동부위</span>
       </S.BottomSheetHeader>
       <S.Content>
         <S.ContentBox>
-          <span>전체</span>
+          <span>전신</span>
         </S.ContentBox>
         <S.ContentBox>
-          <span>스포애니 성산점</span>
+          <span>가슴</span>
         </S.ContentBox>
         <S.ContentBox>
-          <span>수원 바디피트</span>
+          <span>등</span>
+        </S.ContentBox>
+        <S.ContentBox>
+          <span>어깨</span>
+        </S.ContentBox>
+        <S.ContentBox>
+          <span>하체</span>
+        </S.ContentBox>
+        <S.ContentBox>
+          <span>코어</span>
         </S.ContentBox>
       </S.Content>
       <S.ButtonGroup>
@@ -33,4 +38,4 @@ const FitnessClub = () => {
   );
 };
 
-export default FitnessClub;
+export default ExerciseArea;

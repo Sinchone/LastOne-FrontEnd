@@ -1,28 +1,24 @@
 import React from 'react';
 import * as S from './style';
-import PlusIcon from '@assets/icon/plus.svg';
 import { useBottomSheet } from '@hooks/common';
 
-const FitnessClub = () => {
+const Gender = () => {
   const { closeBottomSheet } = useBottomSheet();
+
   return (
     <S.BottomSheetContent>
       <S.BottomSheetHeader>
-        <span className="select_pitness">헬스장 선택</span>
-        <span className="register_pitness">
-          <PlusIcon />
-          헬스장 등록
-        </span>
+        <span className="select_pitness">성별</span>
       </S.BottomSheetHeader>
       <S.Content>
         <S.ContentBox>
-          <span>전체</span>
+          <span>무관</span>
         </S.ContentBox>
         <S.ContentBox>
-          <span>스포애니 성산점</span>
+          <span>남성</span>
         </S.ContentBox>
         <S.ContentBox>
-          <span>수원 바디피트</span>
+          <span>여성</span>
         </S.ContentBox>
       </S.Content>
       <S.ButtonGroup>
@@ -33,4 +29,4 @@ const FitnessClub = () => {
   );
 };
 
-export default FitnessClub;
+export default Gender;

@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Header, Navigation, BottomSheet } from '@components/Common';
 import { MatchingHeader, MatchingPosts } from '@components/Matching';
+import { useBottomSheet } from '@hooks/common';
 
 const Matching = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { bottomsheet } = useBottomSheet();
 
   return (
     <>
       <Header />
-      <button onClick={() => setIsOpen(!isOpen)}>ㅇ</button>
       <MatchingHeader />
       <MatchingPosts />
       <Navigation />
-      <div id="bottomsheet">{isOpen && <BottomSheet />}</div>
+      <div id="bottomsheet">{bottomsheet.isOpen && <BottomSheet />}</div>
     </>
   );
 };

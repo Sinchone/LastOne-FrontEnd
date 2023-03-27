@@ -1,4 +1,15 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const SlideUp = keyframes`
+  from {
+    opacity:0;
+    transform: translateY(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+`;
 
 export const Container = styled.div`
   width: 100%;
@@ -31,6 +42,7 @@ export const Wrapper = styled.div`
   bottom: 0;
   border-radius: 8px 8px 0 0;
   background-color: var(--color-gray1);
+  animation: ${SlideUp} 0.5s;
 
   .icon {
     position: absolute;
