@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import HomeIcon from '@assets/icon/home.svg';
 import UnClickedHome from '@assets/icon/unclick-home.svg';
@@ -32,10 +32,12 @@ const Navigation = () => {
           <ChattingIcon />
           <span>채팅</span>
         </S.Nav>
-        <S.Nav isLocated={pathName !== APPLY_PAGE}>
-          <ApplyIcon />
-          <span>신청목록</span>
-        </S.Nav>
+        <Link href={APPLY_PAGE}>
+          <S.Nav isLocated={pathName !== APPLY_PAGE}>
+            <ApplyIcon />
+            <span>신청목록</span>
+          </S.Nav>
+        </Link>
       </S.NavList>
     </S.Wrapper>
   );

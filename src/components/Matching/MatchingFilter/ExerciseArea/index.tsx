@@ -9,7 +9,6 @@ const ExerciseArea = () => {
   const router = useRouter();
   const { showBottomSheet } = useBottomSheet();
   const exerciseArea = router.query.exercisearea as string | undefined;
-  console.log(exerciseArea !== undefined);
 
   return (
     <FilterContainer isSelected={exerciseArea !== undefined}>
