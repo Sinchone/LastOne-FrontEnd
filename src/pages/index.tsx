@@ -5,10 +5,8 @@ import { Banner, Contents } from '@components/Main';
 const Main = () => {
   return (
     <>
-      <Header />
       <Banner />
       <Contents />
-      <Navigation />
     </>
   );
 };

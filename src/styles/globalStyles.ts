@@ -14,6 +14,10 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     font-family: 'Pretendard';
     margin: 0 auto;
+
+    ${theme.media.tablet} {
+      background-color: var(--color-gray1);
+    }
    
   }
   

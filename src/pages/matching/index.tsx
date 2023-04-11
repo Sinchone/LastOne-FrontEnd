@@ -8,10 +8,9 @@ const Matching = () => {
 
   return (
     <>
-      <Header />
       <MatchingHeader />
       <MatchingPosts />
-      <Navigation />
+
       <div id="bottomsheet">{bottomsheet.isOpen && <BottomSheet />}</div>
     </>
   );

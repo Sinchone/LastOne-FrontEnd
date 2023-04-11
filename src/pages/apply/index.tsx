@@ -5,9 +5,7 @@ import { Content } from '@components/Apply';
 const Apply = () => {
   return (
     <>
-      <Header />
       <Content />
-      <Navigation />
     </>
   );
 };
