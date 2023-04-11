@@ -3,11 +3,7 @@ import { LoginLayout } from '@components/Login';
 import React from 'react';
 
 const Login = () => {
-  return (
-    <Layout>
-      <LoginLayout />
-    </Layout>
-  );
+  return <LoginLayout />;
 };
 
 export default Login;

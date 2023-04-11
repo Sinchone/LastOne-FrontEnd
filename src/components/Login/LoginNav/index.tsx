@@ -1,8 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-
 import * as S from './style';
-
 import Logo from '@assets/icon/loginlogo.svg';
 import Kakao from '@assets/icon/kakao.svg';
 import Home from '@assets/icon/loginhome.svg';
