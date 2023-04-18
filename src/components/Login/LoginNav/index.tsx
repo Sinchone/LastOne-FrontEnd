@@ -12,10 +12,12 @@ const LoginNav = () => {
         <Logo />
       </S.LogoContainer>
       <S.ButtonContainer>
-        <S.KakaoBtn>
-          <Kakao />
-          카카오 간편 로그인
-        </S.KakaoBtn>
+        <Link href={process.env.NEXT_PUBLIC_KAKAO_AUTH_URI as string}>
+          <S.KakaoBtn>
+            <Kakao />
+            카카오 간편 로그인
+          </S.KakaoBtn>
+        </Link>
 
         <Link href="/">
           <S.HomeBtn>

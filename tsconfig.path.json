@@ -11,7 +11,8 @@
       "@recoil/*": ["src/recoil/*"],
       "@styles/*": ["src/styles/*"],
       "@constants/*": ["src/constants/*"],
-      "@typing/*": ["src/typing/*"]
+      "@typing/*": ["src/typing/*"],
+      "@utils/*": ["src/utils/*"]
     }
   }
 }
