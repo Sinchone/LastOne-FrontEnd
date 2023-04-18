@@ -23,17 +23,17 @@ const Navigation = () => {
           </S.HomeNav>
         </Link>
         <Link href={MATCHING_PAGE}>
-          <S.Nav isLocated={pathName === MAIN_PAGE}>
+          <S.Nav isLocated={pathName === MATCHING_PAGE}>
             {pathName === MATCHING_PAGE ? <MatchingIcon /> : <PartnerIcon />}
             <span>파트너 찾기</span>
           </S.Nav>
         </Link>
-        <S.Nav isLocated={pathName !== CHATTING_PAGE}>
+        <S.Nav isLocated={pathName === CHATTING_PAGE}>
           <ChattingIcon />
           <span>채팅</span>
         </S.Nav>
         <Link href={APPLY_PAGE}>
-          <S.Nav isLocated={pathName !== APPLY_PAGE}>
+          <S.Nav isLocated={pathName === APPLY_PAGE}>
             <ApplyIcon />
             <span>신청목록</span>
           </S.Nav>

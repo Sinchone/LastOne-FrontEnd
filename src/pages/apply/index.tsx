@@ -1,12 +1,12 @@
 import React from 'react';
-import { Header, Navigation } from '@components/Common';
+import { MainLayout } from '@components/Common';
 import { Content } from '@components/Apply';
 
 const Apply = () => {
   return (
-    <>
+    <MainLayout>
       <Content />
-    </>
+    </MainLayout>
   );
 };
 

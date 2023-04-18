@@ -9,9 +9,7 @@ interface Props {
 const Layout = ({ children }: Props) => {
   return (
     <S.Wrapper>
-      <Header />
       <S.Content>{children}</S.Content>
-      <Navigation />
     </S.Wrapper>
   );
 };

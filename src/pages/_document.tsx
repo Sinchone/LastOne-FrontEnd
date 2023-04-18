@@ -38,6 +38,7 @@ export default class MyDocument extends Document {
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
           />
           <link rel="shortcut icon" href="/favicon.ico" />
+          <script defer src="https://developers.kakao.com/sdk/js/kakao.js"></script>
           {/* <Favicon /> */}
         </Head>
         <body>
