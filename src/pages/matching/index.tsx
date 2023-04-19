@@ -10,7 +10,6 @@ const Matching = () => {
     <MainLayout>
       <MatchingHeader />
       <MatchingPosts />
-
       <div id="bottomsheet">{bottomsheet.isOpen && <BottomSheet />}</div>
     </MainLayout>
   );

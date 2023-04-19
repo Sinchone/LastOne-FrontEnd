@@ -4,8 +4,12 @@ import Alarm from '@assets/icon/alarm.svg';
 import Profile from '@assets/icon/profile.svg';
 import * as S from './style';
 import Link from 'next/link';
+import { useGetMyProfile } from '@hooks/MyPage/queries';
 
 const Header = () => {
+  const { data } = useGetMyProfile();
+  
+  
   return (
     <S.Header>
       <S.NavContainer>

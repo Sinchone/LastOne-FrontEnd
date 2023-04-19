@@ -18,6 +18,8 @@ export default function App({ Component, pageProps }: AppProps) {
             retryOnMount: false,
             refetchOnWindowFocus: false,
             refetchOnReconnect: false,
+
+            onError: (err: unknown) => console.log(err),
           },
         },
       })
