@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { Header, Navigation } from '@components/Common';
 import * as S from './style';
 
 interface Props {

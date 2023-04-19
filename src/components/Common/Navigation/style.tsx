@@ -44,6 +44,6 @@ export const Nav = styled.li<{ isLocated: boolean }>`
 
   span {
     ${theme.font.ko.subTitle1}
-    color: ${(props) => (props.isLocated ? `var(--color-gray7)` : `var(--color-primary-main)`)}
+    color: ${(props) => (props.isLocated ? `var(--color-primary-main)` : `var(--color-gray7)`)}
   }
 `;

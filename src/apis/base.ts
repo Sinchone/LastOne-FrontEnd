@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, Method } from 'axios';
 import { HTTP_METHODS } from '@constants/net';
+import { getAccessTokenFromCookie } from '@utils/token';
 
 export const customAxios: AxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_KEY,
