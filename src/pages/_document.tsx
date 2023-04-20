@@ -1,6 +1,7 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import Script from 'next/script';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
@@ -43,6 +44,10 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
+          <Script
+            strategy="beforeInteractive"
+            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_KEY}&autoload=false&libraries=services`}
+          />
           <NextScript />
         </body>
       </Html>
