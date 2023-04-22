@@ -12,6 +12,7 @@ export const Wrapper = styled.footer`
   border-top-right-radius: 16px;
   position: fixed;
   bottom: 0;
+  z-index: 100;
 `;
 
 export const NavList = styled.ul`
