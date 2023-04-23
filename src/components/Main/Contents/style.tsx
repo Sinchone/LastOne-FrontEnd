@@ -6,7 +6,7 @@ export const Wrapper = styled.section`
   height: 100%;
   padding-left: 30px;
   padding-right: 30px;
-  padding-bottom: 150px;
+  padding-bottom: 90px;
 `;
 
 export const Content = styled.section`
@@ -23,6 +23,7 @@ export const Title = styled.div`
   gap: 15px;
   width: 100%;
   ${theme.font.ko.subTitle1}
+  font-size: 16px;
 `;
 
 export const PromiseContents = styled.div`
@@ -48,11 +49,12 @@ export const PromiseContent = styled.div`
 
   span {
     ${theme.font.ko.subTitle1}
+    font-size: 16px;
   }
 
   .description {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 20px;
     letter-spacing: -1%;
     color: var(--color-gray8);
@@ -70,7 +72,7 @@ export const CardList = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 13px;
+  gap: 10px;
 
   ${theme.media.mobile2} {
     gap: 20px;

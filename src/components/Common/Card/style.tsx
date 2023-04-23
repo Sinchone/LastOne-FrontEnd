@@ -5,7 +5,7 @@ export const Wrapper = styled.article<{ size: string }>`
   display: flex;
   flex-direction: column;
   width: ${(props) => (props.size === 'main' ? '32%' : '48%')};
-  height: 310px;
+  height: 290px;
   gap: 15px;
   margin-bottom: 15px;
 
@@ -30,6 +30,7 @@ export const Description = styled.div`
 
   .title {
     ${theme.font.ko.subTitle1}
+    font-size: 16px;
 
     ${theme.media.mobile2} {
       font-size: 17px;
@@ -37,6 +38,7 @@ export const Description = styled.div`
   }
   span {
     ${theme.font.ko.body1}
+    font-size: 13px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -54,25 +56,27 @@ export const Badge = styled.div`
   gap: 7px;
 `;
 export const Recruit = styled.div`
-  width: 53px;
-  height: 28px;
+  width: 43px;
+  height: 23px;
   border-radius: 4px;
   padding: 6px 8px 6px 8px;
   background-color: var(--color-secondary-main);
   color: var(--color-white);
   ${theme.font.ko.button}
+  font-size: 10px;
   display: flex;
   align-items: center;
 `;
 
 export const Gender = styled.div`
-  width: 53px;
-  height: 28px;
+  width: 43px;
+  height: 23px;
   border-radius: 4px;
   padding: 6px 8px 6px 8px;
   background-color: var(--color-primary-main);
   color: var(--color-white);
   ${theme.font.ko.button}
+  font-size: 10px;
   display: flex;
   align-items: center;
 `;

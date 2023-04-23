@@ -1,10 +1,15 @@
 import React, { ReactElement } from 'react';
 import { Header, Content } from '@components/MyPage';
 import { NextPageWithLayout } from '@pages/_app';
-import { Navigation } from '@components/Common';
+import { useGetMyProfile } from '@hooks/MyPage/queries';
+import { ProfileType } from '@typing/user';
 
 const MyPage: NextPageWithLayout = () => {
-  return <Content />;
+  const { data: user } = useGetMyProfile();
+
+  console.log(user);
+
+  return <>{user && <Content user={user.data.member} />}</>;
 };
 
 MyPage.getLayout = function getLayout(page: ReactElement) {
@@ -12,7 +17,6 @@ MyPage.getLayout = function getLayout(page: ReactElement) {
     <>
       <Header />
       {page}
-      <Navigation />
     </>
   );
 };

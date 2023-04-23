@@ -90,3 +90,46 @@ export const Contour = styled.div`
   background-color: var(--color-gray3);
   border: 1px solid var(--color-gray3);
 `;
+
+export const GymWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .title {
+    ${theme.font.ko.subTitle2}
+  }
+`;
+
+export const NotGym = styled.div`
+  width: 100%;
+  height: 124px;
+  display: flex;
+  justify-content: center;
+  margin-top: 56px;
+
+  span {
+    ${theme.font.ko.subTitle1}
+  }
+`;
+
+export const FitnesPartner = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .title {
+    ${theme.font.ko.subTitle2}
+  }
+
+  .more {
+    ${theme.font.ko.body1}
+    color: var(--color-gray8);
+    margin-right: 13px;
+    cursor: pointer;
+
+    svg {
+      margin-left: 5px;
+    }
+  }
+`;

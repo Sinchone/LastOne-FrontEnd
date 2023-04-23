@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Header = styled.header`
   width: 100%;
-  height: 80px;
-  padding: 16px 24px 16px 24px;
+  height: 60px;
+  padding: 10px 24px 10px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,16 +35,17 @@ export const UserNav = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 89px;
-  height: 45px;
+  width: 60px;
+  height: 38px;
   border-radius: 6px;
-  padding: 12px 14px 12px 14px;
+
   background-color: var(--color-primary-main);
   color: var(--color-white);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 12px;
 
   &:hover {
     background-color: var(--color-primary-light);

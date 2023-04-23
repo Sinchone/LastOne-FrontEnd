@@ -1,5 +1,6 @@
 import api from '@apis/base';
 import authApi from '@apis/auth';
+import { ProfileType } from '@typing/user';
 
 export const login = (data: { code: string }) => {
   return api.post({
