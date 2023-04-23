@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { Navigation } from '@components/Common';
 import { Header } from '@components/SearchGym';
 import * as S from './style';
 

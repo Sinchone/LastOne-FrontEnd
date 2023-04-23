@@ -38,16 +38,11 @@ export default class MyDocument extends Document {
             as="style"
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
           />
-          <link rel="shortcut icon" href="/favicon.ico" />
-          <script defer src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+          <link rel="shortcut icon" href="/favicon.ico" /> 
           {/* <Favicon /> */}
         </Head>
         <body>
           <Main />
-          <Script
-            strategy="beforeInteractive"
-            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_KEY}&autoload=false&libraries=services`}
-          />
           <NextScript />
         </body>
       </Html>
