@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.header`
   width: 100%;
-  height: 80px;
-  padding: 16px 24px 16px 24px;
+  height: 60px;
+  padding: 10px 24px 10px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,7 +19,7 @@ export const Wrapper = styled.header`
 
   span {
     font-weight: 700;
-    font-size: 24px;
+    font-size: 18px;
     line-height: 34px;
     letter-spacing: -1%;
   }

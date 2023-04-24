@@ -13,6 +13,14 @@ export const Wrapper = styled.footer`
   position: fixed;
   bottom: 0;
   z-index: 100;
+
+  ${theme.media.tablet} {
+    max-width: 768px;
+  }
+
+  ${theme.media.mobile2} {
+    max-width: 620px;
+  }
 `;
 
 export const NavList = styled.ul`

@@ -1,5 +1,4 @@
 import React from 'react';
-import BottomArrowIcon from '@assets/icon/bottom-arrow.svg';
 import BottomArrowSmallIcon from '@assets/icon/bottom-arrow-small.svg';
 import SearchIcon from '@assets/icon/search.svg';
 import { Checkbox } from '@components/Common';
@@ -21,9 +20,6 @@ const MatchingHeader = () => {
       </Link>
       <S.FilterAndCheckbox>
         <S.FilterContainer>
-          <S.Filter>
-            <span>최신순</span>
-          </S.Filter>
           <ExerciseArea />
           <Gender />
           <S.Filter>

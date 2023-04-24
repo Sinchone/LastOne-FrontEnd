@@ -1,3 +1,4 @@
+import theme from '@styles/theme';
 import styled from 'styled-components';
 
 export const Header = styled.header`
@@ -12,6 +13,10 @@ export const Header = styled.header`
   position: sticky;
   top: 0;
   z-index: 100;
+
+  ${theme.media.laptop} {
+    height: 75px;
+  }
 `;
 
 export const NavContainer = styled.ul`

@@ -29,7 +29,7 @@ const font = {
     subTitle1: () => {
       return css`
         font-weight: bold;
-        font-size: 20px;
+        font-size: 15px;
         line-height: 30px;
         letter-spacing: -2%;
       `;
@@ -45,7 +45,7 @@ const font = {
     body1: () => {
       return css`
         font-weight: 400;
-        font-size: 16px;
+        font-size: 12px;
         line-height: 20px;
         letter-spacing: -1%;
       `;
@@ -61,7 +61,7 @@ const font = {
     button: () => {
       return css`
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
         line-height: 24px;
         letter-spacing: 1%;
       `;
@@ -103,7 +103,7 @@ const font = {
     subTitle1: () => {
       return css`
         font-weight: 500;
-        font-size: 24px;
+        font-size: 15px;
         line-height: 30px;
         letter-spacing: 0%;
       `;
@@ -135,7 +135,7 @@ const font = {
     button: () => {
       return css`
         font-weight: 400;
-        font-size: 18px;
+        font-size: 12px;
         line-height: 19px;
         letter-spacing: 0%;
       `;

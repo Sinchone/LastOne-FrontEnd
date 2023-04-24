@@ -5,7 +5,7 @@ export const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   padding: 38px 17px;
 `;
 
@@ -31,6 +31,7 @@ export const EditForm = styled.form`
 export const Label = styled.label`
   display: block;
   ${theme.font.ko.subTitle2}
+  font-size: 15px;
   padding-left: 11px;
 `;
 
@@ -47,6 +48,7 @@ export const Input = styled.input`
 
   &::placeholder {
     ${theme.font.ko.subTitle2}
+    font-size: 15px;
     color: var(--color-gray5);
   }
 `;
@@ -55,13 +57,14 @@ export const Gender = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 352px;
+  width: 282px;
   height: 56px;
   border-radius: 6px;
   padding: 8px;
   background-color: var(--color-gray3);
   color: #001b36;
   ${theme.font.ko.subTitle2}
+  font-size: 15px;
   cursor: pointer;
 `;
 
@@ -83,9 +86,11 @@ export const SmallInput = styled.input`
   margin-top: 5px;
   margin-bottom: 30px;
   ${theme.font.ko.subTitle2}
+  font-size: 15px;
 
   &::placeholder {
     ${theme.font.ko.subTitle2}
+    font-size: 15px;
     color: var(--color-gray5);
   }
 `;
@@ -112,9 +117,9 @@ export const GymRegister = styled.div`
 `;
 
 export const SearchInput = styled.div`
-  width: 730px;
-  height: 48px;
-  padding: 8px 8px 8px 20px;
+  width: 100%;
+  height: 38px;
+  padding: 1px 8px 1px 20px;
   border-radius: 6px;
   background-color: #eeeeee;
   display: flex;
@@ -129,10 +134,10 @@ export const SearchInput = styled.div`
     height: 100%;
 
     font-weight: 400;
-    font-size: 20px;
+    font-size: 14px;
     line-height: 30px;
     letter-spacing: -2%;
-    color: var(--color-primary-main);
+    color: var(--color-gray8);
   }
 `;
 

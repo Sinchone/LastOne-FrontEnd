@@ -36,7 +36,7 @@ const Content = () => {
         <S.GymRegister>
           <S.Label>등록 헬스장</S.Label>
           <S.SearchInput>
-            <input placeholder="제목과 헬스장을 검색해보세요." autoFocus />
+            <input placeholder="헬스장을 검색해보세요." autoFocus />
           </S.SearchInput>
           <S.NotGym>
             <span>등록된 헬스장이 없습니다.</span>

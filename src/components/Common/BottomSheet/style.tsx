@@ -1,3 +1,4 @@
+import theme from '@styles/theme';
 import styled, { keyframes } from 'styled-components';
 
 const SlideUp = keyframes`
@@ -32,9 +33,9 @@ export const Wrapper = styled.div`
   z-index: 102;
   position: fixed;
   width: 100%;
-  max-width: 768px;
+  max-width: 620px;
   height: fit-content;
-  max-height: 90%;
+  max-height: 60%;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
@@ -48,5 +49,16 @@ export const Wrapper = styled.div`
     position: absolute;
     top: 10px;
     left: 45%;
+  }
+
+  ${theme.media.tablet} {
+    max-width: 768px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  ${theme.media.mobile2} {
+    max-width: 620px;
   }
 `;

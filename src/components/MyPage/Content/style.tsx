@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   padding: 38px 17px;
 `;
 
@@ -31,7 +31,7 @@ export const ProfileInfo = styled.div`
 `;
 
 export const Gender = styled.div`
-  width: 48px;
+  width: 39px;
   height: 28px;
   border-radius: 4px;
   padding: 6px 8px 6px 8px;
@@ -51,13 +51,12 @@ export const NameWrapper = styled.div`
 
 export const FitnessContents = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 60px;
+  gap: 30px;
   width: 100%;
   height: 114px;
   border-radius: 8px;
-  padding: 24px 16px 24px 16px;
+  padding: 24px 11px 24px 25px;
   background-color: var(--color-white);
   filter: drop-shadow(0px 0px 10px rgba(111, 120, 130, 0.15));
   margin-bottom: 42px;
@@ -69,15 +68,16 @@ export const FitnessContent = styled.div`
   align-items: center;
   justify-content: center;
   width: 130px;
-  gap: 16px;
+  gap: 10px;
 
   span {
     ${theme.font.ko.subTitle1}
+    font-size: 15px;
   }
 
   .description {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 20px;
     letter-spacing: -1%;
     color: var(--color-gray8);
@@ -98,6 +98,7 @@ export const GymWrapper = styled.section`
 
   .title {
     ${theme.font.ko.subTitle2}
+    font-size: 15px;
   }
 `;
 
@@ -116,6 +117,7 @@ export const NotGym = styled.div`
 export const FitnesPartner = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 
   .title {
@@ -127,6 +129,8 @@ export const FitnesPartner = styled.div`
     color: var(--color-gray8);
     margin-right: 13px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 
     svg {
       margin-left: 5px;

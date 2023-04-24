@@ -2,11 +2,12 @@ import theme from '@styles/theme';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div<{ isSelected: boolean }>`
-  width: 100px;
-  height: 40px;
+  width: 80px;
+  height: 30px;
   border-radius: 6px;
   background-color: ${(props) => (props.isSelected ? 'var(--color-primary-main)' : '#eeeeee')};
   ${theme.font.ko.body1}
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;

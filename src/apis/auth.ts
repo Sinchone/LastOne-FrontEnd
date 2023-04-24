@@ -23,7 +23,7 @@ const createAuthApi = () => {
           if (refreshToken) {
             const response = await getToken({ refreshToken });
 
-            if (response.response?.data?.errorCode === 'ST003') {
+            if (response.response?.data?.errorCode === 'ST003' || response.response?.data?.errorCode === 'VT006') {
               return Promise.reject(response);
             } else if (response.data.errorCode === null) {
               setAccessTokenToCookie(response.data.data.accessToken);

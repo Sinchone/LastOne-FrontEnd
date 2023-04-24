@@ -4,8 +4,8 @@ import styled from 'styled-components';
 export const Wrapper = styled.article<{ size: string }>`
   display: flex;
   flex-direction: column;
-  width: ${(props) => (props.size === 'main' ? '32%' : '48%')};
-  height: 290px;
+  width: ${(props) => (props.size === 'main' ? '32%' : '46%')};
+  height: 269px;
   gap: 15px;
   margin-bottom: 15px;
 
