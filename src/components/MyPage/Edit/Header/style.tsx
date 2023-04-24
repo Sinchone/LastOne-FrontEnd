@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.header`
   width: 100%;
-  height: 80px;
-  padding: 16px 24px 16px 24px;
+  height: 60px;
+  padding: 10px 24px 10px 24px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--color-gray3);
   background-color: var(--color-white);
@@ -14,14 +14,13 @@ export const Wrapper = styled.header`
   z-index: 100;
 
   svg {
-    flex: 1.5;
     cursor: pointer;
   }
 
   span {
-    flex: 2.2;
+    flex: 0.63;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 18px;
     line-height: 34px;
     letter-spacing: -1%;
   }

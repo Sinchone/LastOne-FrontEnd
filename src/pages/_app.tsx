@@ -9,6 +9,7 @@ import { Layout } from '@components/Common';
 import { ThemeProvider } from 'styled-components';
 import { NextPage } from 'next';
 import Script from 'next/script';
+import { AxiosError } from 'axios';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -30,7 +31,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
             refetchOnWindowFocus: false,
             refetchOnReconnect: false,
 
-            onError: (err: unknown) => console.log(err),
+            onError: (err: unknown) => {
+              if (err instanceof AxiosError) console.log(true);
+            },
           },
         },
       })

@@ -32,6 +32,10 @@ export const CheckboxContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+
+  span {
+    ${theme.font.ko.body1}
+  }
 `;
 
 export const Checkbox = styled.div`
@@ -42,9 +46,9 @@ export const Checkbox = styled.div`
 `;
 
 export const SearchInput = styled.div`
-  width: 720px;
-  height: 48px;
-  padding: 8px 8px 8px 20px;
+  width: 100%;
+  height: 38px;
+  padding: 1px 8px 1px 20px;
   border-radius: 6px;
   background-color: #eeeeee;
   display: flex;
@@ -59,7 +63,7 @@ export const SearchInput = styled.div`
     height: 100%;
 
     font-weight: 400;
-    font-size: 20px;
+    font-size: 14px;
     line-height: 30px;
     letter-spacing: -2%;
     color: var(--color-gray8);
@@ -77,11 +81,12 @@ export const FilterContainer = styled.div`
 `;
 
 export const Filter = styled.div`
-  width: 100px;
-  height: 40px;
+  width: 80px;
+  height: 30px;
   border-radius: 6px;
   background-color: #eeeeee;
   ${theme.font.ko.body1}
+  font-size: 12px;
   color: var(--color-gray9);
   display: flex;
   align-items: center;

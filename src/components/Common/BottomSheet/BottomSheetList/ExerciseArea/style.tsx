@@ -2,9 +2,18 @@ import theme from '@styles/theme';
 import styled from 'styled-components';
 
 export const BottomSheetContent = styled.div`
-  padding: 50px 16px;
+  padding: 30px 16px;
   display: flex;
   flex-direction: column;
+  width: 100%;
+
+  ${theme.media.tablet} {
+    padding-left: 100px;
+  }
+
+  ${theme.media.mobile2} {
+    padding: 30px 16px;
+  }
 `;
 
 export const BottomSheetHeader = styled.div`
@@ -17,7 +26,7 @@ export const BottomSheetHeader = styled.div`
 
   .select_pitness {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 30px;
     letter-spacing: -2.2%;
   }
@@ -27,7 +36,7 @@ export const BottomSheetHeader = styled.div`
     align-items: center;
     gap: 6px;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 30px;
     letter-spacing: -2%;
   }
@@ -43,8 +52,8 @@ export const Content = styled.div`
 `;
 
 export const ContentBox = styled.div<{ isSelected: boolean }>`
-  width: 236px;
-  height: 154px;
+  width: 180px;
+  height: 110px;
   border-radius: 8px;
   padding: 8px;
   background-color: ${(props) => (props.isSelected ? 'var(--color-primary-main)' : 'var(--color-white)')};
@@ -57,7 +66,7 @@ export const ContentBox = styled.div<{ isSelected: boolean }>`
   span {
     color: ${(props) => (props.isSelected ? 'var(--color-white)' : 'var(--color-gray8)')};
     font-weight: 500;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 30px;
     letter-spacing: -2%;
   }
@@ -72,8 +81,8 @@ export const ButtonGroup = styled.div`
 
 export const CancelButton = styled.button`
   color: #001b36;
-  width: 352px;
-  height: 56px;
+  width: 252px;
+  height: 46px;
   padding: 8px;
   border-radius: 6px;
   border: none;
@@ -86,8 +95,8 @@ export const CancelButton = styled.button`
 export const Button = styled.button`
   color: var(--color-white);
   border-radius: 6px;
-  width: 352px;
-  height: 56px;
+  width: 252px;
+  height: 46px;
   padding: 8px;
   background-color: var(--color-primary-main);
   ${theme.font.ko.subTitle2}

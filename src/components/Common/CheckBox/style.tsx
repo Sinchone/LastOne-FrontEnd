@@ -12,8 +12,8 @@ export const Wrapper = styled.div`
 `;
 
 export const Checkbox = styled.div`
-  width: 18px;
-  height: 18px;
+  width: 13px;
+  height: 13px;
   border: solid var(--color-gray8);
   display: flex;
 `;

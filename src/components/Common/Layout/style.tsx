@@ -12,6 +12,13 @@ export const Wrapper = styled.main`
 
   ${theme.media.tablet} {
     box-shadow: none;
+    min-width: 768px;
+    max-width: 768px;
+  }
+
+  ${theme.media.mobile2} {
+    min-width: 600px;
+    max-width: 620px;
   }
 `;
 
