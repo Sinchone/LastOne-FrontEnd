@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { Header } from '@components/Common';
 import * as S from './style';
 
 interface Props {
@@ -9,8 +8,7 @@ interface Props {
 const Layout = ({ children }: Props) => {
   return (
     <S.Wrapper>
-      <Header />
-      {children}
+      <S.Content>{children}</S.Content>
     </S.Wrapper>
   );
 };
