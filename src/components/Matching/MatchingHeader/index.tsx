@@ -4,7 +4,6 @@ import SearchIcon from '@assets/icon/search.svg';
 import { Checkbox } from '@components/Common';
 import { ExerciseArea, Gender, FitnessClub } from '@components/Matching/MatchingFilter';
 import * as S from './style';
-import { useBottomSheet } from '@hooks/common';
 import { SEARCH_PAGE } from '@constants/route';
 import Link from 'next/link';
 
