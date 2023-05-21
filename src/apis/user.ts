@@ -18,3 +18,11 @@ export const getToken = (data: { refreshToken: string }) => {
     data,
   });
 };
+
+export const editProfile = (formData: FormData) => {
+  return authApi.put(`api/mypage`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};

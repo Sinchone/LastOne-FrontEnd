@@ -46,10 +46,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <Head>
           <title>Last1</title>
         </Head>
-        <Script
-          strategy="beforeInteractive"
-          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_KEY}&autoload=false&libraries=services`}
-        />
         <GlobalStyle />
         <ThemeProvider theme={theme}>
           <RecoilRoot>

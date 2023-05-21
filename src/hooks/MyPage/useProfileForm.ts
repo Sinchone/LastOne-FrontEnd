@@ -12,17 +12,17 @@ const useProfileForm = (initialState: MyPageField) => {
   });
   const [time, setTime] = useState({
     hour: member.workoutTime?.slice(0, 2),
-    minute: member.workoutTime?.slice(3, 2),
+    minute: member.workoutTime?.slice(3, 5),
   });
 
   const [days, setDays] = useState<{ [key: string]: boolean }>({
-    월: false,
-    화: false,
-    수: false,
-    목: false,
-    금: false,
-    토: false,
-    일: false,
+    월: member.workoutDay.includes('월'),
+    화: member.workoutDay.includes('화'),
+    수: member.workoutDay.includes('수'),
+    목: member.workoutDay.includes('목'),
+    금: member.workoutDay.includes('금'),
+    토: member.workoutDay.includes('토'),
+    일: member.workoutDay.includes('일'),
   });
 
   const handleProfileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +60,28 @@ const useProfileForm = (initialState: MyPageField) => {
     });
   };
 
+  const setChangeGymState = (place: any) => {
+    if (gymState.length > 2) return;
+
+    setGymsState([
+      ...gymState,
+      {
+        ...place,
+      },
+    ]);
+  };
+
+  const handleRemoveGym = (name: string) => {
+    setGymsState(gymState.filter((gym) => gym.latitude !== name));
+  };
+
+  const setProfileImage = (imageUrl: string) => {
+    setProfileState({
+      ...profileState,
+      profileUrl: imageUrl,
+    });
+  };
+
   useEffect(() => {
     if (time.hour && time.minute) {
       setProfileState({
@@ -80,8 +102,6 @@ const useProfileForm = (initialState: MyPageField) => {
     });
   }, [days]);
 
-  console.log(profileState, gymState);
-
   return {
     profileState,
     gymState,
@@ -93,6 +113,9 @@ const useProfileForm = (initialState: MyPageField) => {
     handleSelectGender,
     handleSelectWorkOutDay,
     handleChangeTimeInput,
+    handleRemoveGym,
+    setChangeGymState,
+    setProfileImage,
   };
 };
 

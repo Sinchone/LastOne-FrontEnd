@@ -9,7 +9,7 @@ export const Wrapper = styled.main`
   padding: 38px 17px;
 `;
 
-export const ProfileImgWrapper = styled.div`
+export const ProfileImgWrapper = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,9 +17,21 @@ export const ProfileImgWrapper = styled.div`
   width: 100%;
   height: 120px;
   gap: 15px;
+  cursor: pointer;
 
   span {
     ${theme.font.ko.subTitle1}
+  }
+
+  input {
+    display: none;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
@@ -158,6 +170,7 @@ export const WorkDay = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 15px;
+  margin-top: 15px;
 `;
 
 export const SelectWorkContainer = styled.div`
@@ -225,4 +238,71 @@ export const Divide = styled.div`
   color: var(--color-gray5);
 
   margin-bottom: 27px;
+`;
+
+export const ImgWrapper = styled.div`
+  width: 104px;
+  height: 104px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 2164.5px;
+  }
+`;
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 45px;
+  padding-left: 11px;
+  margin-top: 20px;
+`;
+
+export const CancelButton = styled.button`
+  color: #001b36;
+  width: 252px;
+  height: 46px;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+
+  ${theme.font.ko.subTitle2}
+
+  cursor: pointer;
+`;
+
+export const Button = styled.button`
+  color: var(--color-white);
+  border-radius: 6px;
+  width: 252px;
+  height: 46px;
+  padding: 8px;
+  background-color: var(--color-primary-main);
+  ${theme.font.ko.subTitle2}
+  cursor: pointer;
+`;
+
+export const MyGym = styled.div<{ select: boolean }>`
+  width: 254px;
+  height: 56px;
+  border-radius: 8px;
+  padding: 8px 24px 8px 24px;
+  background-color: ${(props) => (props.select ? `var(--color-primary-main)` : 'var(--color-gray3)')};
+  color: ${(props) => (props.select ? `var(--color-white)` : 'var(--color-primary-main)')}; //vor-white);
+  font-weight: 700px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  cursor: pointer;
+`;
+
+export const MyGymWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 12px;
 `;
