@@ -4,6 +4,10 @@ import ProfileIcon from '@assets/icon/profilelarge.svg';
 import ArrowIcon from '@assets/icon/small-arrow.svg';
 import MyMap from '../MyMap';
 import { ProfileType, GymInfoType, FitnessType } from '@typing/user';
+import { createImageUrl } from '@utils/createImageUrl';
+import { logout } from '@apis/user';
+import { useRouter } from 'next/router';
+import { removeAccessTokenToCookie, removeRefreshTokenToCookie } from '@utils/token';
 
 interface Props {
   user: ProfileType;
@@ -13,22 +17,39 @@ interface Props {
 
 const Content = ({ user, sbd, gym }: Props) => {
   const [gymName, setGymName] = useState(gym.length !== 0 ? gym[0].name : '');
+  const router = useRouter();
 
   const handleSelectGym = (name: string) => {
     setGymName(name);
   };
 
+  const handleLogout = () => {
+    logout();
+    router.push('/login');
+    removeAccessTokenToCookie();
+    removeRefreshTokenToCookie();
+  };
+
   return (
     <S.Wrapper>
       <S.ProfileWrapper>
-        <ProfileIcon />
+        {user.profileUrl ? (
+          <S.ImgWrapper>
+            <img src={createImageUrl(user.profileUrl as string)} />
+          </S.ImgWrapper>
+        ) : (
+          <ProfileIcon />
+        )}
+
         <S.ProfileInfo>
           <S.NameWrapper>
             <span className="name">{user.nickname}</span>
             <S.Gender>{user.gender}</S.Gender>
           </S.NameWrapper>
-          <span className="introduce">한 줄 소개를 입력해주세요.</span>
         </S.ProfileInfo>
+        <span className="logout" onClick={handleLogout}>
+          로그아웃
+        </span>
       </S.ProfileWrapper>
       <S.FitnessContents>
         <S.FitnessContent>

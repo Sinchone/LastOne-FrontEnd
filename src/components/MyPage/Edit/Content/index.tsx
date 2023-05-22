@@ -91,7 +91,7 @@ const Content = ({ profile }: Props) => {
   const handleSelectGym = (name: string) => {
     setGymName(name);
   };
-
+  console.log(profileState.profileUrl?.slice(5));
   return (
     <>
       {!isMapShow ? (
@@ -102,7 +102,11 @@ const Content = ({ profile }: Props) => {
                 <ProfileIcon />
               ) : (
                 <S.ImgWrapper>
-                  <img src={createImageUrl(profileState.profileUrl as string)} />
+                  {image != '' ? (
+                    <img src={profileState.profileUrl} />
+                  ) : (
+                    <img src={createImageUrl(profileState.profileUrl as string)} />
+                  )}
                 </S.ImgWrapper>
               )}
               <span>사진 편집</span>

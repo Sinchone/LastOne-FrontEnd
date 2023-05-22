@@ -8,7 +8,7 @@ import { setAccessTokenToCookie, setRefreshTokenToCookie } from '@utils/token';
 const Kakao = () => {
   const router = useRouter();
 
-  useQuery(queryKeys.signUp, () => login({ code: router.asPath.slice(12) as string, env: 'local' }), {
+  useQuery(queryKeys.signUp, () => login({ code: router.asPath.slice(12) as string }), {
     onSuccess: (response) => {
       setAccessTokenToCookie(response.data.data.accessToken);
       setRefreshTokenToCookie(response.data.data.refreshToken);

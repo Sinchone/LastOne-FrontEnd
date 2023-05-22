@@ -13,6 +13,10 @@ export const ProfileWrapper = styled.div`
   align-items: center;
   gap: 15px;
   margin-bottom: 30px;
+  .logout {
+    ${theme.font.ko.subTitle1}
+    margin-left: 250px;
+  }
 `;
 
 export const ProfileInfo = styled.div`
@@ -167,4 +171,15 @@ export const WorkWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
+`;
+
+export const ImgWrapper = styled.div`
+  width: 58px;
+  height: 58px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 2164.5px;
+  }
 `;
