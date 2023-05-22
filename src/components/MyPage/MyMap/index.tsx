@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import CheckMarker from '@assets/png/checkMarker.png';
-import { Container } from '@components/Common/BottomSheet/style';
-import Script from 'next/script';
 
 declare global {
   interface Window {
@@ -25,7 +23,7 @@ export default function Map({ searchPlace }: Props) {
 
     script.onload = () => {
       window.kakao.maps.load(function () {
-        const infowindow = new window.kakao.maps.InfoWindow({ zIndex: 1 });
+        //const infowindow = new window.kakao.maps.InfoWindow({ zIndex: 1 });
         const container = document.getElementById('map');
 
         const options = {
@@ -83,9 +81,7 @@ export default function Map({ searchPlace }: Props) {
         position: new window.kakao.maps.LatLng(place.y, place.x),
         image: checkMarker,
       });
-      window.kakao.maps.event.addListener(marker, 'click', function () {
-        setSelectedPlace(place);
-      });
+      setSelectedPlace(place);
     }
   }, [kakaoMap, searchPlace]);
 
@@ -109,5 +105,5 @@ export default function Map({ searchPlace }: Props) {
     });
   }, [selectedPlace]);
 
-  return <div id="map" style={{ width: '100%', height: '816px', borderRadius: '8px' }}></div>;
+  return <div id="map" style={{ width: '100%', height: '400px', borderRadius: '8px' }}></div>;
 }

@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import CheckMarker from '@assets/png/checkMarker.png';
-import { Container } from '@components/Common/BottomSheet/style';
-import Script from 'next/script';
 
 declare global {
   interface Window {
@@ -11,9 +9,10 @@ declare global {
 
 interface Props {
   searchPlace: string;
+  handleClickLocation: (place: any) => void;
 }
 
-export default function Map({ searchPlace }: Props) {
+export default function SearchMap({ searchPlace, handleClickLocation }: Props) {
   const [kakaoMap, setKakaoMap] = useState<any>(null);
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const customOverLay = useRef<any>(null);
@@ -25,7 +24,7 @@ export default function Map({ searchPlace }: Props) {
 
     script.onload = () => {
       window.kakao.maps.load(function () {
-        const infowindow = new window.kakao.maps.InfoWindow({ zIndex: 1 });
+        //const infowindow = new window.kakao.maps.InfoWindow({ zIndex: 1 });
         const container = document.getElementById('map');
 
         const options = {
@@ -85,6 +84,7 @@ export default function Map({ searchPlace }: Props) {
       });
       window.kakao.maps.event.addListener(marker, 'click', function () {
         setSelectedPlace(place);
+        handleClickLocation(place);
       });
     }
   }, [kakaoMap, searchPlace]);

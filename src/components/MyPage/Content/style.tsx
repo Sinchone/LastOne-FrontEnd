@@ -13,6 +13,10 @@ export const ProfileWrapper = styled.div`
   align-items: center;
   gap: 15px;
   margin-bottom: 30px;
+  .logout {
+    ${theme.font.ko.subTitle1}
+    margin-left: 250px;
+  }
 `;
 
 export const ProfileInfo = styled.div`
@@ -99,6 +103,7 @@ export const GymWrapper = styled.section`
   .title {
     ${theme.font.ko.subTitle2}
     font-size: 15px;
+    margin-bottom: 15px;
   }
 `;
 
@@ -135,5 +140,46 @@ export const FitnesPartner = styled.div`
     svg {
       margin-left: 5px;
     }
+  }
+`;
+
+export const MyGym = styled.div<{ select: boolean }>`
+  width: 254px;
+  height: 56px;
+  border-radius: 8px;
+  padding: 8px 24px 8px 24px;
+  background-color: ${(props) => (props.select ? `var(--color-primary-main)` : 'var(--color-gray3)')};
+  color: ${(props) => (props.select ? `var(--color-white)` : 'var(--color-primary-main)')}; //vor-white);
+  font-weight: 700px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  cursor: pointer;
+`;
+
+export const MyGymWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 12px;
+  margin-bottom: 20px;
+`;
+
+export const WorkWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+`;
+
+export const ImgWrapper = styled.div`
+  width: 58px;
+  height: 58px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 2164.5px;
   }
 `;

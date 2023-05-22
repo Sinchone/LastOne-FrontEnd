@@ -50,7 +50,6 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
 
   &:hover {
     background-color: var(--color-primary-light);
@@ -58,5 +57,16 @@ export const Button = styled.button`
 
   &:active {
     background-color: var(--color-primary-dark);
+  }
+`;
+
+export const ImgWrapper = styled.div`
+  width: 38px;
+  height: 38px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 2164.5px;
   }
 `;

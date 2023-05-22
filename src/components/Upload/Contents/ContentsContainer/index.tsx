@@ -4,15 +4,18 @@ import { MapContainer } from '../Map';
 import CalendarIcon from '@assets/icon/calendar.svg';
 import ClockIcon from '@assets/icon/clock.svg';
 import ImgContainer from '../ContentsImg';
+import { useBottomSheet } from '@hooks/common';
 
 const ContentsContainer = () => {
+  const { showBottomSheet } = useBottomSheet();
+
   return (
     <S.WriteContainer>
       <S.TitleContainer>
         <S.TitleInput placeholder="제목" />
       </S.TitleContainer>
 
-      <S.TimeContainer>
+      <S.TimeContainer onClick={() => showBottomSheet('Calandar')}>
         <S.DateWrapper>
           <CalendarIcon />
           <p>운동 날짜</p>
