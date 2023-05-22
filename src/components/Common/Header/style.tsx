@@ -51,12 +51,22 @@ export const Button = styled.button`
   align-items: center;
   justify-content: center;
 
-
   &:hover {
     background-color: var(--color-primary-light);
   }
 
   &:active {
     background-color: var(--color-primary-dark);
+  }
+`;
+
+export const ImgWrapper = styled.div`
+  width: 38px;
+  height: 38px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 2164.5px;
   }
 `;

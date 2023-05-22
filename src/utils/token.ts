@@ -15,3 +15,11 @@ export const getAccessTokenFromCookie = () => {
 export const getRefreshTokenFromCookie = () => {
   return Cookies.get('RefreshToken');
 };
+
+export const removeAccessTokenToCookie = () => {
+  Cookies.remove('AccessToken');
+};
+
+export const removeRefreshTokenToCookie = () => {
+  Cookies.remove('RefreshToken');
+};
