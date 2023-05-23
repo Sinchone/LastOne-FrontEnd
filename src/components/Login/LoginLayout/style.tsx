@@ -7,4 +7,6 @@ export const LayoutContainer = styled.div`
 
   width: 100%;
   height: 100vh;
+
+  background-color: var(--color-primary-main);
 `;
