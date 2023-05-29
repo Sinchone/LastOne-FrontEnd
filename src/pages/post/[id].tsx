@@ -1,9 +1,10 @@
-import { Header } from '@components/PostDetail';
+import { Content, Header } from '@components/PostDetail';
 
 const PostDetail = () => {
   return (
     <>
       <Header />
+      <Content />
     </>
   );
 };
