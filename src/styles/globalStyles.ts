@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import theme from './theme';
+import { customOverlayStyle } from '@components/PostDetail/Map/style';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -91,6 +92,7 @@ const GlobalStyle = createGlobalStyle`
     --color-yellow: #FAE407;  
   }
  
+ ${customOverlayStyle}
 `;
 
 export default GlobalStyle;
