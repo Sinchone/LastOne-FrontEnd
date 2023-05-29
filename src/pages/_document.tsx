@@ -38,12 +38,13 @@ export default class MyDocument extends Document {
             as="style"
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
           />
-          <link rel="shortcut icon" href="/favicon.ico" /> 
+          <link rel="shortcut icon" href="/favicon.ico" />
           {/* <Favicon /> */}
         </Head>
         <body>
           <Main />
           <NextScript />
+          <div id="modal-root" />
         </body>
       </Html>
     );
