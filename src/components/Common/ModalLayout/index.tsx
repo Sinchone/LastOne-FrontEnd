@@ -1,12 +1,12 @@
 import * as S from './style';
 import { createPortal } from 'react-dom';
 
-type Modal = {
+interface Modal {
   isOpen: boolean;
   handleClose: () => void;
   handleClick?: () => void;
   children: React.ReactNode;
-};
+}
 
 const ModalLayout = ({ children, isOpen, handleClose }: Modal) => {
   const handleClick = () => {
