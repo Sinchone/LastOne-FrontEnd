@@ -12,8 +12,12 @@ const Banner = () => {
     setStartX(e.pageX);
   };
 
-  const onMouseUp = () => {
+  const onMouseUp = (e: any) => {
     setIsDrag(false);
+
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft = handleScrollSnap(scrollRef.current.scrollLeft) || 0;
+    }
   };
 
   const onMouseMove = (e: any) => {
@@ -25,6 +29,19 @@ const Banner = () => {
         scrollRef.current.scrollLeft = scrollLeft + dragDistance;
         setStartX(e.pageX);
       }
+    }
+  };
+
+  const handleScrollSnap = (scrollLeft: number) => {
+    if (scrollRef.current) {
+      const { scrollWidth, clientWidth } = scrollRef.current;
+      const maxScroll = scrollWidth - clientWidth;
+      const middleScroll = maxScroll / 2;
+      const snapPoints = [0, middleScroll, maxScroll];
+      const diff = snapPoints.map((point) => Math.abs(point - scrollLeft));
+      const index = diff.indexOf(Math.min(...diff));
+
+      return snapPoints[index];
     }
   };
 

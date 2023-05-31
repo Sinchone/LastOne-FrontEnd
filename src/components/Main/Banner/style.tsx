@@ -5,7 +5,7 @@ import styled from 'styled-components';
 interface slideProps {
   ref: RefObject<HTMLDivElement>;
   onMouseDown: (e: any) => void;
-  onMouseUp: () => void;
+  onMouseUp: (e: any) => void;
   onMouseMove: (e: MouseEvent) => void;
 }
 
