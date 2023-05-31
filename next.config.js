@@ -14,4 +14,13 @@ module.exports = withImages({
     });
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/post',
+        destination: '/',
+        permanent: false,
+      },
+    ];
+  },
 });
