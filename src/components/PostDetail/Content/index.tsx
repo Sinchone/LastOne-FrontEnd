@@ -2,9 +2,17 @@ import Image from 'next/image';
 import * as S from './style';
 import CheckMarker from '@assets/png/checkMarker.png';
 import Marker from '@assets/icon/mapmarker.svg';
+import Check from '@assets/icon/check.svg';
 import { Map } from '@components/PostDetail';
+import { useState } from 'react';
+import ModalLayout from '@components/Common/ModalLayout';
 
 const Content = () => {
+  const [isPartnerRequested, setIsPartnerRequested] = useState(false);
+  const [isPartner, setIsPartner] = useState(false);
+  const [isPartnerCancelRequested, setIsPartnerCancelRequested] = useState(false);
+  const [isPartnerCancel, setIsPartnerCancel] = useState(false);
+
   return (
     <S.Wrapper>
       <S.WriterWrapper>
@@ -80,9 +88,80 @@ const Content = () => {
         </p>
       </S.DescriptionWrapper>
       <S.ButtonsWrapper>
-        <S.ChatButton>채팅하기</S.ChatButton>
-        <S.ApplyButton>신청하기</S.ApplyButton>
+        <S.ChatButton onClick={() => alert('구현 예정입니다.')}>채팅하기</S.ChatButton>
+        {isPartner ? (
+          <S.CancelButton
+            onClick={() => {
+              setIsPartnerRequested(false);
+              setIsPartnerCancelRequested(true);
+            }}
+          >
+            취소하기
+          </S.CancelButton>
+        ) : (
+          <S.PrimaryButton
+            onClick={() => {
+              setIsPartnerRequested(true);
+              setIsPartner(true);
+            }}
+          >
+            신청하기
+          </S.PrimaryButton>
+        )}
       </S.ButtonsWrapper>
+
+      {isPartnerRequested && (
+        <ModalLayout isOpen={isPartnerRequested} handleClose={() => setIsPartnerRequested(false)}>
+          <S.ModalWrapper>
+            <S.ModalSpanWrapper>
+              <span>파트너가 신청되었습니다.</span>
+              <span>신청 목록을 확인해주세요</span>
+            </S.ModalSpanWrapper>
+            <S.ModalBtnsWrapper>
+              <S.PrimaryButton onClick={() => alert('신청목록 확인')}>신청목록 확인</S.PrimaryButton>
+              <div onClick={() => setIsPartnerRequested(false)}>나중에 다시 확인</div>
+            </S.ModalBtnsWrapper>
+          </S.ModalWrapper>
+        </ModalLayout>
+      )}
+
+      {isPartnerCancelRequested && (
+        <ModalLayout isOpen={isPartnerCancelRequested} handleClose={() => setIsPartnerCancelRequested(false)}>
+          <S.ModalWrapper>
+            <S.ModalSpanWrapper>
+              <span>정말로 파트너 매칭신청을</span>
+              <span>취소하시겠어요?</span>
+            </S.ModalSpanWrapper>
+            <S.ModalBtnsWrapper>
+              <S.CancelButton
+                onClick={() => {
+                  alert('취소하기');
+                  setIsPartner(false);
+                  setIsPartnerCancelRequested(false);
+                  setIsPartnerCancel(true);
+                }}
+              >
+                취소하기
+              </S.CancelButton>
+              <div onClick={() => setIsPartnerCancelRequested(false)}>아니요</div>
+            </S.ModalBtnsWrapper>
+          </S.ModalWrapper>
+        </ModalLayout>
+      )}
+
+      {isPartnerCancel && (
+        <ModalLayout isOpen={isPartnerCancel} handleClose={() => setIsPartnerCancel(false)}>
+          <S.CancelModalWrapper>
+            <div>
+              <Check />
+              <S.ModalSpanWrapper>
+                <span>성공적으로</span>
+                <span>취소되었습니다!</span>
+              </S.ModalSpanWrapper>
+            </div>
+          </S.CancelModalWrapper>
+        </ModalLayout>
+      )}
     </S.Wrapper>
   );
 };

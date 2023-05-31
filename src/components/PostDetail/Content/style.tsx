@@ -217,7 +217,67 @@ export const ChatButton = styled(Button)`
   color: var(--color-primary-main);
 `;
 
-export const ApplyButton = styled(Button)`
+export const PrimaryButton = styled(Button)`
   background-color: var(--color-primary-main);
   color: var(--color-white);
+  border: none;
+`;
+
+export const CancelButton = styled(Button)`
+  background-color: var(--color-secondary-main);
+  color: var(--color-white);
+  border: none;
+`;
+
+export const ModalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 86px;
+  margin: 86px 24px 24px 24px;
+`;
+
+export const ModalSpanWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  color: var(--color-gray9);
+`;
+
+export const ModalBtnsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-weight: 700;
+  & div {
+    width: 426px;
+    height: 54px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:last-of-type {
+      background-color: var(--color-gray2);
+      color: var(--color-gray7);
+    }
+  }
+`;
+
+export const CancelModalWrapper = styled(ModalWrapper)`
+  width: 474px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  > div div:first-of-type {
+    margin-top: 20px;
+  }
 `;
