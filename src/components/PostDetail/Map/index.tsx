@@ -69,5 +69,5 @@ export default function Map() {
       });
     };
   };
-  return <div id="map" style={{ width: '100%', height: 312, borderRadius: '8px', zIndex: 80 }}></div>;
+  return <div id="map" style={{ width: '100%', height: 312, borderRadius: '8px', zIndex: 2 }}></div>;
 }
