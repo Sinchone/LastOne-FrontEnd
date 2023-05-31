@@ -18,13 +18,6 @@ export const LogoContainer = styled.div`
   justify-content: center;
 
   margin: 0 auto;
-
-  width: 230px;
-  height: 168px;
-
-  border-radius: 8px;
-
-  background-color: var(--color-gray3);
 `;
 
 export const ButtonContainer = styled.div`
@@ -64,8 +57,8 @@ export const HomeBtn = styled.button`
   width: 100%;
   height: 62px;
 
-  background-color: var(--color-primary-main);
-  color: var(--color-white);
+  background-color: var(--color-white);
+  color: var(--color-primary-main);
 
   border: 0px;
   border-radius: 6px;
