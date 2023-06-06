@@ -193,7 +193,7 @@ export const DescriptionTextAreaWrapper = styled.div`
     resize: none;
     background-color: inherit;
     font-size: 16px;
-
+    overflow: hidden;
     ::placeholder {
       font-weight: 400;
     }
