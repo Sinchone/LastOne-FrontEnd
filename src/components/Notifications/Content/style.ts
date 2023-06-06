@@ -63,15 +63,13 @@ export const NotificationContainer = styled.div`
   flex-direction: column;
   gap: 56px;
 
+  overflow: scroll;
+
   -ms-overflow-style: none;
   scrollbar-width: none;
 
   &::-webkit-scrollbar {
     display: none;
-  }
-
-  ${theme.media.laptop} {
-    overflow: scroll;
   }
 `;
 
