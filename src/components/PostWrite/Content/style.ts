@@ -187,7 +187,8 @@ export const DescriptionTextAreaWrapper = styled.div`
   }
 
   & textarea {
-    width: 90%;
+    width: 100%;
+    margin-top: 15px;
     border: none;
     outline: none;
     resize: none;
