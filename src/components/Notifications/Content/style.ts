@@ -56,7 +56,7 @@ export const SelectBox = styled.div`
 `;
 
 export const NotificationContainer = styled.div`
-  height: 100%;
+  height: calc(100vh - 145px);
   padding: 24px 0;
 
   display: flex;
@@ -71,7 +71,6 @@ export const NotificationContainer = styled.div`
   }
 
   ${theme.media.laptop} {
-    height: calc(100vh - 145px);
     overflow: scroll;
   }
 `;
