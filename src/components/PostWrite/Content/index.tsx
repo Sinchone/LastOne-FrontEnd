@@ -6,12 +6,14 @@ import BottomArrowIcon from '@assets/icon/bottom-arrow.svg';
 import SearchIcon from '@assets/icon/search.svg';
 import AddImgIcon from '@assets/icon/addImg.svg';
 import Map from '../Map';
+import { useBottomSheet } from '@hooks/common';
 
 const Content = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedExercisePart, setSelectedExercisePart] = useState('');
   const textarea = useRef<HTMLTextAreaElement>(null);
+  const { showBottomSheet } = useBottomSheet();
 
   const titleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -43,7 +45,7 @@ const Content = () => {
       </S.TitleInputWrapper>
 
       {/* 운동 날짜와 운동 시간 BottomSheet 사용 */}
-      <S.SelectWrapper>
+      <S.SelectWrapper onClick={() => showBottomSheet('Calandar')}>
         <S.SelectArea>
           <div>
             <CalendarIcon />
