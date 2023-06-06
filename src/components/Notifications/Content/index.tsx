@@ -229,7 +229,7 @@ const Content = ({ isSelecting, setIsSelecting, setSelectedList }: Props) => {
         )}
       </S.Option>
       <S.NotificationContainer>
-        {notifications.length === 0 ? (
+        {notifications.length ? (
           notifications.map((item) => (
             <div key={item.notificationId} onClick={() => console.log('read')}>
               <Notification data={item} isSelecting={isSelecting} setSelected={setSelectedList} />
