@@ -82,7 +82,7 @@ export const ExercisePartWrapper = styled.div`
   margin-top: 8px;
 `;
 
-export const ExercisePart = styled.div`
+export const ExercisePart = styled.div<{ selected: string; part: string }>`
   width: 105px;
   height: 72px;
   border-radius: 8px;
@@ -92,8 +92,9 @@ export const ExercisePart = styled.div`
   align-items: center;
   font-size: 20px;
   font-weight: 500;
-  color: var(--color-gray8);
   cursor: pointer;
+  color: var(${(props) => (props.selected === props.part ? '--color-white' : '--color-gray8')});
+  background-color: var(${(props) => (props.selected === props.part ? '--color-primary-main' : '--color-white')});
 `;
 
 export const ExercisePlaceSearchArea = styled.div`

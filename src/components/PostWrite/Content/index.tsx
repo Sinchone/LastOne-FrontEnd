@@ -10,6 +10,7 @@ import Map from '../Map';
 const Content = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [selectedExercisePart, setSelectedExercisePart] = useState('');
   const textarea = useRef<HTMLTextAreaElement>(null);
 
   const titleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +65,14 @@ const Content = () => {
         <S.Subject>운동 부위</S.Subject>
         <S.ExercisePartWrapper>
           {exercisePartArray.map((part, idx) => (
-            <S.ExercisePart key={idx}>{part}</S.ExercisePart>
+            <S.ExercisePart
+              key={idx}
+              onClick={() => setSelectedExercisePart(part)}
+              selected={selectedExercisePart}
+              part={part}
+            >
+              {part}
+            </S.ExercisePart>
           ))}
         </S.ExercisePartWrapper>
       </S.ExercisePartArea>
