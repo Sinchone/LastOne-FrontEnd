@@ -22,7 +22,9 @@ const Header = () => {
           <Link href={'/upload'}>
             <S.Button>글쓰기</S.Button>
           </Link>
-          <Alarm />
+          <Link href={'/notifications'}>
+            <Alarm />
+          </Link>
           {user?.data.member.profileUrl ? (
             <S.ImgWrapper>
               <Link href={'/mypage'}>
