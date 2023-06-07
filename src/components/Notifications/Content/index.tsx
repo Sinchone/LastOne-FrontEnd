@@ -239,7 +239,7 @@ const Content = ({ isSelecting, setIsSelecting, setSelectedList }: Props) => {
           <S.Empty />
         )}
       </S.NotificationContainer>
-      {isToast && <Toast setToast={setIsToast}>전체 삭제가 완료되었습니다!</Toast>}
+      {isToast && <Toast setIsExist={setIsToast}>전체 삭제가 완료되었습니다!</Toast>}
     </S.Wrapper>
   );
 };
