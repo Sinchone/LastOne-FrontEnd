@@ -41,7 +41,7 @@ const Header = ({ isSelecting, setIsSelecting, selectedList }: Props) => {
       <S.Title>알림</S.Title>
       <S.DeleteButton onClick={handleIsSelecting}>{isSelecting ? '선택완료' : '삭제'}</S.DeleteButton>
       {isModal && <CheckModal isOpen={isModal} handleClose={() => setIsModal(false)} handleConfirm={handleConfirm} />}
-      {isToast && <Toast setToast={setIsToast}>삭제가 완료되었습니다!</Toast>}
+      {isToast && <Toast setIsExist={setIsToast}>삭제가 완료되었습니다!</Toast>}
     </S.Wrapper>
   );
 };
