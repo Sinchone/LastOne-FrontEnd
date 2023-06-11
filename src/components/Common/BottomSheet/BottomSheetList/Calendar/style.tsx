@@ -24,7 +24,7 @@ export const BottomSheetHeader = styled.div`
   border-bottom: 1px solid var(--color-gray3);
   padding-bottom: 15px;
 
-  .select_pitness {
+  .select_fitness {
     font-weight: 700;
     font-size: 16px;
     line-height: 30px;
@@ -34,7 +34,7 @@ export const BottomSheetHeader = styled.div`
     gap: 15px;
   }
 
-  .register_pitness {
+  .register_fitness {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -106,7 +106,7 @@ export const Button = styled.button`
   cursor: pointer;
 `;
 
-export const CalandarWrapper = styled.div`
+export const CalendarWrapper = styled.div`
   width: 100%;
   display: flex;
   font-family: 'Pretendard';

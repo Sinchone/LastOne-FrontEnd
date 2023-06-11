@@ -26,7 +26,7 @@ const ExerciseArea = () => {
   return (
     <S.BottomSheetContent>
       <S.BottomSheetHeader>
-        <span className="select_pitness">운동부위</span>
+        <span className="select_fitness">운동부위</span>
       </S.BottomSheetHeader>
       <S.Content>
         {dummy.map((el) => (
