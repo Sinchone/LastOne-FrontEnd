@@ -95,13 +95,16 @@ export const ApplyHeader = styled.div`
 `;
 
 export const ApplyItem = styled.li`
-  width: 730px;
-  height: 96px;
+  width: 100%;
   background-color: var(--color-white);
-  padding: 16px 24px 16px 24px;
+  padding: 16px 24px;
+
   display: flex;
   align-items: center;
-  gap: 35px;
+  gap: 20px;
+
+  box-shadow: 0px 0px 7px rgba(102, 109, 117, 0.1);
+  border-radius: 8px;
 
   .time {
     ${theme.font.ko.body1}
@@ -114,6 +117,11 @@ export const ApplyProfile = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
+
+  svg {
+    width: 64px;
+    height: 64px;
+  }
 
   span {
     font-weight: 700;
@@ -133,26 +141,23 @@ export const Contour = styled.div`
 `;
 
 export const Gender = styled.div`
-  ${theme.font.ko.button};
+  font-weight: 400;
+  font-size: 12px;
   color: var(--color-white);
   background-color: var(--color-primary-main);
   padding: 6px 8px 6px 8px;
   border-radius: 4px;
-  width: 41px;
-  height: 28px;
 `;
 
 export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 5px;
+  gap: 16px;
 `;
 export const ApplyButton = styled.div`
-  width: 104px;
-  height: 44px;
   border-radius: 6px;
-  padding: 10px 24px 10px 24px;
+  padding: 10px 20px;
   background-color: var(--color-primary-main);
   ${theme.font.ko.body1}
   color: var(--color-white);
@@ -162,8 +167,6 @@ export const ApplyButton = styled.div`
 `;
 
 export const ChattingButton = styled.div`
-  width: 104px;
-  height: 44px;
   border-radius: 6px;
   padding: 10px 20px 10px 20px;
   background-color: var(--color-white);
