@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import * as S from './style';
 import ProfileIcon from '@assets/icon/mypage.svg';
 import CloseIcon from '@assets/icon/close.svg';
@@ -19,6 +20,7 @@ interface Props {
 }
 
 const Content = ({ profile }: Props) => {
+  const router = useRouter();
   const [isMapShow, setIsMapShow] = useState(false);
   const [image, setImage] = useState<any>('');
   const {
@@ -85,7 +87,10 @@ const Content = ({ profile }: Props) => {
       formData.append('profileImg', image);
     }
 
-    editProfile(formData).then((res) => console.log(res));
+    editProfile(formData).then((res) => {
+      console.log(res);
+      router.push('/mypage');
+    });
   };
 
   const handleSelectGym = (name: string) => {
