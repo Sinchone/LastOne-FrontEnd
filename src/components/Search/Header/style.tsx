@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.header`
+  position: relative;
   width: 100%;
   height: 80px;
   padding: 16px 24px 16px 24px;
@@ -11,15 +12,15 @@ export const Wrapper = styled.header`
   background-color: var(--color-white);
 
   svg {
-    flex: 1.9;
+    position: absolute;
+    left: 24px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
   }
 
   span {
-    flex: 2.2;
     font-weight: 700;
     font-size: 24px;
-    line-height: 34px;
-    letter-spacing: -1%;
   }
 `;
