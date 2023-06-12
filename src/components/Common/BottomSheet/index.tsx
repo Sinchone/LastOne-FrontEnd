@@ -12,6 +12,7 @@ const BottomSheetContainer = () => {
     ExerciseArea: BottomSheet['ExerciseArea'],
     Gender: BottomSheet['Gender'],
     Calendar: BottomSheet['Calendar'],
+    CalendarTime: BottomSheet['CalendarTime'],
     '': <></>,
   };
   const Content = bottomSheetComp[bottomsheet.name] as () => JSX.Element;
