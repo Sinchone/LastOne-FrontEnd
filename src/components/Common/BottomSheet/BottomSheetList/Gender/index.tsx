@@ -26,7 +26,7 @@ const Gender = () => {
   return (
     <S.BottomSheetContent>
       <S.BottomSheetHeader>
-        <span className="select_pitness">성별</span>
+        <span className="select_fitness">성별</span>
       </S.BottomSheetHeader>
       <S.Content>
         {dummy.map((el) => (

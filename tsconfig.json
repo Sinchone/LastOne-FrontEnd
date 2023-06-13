@@ -15,7 +15,12 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Common/BottomSheet/BottomSheetList/Calandar/index.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/components/Common/BottomSheet/BottomSheetList/Calendar/index.js"
+  ],
   "exclude": ["node_modules"],
   "extends": "./tsconfig.path"
 }

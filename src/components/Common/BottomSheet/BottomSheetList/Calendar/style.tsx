@@ -2,9 +2,18 @@ import theme from '@styles/theme';
 import styled from 'styled-components';
 
 export const BottomSheetContent = styled.div`
-  padding: 50px 16px;
+  padding: 30px 16px;
   display: flex;
   flex-direction: column;
+  width: 100%;
+
+  ${theme.media.tablet} {
+    padding-left: 100px;
+  }
+
+  ${theme.media.mobile2} {
+    padding: 30px 16px;
+  }
 `;
 
 export const BottomSheetHeader = styled.div`
@@ -20,6 +29,9 @@ export const BottomSheetHeader = styled.div`
     font-size: 16px;
     line-height: 30px;
     letter-spacing: -2.2%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
   }
 
   .register_fitness {
@@ -39,7 +51,7 @@ export const Content = styled.div`
   padding: 35px 0px;
   width: 100%;
   gap: 13px;
-  margin-bottom: 13px;
+  margin-bottom: 20px;
 `;
 
 export const ContentBox = styled.div<{ isSelected: boolean }>`
@@ -92,4 +104,55 @@ export const Button = styled.button`
   background-color: var(--color-primary-main);
   ${theme.font.ko.subTitle2}
   cursor: pointer;
+`;
+
+export const CalendarWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  font-family: 'Pretendard';
+  justify-content: center;
+
+  .react-calendar {
+    width: 100%;
+    border: none;
+    .react-calendar__tile--now {
+    }
+    .react-calendar__tile--now:enabled:hover,
+    .react-calendar__tile--now:enabled:focus {
+    }
+    .react-calendar__navigation {
+      width: 200px;
+      margin: 0 auto;
+      margin-bottom: 25px;
+      align-items: center;
+      &:hover {
+        background-color: var(--color-white);
+      }
+      button {
+        background-color: var(--color-white);
+      }
+    }
+    .react-calendar__navigation__prev2-button {
+      display: none;
+    }
+    .react-calendar__navigation__next2-button {
+      display: none;
+    }
+    .react-calendar__navigation__label {
+      &:hover {
+        background-color: var(--color-white);
+      }
+    }
+
+    .react-calendar__navigation__next-button {
+      font-size: 25px;
+    }
+
+    .react-calendar__navigation__label > span {
+      font-size: 14px;
+      font-weight: bold;
+      color: #000000;
+      font-family: 'Pretendard';
+    }
+  }
 `;

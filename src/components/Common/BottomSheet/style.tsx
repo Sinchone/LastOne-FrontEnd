@@ -35,8 +35,6 @@ export const Wrapper = styled.div`
   width: 100%;
   max-width: 620px;
   height: fit-content;
-  max-height: 60%;
-  overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
   }

@@ -11,7 +11,8 @@ const BottomSheetContainer = () => {
     FitnessClub: BottomSheet['FitnessClub'],
     ExerciseArea: BottomSheet['ExerciseArea'],
     Gender: BottomSheet['Gender'],
-    Calandar: BottomSheet['Calandar'],
+    Calendar: BottomSheet['Calendar'],
+    CalendarTime: BottomSheet['CalendarTime'],
     '': <></>,
   };
   const Content = bottomSheetComp[bottomsheet.name] as () => JSX.Element;

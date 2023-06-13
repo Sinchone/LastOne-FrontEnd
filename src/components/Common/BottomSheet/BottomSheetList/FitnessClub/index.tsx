@@ -29,8 +29,8 @@ const FitnessClub = () => {
   return (
     <S.BottomSheetContent>
       <S.BottomSheetHeader>
-        <span className="select_pitness">헬스장 선택</span>
-        <span className="register_pitness">
+        <span className="select_fitness">헬스장 선택</span>
+        <span className="register_fitness">
           <PlusIcon />
           헬스장 등록
         </span>
