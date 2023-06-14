@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as S from './style';
 import CalendarIcon from '@assets/icon/calendar.svg';
 import ClockIcon from '@assets/icon/clock.svg';
@@ -17,6 +17,7 @@ const Content = () => {
   const [description, setDescription] = useState('');
   const [selectedExercisePart, setSelectedExercisePart] = useState('');
   const [isMapShow, setIsMapShow] = useRecoilState(isMapShowState);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [searchPlace, setSearchPlace] = useState<GymInfoType>({
     name: '',
     location: '',
@@ -25,6 +26,14 @@ const Content = () => {
   });
   const textarea = useRef<HTMLTextAreaElement>(null);
   const { showBottomSheet } = useBottomSheet();
+
+  useEffect(() => {
+    if (inputRef.current) {
+      if (title === '') {
+        inputRef.current.focus();
+      }
+    }
+  }, [isMapShow, title]);
 
   const titleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -61,7 +70,7 @@ const Content = () => {
       {!isMapShow ? (
         <S.Wrapper>
           <S.TitleInputWrapper>
-            <input type="text" placeholder="제목" value={title} onChange={titleHandler} maxLength={30} />
+            <input ref={inputRef} type="text" placeholder="제목" value={title} onChange={titleHandler} maxLength={30} />
             <span>{title.length}/30</span>
           </S.TitleInputWrapper>
 
