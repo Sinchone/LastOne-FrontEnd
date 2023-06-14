@@ -9,9 +9,10 @@ declare global {
 
 interface Props {
   searchPlace: string;
+  handleClickLocation: (place: any) => void;
 }
 
-export default function Map({ searchPlace }: Props) {
+export default function SearchMap({ searchPlace, handleClickLocation }: Props) {
   const [kakaoMap, setKakaoMap] = useState<any>(null);
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const customOverLay = useRef<any>(null);
@@ -49,9 +50,9 @@ export default function Map({ searchPlace }: Props) {
 
     const ps = new window.kakao.maps.services.Places();
 
-    //검색어따라 지도에서 찾기
+    // 검색어따라 지도에서 찾기
 
-    const placesSearchCB = (data: any, status: any) => {
+    const placesSearchCB = (data: any, status: any, pagination: any) => {
       if (status === window.kakao.maps.services.Status.OK) {
         const bounds = new window.kakao.maps.LatLngBounds();
 
@@ -78,7 +79,10 @@ export default function Map({ searchPlace }: Props) {
         position: new window.kakao.maps.LatLng(place.y, place.x),
         image: checkMarker,
       });
-      setSelectedPlace(place);
+      window.kakao.maps.event.addListener(marker, 'click', function () {
+        setSelectedPlace(place);
+        handleClickLocation(place);
+      });
     }
   }, [kakaoMap, searchPlace]);
 
@@ -102,5 +106,5 @@ export default function Map({ searchPlace }: Props) {
     });
   }, [selectedPlace]);
 
-  return <div id="map" style={{ width: '100%', height: '400px', borderRadius: '8px' }}></div>;
+  return <div id="map" style={{ width: '100%', height: '70vh', borderRadius: '8px' }}></div>;
 }

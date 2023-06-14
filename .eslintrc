@@ -9,5 +9,8 @@
   "env": {
     "browser": true,
     "es6": true
+  },
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off" // any 타입 사용 허용
   }
 }
