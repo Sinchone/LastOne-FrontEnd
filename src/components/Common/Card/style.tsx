@@ -12,6 +12,15 @@ export const Wrapper = styled.article<{ size: string }>`
   ${theme.media.mobile2} {
     width: 48%;
   }
+
+  padding: 5px;
+  border-radius: 8px;
+  transition: ease all 0.3s;
+  cursor: pointer;
+
+  :hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const ImgBox = styled.div`
