@@ -9,12 +9,14 @@ import Map from '../Map';
 import SearchGym from '../SearchGym';
 import { useBottomSheet } from '@hooks/common';
 import { GymInfoType } from '@typing/user';
+import { useRecoilState } from 'recoil';
+import { isMapShowState } from '@recoil/postWrite';
 
 const Content = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedExercisePart, setSelectedExercisePart] = useState('');
-  const [isMapShow, setIsMapShow] = useState(false);
+  const [isMapShow, setIsMapShow] = useRecoilState(isMapShowState);
   const [searchPlace, setSearchPlace] = useState<GymInfoType>({
     name: '',
     location: '',
