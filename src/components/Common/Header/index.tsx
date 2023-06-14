@@ -19,7 +19,7 @@ const Header = () => {
       </S.NavContainer>
       {token ? (
         <S.UserNav>
-          <Link href={'/upload'}>
+          <Link href={'/post/write'}>
             <S.Button>글쓰기</S.Button>
           </Link>
           <Link href={'/notifications'}>
