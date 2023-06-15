@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as S from './style';
 import CalendarIcon from '@assets/icon/calendar.svg';
 import ClockIcon from '@assets/icon/clock.svg';
@@ -8,36 +8,64 @@ import AddImgIcon from '@assets/icon/addImg.svg';
 import Map from '../Map';
 import SearchGym from '../SearchGym';
 import { useBottomSheet } from '@hooks/common';
-import { GymInfoType } from '@typing/user';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { isMapShowState } from '@recoil/postWrite';
+import { selectedDateState, selectedTimeState } from '@recoil/bottomsheet/calendarTime';
+import moment from 'moment';
+import { Post } from '@typing/post';
+import { exercisePartArray } from '@constants/post';
 
 const Content = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [selectedExercisePart, setSelectedExercisePart] = useState('');
+  const initialData: Post = {
+    title: '',
+    description: '',
+    workoutPart: '',
+    preferGender: '',
+    gym: {
+      name: '',
+      location: '',
+      latitude: '',
+      longitude: '',
+    },
+    startedAt: {
+      date: '',
+      meridiem: '',
+      time: '',
+    },
+  };
+  const [data, setData] = useState<Post>(initialData);
+  const selectedDate = useRecoilValue(selectedDateState);
+  const selectedTime = useRecoilValue(selectedTimeState);
   const [isMapShow, setIsMapShow] = useRecoilState(isMapShowState);
-  const [searchPlace, setSearchPlace] = useState<GymInfoType>({
-    name: '',
-    location: '',
-    latitude: '',
-    longitude: '',
-  });
-  const textarea = useRef<HTMLTextAreaElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { showBottomSheet } = useBottomSheet();
 
+  useEffect(() => {
+    if (inputRef.current) {
+      if (inputRef.current.value === '') {
+        inputRef.current.focus();
+      }
+    }
+  }, [isMapShow, inputRef]);
+
   const titleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
+    setData({ ...data, title: e.target.value });
   };
 
   const descriptionHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setDescription(e.target.value);
+    setData({ ...data, description: e.target.value });
   };
 
-  const exercisePartArray = ['전신', '가슴', '등', '어깨', '하체', '코어'];
-
   const setChangeSearchPlace = (place: any) => {
-    setSearchPlace(place);
+    setData({
+      ...data,
+      gym: {
+        ...data.gym,
+        ...place,
+      },
+    });
   };
 
   const handleCloseSearch = () => {
@@ -45,9 +73,9 @@ const Content = () => {
   };
 
   const textareaResizeHandler = () => {
-    if (textarea.current) {
-      textarea.current.style.height = 'auto';
-      textarea.current.style.height = textarea.current.scrollHeight + 'px';
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
     }
   };
 
@@ -56,13 +84,33 @@ const Content = () => {
     textareaResizeHandler();
   };
 
+  const handleUpload = () => {
+    setData({
+      ...data,
+      startedAt: {
+        ...data.startedAt,
+        date: moment(selectedDate).format('yyyy.MM.DD'),
+        meridiem: selectedTime.meridiem,
+        time: selectedTime.time,
+      },
+    });
+    console.log('data', data);
+  };
+
   return (
     <>
       {!isMapShow ? (
         <S.Wrapper>
           <S.TitleInputWrapper>
-            <input type="text" placeholder="제목" value={title} onChange={titleHandler} maxLength={30} />
-            <span>{title.length}/30</span>
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="제목"
+              value={data.title}
+              onChange={titleHandler}
+              maxLength={30}
+            />
+            <span>{data.title.length}/30</span>
           </S.TitleInputWrapper>
 
           {/* 운동 날짜와 운동 시간 BottomSheet 사용 */}
@@ -70,14 +118,18 @@ const Content = () => {
             <S.SelectArea>
               <div>
                 <CalendarIcon />
-                <S.Subject>운동 날짜</S.Subject>
+                <S.Subject>{selectedDate ? moment(selectedDate).format('MM/DD') : '운동 날짜'}</S.Subject>
               </div>
               <BottomArrowIcon />
             </S.SelectArea>
             <S.SelectArea>
               <div>
                 <ClockIcon />
-                <S.Subject>운동 시간</S.Subject>
+                <S.Subject>
+                  {Object.values(selectedTime).every((value) => value)
+                    ? `${selectedTime.meridiem} ${selectedTime.time}`
+                    : '운동 시간'}
+                </S.Subject>
               </div>
               <BottomArrowIcon />
             </S.SelectArea>
@@ -90,8 +142,8 @@ const Content = () => {
               {exercisePartArray.map((part, idx) => (
                 <S.ExercisePart
                   key={idx}
-                  onClick={() => setSelectedExercisePart(part)}
-                  selected={selectedExercisePart}
+                  onClick={() => setData({ ...data, workoutPart: part })}
+                  selected={data.workoutPart}
                   part={part}
                 >
                   {part}
@@ -108,7 +160,7 @@ const Content = () => {
               <input type="text" placeholder="헬스장 위치를 검색해보세요." />
             </S.ExercisePlaceSearchInputWrapper>
             {/* 맵 */}
-            <Map searchPlace={searchPlace.name} />
+            <Map searchPlace={data.gym.name} />
           </S.ExercisePlaceSearchArea>
 
           {/* 상세설명 */}
@@ -126,11 +178,11 @@ const Content = () => {
               </div>
             </S.DescriptionImageWrapper>
             <S.DescriptionTextAreaWrapper>
-              <span>{description.length}/100</span>
+              <span>{data.description.length}/100</span>
               <textarea
-                ref={textarea}
+                ref={textareaRef}
                 name="description"
-                value={description}
+                value={data.description}
                 onChange={textareaOnChangeHandler}
                 maxLength={100}
                 rows={1}
@@ -140,7 +192,7 @@ const Content = () => {
           </S.DescriptionArea>
 
           {/* 업로드 버튼 */}
-          <S.UploadBtn>업로드</S.UploadBtn>
+          <S.UploadBtn onClick={handleUpload}>업로드</S.UploadBtn>
         </S.Wrapper>
       ) : (
         <SearchGym setChangeSearchPlace={setChangeSearchPlace} handleCloseSearch={handleCloseSearch} />
