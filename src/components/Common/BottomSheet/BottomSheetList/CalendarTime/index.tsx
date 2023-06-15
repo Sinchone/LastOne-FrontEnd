@@ -9,36 +9,31 @@ import ReactCalendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Time from './Time';
 import moment from 'moment';
-
-type ValuePiece = Date | null;
+import { useRecoilState } from 'recoil';
+import { selectedDateState, selectedTimeState } from '@recoil/bottomsheet/calendarTime';
+import { TimeType } from '@typing/post';
 
 const CalendarTime = () => {
   const { closeBottomSheet } = useBottomSheet();
-  const [selectedDate, setSelectedDate] = useState<ValuePiece>(new Date());
 
+  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
+  const [selectedTime, setSelectedTime] = useRecoilState(selectedTimeState);
+  const [currentDate, setCurrentDate] = useState(selectedDate);
+  const [currentTime, setCurrentTime] = useState<TimeType>(selectedTime);
   const [selectMenu, setSelectMenu] = useState('calendar');
-  const [selectAMTime, setSelectAMTime] = useState('');
-  const [selectPMTime, setSelectPMTime] = useState('');
 
   const handleDateChange = (date: Date) => {
-    setSelectedDate(date);
+    setCurrentDate(date);
   };
 
-  const handleTimeChange = (time: string, isAM: boolean) => {
-    if (isAM) {
-      setSelectAMTime(time);
-      setSelectPMTime('');
-    } else {
-      setSelectPMTime(time);
-      setSelectAMTime('');
-    }
+  const handleTimeChange = ({ meridiem, time }: TimeType) => {
+    setCurrentTime({ meridiem, time });
   };
 
   const handleApply = () => {
-    const formattedDate = moment(selectedDate).format('MM/DD');
-    const timeToUse = selectAMTime !== '' ? `오전 ${selectAMTime}` : `오후 ${selectPMTime}`;
-    console.log('선택 날짜', formattedDate);
-    console.log('선택 시간', timeToUse);
+    setSelectedDate(currentDate);
+    setSelectedTime(currentTime);
+
     closeBottomSheet();
   };
 
@@ -56,7 +51,7 @@ const CalendarTime = () => {
           <S.CalendarWrapper>
             <ReactCalendar
               onChange={handleDateChange as any}
-              value={selectedDate}
+              value={selectedDate ? selectedDate : new Date()}
               calendarType={'US'}
               formatMonthYear={(locale, date) => moment(date).format('YYYY.MM')}
               formatDay={(locale, date) => moment(date).format('D')}
@@ -73,7 +68,7 @@ const CalendarTime = () => {
       </S.BottomSheetHeader>
       {selectMenu === 'time' && (
         <S.Content>
-          <Time onChange={handleTimeChange} amTime={selectAMTime} pmTime={selectPMTime} />
+          <Time onChange={handleTimeChange} currentTime={currentTime} />
         </S.Content>
       )}
       <S.ButtonGroup>
