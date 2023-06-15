@@ -175,6 +175,9 @@ export const CalendarWrapper = styled.div`
       button:nth-of-type(7n) {
         color: blue;
       }
+      .react-calendar__tile--active {
+        color: white !important;
+      }
       .react-calendar__month-view__days__day--neighboringMonth {
         color: #757575 !important;
       }
