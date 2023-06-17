@@ -16,6 +16,7 @@ import { Post } from '@typing/post';
 import { exercisePartArray } from '@constants/post';
 import { createPost } from '@apis/post';
 import { createImageUrl } from '@utils/createImageUrl';
+import { checkAllKeysHaveValues } from '@utils/checkAllKeysHaveValues';
 
 const Content = () => {
   const initialData: Post = {
@@ -101,6 +102,11 @@ const Content = () => {
         time: selectedTime.time,
       },
     };
+
+    if (!checkAllKeysHaveValues(postData)) {
+      alert('항목을 모두 작성해주세요.');
+      return;
+    }
 
     const formData = new FormData();
 
