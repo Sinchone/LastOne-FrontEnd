@@ -14,6 +14,8 @@ import { selectedDateState, selectedTimeState } from '@recoil/bottomsheet/calend
 import moment from 'moment';
 import { Post } from '@typing/post';
 import { exercisePartArray } from '@constants/post';
+import { createPost } from '@apis/post';
+import { createImageUrl } from '@utils/createImageUrl';
 
 const Content = () => {
   const initialData: Post = {
@@ -37,6 +39,7 @@ const Content = () => {
   const selectedDate = useRecoilValue(selectedDateState);
   const selectedTime = useRecoilValue(selectedTimeState);
   const [isMapShow, setIsMapShow] = useRecoilState(isMapShowState);
+  const [image, setImage] = useState<any>('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -84,17 +87,36 @@ const Content = () => {
     textareaResizeHandler();
   };
 
-  const handleUpload = () => {
-    setData({
-      ...data,
+  const handleSubmitForm = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    const postData = {
+      title: data.title,
+      description: data.description,
+      workoutPart: data.workoutPart,
+      preferGender: '무관',
+      gym: data.gym,
       startedAt: {
-        ...data.startedAt,
         date: moment(selectedDate).format('yyyy.MM.DD'),
         meridiem: selectedTime.meridiem,
         time: selectedTime.time,
       },
+    };
+
+    const formData = new FormData();
+
+    formData.append(
+      'recruitment',
+      new Blob([JSON.stringify(postData)], {
+        type: 'application/json',
+      })
+    );
+    if (image) {
+      formData.append('profileImg', image);
+    }
+
+    createPost(formData).then((res) => {
+      console.log(res);
     });
-    console.log('data', data);
   };
 
   return (
@@ -192,7 +214,7 @@ const Content = () => {
           </S.DescriptionArea>
 
           {/* 업로드 버튼 */}
-          <S.UploadBtn onClick={handleUpload}>업로드</S.UploadBtn>
+          <S.UploadBtn onClick={handleSubmitForm}>업로드</S.UploadBtn>
         </S.Wrapper>
       ) : (
         <SearchGym setChangeSearchPlace={setChangeSearchPlace} handleCloseSearch={handleCloseSearch} />

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.main`
+export const Wrapper = styled.form`
   width: 100%;
   height: fit-content;
   padding: 40px 24px;
@@ -201,7 +201,7 @@ export const DescriptionTextAreaWrapper = styled.div`
   }
 `;
 
-export const UploadBtn = styled.div`
+export const UploadBtn = styled.button`
   width: 100%;
   height: 56px;
   border-radius: 6px;
