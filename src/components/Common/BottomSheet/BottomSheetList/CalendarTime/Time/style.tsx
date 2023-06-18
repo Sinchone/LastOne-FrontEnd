@@ -20,22 +20,7 @@ export const TimesWrapper = styled.div`
   margin-bottom: 24px;
 `;
 
-const getBackgroundColor = (isSelected: boolean, isCurrent: boolean): string => {
-  if (isSelected) {
-    return 'var(--color-primary-main)';
-  }
-  if (isCurrent) {
-    return 'var(--color-primary-light)';
-  }
-  return 'var(--color-white)';
-};
-
-const getTextColor = (isSelected: boolean, isCurrent: boolean): string =>
-  isSelected || isCurrent ? 'var(--color-white)' : 'var(--color-gray8)';
-// isSelected 와 isCurrent 중 하나라도 true 일 때 'var(--color-white)'
-// 둘 다 false 일 때 'var(--color-gray8)'
-
-export const Time = styled.div<{ isSelected: boolean; isCurrent: boolean }>`
+export const Time = styled.div<{ isSelected: boolean }>`
   width: 80px;
   height: 54px;
   display: flex;
@@ -45,6 +30,6 @@ export const Time = styled.div<{ isSelected: boolean; isCurrent: boolean }>`
   border-radius: 8px;
   cursor: pointer;
   font-weight: 400;
-  background-color: ${(props) => getBackgroundColor(props.isSelected, props.isCurrent)};
-  color: ${(props) => getTextColor(props.isSelected, props.isCurrent)};
+  background-color: ${(props) => (props.isSelected ? 'var(--color-primary-main)' : 'var(--color-white)')};
+  color: ${(props) => (props.isSelected ? 'var(--color-white)' : 'var(--color-gray8)')};
 `;
