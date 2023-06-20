@@ -7,7 +7,14 @@ const ModalTest = () => {
   const [isModal, setIsModal] = useState(false);
 
   const [isCustomModal, setIsCustomModal] = useState(false);
-  const messages = { label: '어쩌구 하시겠습니까?', confirm: '네', cancel: '아니오', success: '성공!' };
+  const messages = { label: '어쩌구 하시겠습니까?', confirm: '네', cancel: '아니오' };
+
+  const [isModalWithSuccess, setIsModalWithSuccess] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const messagesWithSuccess = { label: '어쩌구 하시겠습니까?', confirm: '네', cancel: '아니오', success: '성공!' };
+
+  const [isSuccessModal, setIsSuccessModal] = useState(false);
+  const messageOnlySuccess = { success: '성공이다' };
 
   return (
     <FlexContainer>
@@ -23,10 +30,33 @@ const ModalTest = () => {
         <Modal
           isOpen={isCustomModal}
           handleClose={() => setIsCustomModal(false)}
-          handleConfirm={() => console.log('confirm!!')}
+          handleConfirm={() => {
+            console.log('confirm!!!');
+            setIsCustomModal(false);
+          }}
           buttonColor="green"
           text={messages}
         />
+      )}
+
+      <button onClick={() => setIsModalWithSuccess(true)}>Test!!!Button - success</button>
+      {isModalWithSuccess && (
+        <Modal
+          isOpen={isModalWithSuccess}
+          handleClose={() => setIsModalWithSuccess(false)}
+          handleConfirm={() => {
+            console.log('confirm!!!');
+            setIsSuccess(true);
+          }}
+          isSuccess={isSuccess}
+          setIsSuccess={setIsSuccess}
+          text={messagesWithSuccess}
+        />
+      )}
+
+      <button onClick={() => setIsSuccessModal(true)}>Success!!!Button</button>
+      {isSuccessModal && (
+        <Modal isOpen={isSuccessModal} handleClose={() => setIsSuccessModal(false)} text={messageOnlySuccess} />
       )}
     </FlexContainer>
   );
