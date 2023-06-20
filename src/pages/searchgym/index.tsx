@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
-import { Layout, Input, Map } from '@components/SearchGym';
+import { Layout, Input } from '@components/SearchGym';
 import { NextPageWithLayout } from '@pages/_app';
-import { Navigation } from '@components/Common';
+import { Map, Navigation } from '@components/Common';
 import { setAccessTokenToCookie } from '@utils/token';
 
 const SearchGym: NextPageWithLayout = () => {

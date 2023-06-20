@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './style';
-import Map from '../SearchMap';
 import { GymInfoType } from '@typing/user';
 import SearchIcon from '@assets/icon/search.svg';
+import { Map } from '@components/Common';
 
 interface Props {
   setChangeGymState: (place: any) => void;
