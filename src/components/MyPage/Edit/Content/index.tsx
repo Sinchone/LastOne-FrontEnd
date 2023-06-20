@@ -119,14 +119,18 @@ const Content = ({ profile }: Props) => {
             </label>
           </S.ProfileImgWrapper>
           <S.EditForm>
-            <S.Label>닉네임</S.Label>
+            <S.Label>
+              닉네임<span>(필수)</span>
+            </S.Label>
             <S.Input
               placeholder="닉네임을 입력해주세요."
               value={profileState.nickname}
               name="nickname"
               onChange={handleProfileInputChange}
             />
-            <S.Label>성별</S.Label>
+            <S.Label>
+              성별<span>(필수)</span>
+            </S.Label>
             <S.GenderWrapper>
               <S.Gender select={profileState.gender === '남성'} onClick={handleSelectGender('남성')}>
                 남성
@@ -172,7 +176,9 @@ const Content = ({ profile }: Props) => {
               </S.FitnessInfo>
             </S.FitnessInfoWrapper>
             <S.GymRegister>
-              <S.Label>등록 헬스장</S.Label>
+              <S.Label>
+                등록 헬스장<span>(필수)</span>
+              </S.Label>
               <S.SearchInput onClick={() => setIsMapShow(true)}>
                 <SearchIcon />
                 <input placeholder="헬스장을 검색해보세요." />

@@ -45,6 +45,13 @@ export const Label = styled.label`
   ${theme.font.ko.subTitle2}
   font-size: 15px;
   padding-left: 11px;
+
+  span {
+    ${theme.font.ko.subTitle2}
+    font-size: 15px;
+    color: var(--color-error);
+    padding-left: 2px;
+  }
 `;
 
 export const Input = styled.input`
