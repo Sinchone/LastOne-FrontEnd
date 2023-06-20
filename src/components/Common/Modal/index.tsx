@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import * as S from './style';
 import ModalLayout from '@components/Common/ModalLayout';
 import Check from '@assets/icon/check.svg';
+import RightArrow from '@assets/icon/right-arrow.svg';
 
 interface Props {
   isOpen: boolean;
+  hasArrow?: boolean;
   handleClose: () => void;
   handleConfirm?: () => void;
   handleCancel?: () => void;
@@ -21,6 +23,7 @@ interface Props {
 
 const Modal = ({
   isOpen,
+  hasArrow,
   handleClose,
   handleConfirm,
   handleCancel,
@@ -55,9 +58,11 @@ const Modal = ({
       <S.ButtonContainer>
         <S.Button onClick={handleConfirm} color={buttonColor}>
           {text.confirm}
+          {hasArrow && <RightArrow />}
         </S.Button>
         <S.Button onClick={handleCancel || handleClose} color={'gray'}>
           {text.cancel}
+          {hasArrow && <RightArrow />}
         </S.Button>
       </S.ButtonContainer>
     </S.Wrapper>
