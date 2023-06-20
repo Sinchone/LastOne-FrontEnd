@@ -5,7 +5,6 @@ import ClockIcon from '@assets/icon/clock.svg';
 import BottomArrowIcon from '@assets/icon/bottom-arrow.svg';
 import SearchIcon from '@assets/icon/search.svg';
 import AddImgIcon from '@assets/icon/addImg.svg';
-import Map from '../Map';
 import SearchGym from '../SearchGym';
 import { useBottomSheet } from '@hooks/common';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -17,6 +16,7 @@ import { exercisePartArray } from '@constants/post';
 import { createPost } from '@apis/post';
 import { createImageUrl } from '@utils/createImageUrl';
 import { checkAllKeysHaveValues } from '@utils/checkAllKeysHaveValues';
+import { Map } from '@components/Common';
 
 const Content = () => {
   const initialData: Post = {
