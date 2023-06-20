@@ -100,6 +100,7 @@ export const GymWrapper = styled.section`
     ${theme.font.ko.subTitle2}
     font-size: 15px;
     margin-bottom: 15px;
+    color: var(--color-black);
   }
 `;
 
@@ -123,6 +124,7 @@ export const FitnesPartner = styled.div`
 
   .title {
     ${theme.font.ko.subTitle2}
+    color: var(--color-black);
   }
 
   .more {

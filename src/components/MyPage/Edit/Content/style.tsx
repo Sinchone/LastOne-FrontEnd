@@ -45,6 +45,7 @@ export const Label = styled.label`
   ${theme.font.ko.subTitle2}
   font-size: 15px;
   padding-left: 11px;
+  color: var(--color-black);
 
   span {
     ${theme.font.ko.subTitle2}
