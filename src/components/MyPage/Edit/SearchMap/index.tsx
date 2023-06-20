@@ -109,5 +109,5 @@ export default function SearchMap({ searchPlace, handleClickLocation }: Props) {
     });
   }, [selectedPlace]);
 
-  return <div id="map" style={{ width: '100%', height: '816px', borderRadius: '8px' }}></div>;
+  return <div id="map" style={{ width: '100%', height: '70vh', borderRadius: '8px' }}></div>;
 }

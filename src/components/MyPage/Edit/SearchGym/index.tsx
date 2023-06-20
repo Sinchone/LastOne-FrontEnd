@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as S from './style';
 import Map from '../SearchMap';
 import { GymInfoType } from '@typing/user';
@@ -17,6 +17,8 @@ const SearchGym = ({ setChangeGymState, handleCloseSearch }: Props) => {
     latitude: '',
     longitude: '',
   });
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchplace(e.target.value);
@@ -37,6 +39,9 @@ const SearchGym = ({ setChangeGymState, handleCloseSearch }: Props) => {
   };
 
   useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
     return () => {
       setClickedLocation({
         name: '',
@@ -52,7 +57,7 @@ const SearchGym = ({ setChangeGymState, handleCloseSearch }: Props) => {
     <S.Wrapper>
       <S.Input>
         <SearchIcon />
-        <input onChange={handleChangeInput} placeholder="헬스장을 검색해주세요." />
+        <input ref={inputRef} onChange={handleChangeInput} placeholder="헬스장을 검색해주세요." />
       </S.Input>
       <Map searchPlace={searchPlace} handleClickLocation={handleClickLocation} />
       <S.ButtonGroup>
