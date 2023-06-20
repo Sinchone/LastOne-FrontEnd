@@ -33,7 +33,7 @@ const Content = ({ user, sbd, gym }: Props) => {
         <S.ProfileInfo>
           <S.NameWrapper>
             <span className="name">{user.nickname}</span>
-            <S.Gender>{user.gender}</S.Gender>
+            <S.Gender>{user.gender || '미정'}</S.Gender>
           </S.NameWrapper>
         </S.ProfileInfo>
       </S.ProfileWrapper>
