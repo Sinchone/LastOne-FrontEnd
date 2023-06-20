@@ -5,5 +5,4 @@ export { default as Checkbox } from './CheckBox';
 export { default as Navigation } from './Navigation';
 export { default as BottomSheet } from './BottomSheet';
 export { default as MainLayout } from './MainLayout';
-export { default as MapOverLay } from './MainLayout';
 export { default as Map } from './Map';
