@@ -29,7 +29,7 @@ const Modal = ({
   buttonColor = 'blue',
   text,
 }: Props) => {
-  if (Object.keys(text).length === 1) {
+  if (Object.keys(text).length === 1 && text.success) {
     isSuccess = isOpen;
     setIsSuccess = handleClose;
   }
