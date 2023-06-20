@@ -5,9 +5,6 @@ import ArrowIcon from '@assets/icon/small-arrow.svg';
 import MyMap from '../MyMap';
 import { ProfileType, GymInfoType, FitnessType } from '@typing/user';
 import { createImageUrl } from '@utils/createImageUrl';
-import { logout } from '@apis/user';
-import { useRouter } from 'next/router';
-import { removeAccessTokenToCookie, removeRefreshTokenToCookie } from '@utils/token';
 
 interface Props {
   user: ProfileType;
@@ -17,17 +14,9 @@ interface Props {
 
 const Content = ({ user, sbd, gym }: Props) => {
   const [gymName, setGymName] = useState(gym.length !== 0 ? gym[0].name : '');
-  const router = useRouter();
 
   const handleSelectGym = (name: string) => {
     setGymName(name);
-  };
-
-  const handleLogout = () => {
-    logout();
-    router.push('/login');
-    removeAccessTokenToCookie();
-    removeRefreshTokenToCookie();
   };
 
   return (
@@ -47,9 +36,6 @@ const Content = ({ user, sbd, gym }: Props) => {
             <S.Gender>{user.gender}</S.Gender>
           </S.NameWrapper>
         </S.ProfileInfo>
-        <span className="logout" onClick={handleLogout}>
-          로그아웃
-        </span>
       </S.ProfileWrapper>
       <S.FitnessContents>
         <S.FitnessContent>

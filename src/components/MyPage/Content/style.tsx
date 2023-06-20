@@ -13,10 +13,6 @@ export const ProfileWrapper = styled.div`
   align-items: center;
   gap: 15px;
   margin-bottom: 30px;
-  .logout {
-    ${theme.font.ko.subTitle1}
-    margin-left: 250px;
-  }
 `;
 
 export const ProfileInfo = styled.div`
