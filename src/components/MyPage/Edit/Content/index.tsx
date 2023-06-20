@@ -139,7 +139,7 @@ const Content = ({ profile }: Props) => {
                 여성
               </S.Gender>
             </S.GenderWrapper>
-            <S.Label>한줄 소개</S.Label>
+            <S.Label>운동 목표</S.Label>
             <S.Input
               placeholder="한줄 소개를 간단하게 입력해주세요."
               value={profileState.workoutPurpose}
