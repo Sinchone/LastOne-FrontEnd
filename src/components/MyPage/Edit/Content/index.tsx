@@ -9,7 +9,7 @@ import SearchGym from '../SearchGym';
 import { editProfile } from '@apis/user';
 import { createImageUrl } from '@utils/createImageUrl';
 import SearchIcon from '@assets/icon/search.svg';
-import { Map } from '@components/Common';
+import { Map, Modal } from '@components/Common';
 
 interface Props {
   profile: {
@@ -40,6 +40,9 @@ const Content = ({ profile }: Props) => {
   } = useProfileForm(profile);
   const [gymName, setGymName] = useState(gymState.length !== 0 ? gymState[0].name : '');
 
+  const [isSubmitModal, setIsSubmitModal] = useState(false);
+  const [isSumitSuccess, setIsSumitSuccess] = useState(false);
+
   console.log(gymState);
   console.log(fitness);
   console.log(profileState);
@@ -61,8 +64,12 @@ const Content = ({ profile }: Props) => {
     setIsMapShow(false);
   };
 
-  const handleSubmitForm = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleClickSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
+    setIsSubmitModal(true);
+  };
+
+  const handleSubmitForm = async () => {
     const myPageData = {
       member: {
         nickname: profileState.nickname,
@@ -87,10 +94,16 @@ const Content = ({ profile }: Props) => {
       formData.append('profileImg', image);
     }
 
-    editProfile(formData).then((res) => {
-      console.log(res);
-      router.push('/mypage');
-    });
+    editProfile(formData)
+      .then((res) => {
+        console.log(res);
+        setIsSumitSuccess(true);
+      })
+      .then(() => {
+        setTimeout(() => {
+          router.push('/mypage');
+        }, 2000);
+      });
   };
 
   const handleSelectGym = (name: string) => {
@@ -238,8 +251,23 @@ const Content = ({ profile }: Props) => {
             </S.WorkTime>
             <S.ButtonGroup>
               <S.CancelButton>취소</S.CancelButton>
-              <S.Button onClick={handleSubmitForm}>등록</S.Button>
+              <S.Button onClick={handleClickSubmit}>등록</S.Button>
             </S.ButtonGroup>
+            {isSubmitModal && (
+              <Modal
+                isOpen={isSubmitModal}
+                handleClose={() => setIsSubmitModal(false)}
+                handleConfirm={handleSubmitForm}
+                isSuccess={isSumitSuccess}
+                setIsSuccess={setIsSumitSuccess}
+                text={{
+                  label: '수정된 정보를 저장할까요?',
+                  confirm: '저장하기',
+                  cancel: '계속 수정하기',
+                  success: '성공적으로\n저장 되었습니다!',
+                }}
+              />
+            )}
           </S.EditForm>
         </S.Wrapper>
       ) : (
