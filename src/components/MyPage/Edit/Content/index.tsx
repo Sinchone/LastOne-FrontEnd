@@ -7,9 +7,9 @@ import { FitnessType, GymInfoType, ProfileType } from '@typing/user';
 import { useProfileForm } from '@hooks/MyPage';
 import SearchGym from '../SearchGym';
 import { editProfile } from '@apis/user';
-import Map from '../Map';
 import { createImageUrl } from '@utils/createImageUrl';
 import SearchIcon from '@assets/icon/search.svg';
+import { Map } from '@components/Common';
 
 interface Props {
   profile: {

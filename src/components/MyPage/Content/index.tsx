@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import * as S from './style';
 import ProfileIcon from '@assets/icon/profilelarge.svg';
 import ArrowIcon from '@assets/icon/small-arrow.svg';
-import MyMap from '../MyMap';
 import { ProfileType, GymInfoType, FitnessType } from '@typing/user';
 import { createImageUrl } from '@utils/createImageUrl';
+import { Map } from '@components/Common';
 
 interface Props {
   user: ProfileType;
@@ -80,7 +80,7 @@ const Content = ({ user, sbd, gym }: Props) => {
             <span>등록된 헬스장이 없습니다.</span>
           </S.NotGym>
         ) : (
-          <MyMap searchPlace={gymName} />
+          <Map searchPlace={gymName} />
         )}
         <S.MyGymWrapper>
           {gym.length !== 0 &&

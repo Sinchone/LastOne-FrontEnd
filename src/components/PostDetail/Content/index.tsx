@@ -3,9 +3,9 @@ import * as S from './style';
 import CheckMarker from '@assets/png/checkMarker.png';
 import Marker from '@assets/icon/mapmarker.svg';
 import Check from '@assets/icon/check.svg';
-import { Map } from '@components/PostDetail';
 import { useState } from 'react';
 import ModalLayout from '@components/Common/ModalLayout';
+import { Map } from '@components/Common';
 
 const Content = () => {
   const [isPartnerRequested, setIsPartnerRequested] = useState(false);
@@ -67,7 +67,8 @@ const Content = () => {
           <Marker />
           <span>위치 스포애니 성산점</span>
         </div>
-        <Map />
+        {/* 조회 API 응답결과로 받은 주소 넘겨줘야 함 */}
+        {/* <Map searchPlace={}/> */}
       </S.PlaceWrapper>
       <S.DescriptionWrapper>
         <span>상세설명</span>

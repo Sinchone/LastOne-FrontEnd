@@ -9,7 +9,7 @@ declare global {
 
 interface Props {
   searchPlace: string;
-  handleClickLocation: (place: any) => void;
+  handleClickLocation?: (place: any) => void;
 }
 
 export default function SearchMap({ searchPlace, handleClickLocation }: Props) {
@@ -51,8 +51,7 @@ export default function SearchMap({ searchPlace, handleClickLocation }: Props) {
     const ps = new window.kakao.maps.services.Places();
 
     // 검색어따라 지도에서 찾기
-
-    const placesSearchCB = (data: any, status: any, pagination: any) => {
+    const placesSearchCB = (data: any, status: any) => {
       if (status === window.kakao.maps.services.Status.OK) {
         const bounds = new window.kakao.maps.LatLngBounds();
 
@@ -79,12 +78,16 @@ export default function SearchMap({ searchPlace, handleClickLocation }: Props) {
         position: new window.kakao.maps.LatLng(place.y, place.x),
         image: checkMarker,
       });
-      window.kakao.maps.event.addListener(marker, 'click', function () {
+      if (handleClickLocation) {
+        window.kakao.maps.event.addListener(marker, 'click', function () {
+          setSelectedPlace(place);
+          handleClickLocation(place);
+        });
+      } else {
         setSelectedPlace(place);
-        handleClickLocation(place);
-      });
+      }
     }
-  }, [kakaoMap, searchPlace]);
+  }, [handleClickLocation, kakaoMap, searchPlace]);
 
   useEffect(() => {
     if (kakaoMap === null) {
@@ -106,5 +109,10 @@ export default function SearchMap({ searchPlace, handleClickLocation }: Props) {
     });
   }, [selectedPlace]);
 
-  return <div id="map" style={{ width: '100%', height: '70vh', borderRadius: '8px' }}></div>;
+  return (
+    <div
+      id="map"
+      style={{ width: '100%', height: handleClickLocation ? 'calc(100vh - 264px)' : '400px', borderRadius: '8px' }}
+    ></div>
+  );
 }

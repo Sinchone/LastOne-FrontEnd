@@ -1,11 +1,14 @@
 import Cookies from 'js-cookie';
 
+const accessTokenExpireTime = new Date(new Date().getTime() + 3 * 60 * 60 * 1000); // 3 hours
+const refreshTokenExpireTime = new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000); // 7 days
+
 export const setAccessTokenToCookie = (token: string) => {
-  Cookies.set('AccessToken', token, { expires: 7 * 24 * 60 * 60 });
+  Cookies.set('AccessToken', token, { expires: accessTokenExpireTime });
 };
 
 export const setRefreshTokenToCookie = (token: string) => {
-  Cookies.set('RefreshToken', token, { expires: 7 * 24 * 60 * 60 });
+  Cookies.set('RefreshToken', token, { expires: refreshTokenExpireTime });
 };
 
 export const getAccessTokenFromCookie = () => {
