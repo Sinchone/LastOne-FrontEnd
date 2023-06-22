@@ -42,6 +42,7 @@ const Content = ({ profile }: Props) => {
 
   const [isSubmitModal, setIsSubmitModal] = useState(false);
   const [isSumitSuccess, setIsSumitSuccess] = useState(false);
+  const [isWarningModal, setIsWarningModal] = useState(false);
 
   console.log(gymState);
   console.log(fitness);
@@ -66,7 +67,8 @@ const Content = ({ profile }: Props) => {
 
   const handleClickSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    setIsSubmitModal(true);
+    if (profileState.nickname && profileState.gender && gymState.length) setIsSubmitModal(true);
+    else setIsWarningModal(true);
   };
 
   const handleSubmitForm = async () => {
@@ -253,22 +255,35 @@ const Content = ({ profile }: Props) => {
               <S.CancelButton>취소</S.CancelButton>
               <S.Button onClick={handleClickSubmit}>등록</S.Button>
             </S.ButtonGroup>
-            {isSubmitModal && (
-              <Modal
-                isOpen={isSubmitModal}
-                handleClose={() => setIsSubmitModal(false)}
-                handleConfirm={handleSubmitForm}
-                isSuccess={isSumitSuccess}
-                setIsSuccess={setIsSumitSuccess}
-                text={{
-                  label: '수정된 정보를 저장할까요?',
-                  confirm: '저장하기',
-                  cancel: '계속 수정하기',
-                  success: '성공적으로\n저장 되었습니다!',
-                }}
-              />
-            )}
           </S.EditForm>
+          {isSubmitModal && (
+            <Modal
+              isOpen={isSubmitModal}
+              handleClose={() => setIsSubmitModal(false)}
+              handleConfirm={handleSubmitForm}
+              isSuccess={isSumitSuccess}
+              setIsSuccess={setIsSumitSuccess}
+              text={{
+                label: '수정된 정보를 저장할까요?',
+                confirm: '저장하기',
+                cancel: '계속 수정하기',
+                success: '성공적으로\n저장 되었습니다!',
+              }}
+            />
+          )}
+          {isWarningModal && (
+            <Modal
+              isOpen={isWarningModal}
+              handleClose={() => setIsWarningModal(false)}
+              handleConfirm={() => setIsWarningModal(false)}
+              handleCancel={() => router.push('/mypage')}
+              text={{
+                label: '필수 정보를 입력해주세요!',
+                confirm: '입력하러가기',
+                cancel: '다음에 수정하기',
+              }}
+            />
+          )}
         </S.Wrapper>
       ) : (
         <SearchGym setChangeGymState={setChangeGymState} handleCloseSearch={handleCloseSearch} />
