@@ -7,17 +7,29 @@ import { createImageUrl } from '@utils/createImageUrl';
 import { Map } from '@components/Common';
 
 interface Props {
+  other?: boolean;
   user: ProfileType;
   sbd: FitnessType;
   gym: GymInfoType[];
 }
 
-const Content = ({ user, sbd, gym }: Props) => {
+const Content = ({ other, user, sbd, gym }: Props) => {
   const [gymName, setGymName] = useState(gym.length !== 0 ? gym[0].name : '');
 
   const handleSelectGym = (name: string) => {
     setGymName(name);
   };
+
+  const fitnesPartner = (
+    <S.FitnesPartner>
+      <span className="title">운동 파트너 목록</span>
+      <span className="more">
+        전체보기 <ArrowIcon />
+      </span>
+    </S.FitnesPartner>
+  );
+
+  const chattingButton = <S.ChattingButton onClick={() => console.log(`채팅하러 가기`)}>채팅하기</S.ChattingButton>;
 
   return (
     <S.Wrapper>
@@ -63,7 +75,9 @@ const Content = ({ user, sbd, gym }: Props) => {
           <span>운동 요일</span>
           <S.WorkWrapper>
             {user.workoutDay.map((day) => (
-              <span key={day}>{day}</span>
+              <span className="description" key={day}>
+                {day}
+              </span>
             ))}
           </S.WorkWrapper>
         </S.FitnessContent>
@@ -91,12 +105,7 @@ const Content = ({ user, sbd, gym }: Props) => {
             ))}
         </S.MyGymWrapper>
       </S.GymWrapper>
-      <S.FitnesPartner>
-        <span className="title">운동 파트너 목록</span>
-        <span className="more">
-          전체보기 <ArrowIcon />
-        </span>
-      </S.FitnesPartner>
+      {other ? chattingButton : fitnesPartner}
     </S.Wrapper>
   );
 };

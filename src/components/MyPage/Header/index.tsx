@@ -9,7 +9,11 @@ import { logout } from '@apis/user';
 import { removeAccessTokenToCookie, removeRefreshTokenToCookie } from '@utils/token';
 import { Modal } from '@components/Common';
 
-const Header = () => {
+interface Props {
+  nickname?: string;
+}
+
+const Header = ({ nickname }: Props) => {
   const router = useRouter();
   const [isLogoutModal, setIsLogoutModal] = useState(false);
 
@@ -27,13 +31,19 @@ const Header = () => {
   return (
     <S.Wrapper>
       <LeftArrowIcon onClick={handleRouteBack} />
-      <span>마이페이지</span>
+      <span>{nickname ? `${nickname}님 프로필` : '마이페이지'}</span>
+
       <S.ButtonContainer>
-        <S.LogoutButton onClick={() => setIsLogoutModal(true)}>로그아웃</S.LogoutButton>
-        <Link href={MY_PAGE_EDIT}>
-          <PenCilIcon />
-        </Link>
+        {!nickname && (
+          <>
+            <S.LogoutButton onClick={() => setIsLogoutModal(true)}>로그아웃</S.LogoutButton>
+            <Link href={MY_PAGE_EDIT}>
+              <PenCilIcon />
+            </Link>
+          </>
+        )}
       </S.ButtonContainer>
+
       {isLogoutModal && (
         <Modal
           isOpen={isLogoutModal}

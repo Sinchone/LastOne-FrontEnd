@@ -142,25 +142,28 @@ export const FitnesPartner = styled.div`
 `;
 
 export const MyGym = styled.div<{ select: boolean }>`
-  width: 254px;
+  width: 100%;
   height: 56px;
   border-radius: 8px;
-  padding: 8px 24px 8px 24px;
+  padding: 8px 0;
   background-color: ${(props) => (props.select ? `var(--color-primary-main)` : 'var(--color-gray3)')};
   color: ${(props) => (props.select ? `var(--color-white)` : 'var(--color-primary-main)')}; //vor-white);
   font-weight: 700px;
   font-size: 16px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
   cursor: pointer;
 `;
 
 export const MyGymWrapper = styled.div`
+  width: 100%;
+
   display: flex;
   align-items: center;
-  gap: 15px;
+  justify-content: space-between;
+  gap: 12px;
   margin-top: 12px;
   margin-bottom: 20px;
 `;
@@ -180,4 +183,24 @@ export const ImgWrapper = styled.div`
     height: 100%;
     border-radius: 2164.5px;
   }
+`;
+
+export const ChattingButton = styled.button`
+  width: 100%;
+  padding: 14px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--color-primary-main);
+
+  background-color: var(--color-white);
+  border: 1px solid var(--color-primary-main);
+  border-radius: 6px;
+
+  user-select: none;
+  cursor: pointer;
 `;

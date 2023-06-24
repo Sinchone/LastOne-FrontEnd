@@ -19,6 +19,10 @@ export const getMyProfile = () => {
   return authApi.get(`api/mypage`);
 };
 
+export const getOtherProfile = (memberId: string) => {
+  return authApi.get(`api/mypage/${memberId}`);
+};
+
 export const getToken = (data: { refreshToken: string }) => {
   return api.post({
     url: 'api/token/refresh',
