@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import * as S from './style';
 import ProfileIcon from '@assets/icon/mypage.svg';
 import CloseIcon from '@assets/icon/close.svg';
+import PlusIcon from '@assets/icon/plus.svg';
 import { FitnessType, GymInfoType, ProfileType } from '@typing/user';
 import { useProfileForm } from '@hooks/MyPage';
 import SearchGym from '../SearchGym';
@@ -213,6 +214,11 @@ const Content = ({ profile }: Props) => {
                       <CloseIcon onClick={() => handleRemoveGym(gym.latitude)} />
                     </S.MyGym>
                   ))}
+                {gymState.length === 1 && (
+                  <S.MyGymPlus>
+                    <PlusIcon onClick={() => setIsMapShow(true)} />
+                  </S.MyGymPlus>
+                )}
               </S.MyGymWrapper>
             </S.GymRegister>
             <S.WorkDay>

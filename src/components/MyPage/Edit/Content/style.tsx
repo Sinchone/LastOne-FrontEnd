@@ -298,7 +298,8 @@ export const Button = styled.button`
 `;
 
 export const MyGym = styled.div<{ select: boolean }>`
-  width: 254px;
+  position: relative;
+  width: 100%;
   height: 56px;
   border-radius: 8px;
   padding: 8px 24px 8px 24px;
@@ -308,8 +309,7 @@ export const MyGym = styled.div<{ select: boolean }>`
   font-size: 16px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-between;
   cursor: pointer;
 `;
 
@@ -318,4 +318,20 @@ export const MyGymWrapper = styled.div`
   align-items: center;
   gap: 15px;
   margin-top: 12px;
+`;
+
+export const MyGymPlus = styled.div`
+  width: 100%;
+  height: 56px;
+  padding: 8px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+  background-color: var(--color-gray3);
+
+  user-select: none;
+  cursor: pointer;
 `;
