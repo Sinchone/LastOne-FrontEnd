@@ -252,7 +252,7 @@ const Content = ({ profile }: Props) => {
               </S.InputContainer>
             </S.WorkTime>
             <S.ButtonGroup>
-              <S.CancelButton>취소</S.CancelButton>
+              <S.CancelButton onClick={() => router.push('/mypage')}>취소</S.CancelButton>
               <S.Button onClick={handleClickSubmit}>등록</S.Button>
             </S.ButtonGroup>
           </S.EditForm>
