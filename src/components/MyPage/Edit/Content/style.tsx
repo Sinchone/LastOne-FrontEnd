@@ -32,6 +32,11 @@ export const ProfileImgWrapper = styled.form`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    user-select: none;
+
+    span {
+      cursor: pointer;
+    }
   }
 `;
 
