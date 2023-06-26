@@ -4,6 +4,12 @@ const withImages = require('next-images');
 module.exports = withImages({
   images: {
     disableStaticImages: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.cloudfront.net',
+      },
+    ],
   },
   esModule: true,
   fileExtensions: ['jpg', 'jpeg', 'png', 'gif'],
