@@ -12,3 +12,22 @@ export const createPost = (formData: FormData) => {
     },
   });
 };
+
+export const getAllPosts = () => {
+  return api.get({ url: 'api/recruitment' });
+};
+
+export const getPostById = (id: number) => {
+  return api.get({ url: `api/recruitment/${id}` });
+};
+
+export const deletePostById = (id: number) => {
+  const accessToken = getAccessTokenFromCookie();
+
+  return api.delete({
+    url: `api/recruitment/${id}`,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
