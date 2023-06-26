@@ -1,14 +1,14 @@
-import { atom } from 'recoil';
+import { getMyProfile } from '@apis/user';
+import { selector } from 'recoil';
 
-interface UserStateType {
-  id: number | undefined;
-  isEdited: boolean;
-}
-
-export const currentUserState = atom<UserStateType>({
+export const currentUserState = selector({
   key: 'currentUserState',
-  default: {
-    id: undefined,
-    isEdited: false,
+  get: async () => {
+    const { data: user } = await getMyProfile();
+
+    return {
+      id: user.member.id,
+      isEdited: user.member.isEdited,
+    };
   },
 });
