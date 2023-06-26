@@ -29,6 +29,11 @@ export const ImageBox = styled.div`
   background-color: var(--color-secondary-main);
   margin-right: 24px;
   overflow: hidden;
+
+  svg {
+    width: 80px;
+    height: 80px;
+  }
 `;
 
 export const WriterInfo = styled.div`
