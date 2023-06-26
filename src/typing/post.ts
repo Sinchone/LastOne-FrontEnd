@@ -17,6 +17,7 @@ export interface Post {
 export interface PostDetailType {
   memberId: number;
   nickname: string;
+  gender: string;
   profileUrl: string;
   workoutPurpose: string;
   sbd: FitnessType;
