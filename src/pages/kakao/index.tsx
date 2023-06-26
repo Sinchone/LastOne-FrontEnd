@@ -4,12 +4,12 @@ import { getMyProfile, login } from '@apis/user';
 import { MAIN_PAGE } from '@constants/route';
 import { queryKeys } from '@constants/querykeys';
 import { getAccessTokenFromCookie, setAccessTokenToCookie, setRefreshTokenToCookie } from '@utils/token';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { currentUserState } from '@recoil/userState';
 
 const Kakao = () => {
   const router = useRouter();
-  const [, setCurrentUser] = useRecoilState(currentUserState);
+  const setCurrentUser = useSetRecoilState(currentUserState);
 
   useQuery(queryKeys.signUp, () => login({ code: router.asPath.slice(12) as string }), {
     onSuccess: (response) => {
