@@ -24,6 +24,7 @@ const Header = ({ isOther, postId }: Props) => {
       deletePostById(postId).then((response) => {
         console.log(response);
         setIsDeleteSuccess(true);
+        router.replace('/');
       });
     }
   };
