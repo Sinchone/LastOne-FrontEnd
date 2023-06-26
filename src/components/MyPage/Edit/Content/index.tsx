@@ -42,7 +42,7 @@ const Content = ({ profile }: Props) => {
   const [gymName, setGymName] = useState(gymState.length !== 0 ? gymState[0].name : '');
 
   const [isSubmitModal, setIsSubmitModal] = useState(false);
-  const [isSumitSuccess, setIsSumitSuccess] = useState(false);
+  const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
   const [isWarningModal, setIsWarningModal] = useState(false);
 
   console.log(gymState);
@@ -100,7 +100,7 @@ const Content = ({ profile }: Props) => {
     editProfile(formData)
       .then((res) => {
         console.log(res);
-        setIsSumitSuccess(true);
+        setIsSubmitSuccess(true);
       })
       .then(() => {
         setTimeout(() => {
@@ -267,8 +267,8 @@ const Content = ({ profile }: Props) => {
               isOpen={isSubmitModal}
               handleClose={() => setIsSubmitModal(false)}
               handleConfirm={handleSubmitForm}
-              isSuccess={isSumitSuccess}
-              setIsSuccess={setIsSumitSuccess}
+              isSuccess={isSubmitSuccess}
+              setIsSuccess={setIsSubmitSuccess}
               text={{
                 label: '수정된 정보를 저장할까요?',
                 confirm: '저장하기',
