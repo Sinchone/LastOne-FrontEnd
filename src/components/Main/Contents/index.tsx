@@ -6,7 +6,7 @@ import { useGetTodayPartner } from '@hooks/MainPage/queries';
 
 const Contents = () => {
   const { data } = useGetTodayPartner();
-  console.log('test', data?.response.data);
+  console.log('test', data);
 
   return (
     <S.Wrapper>
