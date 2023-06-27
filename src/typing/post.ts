@@ -2,16 +2,16 @@ import { times } from '@constants/post';
 import { GymInfoType, FitnessType } from './user';
 
 export interface Post {
-  id: number;
+  id?: number;
   title: string;
   description: string;
-  workoutPurpose: string;
+  workoutPurpose?: string;
   preferGender: string;
   gym: GymInfoType;
   workoutPart: string;
   startedAt: StartedAtDate;
-  status: string;
-  imgUrl: string;
+  status?: string;
+  imgUrl?: string;
 }
 
 export interface PostDetailType {
