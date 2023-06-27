@@ -3,14 +3,14 @@ import useGetPostById from '@hooks/Post/queries/useGetPostById';
 import { currentUserState } from '@recoil/userState';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useRecoilValueLoadable } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 const PostDetail = () => {
   const router = useRouter();
   const [postId, setPostId] = useState<number | undefined>();
   const { data: post } = useGetPostById(Number(postId));
 
-  const currentUser = useRecoilValueLoadable(currentUserState);
+  const currentUser = useRecoilValue(currentUserState);
   const [isOther, setIsOther] = useState(true);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const PostDetail = () => {
   }, [router.query]);
 
   useEffect(() => {
-    if (post) setIsOther(post.data.data.memberId !== currentUser.contents.id);
+    if (post) setIsOther(post.data.data.memberId !== currentUser.id);
   }, [post, currentUser]);
 
   if (post) {
