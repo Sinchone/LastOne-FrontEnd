@@ -2,8 +2,12 @@ import React from 'react';
 import RightArrowIcon from '@assets/icon/right-arrow.svg';
 import { Card } from '@components/Common';
 import * as S from './style';
+import { useGetTodayPartner } from '@hooks/MainPage/queries';
 
 const Contents = () => {
+  const { data } = useGetTodayPartner();
+  console.log('test', data?.response.data);
+
   return (
     <S.Wrapper>
       <S.Content>
