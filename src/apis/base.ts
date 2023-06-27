@@ -14,7 +14,7 @@ const createApiMethod =
         return response;
       },
       (error) => {
-        return error;
+        return error.response;
       }
     );
     return _axiosInstace({
