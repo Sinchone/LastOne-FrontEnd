@@ -4,24 +4,30 @@ import * as S from './style';
 
 interface Props {
   size: 'main' | 'matching';
+  status: '모집중' | '모집완료' | '기간만료';
+  preferGender: '남성만' | '여성만' | '성별무관';
+  title: string;
+  gym: string;
+  startedAt: string;
+  imgUrl: string;
 }
 
-const Card = ({ size }: Props) => {
+const Card = ({ size, status, preferGender, title, gym, startedAt, imgUrl }: Props) => {
   return (
     <S.Wrapper size={size}>
-      <S.ImgBox>
+      <S.ImgBox imgUrl={imgUrl}>
         <S.Badge>
-          <S.Recruit>모집중</S.Recruit>
-          <S.Gender>남성만</S.Gender>
+          <S.Recruit>{status}</S.Recruit>
+          <S.Gender>{preferGender}</S.Gender>
         </S.Badge>
       </S.ImgBox>
       <S.Description>
-        <span className="title">함께 운동해용</span>
+        <span className="title">{title}</span>
         <span>
           <MapMarkerIcon />
-          스포애니 성산점
+          <span className="gym">{gym}</span>
         </span>
-        <span>운동날짜 2023.03.03 20:00</span>
+        <span>운동날짜 {startedAt}</span>
       </S.Description>
     </S.Wrapper>
   );
