@@ -1,12 +1,5 @@
-import api from '@apis/base';
-import { getAccessTokenFromCookie } from '@utils/token';
+import authApi from '@apis/auth';
 
 export const getTodayPartner = () => {
-  const accessToken = getAccessTokenFromCookie();
-  return api.get({
-    url: 'api/partner/today',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  return authApi.get('api/partner/today');
 };

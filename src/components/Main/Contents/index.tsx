@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import RightArrowIcon from '@assets/icon/right-arrow.svg';
 import { Card } from '@components/Common';
 import * as S from './style';
@@ -8,30 +8,15 @@ import { MainPost } from '@typing/post';
 import { getAccessTokenFromCookie } from '@utils/token';
 
 const Contents = () => {
-  const [todayPartner, setTodayPartner] = useState({
-    recruitmentId: null,
-    partnerName: '',
-    workoutPart: '',
-    startedAt: '',
-    gym: '',
-  });
-
-  const accessToken = getAccessTokenFromCookie();
   const { data: todayPartnerData } = useGetTodayPartner();
-
-  useEffect(() => {
-    if (accessToken) {
-      console.log('test', todayPartnerData?.data);
-      setTodayPartner({ ...todayPartnerData?.data.data });
-    }
-  }, [accessToken, todayPartnerData]);
-
   const { data: mainPosts } = useGetPosts();
   const mainPostArray = mainPosts?.data.data;
+  const todayPartner = todayPartnerData?.data;
+  const accessToken = getAccessTokenFromCookie();
 
   return (
     <S.Wrapper>
-      {accessToken && mainPostArray && (
+      {accessToken && todayPartner && (
         <S.Content>
           <S.Title href={'/apply'}>
             <span>오늘의 약속</span>
