@@ -3,4 +3,6 @@ export const queryKeys = {
   me: ['me'],
   postDetail: ['postDetail'],
   requestedApplications: ['requestedApplications'],
+  partner: ['partner'],
+  mainPost: ['mainPost'],
 } as const;
