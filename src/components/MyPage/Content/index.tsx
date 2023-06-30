@@ -19,10 +19,6 @@ const Content = ({ user, sbd, gym }: Props) => {
   const [gymName, setGymName] = useState(gym.length !== 0 ? gym[0].name : '');
   const router = useRouter();
 
-  useEffect(() => {
-    localStorage.setItem('userIsEdited', user.isEdited.toString());
-  }, [user]);
-
   const handleSelectGym = (name: string) => {
     setGymName(name);
   };
@@ -30,10 +26,6 @@ const Content = ({ user, sbd, gym }: Props) => {
   const handleLogout = () => {
     logout();
     router.push('/login');
-
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userIsEdited');
-
     removeAccessTokenToCookie();
     removeRefreshTokenToCookie();
   };
