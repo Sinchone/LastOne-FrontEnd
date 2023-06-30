@@ -52,6 +52,7 @@ const Content = ({ profile }: Props) => {
   const [isSubmitModal, setIsSubmitModal] = useState(false);
   const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
   const [isWarningModal, setIsWarningModal] = useState(false);
+  const [isNicknameCheckModal, setIsNicknameCheckModal] = useState(false);
 
   console.log(gymState);
   console.log(fitness);
@@ -90,6 +91,7 @@ const Content = ({ profile }: Props) => {
       }
     } else {
       setIsNicknameChecked(false);
+      setIsUsableNickname(true);
     }
   };
 
@@ -99,8 +101,10 @@ const Content = ({ profile }: Props) => {
 
   const handleClickSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    if (profileState.nickname && profileState.gender && gymState.length) setIsSubmitModal(true);
-    else setIsWarningModal(true);
+    if (profileState.nickname && profileState.gender && gymState.length) {
+      if (isUsableNickname) setIsSubmitModal(true);
+      else setIsNicknameCheckModal(true);
+    } else setIsWarningModal(true);
   };
 
   const handleSubmitForm = async () => {
@@ -128,16 +132,20 @@ const Content = ({ profile }: Props) => {
       formData.append('profileImg', image);
     }
 
-    editProfile(formData)
-      .then((res) => {
-        console.log(res);
-        setIsSubmitSuccess(true);
-      })
-      .then(() => {
-        setTimeout(() => {
-          router.push('/mypage');
-        }, 2000);
-      });
+    if (isUsableNickname) {
+      editProfile(formData)
+        .then((res) => {
+          console.log(res);
+          setIsSubmitSuccess(true);
+        })
+        .then(() => {
+          setTimeout(() => {
+            router.push('/mypage');
+          }, 2000);
+        });
+    } else {
+      setIsNicknameCheckModal(true);
+    }
   };
 
   const handleSelectGym = (name: string) => {
@@ -353,6 +361,20 @@ const Content = ({ profile }: Props) => {
                 label: '필수 정보를 입력해주세요!',
                 confirm: '입력하러가기',
                 cancel: '다음에 수정하기',
+              }}
+            />
+          )}
+
+          {isNicknameCheckModal && (
+            <Modal
+              isOpen={isNicknameCheckModal}
+              handleClose={() => setIsNicknameCheckModal(false)}
+              handleConfirm={() => setIsNicknameCheckModal(false)}
+              handleCancel={() => router.replace('/mypage')}
+              text={{
+                label: '닉네임 중복 확인이 필요합니다!',
+                confirm: '계속 수정하기',
+                cancel: '수정 취소하기',
               }}
             />
           )}
