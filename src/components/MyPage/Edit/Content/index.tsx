@@ -15,6 +15,7 @@ import CloseIcon from '@assets/icon/close.svg';
 import PlusIcon from '@assets/icon/plus.svg';
 import Usable from '@assets/icon/usable.svg';
 import Unusable from '@assets/icon/unusable.svg';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface Props {
   profile: {
@@ -26,6 +27,7 @@ interface Props {
 
 const Content = ({ profile }: Props) => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [isMapShow, setIsMapShow] = useState(false);
   const [image, setImage] = useState<any>('');
   const {
@@ -137,6 +139,7 @@ const Content = ({ profile }: Props) => {
       editProfile(formData)
         .then((res) => {
           console.log(res);
+          queryClient.invalidateQueries(['me']);
           setIsSubmitSuccess(true);
         })
         .then(() => {
