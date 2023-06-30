@@ -38,6 +38,10 @@ export const editProfile = (formData: FormData) => {
   });
 };
 
+export const nicknameCheck = (nickname: string) => {
+  return authApi.get(`api/mypage/nickname-check?nickname=${nickname}`);
+};
+
 export const logout = () => {
   const accessToken = getAccessTokenFromCookie();
   const refreshToken = getRefreshTokenFromCookie();
