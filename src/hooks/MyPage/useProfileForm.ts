@@ -28,7 +28,7 @@ const useProfileForm = (initialState: MyPageField) => {
   const handleProfileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProfileState({
       ...profileState,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.substring(0, 20),
     });
   };
 

@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import * as S from './style';
-import ProfileIcon from '@assets/icon/mypage.svg';
-import CloseIcon from '@assets/icon/close.svg';
-import PlusIcon from '@assets/icon/plus.svg';
+
 import { FitnessType, GymInfoType, ProfileType } from '@typing/user';
 import { useProfileForm } from '@hooks/MyPage';
 import SearchGym from '../SearchGym';
-import { editProfile } from '@apis/user';
+import { editProfile, nicknameCheck } from '@apis/user';
 import { createImageUrl } from '@utils/createImageUrl';
 import SearchIcon from '@assets/icon/search.svg';
 import { Map, Modal } from '@components/Common';
+
+import ProfileIcon from '@assets/icon/mypage.svg';
+import CloseIcon from '@assets/icon/close.svg';
+import PlusIcon from '@assets/icon/plus.svg';
+import Usable from '@assets/icon/usable.svg';
+import Unusable from '@assets/icon/unusable.svg';
 
 interface Props {
   profile: {
@@ -41,6 +45,10 @@ const Content = ({ profile }: Props) => {
   } = useProfileForm(profile);
   const [gymName, setGymName] = useState(gymState.length !== 0 ? gymState[0].name : '');
 
+  const [isNicknameChecked, setIsNicknameChecked] = useState(false);
+  const [isUsableNickname, setIsUsableNickname] = useState(false);
+  const [warningText, setWarningText] = useState('이미 사용중인 닉네임입니다.');
+
   const [isSubmitModal, setIsSubmitModal] = useState(false);
   const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
   const [isWarningModal, setIsWarningModal] = useState(false);
@@ -60,6 +68,29 @@ const Content = ({ profile }: Props) => {
     });
 
     setProfileImage(url);
+  };
+
+  const handleCheckNickname = () => {
+    const originalNickname = profile.member.nickname;
+    const changedNickname = profileState.nickname || '';
+
+    if (originalNickname !== changedNickname) {
+      if (changedNickname.length >= 2) {
+        nicknameCheck(changedNickname).then((response) => {
+          const isDuplicated = response.data.isDuplicated;
+
+          setIsNicknameChecked(true);
+          setIsUsableNickname(isDuplicated ? false : true);
+          setWarningText('이미 사용중인 닉네임입니다.');
+        });
+      } else {
+        setIsNicknameChecked(true);
+        setIsUsableNickname(false);
+        setWarningText('닉네임은 2~20자만 가능합니다.');
+      }
+    } else {
+      setIsNicknameChecked(false);
+    }
   };
 
   const handleCloseSearch = () => {
@@ -135,33 +166,67 @@ const Content = ({ profile }: Props) => {
             </label>
           </S.ProfileImgWrapper>
           <S.EditForm>
-            <S.Label>
-              닉네임<span>(필수)</span>
-            </S.Label>
-            <S.Input
-              placeholder="닉네임을 입력해주세요."
-              value={profileState.nickname}
-              name="nickname"
-              onChange={handleProfileInputChange}
-            />
-            <S.Label>
-              성별<span>(필수)</span>
-            </S.Label>
-            <S.GenderWrapper>
-              <S.Gender select={profileState.gender === '남성'} onClick={handleSelectGender('남성')}>
-                남성
-              </S.Gender>
-              <S.Gender select={profileState.gender === '여성'} onClick={handleSelectGender('여성')}>
-                여성
-              </S.Gender>
-            </S.GenderWrapper>
-            <S.Label>운동 목표</S.Label>
-            <S.Input
-              placeholder="한줄 소개를 간단하게 입력해주세요."
-              value={profileState.workoutPurpose}
-              name="workoutPurpose"
-              onChange={handleProfileInputChange}
-            />
+            <S.EditItem>
+              <S.Label>
+                닉네임<span>(필수)</span>
+              </S.Label>
+              <S.NicknameWrapper>
+                <span>
+                  <S.NicknameInputWrapper>
+                    <S.Input
+                      placeholder="닉네임을 입력해주세요."
+                      value={profileState.nickname}
+                      name="nickname"
+                      onChange={handleProfileInputChange}
+                      maxLength={20}
+                    />
+                    <span>{profileState.nickname?.length}/20</span>
+                  </S.NicknameInputWrapper>
+                  <S.NicknameCheckButton onClick={handleCheckNickname}>중복 확인</S.NicknameCheckButton>
+                </span>
+
+                {isNicknameChecked && (
+                  <S.NicknameCheckResult isUsable={isUsableNickname}>
+                    {isUsableNickname ? (
+                      <>
+                        <Usable />
+                        사용 가능한 닉네임입니다.
+                      </>
+                    ) : (
+                      <>
+                        <Unusable />
+                        {warningText}
+                      </>
+                    )}
+                  </S.NicknameCheckResult>
+                )}
+              </S.NicknameWrapper>
+            </S.EditItem>
+
+            <S.EditItem>
+              <S.Label>
+                성별<span>(필수)</span>
+              </S.Label>
+              <S.GenderWrapper>
+                <S.Gender select={profileState.gender === '남성'} onClick={handleSelectGender('남성')}>
+                  남성
+                </S.Gender>
+                <S.Gender select={profileState.gender === '여성'} onClick={handleSelectGender('여성')}>
+                  여성
+                </S.Gender>
+              </S.GenderWrapper>
+            </S.EditItem>
+
+            <S.EditItem>
+              <S.Label>운동 목표</S.Label>
+              <S.Input
+                placeholder="운동 목표를 간단하게 입력해주세요."
+                value={profileState.workoutPurpose}
+                name="workoutPurpose"
+                onChange={handleProfileInputChange}
+              />
+            </S.EditItem>
+
             <S.FitnessInfoWrapper>
               <S.FitnessInfo>
                 <S.Label>데드리프트</S.Label>
@@ -191,6 +256,7 @@ const Content = ({ profile }: Props) => {
                 />
               </S.FitnessInfo>
             </S.FitnessInfoWrapper>
+
             <S.GymRegister>
               <S.Label>
                 등록 헬스장<span>(필수)</span>
