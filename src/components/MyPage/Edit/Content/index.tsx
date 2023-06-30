@@ -77,23 +77,23 @@ const Content = ({ profile }: Props) => {
     const originalNickname = profile.member.nickname;
     const changedNickname = profileState.nickname || '';
 
-    if (originalNickname !== changedNickname) {
-      if (changedNickname.length >= 2) {
+    if (originalNickname === changedNickname) {
+      setIsNicknameChecked(false);
+      setIsUsableNickname(true);
+    } else {
+      setIsNicknameChecked(true);
+
+      if (changedNickname.length < 2) {
+        setIsUsableNickname(false);
+        setWarningText('닉네임은 2~15자만 가능합니다.');
+      } else {
         nicknameCheck(changedNickname).then((response) => {
           const isDuplicated = response.data.isDuplicated;
 
-          setIsNicknameChecked(true);
           setIsUsableNickname(isDuplicated ? false : true);
           setWarningText('이미 사용중인 닉네임입니다.');
         });
-      } else {
-        setIsNicknameChecked(true);
-        setIsUsableNickname(false);
-        setWarningText('닉네임은 2~15자만 가능합니다.');
       }
-    } else {
-      setIsNicknameChecked(false);
-      setIsUsableNickname(true);
     }
   };
 
