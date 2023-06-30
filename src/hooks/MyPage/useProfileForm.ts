@@ -26,9 +26,15 @@ const useProfileForm = (initialState: MyPageField) => {
   });
 
   const handleProfileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    let maxLength;
+
+    if (name === 'nickname') maxLength = 15;
+    else if (name === 'workoutPurpose') maxLength = 20;
+
     setProfileState({
       ...profileState,
-      [e.target.name]: e.target.value.substring(0, 15),
+      [name]: e.target.value.substring(0, maxLength),
     });
   };
 

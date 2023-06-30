@@ -146,6 +146,20 @@ export const NicknameCheckResult = styled.div<{ isUsable?: boolean }>`
   }
 `;
 
+export const WorkoutPurposeInputWrapper = styled.div`
+  position: relative;
+
+  & > span {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+
+    text-align: right;
+    color: var(--color-gray7);
+  }
+`;
+
 export const Gender = styled.div<{ select: boolean }>`
   display: flex;
   justify-content: center;

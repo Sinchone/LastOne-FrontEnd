@@ -101,8 +101,9 @@ const Content = ({ profile }: Props) => {
 
   const handleClickSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
+    const notChangedNickname = profile.member.nickname === profileState.nickname;
     if (profileState.nickname && profileState.gender && gymState.length) {
-      if (isUsableNickname) setIsSubmitModal(true);
+      if (isUsableNickname || notChangedNickname) setIsSubmitModal(true);
       else setIsNicknameCheckModal(true);
     } else setIsWarningModal(true);
   };
@@ -227,12 +228,16 @@ const Content = ({ profile }: Props) => {
 
             <S.EditItem>
               <S.Label>운동 목표</S.Label>
-              <S.Input
-                placeholder="운동 목표를 간단하게 입력해주세요."
-                value={profileState.workoutPurpose}
-                name="workoutPurpose"
-                onChange={handleProfileInputChange}
-              />
+              <S.WorkoutPurposeInputWrapper>
+                <S.Input
+                  placeholder="운동 목표를 간단하게 입력해주세요."
+                  value={profileState.workoutPurpose}
+                  name="workoutPurpose"
+                  onChange={handleProfileInputChange}
+                  maxLength={20}
+                />
+                <span>{profileState.workoutPurpose?.length}/20</span>
+              </S.WorkoutPurposeInputWrapper>
             </S.EditItem>
 
             <S.FitnessInfoWrapper>
