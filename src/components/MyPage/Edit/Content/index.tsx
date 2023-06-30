@@ -87,7 +87,7 @@ const Content = ({ profile }: Props) => {
       } else {
         setIsNicknameChecked(true);
         setIsUsableNickname(false);
-        setWarningText('닉네임은 2~20자만 가능합니다.');
+        setWarningText('닉네임은 2~15자만 가능합니다.');
       }
     } else {
       setIsNicknameChecked(false);
@@ -186,9 +186,9 @@ const Content = ({ profile }: Props) => {
                       value={profileState.nickname}
                       name="nickname"
                       onChange={handleProfileInputChange}
-                      maxLength={20}
+                      maxLength={15}
                     />
-                    <span>{profileState.nickname?.length}/20</span>
+                    <span>{profileState.nickname?.length}/15</span>
                   </S.NicknameInputWrapper>
                   <S.NicknameCheckButton onClick={handleCheckNickname}>중복 확인</S.NicknameCheckButton>
                 </span>
