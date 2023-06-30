@@ -1,5 +1,3 @@
-import api from '@apis/base';
-import { getAccessTokenFromCookie } from '@utils/token';
 import authApi from './auth';
 
 export const getRequestedApplications = () => {
@@ -11,15 +9,7 @@ export const getReceivedApplications = () => {
 };
 
 export const createApplication = (id: number) => {
-  const accessToken = getAccessTokenFromCookie();
-
-  return api.post({
-    url: 'api/application',
-    data: { recruitmentId: id },
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  return authApi.post('api/application', { recruitmentId: id });
 };
 
 export const deleteApplication = (id: number) => {

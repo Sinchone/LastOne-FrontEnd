@@ -1,5 +1,6 @@
 import api from '@apis/base';
 import { getAccessTokenFromCookie } from '@utils/token';
+import authApi from './auth';
 
 export const createPost = (formData: FormData) => {
   const accessToken = getAccessTokenFromCookie();
@@ -22,12 +23,5 @@ export const getPostById = (id: number) => {
 };
 
 export const deletePostById = (id: number) => {
-  const accessToken = getAccessTokenFromCookie();
-
-  return api.delete({
-    url: `api/recruitment/${id}`,
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  return authApi.delete(`api/recruitment/${id}`);
 };
