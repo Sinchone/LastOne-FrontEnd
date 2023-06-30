@@ -12,3 +12,9 @@ export const createPost = (formData: FormData) => {
     },
   });
 };
+
+export const getMainPosts = () => {
+  return api.get({
+    url: 'api/recruitment/main',
+  });
+};
