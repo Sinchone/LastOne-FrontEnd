@@ -4,7 +4,8 @@ import ProfileIcon from '@assets/icon/profilelarge.svg';
 import ArrowIcon from '@assets/icon/small-arrow.svg';
 import { ProfileType, GymInfoType, FitnessType } from '@typing/user';
 import { createImageUrl } from '@utils/createImageUrl';
-import { Map } from '@components/Common';
+import { Map, Modal } from '@components/Common';
+import { useRouter } from 'next/router';
 
 interface Props {
   other?: boolean;
@@ -14,6 +15,8 @@ interface Props {
 }
 
 const Content = ({ other, user, sbd, gym }: Props) => {
+  const router = useRouter();
+  const [isEditRequiredModal, setIsEditRequiredModal] = useState(!user.isEdited);
   const [gymName, setGymName] = useState(gym.length !== 0 ? gym[0].name : '');
 
   const handleSelectGym = (name: string) => {
@@ -106,6 +109,20 @@ const Content = ({ other, user, sbd, gym }: Props) => {
         </S.MyGymWrapper>
       </S.GymWrapper>
       {other ? chattingButton : fitnesPartner}
+      {!other && isEditRequiredModal && (
+        <Modal
+          hasArrow
+          isOpen={isEditRequiredModal}
+          handleClose={() => setIsEditRequiredModal(false)}
+          handleConfirm={() => router.replace('/mypage/edit')}
+          handleCancel={() => router.replace('/')}
+          text={{
+            label: '서비스 이용을 위해 정보를 입력해주세요!',
+            confirm: '정보 입력하기',
+            cancel: '다음에 하기',
+          }}
+        />
+      )}
     </S.Wrapper>
   );
 };
