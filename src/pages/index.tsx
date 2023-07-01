@@ -3,12 +3,20 @@ import { Header, Navigation, MainLayout } from '@components/Common';
 import { Banner, Contents } from '@components/Main';
 
 const Main = () => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   return (
-    <MainLayout>
-      <Banner />
-      <Contents />
-    </MainLayout>
+    mounted && (
+      <MainLayout>
+        <Banner />
+        <Contents />
+      </MainLayout>
+    )
   );
 };
 
 export default Main;
+
+import { useState, useEffect } from 'react';
