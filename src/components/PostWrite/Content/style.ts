@@ -154,7 +154,7 @@ export const DescriptionImageWrapper = styled.div`
 
   > div:first-of-type {
     width: 100%;
-    height: 212px;
+    height: 180px;
     background-color: rgba(0, 0, 0, 0.2);
     position: absolute;
   }
@@ -168,7 +168,7 @@ export const DescriptionImageWrapper = styled.div`
 
 export const DescriptionImage = styled.div`
   width: 230px;
-  height: 212px;
+  height: 180px;
   background-color: var(--color-gray2);
   border-radius: 8px;
 `;
