@@ -4,7 +4,8 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.section`
   width: 100%;
-  height: 100%;
+  height: fit-content;
+  min-height: calc(100vh - 60px - 370px);
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 90px;
