@@ -72,6 +72,32 @@ export const SelectArea = styled.div`
   }
 `;
 
+export const GenderArea = styled.div`
+  margin-top: 24px;
+  margin-bottom: 40px;
+`;
+export const GenderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 8px;
+`;
+
+export const Gender = styled.div<{ selected: string; gender: string }>`
+  width: 100%;
+  height: 72px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 7px rgba(102, 109, 117, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(${(props) => (props.selected === props.gender ? '--color-white' : '--color-gray8')});
+  background-color: var(${(props) => (props.selected === props.gender ? '--color-primary-main' : '--color-white')});
+`;
+
 export const ExercisePartArea = styled.div`
   margin-top: 24px;
   margin-bottom: 40px;

@@ -12,7 +12,7 @@ import { isMapShowState } from '@recoil/postWrite';
 import { selectedDateState, selectedTimeState } from '@recoil/bottomsheet/calendarTime';
 import moment from 'moment';
 import { Post } from '@typing/post';
-import { exercisePartArray } from '@constants/post';
+import { exercisePartArray, genderArray } from '@constants/post';
 import { createPost } from '@apis/post';
 import { createImageUrl } from '@utils/createImageUrl';
 import { checkAllKeysHaveValues } from '@utils/checkAllKeysHaveValues';
@@ -94,7 +94,7 @@ const Content = () => {
       title: data.title,
       description: data.description,
       workoutPart: data.workoutPart,
-      preferGender: '무관',
+      preferGender: data.preferGender,
       gym: data.gym,
       startedAt: {
         date: moment(selectedDate).format('yyyy.MM.DD'),
@@ -102,6 +102,8 @@ const Content = () => {
         time: selectedTime.time,
       },
     };
+
+    console.log(postData);
 
     if (!checkAllKeysHaveValues(postData)) {
       alert('항목을 모두 작성해주세요.');
@@ -162,6 +164,23 @@ const Content = () => {
               <BottomArrowIcon />
             </S.SelectArea>
           </S.SelectWrapper>
+
+          {/* 선호 성별 선택 버튼 */}
+          <S.GenderArea>
+            <S.Subject>성별</S.Subject>
+            <S.GenderWrapper>
+              {genderArray.map((gender, idx) => (
+                <S.Gender
+                  key={idx}
+                  onClick={() => setData({ ...data, preferGender: gender })}
+                  selected={data.preferGender}
+                  gender={gender}
+                >
+                  {gender}
+                </S.Gender>
+              ))}
+            </S.GenderWrapper>
+          </S.GenderArea>
 
           {/* 운동 부위 선택 버튼*/}
           <S.ExercisePartArea>
