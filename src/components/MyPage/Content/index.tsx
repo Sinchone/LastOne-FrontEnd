@@ -4,31 +4,35 @@ import ProfileIcon from '@assets/icon/profilelarge.svg';
 import ArrowIcon from '@assets/icon/small-arrow.svg';
 import { ProfileType, GymInfoType, FitnessType } from '@typing/user';
 import { createImageUrl } from '@utils/createImageUrl';
-import { logout } from '@apis/user';
+import { Map, Modal } from '@components/Common';
 import { useRouter } from 'next/router';
-import { removeAccessTokenToCookie, removeRefreshTokenToCookie } from '@utils/token';
-import { Map } from '@components/Common';
 
 interface Props {
+  other?: boolean;
   user: ProfileType;
   sbd: FitnessType;
   gym: GymInfoType[];
 }
 
-const Content = ({ user, sbd, gym }: Props) => {
-  const [gymName, setGymName] = useState(gym.length !== 0 ? gym[0].name : '');
+const Content = ({ other, user, sbd, gym }: Props) => {
   const router = useRouter();
+  const [isEditRequiredModal, setIsEditRequiredModal] = useState(!user.isEdited);
+  const [gymName, setGymName] = useState(gym.length !== 0 ? gym[0].name : '');
 
   const handleSelectGym = (name: string) => {
     setGymName(name);
   };
 
-  const handleLogout = () => {
-    logout();
-    router.push('/login');
-    removeAccessTokenToCookie();
-    removeRefreshTokenToCookie();
-  };
+  const fitnesPartner = (
+    <S.FitnesPartner>
+      <span className="title">운동 파트너 목록</span>
+      <span className="more">
+        전체보기 <ArrowIcon />
+      </span>
+    </S.FitnesPartner>
+  );
+
+  const chattingButton = <S.ChattingButton onClick={() => console.log(`채팅하러 가기`)}>채팅하기</S.ChattingButton>;
 
   return (
     <S.Wrapper>
@@ -44,12 +48,9 @@ const Content = ({ user, sbd, gym }: Props) => {
         <S.ProfileInfo>
           <S.NameWrapper>
             <span className="name">{user.nickname}</span>
-            <S.Gender>{user.gender}</S.Gender>
+            <S.Gender>{user.gender || '미정'}</S.Gender>
           </S.NameWrapper>
         </S.ProfileInfo>
-        <span className="logout" onClick={handleLogout}>
-          로그아웃
-        </span>
       </S.ProfileWrapper>
       <S.FitnessContents>
         <S.FitnessContent>
@@ -77,7 +78,9 @@ const Content = ({ user, sbd, gym }: Props) => {
           <span>운동 요일</span>
           <S.WorkWrapper>
             {user.workoutDay.map((day) => (
-              <span key={day}>{day}</span>
+              <span className="description" key={day}>
+                {day}
+              </span>
             ))}
           </S.WorkWrapper>
         </S.FitnessContent>
@@ -105,12 +108,21 @@ const Content = ({ user, sbd, gym }: Props) => {
             ))}
         </S.MyGymWrapper>
       </S.GymWrapper>
-      <S.FitnesPartner>
-        <span className="title">운동 파트너 목록</span>
-        <span className="more">
-          전체보기 <ArrowIcon />
-        </span>
-      </S.FitnesPartner>
+      {other ? chattingButton : fitnesPartner}
+      {!other && isEditRequiredModal && (
+        <Modal
+          hasArrow
+          isOpen={isEditRequiredModal}
+          handleClose={() => setIsEditRequiredModal(false)}
+          handleConfirm={() => router.replace('/mypage/edit')}
+          handleCancel={() => router.replace('/')}
+          text={{
+            label: '서비스 이용을 위해 정보를 입력해주세요!',
+            confirm: '정보 입력하기',
+            cancel: '다음에 하기',
+          }}
+        />
+      )}
     </S.Wrapper>
   );
 };

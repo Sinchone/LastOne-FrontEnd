@@ -7,3 +7,4 @@ export { default as BottomSheet } from './BottomSheet';
 export { default as MainLayout } from './MainLayout';
 export { default as Map } from './Map';
 export { default as Modal } from './Modal';
+export { default as Loader } from './Loading';
