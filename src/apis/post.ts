@@ -24,6 +24,7 @@ export const getPostById = (id: number) => {
 
 export const deletePostById = (id: number) => {
   return authApi.delete(`api/recruitment/${id}`);
+};
 
 export const getMainPosts = () => {
   return api.get({
