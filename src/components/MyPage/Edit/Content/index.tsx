@@ -80,21 +80,28 @@ const Content = ({ profile }: Props) => {
     if (originalNickname === changedNickname) {
       setIsNicknameChecked(false);
       setIsUsableNickname(true);
-    } else {
-      setIsNicknameChecked(true);
-
-      if (changedNickname.length < 2) {
-        setIsUsableNickname(false);
-        setWarningText('닉네임은 2~15자만 가능합니다.');
-      } else {
-        nicknameCheck(changedNickname).then((response) => {
-          const isDuplicated = response.data.isDuplicated;
-
-          setIsUsableNickname(isDuplicated ? false : true);
-          setWarningText('이미 사용중인 닉네임입니다.');
-        });
-      }
+      return;
     }
+
+    setIsNicknameChecked(true);
+
+    if (changedNickname.length < 2) {
+      setIsUsableNickname(false);
+      setWarningText('닉네임은 2~15자만 가능합니다.');
+      return;
+    }
+
+    nicknameCheck(changedNickname)
+      .then((response) => {
+        const isDuplicated = response.data.isDuplicated;
+        setIsUsableNickname(!isDuplicated);
+        isDuplicated && setWarningText('이미 사용중인 닉네임입니다.');
+      })
+      .catch((error) => {
+        console.error('닉네임 체크 중 오류가 발생했습니다:', error);
+        setIsUsableNickname(false);
+        setWarningText('닉네임 체크 중 오류가 발생했습니다.');
+      });
   };
 
   const handleCloseSearch = () => {
@@ -104,10 +111,14 @@ const Content = ({ profile }: Props) => {
   const handleClickSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const notChangedNickname = profile.member.nickname === profileState.nickname;
+
     if (profileState.nickname && profileState.gender && gymState.length) {
       if (isUsableNickname || notChangedNickname) setIsSubmitModal(true);
-      else setIsNicknameCheckModal(true);
-    } else setIsWarningModal(true);
+      setIsNicknameCheckModal(true);
+      return;
+    }
+
+    setIsWarningModal(true);
   };
 
   const handleSubmitForm = async () => {
