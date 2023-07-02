@@ -1,7 +1,7 @@
 import theme from '@styles/theme';
 import styled from 'styled-components';
 
-export const Header = styled.header`
+export const Header = styled.div`
   width: 100%;
   height: 60px;
   padding: 10px 24px 10px 24px;

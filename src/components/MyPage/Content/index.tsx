@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './style';
 import ProfileIcon from '@assets/icon/profilelarge.svg';
 import ArrowIcon from '@assets/icon/small-arrow.svg';

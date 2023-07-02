@@ -23,12 +23,12 @@ export const Wrapper = styled.article<{ size: string }>`
   }
 `;
 
-export const ImgBox = styled.div`
+export const ImgBox = styled.div<{ imgUrl: string }>`
   position: relative;
   width: 100%;
   height: 208px;
-  background-color: var(--color-gray3);
   border-radius: 8px;
+  background: no-repeat center/contain url(${(props) => process.env.NEXT_PUBLIC_IMAGE_URL + props.imgUrl});
 `;
 
 export const Description = styled.div`
@@ -36,8 +36,13 @@ export const Description = styled.div`
   flex-direction: column;
   gap: 7px;
   width: 100%;
+  padding: 0 5px;
 
   .title {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     ${theme.font.ko.subTitle1}
     font-size: 16px;
 
@@ -45,7 +50,7 @@ export const Description = styled.div`
       font-size: 17px;
     }
   }
-  span {
+  > span {
     ${theme.font.ko.body1}
     font-size: 13px;
     display: flex;
@@ -55,6 +60,12 @@ export const Description = styled.div`
       font-size: 13px;
     }
   }
+  .gym {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 export const Badge = styled.div`
@@ -63,29 +74,22 @@ export const Badge = styled.div`
   left: 10px;
   display: flex;
   gap: 7px;
+  > div {
+    width: 43px;
+    height: 23px;
+    border-radius: 4px;
+    padding: 6px 8px 6px 8px;
+    color: var(--color-white);
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 export const Recruit = styled.div`
-  width: 43px;
-  height: 23px;
-  border-radius: 4px;
-  padding: 6px 8px 6px 8px;
   background-color: var(--color-secondary-main);
-  color: var(--color-white);
-  ${theme.font.ko.button}
-  font-size: 10px;
-  display: flex;
-  align-items: center;
 `;
 
 export const Gender = styled.div`
-  width: 43px;
-  height: 23px;
-  border-radius: 4px;
-  padding: 6px 8px 6px 8px;
   background-color: var(--color-primary-main);
-  color: var(--color-white);
-  ${theme.font.ko.button}
-  font-size: 10px;
-  display: flex;
-  align-items: center;
 `;

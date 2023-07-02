@@ -1,4 +1,5 @@
 import theme from '@styles/theme';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 export const Wrapper = styled.section`
@@ -16,7 +17,7 @@ export const Content = styled.section`
   gap: 20px;
 `;
 
-export const Title = styled.div`
+export const Title = styled(Link)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -24,6 +25,7 @@ export const Title = styled.div`
   width: 100%;
   ${theme.font.ko.subTitle1}
   font-size: 16px;
+  cursor: pointer;
 `;
 
 export const PromiseContents = styled.div`

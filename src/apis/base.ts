@@ -7,17 +7,17 @@ export const customAxios: AxiosInstance = axios.create({
 });
 
 const createApiMethod =
-  (_axiosInstace: AxiosInstance, methodType: Method) =>
+  (_axiosInstance: AxiosInstance, methodType: Method) =>
   (config: AxiosRequestConfig): Promise<any> => {
-    _axiosInstace.interceptors.response.use(
+    _axiosInstance.interceptors.response.use(
       (response) => {
         return response;
       },
       (error) => {
-        return error;
+        return error.response;
       }
     );
-    return _axiosInstace({
+    return _axiosInstance({
       ...config,
       method: methodType,
     });

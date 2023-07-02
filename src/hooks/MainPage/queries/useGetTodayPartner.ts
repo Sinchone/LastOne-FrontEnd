@@ -1,15 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { queryKeys } from '@constants/querykeys';
-import { getMyProfile } from '@apis/user';
 import { getAccessTokenFromCookie } from '@utils/token';
+import { getTodayPartner } from '@apis/partner';
 
-const useGetMyProfile = () => {
+const useGetTodayPartner = () => {
   const token = getAccessTokenFromCookie();
 
-  return useQuery(queryKeys.me, () => getMyProfile(), {
+  return useQuery(queryKeys.partner, () => getTodayPartner(), {
     enabled: !!token,
-    staleTime: Infinity,
   });
 };
 
-export default useGetMyProfile;
+export default useGetTodayPartner;
