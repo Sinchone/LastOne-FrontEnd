@@ -113,7 +113,11 @@ const Content = ({ profile }: Props) => {
     const notChangedNickname = profile.member.nickname === profileState.nickname;
 
     if (profileState.nickname && profileState.gender && gymState.length) {
-      if (isUsableNickname || notChangedNickname) setIsSubmitModal(true);
+      if (isUsableNickname || notChangedNickname) {
+        setIsSubmitModal(true);
+        return;
+      }
+
       setIsNicknameCheckModal(true);
       return;
     }
