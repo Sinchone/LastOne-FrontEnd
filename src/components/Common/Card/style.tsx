@@ -75,10 +75,10 @@ export const Badge = styled.div`
   display: flex;
   gap: 7px;
   > div {
-    width: 43px;
+    width: 50px;
     height: 23px;
     border-radius: 4px;
-    padding: 6px 8px 6px 8px;
+    padding: 6px;
     color: var(--color-white);
     font-size: 10px;
     display: flex;
