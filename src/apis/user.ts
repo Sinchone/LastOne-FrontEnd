@@ -19,6 +19,10 @@ export const getMyProfile = () => {
   return authApi.get(`api/mypage`);
 };
 
+export const getOtherProfile = (memberId: string) => {
+  return authApi.get(`api/mypage/${memberId}`);
+};
+
 export const getToken = (data: { refreshToken: string }) => {
   return api.post({
     url: 'api/token/refresh',
@@ -32,6 +36,10 @@ export const editProfile = (formData: FormData) => {
       'Content-Type': 'multipart/form-data',
     },
   });
+};
+
+export const nicknameCheck = (nickname: string) => {
+  return authApi.get(`api/mypage/nickname-check?nickname=${nickname}`);
 };
 
 export const logout = () => {

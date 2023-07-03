@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import * as S from './style';
-import ProfileIcon from '@assets/icon/mypage.svg';
-import CloseIcon from '@assets/icon/close.svg';
+
 import { FitnessType, GymInfoType, ProfileType } from '@typing/user';
 import { useProfileForm } from '@hooks/MyPage';
 import SearchGym from '../SearchGym';
-import { editProfile } from '@apis/user';
+import { editProfile, nicknameCheck } from '@apis/user';
 import { createImageUrl } from '@utils/createImageUrl';
 import SearchIcon from '@assets/icon/search.svg';
-import { Map } from '@components/Common';
+import { Map, Modal } from '@components/Common';
+
+import ProfileIcon from '@assets/icon/mypage.svg';
+import CloseIcon from '@assets/icon/close.svg';
+import PlusIcon from '@assets/icon/plus.svg';
+import Usable from '@assets/icon/usable.svg';
+import Unusable from '@assets/icon/unusable.svg';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface Props {
   profile: {
@@ -21,6 +27,7 @@ interface Props {
 
 const Content = ({ profile }: Props) => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [isMapShow, setIsMapShow] = useState(false);
   const [image, setImage] = useState<any>('');
   const {
@@ -40,6 +47,15 @@ const Content = ({ profile }: Props) => {
   } = useProfileForm(profile);
   const [gymName, setGymName] = useState(gymState.length !== 0 ? gymState[0].name : '');
 
+  const [isNicknameChecked, setIsNicknameChecked] = useState(false);
+  const [isUsableNickname, setIsUsableNickname] = useState(false);
+  const [warningText, setWarningText] = useState('이미 사용중인 닉네임입니다.');
+
+  const [isSubmitModal, setIsSubmitModal] = useState(false);
+  const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
+  const [isWarningModal, setIsWarningModal] = useState(false);
+  const [isNicknameCheckModal, setIsNicknameCheckModal] = useState(false);
+
   console.log(gymState);
   console.log(fitness);
   console.log(profileState);
@@ -57,12 +73,59 @@ const Content = ({ profile }: Props) => {
     setProfileImage(url);
   };
 
+  const handleCheckNickname = () => {
+    const originalNickname = profile.member.nickname;
+    const changedNickname = profileState.nickname || '';
+
+    if (originalNickname === changedNickname) {
+      setIsNicknameChecked(false);
+      setIsUsableNickname(true);
+      return;
+    }
+
+    setIsNicknameChecked(true);
+
+    if (changedNickname.length < 2) {
+      setIsUsableNickname(false);
+      setWarningText('닉네임은 2~15자만 가능합니다.');
+      return;
+    }
+
+    nicknameCheck(changedNickname)
+      .then((response) => {
+        const isDuplicated = response.data.isDuplicated;
+        setIsUsableNickname(!isDuplicated);
+        isDuplicated && setWarningText('이미 사용중인 닉네임입니다.');
+      })
+      .catch((error) => {
+        console.error('닉네임 체크 중 오류가 발생했습니다:', error);
+        setIsUsableNickname(false);
+        setWarningText('닉네임 체크 중 오류가 발생했습니다.');
+      });
+  };
+
   const handleCloseSearch = () => {
     setIsMapShow(false);
   };
 
-  const handleSubmitForm = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleClickSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
+    const notChangedNickname = profile.member.nickname === profileState.nickname;
+
+    if (profileState.nickname && profileState.gender && gymState.length) {
+      if (isUsableNickname || notChangedNickname) {
+        setIsSubmitModal(true);
+        return;
+      }
+
+      setIsNicknameCheckModal(true);
+      return;
+    }
+
+    setIsWarningModal(true);
+  };
+
+  const handleSubmitForm = async () => {
     const myPageData = {
       member: {
         nickname: profileState.nickname,
@@ -87,10 +150,21 @@ const Content = ({ profile }: Props) => {
       formData.append('profileImg', image);
     }
 
-    editProfile(formData).then((res) => {
-      console.log(res);
-      router.push('/mypage');
-    });
+    if (isUsableNickname) {
+      editProfile(formData)
+        .then((res) => {
+          console.log(res);
+          queryClient.invalidateQueries(['me']);
+          setIsSubmitSuccess(true);
+        })
+        .then(() => {
+          setTimeout(() => {
+            router.push('/mypage');
+          }, 2000);
+        });
+    } else {
+      setIsNicknameCheckModal(true);
+    }
   };
 
   const handleSelectGym = (name: string) => {
@@ -119,29 +193,71 @@ const Content = ({ profile }: Props) => {
             </label>
           </S.ProfileImgWrapper>
           <S.EditForm>
-            <S.Label>닉네임</S.Label>
-            <S.Input
-              placeholder="닉네임을 입력해주세요."
-              value={profileState.nickname}
-              name="nickname"
-              onChange={handleProfileInputChange}
-            />
-            <S.Label>성별</S.Label>
-            <S.GenderWrapper>
-              <S.Gender select={profileState.gender === '남성'} onClick={handleSelectGender('남성')}>
-                남성
-              </S.Gender>
-              <S.Gender select={profileState.gender === '여성'} onClick={handleSelectGender('여성')}>
-                여성
-              </S.Gender>
-            </S.GenderWrapper>
-            <S.Label>한줄 소개</S.Label>
-            <S.Input
-              placeholder="한줄 소개를 간단하게 입력해주세요."
-              value={profileState.workoutPurpose}
-              name="workoutPurpose"
-              onChange={handleProfileInputChange}
-            />
+            <S.EditItem>
+              <S.Label>
+                닉네임<span>(필수)</span>
+              </S.Label>
+              <S.NicknameWrapper>
+                <span>
+                  <S.NicknameInputWrapper>
+                    <S.Input
+                      placeholder="닉네임을 입력해주세요."
+                      value={profileState.nickname}
+                      name="nickname"
+                      onChange={handleProfileInputChange}
+                      maxLength={15}
+                    />
+                    <span>{profileState.nickname?.length}/15</span>
+                  </S.NicknameInputWrapper>
+                  <S.NicknameCheckButton onClick={handleCheckNickname}>중복 확인</S.NicknameCheckButton>
+                </span>
+
+                {isNicknameChecked && (
+                  <S.NicknameCheckResult isUsable={isUsableNickname}>
+                    {isUsableNickname ? (
+                      <>
+                        <Usable />
+                        사용 가능한 닉네임입니다.
+                      </>
+                    ) : (
+                      <>
+                        <Unusable />
+                        {warningText}
+                      </>
+                    )}
+                  </S.NicknameCheckResult>
+                )}
+              </S.NicknameWrapper>
+            </S.EditItem>
+
+            <S.EditItem>
+              <S.Label>
+                성별<span>(필수)</span>
+              </S.Label>
+              <S.GenderWrapper>
+                <S.Gender select={profileState.gender === '남성'} onClick={handleSelectGender('남성')}>
+                  남성
+                </S.Gender>
+                <S.Gender select={profileState.gender === '여성'} onClick={handleSelectGender('여성')}>
+                  여성
+                </S.Gender>
+              </S.GenderWrapper>
+            </S.EditItem>
+
+            <S.EditItem>
+              <S.Label>운동 목표</S.Label>
+              <S.WorkoutPurposeInputWrapper>
+                <S.Input
+                  placeholder="운동 목표를 간단하게 입력해주세요."
+                  value={profileState.workoutPurpose}
+                  name="workoutPurpose"
+                  onChange={handleProfileInputChange}
+                  maxLength={20}
+                />
+                <span>{profileState.workoutPurpose?.length}/20</span>
+              </S.WorkoutPurposeInputWrapper>
+            </S.EditItem>
+
             <S.FitnessInfoWrapper>
               <S.FitnessInfo>
                 <S.Label>데드리프트</S.Label>
@@ -171,8 +287,11 @@ const Content = ({ profile }: Props) => {
                 />
               </S.FitnessInfo>
             </S.FitnessInfoWrapper>
+
             <S.GymRegister>
-              <S.Label>등록 헬스장</S.Label>
+              <S.Label>
+                등록 헬스장<span>(필수)</span>
+              </S.Label>
               <S.SearchInput onClick={() => setIsMapShow(true)}>
                 <SearchIcon />
                 <input placeholder="헬스장을 검색해보세요." />
@@ -192,6 +311,11 @@ const Content = ({ profile }: Props) => {
                       <CloseIcon onClick={() => handleRemoveGym(gym.latitude)} />
                     </S.MyGym>
                   ))}
+                {gymState.length === 1 && (
+                  <S.MyGymPlus>
+                    <PlusIcon onClick={() => setIsMapShow(true)} />
+                  </S.MyGymPlus>
+                )}
               </S.MyGymWrapper>
             </S.GymRegister>
             <S.WorkDay>
@@ -231,10 +355,52 @@ const Content = ({ profile }: Props) => {
               </S.InputContainer>
             </S.WorkTime>
             <S.ButtonGroup>
-              <S.CancelButton>취소</S.CancelButton>
-              <S.Button onClick={handleSubmitForm}>등록</S.Button>
+              <S.CancelButton onClick={() => router.push('/mypage')}>취소</S.CancelButton>
+              <S.Button onClick={handleClickSubmit}>등록</S.Button>
             </S.ButtonGroup>
           </S.EditForm>
+          {isSubmitModal && (
+            <Modal
+              isOpen={isSubmitModal}
+              handleClose={() => setIsSubmitModal(false)}
+              handleConfirm={handleSubmitForm}
+              isSuccess={isSubmitSuccess}
+              setIsSuccess={setIsSubmitSuccess}
+              text={{
+                label: '수정된 정보를 저장할까요?',
+                confirm: '저장하기',
+                cancel: '계속 수정하기',
+                success: '성공적으로\n저장 되었습니다!',
+              }}
+            />
+          )}
+          {isWarningModal && (
+            <Modal
+              isOpen={isWarningModal}
+              handleClose={() => setIsWarningModal(false)}
+              handleConfirm={() => setIsWarningModal(false)}
+              handleCancel={() => router.push('/mypage')}
+              text={{
+                label: '필수 정보를 입력해주세요!',
+                confirm: '입력하러가기',
+                cancel: '다음에 수정하기',
+              }}
+            />
+          )}
+
+          {isNicknameCheckModal && (
+            <Modal
+              isOpen={isNicknameCheckModal}
+              handleClose={() => setIsNicknameCheckModal(false)}
+              handleConfirm={() => setIsNicknameCheckModal(false)}
+              handleCancel={() => router.replace('/mypage')}
+              text={{
+                label: '닉네임 중복 확인이 필요합니다!',
+                confirm: '계속 수정하기',
+                cancel: '수정 취소하기',
+              }}
+            />
+          )}
         </S.Wrapper>
       ) : (
         <SearchGym setChangeGymState={setChangeGymState} handleCloseSearch={handleCloseSearch} />

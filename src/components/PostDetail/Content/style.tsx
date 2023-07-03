@@ -28,6 +28,12 @@ export const ImageBox = styled.div`
   position: relative;
   background-color: var(--color-secondary-main);
   margin-right: 24px;
+  overflow: hidden;
+
+  svg {
+    width: 80px;
+    height: 80px;
+  }
 `;
 
 export const WriterInfo = styled.div`
@@ -168,27 +174,39 @@ export const MapWrapper = styled.div`
 
 export const DescriptionWrapper = styled.div`
   margin-top: 32px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+
   font-weight: 400;
   color: var(--color-gray9);
+
   & span {
     color: var(--color-black);
     font-size: 18px;
     font-weight: 700;
   }
+`;
 
-  & div {
+export const ImageWrapper = styled.div`
+  width: 100%;
+  height: 180px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+
+  & > div {
+    position: relative;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    > div {
-      margin: 16px 0;
-      width: 180px;
-      height: 180px;
-      position: relative;
-      border-radius: 16px;
-      background-color: var(--color-secondary-main);
-    }
+    height: 180px;
+
+    border-radius: 8px;
+    background-color: var(--color-secondary-main);
+
+    overflow: hidden;
   }
 `;
 
@@ -226,6 +244,13 @@ export const PrimaryButton = styled(Button)`
 export const CancelButton = styled(Button)`
   background-color: var(--color-secondary-main);
   color: var(--color-white);
+  border: none;
+`;
+
+export const EditButton = styled(Button)`
+  width: 100%;
+  background-color: var(--color-gray2);
+  color: var(--color-primary-main);
   border: none;
 `;
 

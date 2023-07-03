@@ -8,6 +8,7 @@ const useGetMyProfile = () => {
 
   return useQuery(queryKeys.me, () => getMyProfile(), {
     enabled: !!token,
+    staleTime: Infinity,
   });
 };
 
