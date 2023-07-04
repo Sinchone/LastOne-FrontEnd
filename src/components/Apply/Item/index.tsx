@@ -19,13 +19,6 @@ const Item = ({ recruitmentId, data }: Props) => {
   const menu = useRecoilValue(currentMenuState);
   const [isModal, setIsModal] = useState(false);
 
-  // const types = {
-  //   FAILURE: 'disabled',
-  //   SUCCESS: 'cancel',
-  //   WAITING: 'default',
-  //   CANCEL: 'default',
-  // };
-
   const handleButtonClick = () => {
     if (menu === 'received')
       return data.status === 'SUCCESS'
