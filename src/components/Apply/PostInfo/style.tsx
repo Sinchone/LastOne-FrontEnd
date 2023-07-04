@@ -50,7 +50,7 @@ export const Status = styled.span<{ status: string }>`
   font-size: 14px;
   color: var(--color-white);
 
-  background-color: var(${(props) => (props.status === 'waiting' ? '--color-gray5' : '--color-primary-main')});
+  background-color: var(${(props) => (props.status === 'WAITING' ? '--color-gray5' : '--color-primary-main')});
 `;
 
 export const MovePost = styled.span`
