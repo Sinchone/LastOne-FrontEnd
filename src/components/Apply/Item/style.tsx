@@ -30,6 +30,10 @@ export const Profile = styled.div`
     height: 64px;
   }
 
+  img {
+    border-radius: 50%;
+  }
+
   span {
     font-weight: 700;
     font-size: 16px;

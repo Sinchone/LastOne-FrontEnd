@@ -7,6 +7,8 @@ import ApplicationModal from '../Modal';
 import { useRecoilValue } from 'recoil';
 import { currentMenuState } from '@recoil/application';
 import { cancelMatching, completeMatching, deleteApplication } from '@apis/application';
+import { createImageUrl } from '@utils/createImageUrl';
+import Image from 'next/image';
 
 interface Props {
   recruitmentId: number;
@@ -37,7 +39,17 @@ const Item = ({ recruitmentId, data }: Props) => {
   return (
     <S.Wrapper>
       <S.Profile>
-        <ProfileIcon />
+        {data.profileUrl ? (
+          <Image
+            src={createImageUrl(data.profileUrl as string)}
+            width={64}
+            height={64}
+            alt="profile"
+            style={{ objectFit: 'cover' }}
+          />
+        ) : (
+          <ProfileIcon />
+        )}
         <span>{data.nickname}</span>
       </S.Profile>
       <S.Contour />
