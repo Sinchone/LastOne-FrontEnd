@@ -15,3 +15,11 @@ export const createApplication = (id: number) => {
 export const deleteApplication = (id: number) => {
   return authApi.delete(`api/application/${id}`);
 };
+
+export const completeMatching = (recruitmentId: number, applicationId: number) => {
+  return authApi.patch(`/api/recruitment/${recruitmentId}/application/${applicationId}`);
+};
+
+export const cancelMatching = (recruitmentId: number, applicationId: number) => {
+  return authApi.delete(`/api/recruitment/${recruitmentId}/application/${applicationId}`);
+};
