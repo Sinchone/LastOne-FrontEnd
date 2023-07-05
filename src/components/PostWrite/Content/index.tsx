@@ -4,7 +4,6 @@ import CalendarIcon from '@assets/icon/calendar.svg';
 import ClockIcon from '@assets/icon/clock.svg';
 import BottomArrowIcon from '@assets/icon/bottom-arrow.svg';
 import SearchIcon from '@assets/icon/search.svg';
-import AddImgIcon from '@assets/icon/addImg.svg';
 import SearchGym from '../SearchGym';
 import { useBottomSheet } from '@hooks/common';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -17,6 +16,7 @@ import { createPost } from '@apis/post';
 import { createImageUrl } from '@utils/createImageUrl';
 import { checkAllKeysHaveValues } from '@utils/checkAllKeysHaveValues';
 import { Map } from '@components/Common';
+import Images from '../Image';
 
 const Content = () => {
   const initialData: Post = {
@@ -40,7 +40,7 @@ const Content = () => {
   const selectedDate = useRecoilValue(selectedDateState);
   const selectedTime = useRecoilValue(selectedTimeState);
   const [isMapShow, setIsMapShow] = useRecoilState(isMapShowState);
-  const [image, setImage] = useState<any>('');
+  const [image, setImage] = useState<any>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -53,6 +53,10 @@ const Content = () => {
       }
     }
   }, [isMapShow, inputRef]);
+
+  useEffect(() => {
+    console.log('image', image);
+  }, [image]);
 
   const titleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, title: e.target.value });
@@ -88,6 +92,16 @@ const Content = () => {
     textareaResizeHandler();
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files as any;
+    const images = [];
+    for (const img of files) {
+      images.push(URL.createObjectURL(img));
+    }
+
+    setImage(images);
+  };
+
   const handleSubmitForm = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const postData = {
@@ -119,9 +133,15 @@ const Content = () => {
       })
     );
     if (image) {
-      formData.append('profileImg', image);
+      console.log('imgFiles', image);
+      for (let i = 0; i < image.length; i++) {
+        formData.append('imgFiles', image[i]);
+      }
     }
 
+    for (const pair of formData.entries()) {
+      console.log('test', pair[0] + ', ' + pair[1]);
+    }
     createPost(formData).then((res) => {
       console.log(res);
     });
@@ -213,17 +233,21 @@ const Content = () => {
           {/* 상세설명 */}
           <S.DescriptionArea>
             <S.Subject>상세설명</S.Subject>
-            <S.DescriptionImageWrapper>
-              <AddImgIcon />
-              {/* 사진 없으면 아이콘 + 사진추가 버튼? */}
-              {/* 사진 있으면 사진 3장까지? */}
-              <div></div>
-              <div>
-                <S.DescriptionImage></S.DescriptionImage>
-                <S.DescriptionImage></S.DescriptionImage>
-                <S.DescriptionImage></S.DescriptionImage>
-              </div>
-            </S.DescriptionImageWrapper>
+
+            <S.ImageAreaWrapper>
+              <label htmlFor="image-input">
+                {image.length > 0 ? image.length : <Images />}
+                {/* <span>사진 추가</span> */}
+                <input
+                  type="file"
+                  id="image-input"
+                  name="image"
+                  multiple
+                  accept=".gif, .jpg, .png, .jpeg"
+                  onChange={handleImageChange}
+                />
+              </label>
+            </S.ImageAreaWrapper>
             <S.DescriptionTextAreaWrapper>
               <span>{data.description.length}/100</span>
               <textarea

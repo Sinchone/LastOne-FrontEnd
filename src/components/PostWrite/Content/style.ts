@@ -199,6 +199,12 @@ export const DescriptionImage = styled.div`
   border-radius: 8px;
 `;
 
+export const ImageAreaWrapper = styled.div`
+  input {
+    display: none;
+  }
+`;
+
 export const DescriptionTextAreaWrapper = styled.div`
   width: 100%;
   margin-top: 16px;
