@@ -28,7 +28,7 @@ export const ImgBox = styled.div<{ imgUrl: string }>`
   width: 100%;
   height: 208px;
   border-radius: 8px;
-  background: no-repeat center/contain url(${(props) => process.env.NEXT_PUBLIC_IMAGE_URL + props.imgUrl});
+  background: no-repeat center/contain white url(${(props) => process.env.NEXT_PUBLIC_IMAGE_URL + props.imgUrl});
 `;
 
 export const Description = styled.div`
