@@ -1,26 +1,33 @@
-import theme from '@styles/theme';
 import styled from 'styled-components';
 
 export const NavContainer = styled.div`
+  width: 100%;
+  height: 100%;
+
   display: flex;
   flex-direction: column;
-  gap: 155px;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
 
-  width: 474px;
-  height: 473px;
-
-  border-radius: 8px;
+  overflow: hidden;
 `;
 
 export const LogoContainer = styled.div`
+  height: 55%;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  margin: 0 auto;
+  svg {
+    height: 100%;
+  }
 `;
 
 export const ButtonContainer = styled.div`
+  width: 70%;
+
   display: flex;
   flex-direction: column;
   gap: 24px;
