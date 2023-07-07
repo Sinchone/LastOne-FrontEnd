@@ -74,8 +74,8 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
 
         <S.Writer>
           <div>
-            <S.ImageBox>
-              {post.profileUrl ? (
+            {post.profileUrl ? (
+              <S.ImageBox>
                 <Image
                   src={createImageUrl(post.profileUrl as string)}
                   priority
@@ -84,10 +84,11 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
                   alt="profile"
                   style={{ objectFit: 'cover' }}
                 />
-              ) : (
-                <ProfileIcon />
-              )}
-            </S.ImageBox>
+              </S.ImageBox>
+            ) : (
+              <ProfileIcon />
+            )}
+
             <S.WriterInfo>
               <div>
                 <span>{post.nickname}</span>
