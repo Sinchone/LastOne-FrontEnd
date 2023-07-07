@@ -235,10 +235,21 @@ export const ChatButton = styled(Button)`
   color: var(--color-primary-main);
 `;
 
-export const PrimaryButton = styled(Button)`
+export const PrimaryButton = styled(Button)<{ isPossible: boolean }>`
   background-color: var(--color-primary-main);
   color: var(--color-white);
   border: none;
+
+  ${(props) =>
+    !props.isPossible &&
+    `
+    filter: grayscale(100%) contrast(50%) brightness(200%);
+    cursor: default;
+    `};
+
+  &::after {
+    content: ${(props) => (props.isPossible ? `'신청하기'` : `'신청마감'`)};
+  }
 `;
 
 export const CancelButton = styled(Button)`

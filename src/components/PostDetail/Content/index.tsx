@@ -25,6 +25,7 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
 
   const [applicationId, setApplicationId] = useState<number | null>();
   const [isPartner, setIsPartner] = useState<boolean>();
+  const [isRequestPossible] = useState(moment().isBefore(moment(post.startedAt, 'yyyy.MM.DD HH:mm')));
 
   const [isPartnerRequested, setIsPartnerRequested] = useState(false);
   const [isPartnerCancelRequested, setIsPartnerCancelRequested] = useState(false);
@@ -38,15 +39,16 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
   }, [applyStatus]);
 
   const handleCreateApplication = () => {
-    createApplication(post.recruitmentId)
-      .then((response) => {
-        console.log(response);
-        setIsPartnerRequested(true);
-        setIsPartner(true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    isRequestPossible &&
+      createApplication(post.recruitmentId)
+        .then((response) => {
+          console.log(response);
+          setIsPartnerRequested(true);
+          setIsPartner(true);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   };
 
   const handleCancelApplication = () => {
@@ -166,7 +168,7 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
               취소하기
             </S.CancelButton>
           ) : (
-            <S.PrimaryButton onClick={handleCreateApplication}>신청하기</S.PrimaryButton>
+            <S.PrimaryButton onClick={handleCreateApplication} isPossible={isRequestPossible}></S.PrimaryButton>
           )}
         </S.ButtonsWrapper>
       ) : (
