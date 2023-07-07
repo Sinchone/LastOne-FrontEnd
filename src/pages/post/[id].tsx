@@ -1,5 +1,5 @@
 import { Content, Header } from '@components/PostDetail';
-import { useCheckIsApply } from '@hooks/Post/queries';
+import { useCheckApplyStatus } from '@hooks/Post/queries';
 import useGetPostById from '@hooks/Post/queries/useGetPostById';
 import { useGetUserInfo } from '@hooks/common/queries';
 import { useRouter } from 'next/router';
@@ -11,6 +11,8 @@ const PostDetail = () => {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const { data: post } = useGetPostById(Number(postId));
+  const { data: applyStatus } = useCheckApplyStatus(Number(postId));
+
   const { currentUserId } = useGetUserInfo();
   const [isOther, setIsOther] = useState(true);
 
@@ -30,7 +32,7 @@ const PostDetail = () => {
     return (
       <>
         <Header isOther={isOther} postId={postId} />
-        <Content isOther={isOther} post={post.data.data} />
+        <Content isOther={isOther} post={post.data.data} applyStatus={applyStatus?.data} />
       </>
     );
   }

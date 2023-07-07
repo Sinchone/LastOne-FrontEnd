@@ -4,8 +4,7 @@ import * as S from './style';
 import Image from 'next/image';
 import moment from 'moment';
 
-import { PostDetailType } from '@typing/post';
-import { RequestedApplication } from '@typing/application';
+import { ApplyStatusType, PostDetailType } from '@typing/post';
 
 import { Map, Modal } from '@components/Common';
 import ProfileIcon from '@assets/icon/profilelarge.svg';
@@ -13,19 +12,18 @@ import Marker from '@assets/icon/mapmarker.svg';
 
 import { createImageUrl } from '@utils/createImageUrl';
 import { createApplication, deleteApplication } from '@apis/application';
-import { useGetRequestedApplications } from '@hooks/application/queries';
 import { useRouter } from 'next/router';
 
 interface Props {
   isOther: boolean;
   post: PostDetailType;
+  applyStatus: ApplyStatusType | undefined;
 }
 
-const Content = ({ isOther, post }: Props) => {
+const Content = ({ isOther, post, applyStatus }: Props) => {
   const router = useRouter();
 
-  const { data: requestedApplications } = useGetRequestedApplications();
-  const [applicationId, setApplicationId] = useState();
+  const [applicationId, setApplicationId] = useState<number | null>();
   const [isPartner, setIsPartner] = useState<boolean>();
 
   const [isPartnerRequested, setIsPartnerRequested] = useState(false);
@@ -33,16 +31,11 @@ const Content = ({ isOther, post }: Props) => {
   const [isPartnerCancel, setIsPartnerCancel] = useState(false);
 
   useEffect(() => {
-    const recruitmentId = post.recruitmentId;
-    const applications = requestedApplications?.data || [];
-    const filteredApplication = applications.filter(
-      (application: RequestedApplication) => application.recruitmentId === recruitmentId
-    );
-    const applicationId = filteredApplication.length ? filteredApplication[0].applicationId : null;
-
-    setApplicationId(applicationId);
-    setIsPartner(applicationId ? true : false);
-  }, [post, requestedApplications]);
+    if (applyStatus) {
+      setApplicationId(applyStatus.applicationId);
+      setIsPartner(applyStatus.isApply);
+    }
+  }, [applyStatus]);
 
   const handleCreateApplication = () => {
     createApplication(post.recruitmentId)
