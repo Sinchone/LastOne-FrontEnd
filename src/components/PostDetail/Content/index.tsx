@@ -144,7 +144,7 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
           <S.ImageWrapper>
             {post.imgUrls.map((imgUrl) => (
               <div key={imgUrl}>
-                <Image src={imgUrl} fill alt="image" style={{ objectFit: 'cover' }} />
+                <Image src={createImageUrl(imgUrl as string)} fill alt="image" style={{ objectFit: 'cover' }} />
               </div>
             ))}
           </S.ImageWrapper>
