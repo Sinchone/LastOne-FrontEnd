@@ -31,3 +31,7 @@ export const getMainPosts = () => {
     url: 'api/recruitment/main',
   });
 };
+
+export const checkApplyStatus = (id: number) => {
+  return authApi.get(`/api/recruitment/${id}/application`);
+};
