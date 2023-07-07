@@ -91,7 +91,7 @@ const Content = ({ isOther, post }: Props) => {
                 <span>{post.nickname}</span>
                 <S.Gender>{post.gender}</S.Gender>
               </div>
-              <span>{moment(post.createdAt.date).format('yyyy.MM.DD')}</span>
+              <span>{moment(post.createdAt, 'yyyy.MM.DD HH:mm').format('yyyy.MM.DD')}</span>
             </S.WriterInfo>
           </div>
           <S.ProfileButton onClick={() => alert('프로필 상세 페이지로 이동')}>프로필 상세</S.ProfileButton>
@@ -120,7 +120,7 @@ const Content = ({ isOther, post }: Props) => {
       <S.HealthCondition>
         <div>
           <span>운동날짜</span>
-          <span>{moment(post.startedAt.date).format('yyyy.MM.DD HH:mm')}</span>
+          <span>{moment(post.startedAt, 'yyyy.MM.DD HH:mm').format('yyyy.MM.DD HH:mm')}</span>
         </div>
         <div>
           <span>선호 성별</span>
