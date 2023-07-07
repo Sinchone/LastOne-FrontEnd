@@ -8,7 +8,7 @@ export const Wrapper = styled.section`
 
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 
   box-shadow: 0px 0px 7px rgba(102, 109, 117, 0.1);
   border-radius: 8px;
@@ -28,6 +28,10 @@ export const Profile = styled.div`
   svg {
     width: 64px;
     height: 64px;
+  }
+
+  img {
+    border-radius: 50%;
   }
 
   span {
@@ -63,39 +67,37 @@ export const ButtonGroup = styled.div`
   gap: 16px;
 `;
 
-const buttonStyles = (type: string, menu?: string) => {
-  if (menu === 'received') {
-    switch (type) {
-      case 'default':
-        return `background-color: var(--color-primary-main);`;
-      case 'disabled':
-        return `
-        background-color: var(--color-gray4);
-        color: var(--color-gray7);
-        cursor: default;
-        `;
-      case 'cancel':
-        return `background-color: var(--color-error);`;
-    }
-  } else if (menu === 'requested') {
-    switch (type) {
-      case 'default':
-        return `background-color: var(--color-secondary-main);`;
-      case 'cancel':
-        return `background-color: var(--color-error);`;
-    }
-  } else if (type === 'chatting') {
-    return `
-      background-color: var(--color-white);
-      border: 0.3px solid var(--color-primary-main);
-      color: var(--color-primary-main);
-      `;
-  }
+interface ButtonStyleType {
+  [key: string]: any;
+  received: { [key: string]: string };
+  requested: { [key: string]: string };
+  chatting: string;
+}
+
+const buttonStyles: ButtonStyleType = {
+  received: {
+    WAITING: `background-color: var(--color-primary-main);`,
+    FAILURE: `
+    background-color: var(--color-gray4);
+    color: var(--color-gray7);
+    cursor: default;
+    `,
+    SUCCESS: `background-color: var(--color-error);`,
+  },
+  requested: {
+    WAITING: `background-color: var(--color-secondary-main);`,
+    SUCCESS: `background-color: var(--color-error);`,
+  },
+  chatting: `
+  background-color: var(--color-white);
+  border: 0.3px solid var(--color-primary-main);
+  color: var(--color-primary-main);
+  `,
 };
 
 const buttonText = (type: string, menu: string) => {
-  if (menu === 'received') return type === 'cancel' ? '취소하기' : '함께하기';
-  if (menu === 'requested') return type === 'cancel' ? '취소요청' : '신청취소';
+  if (menu === 'received') return type === 'SUCCESS' ? '취소하기' : '함께하기';
+  if (menu === 'requested') return type === 'SUCCESS' ? '취소요청' : '신청취소';
 };
 
 export const Button = styled.div<{ type: string; menu?: string }>`
@@ -112,7 +114,7 @@ export const Button = styled.div<{ type: string; menu?: string }>`
   user-select: none;
   cursor: pointer;
 
-  ${(props) => buttonStyles(props.type, props.menu)};
+  ${(props) => (props.menu ? buttonStyles[props.menu][props.type] : buttonStyles['chatting'])}
 
   &::after {
     content: '${(props) => (props.menu ? buttonText(props.type, props.menu) : '채팅하기')}';

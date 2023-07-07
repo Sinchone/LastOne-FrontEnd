@@ -1,31 +1,67 @@
 import { useState } from 'react';
 import * as S from './style';
 import ProfileIcon from '@assets/icon/profile.svg';
-import Modal from '../Modal';
+import { ReceivedApplication, RequestedApplication } from '@typing/application';
+import moment from 'moment';
+import ApplicationModal from '../Modal';
+import { useRecoilValue } from 'recoil';
+import { currentMenuState } from '@recoil/application';
+import { cancelMatching, completeMatching, deleteApplication } from '@apis/application';
+import { createImageUrl } from '@utils/createImageUrl';
+import Image from 'next/image';
 
 interface Props {
-  menu: string;
-  type: string;
+  recruitmentId: number;
+  data: ReceivedApplication | RequestedApplication;
 }
 
-const Item = ({ menu, type }: Props) => {
+const Item = ({ recruitmentId, data }: Props) => {
+  const menu = useRecoilValue(currentMenuState);
   const [isModal, setIsModal] = useState(false);
+
+  const handleButtonClick = () => {
+    if (menu === 'received')
+      return data.status === 'SUCCESS'
+        ? cancelMatching(recruitmentId, data.applicationId)
+        : completeMatching(recruitmentId, data.applicationId);
+
+    // TODO: 요청한 신청 중, status가 SUCCESS인 경우 API 수정
+    return data.status === 'WAITING' ? deleteApplication(data.applicationId) : deleteApplication(data.applicationId);
+  };
 
   return (
     <S.Wrapper>
       <S.Profile>
-        <ProfileIcon />
-        <span>운동관</span>
+        {data.profileUrl ? (
+          <Image
+            src={createImageUrl(data.profileUrl as string)}
+            width={64}
+            height={64}
+            alt="profile"
+            style={{ objectFit: 'cover' }}
+          />
+        ) : (
+          <ProfileIcon />
+        )}
+        <span>{data.nickname}</span>
       </S.Profile>
       <S.Contour />
-      <S.Gender>남성</S.Gender>
+      <S.Gender>{data.gender}</S.Gender>
       <S.Contour />
-      <span className="time">30분전 신청</span>
+      <span className="time">{moment(data.applicationDate, 'YYYY.MM.DD HH:mm').format('MM.DD HH:mm')}</span>
       <S.ButtonGroup>
-        <S.Button menu={menu} type={type} onClick={() => type !== 'disabled' && setIsModal(true)} />
+        <S.Button menu={menu} type={data.status} onClick={() => data.status !== 'FAILURE' && setIsModal(true)} />
         <S.Button type={'chatting'} />
       </S.ButtonGroup>
-      {isModal && <Modal isOpen={isModal} handleClose={() => setIsModal(false)} menu={menu} type={type} />}
+      {isModal && (
+        <ApplicationModal
+          isOpen={isModal}
+          handleClose={() => setIsModal(false)}
+          handleButtonClick={handleButtonClick}
+          recruitmentId={recruitmentId}
+          data={data}
+        />
+      )}
     </S.Wrapper>
   );
 };
