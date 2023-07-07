@@ -14,6 +14,7 @@ import Marker from '@assets/icon/mapmarker.svg';
 import { createImageUrl } from '@utils/createImageUrl';
 import { createApplication, deleteApplication } from '@apis/application';
 import { useGetRequestedApplications } from '@hooks/application/queries';
+import { useRouter } from 'next/router';
 
 interface Props {
   isOther: boolean;
@@ -21,6 +22,8 @@ interface Props {
 }
 
 const Content = ({ isOther, post }: Props) => {
+  const router = useRouter();
+
   const { data: requestedApplications } = useGetRequestedApplications();
   const [applicationId, setApplicationId] = useState();
   const [isPartner, setIsPartner] = useState<boolean>();
@@ -96,7 +99,7 @@ const Content = ({ isOther, post }: Props) => {
               <span>{moment(post.createdAt, 'yyyy.MM.DD HH:mm').format('yyyy.MM.DD')}</span>
             </S.WriterInfo>
           </div>
-          <S.ProfileButton onClick={() => alert('프로필 상세 페이지로 이동')}>프로필 상세</S.ProfileButton>
+          <S.ProfileButton onClick={() => router.push(`/mypage/${post.memberId}`)}>프로필 상세</S.ProfileButton>
         </S.Writer>
 
         <S.HealthInfoWrapper>
