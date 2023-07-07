@@ -31,6 +31,12 @@ export interface PostDetailType {
   startedAt: string;
   createdAt: string;
 }
+
+export interface ApplyStatusType {
+  isApply: boolean;
+  applicationId: number | null;
+}
+
 export interface TimeType {
   meridiem: '' | '오전' | '오후';
   time: '' | (typeof times)[number];
