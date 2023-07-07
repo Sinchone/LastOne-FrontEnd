@@ -31,6 +31,8 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
   const [isPartnerCancelRequested, setIsPartnerCancelRequested] = useState(false);
   const [isPartnerCancel, setIsPartnerCancel] = useState(false);
 
+  console.log(post);
+
   useEffect(() => {
     if (applyStatus) {
       setApplicationId(applyStatus.applicationId);
@@ -100,15 +102,15 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
         <S.HealthInfoWrapper>
           <div>
             <span>데드리프트</span>
-            <span>{post.sbd.deadLift ? `${post.sbd.deadLift} kg` : '-'}</span>
+            <span>{post.sbd?.deadLift ? `${post.sbd.deadLift} kg` : '-'}</span>
           </div>
           <div>
             <span>스쿼트</span>
-            <span>{post.sbd.squat ? `${post.sbd.squat} kg` : '-'}</span>
+            <span>{post.sbd?.squat ? `${post.sbd.squat} kg` : '-'}</span>
           </div>
           <div>
             <span>벤치</span>
-            <span>{post.sbd.benchPress ? `${post.sbd.benchPress} kg` : '-'}</span>
+            <span>{post.sbd?.benchPress ? `${post.sbd.benchPress} kg` : '-'}</span>
           </div>
           <div>
             <span>운동목표</span>
