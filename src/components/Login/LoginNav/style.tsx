@@ -24,6 +24,10 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+
+  button {
+    cursor: pointer;
+  }
 `;
 
 export const KakaoBtn = styled.button`
