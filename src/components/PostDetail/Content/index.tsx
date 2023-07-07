@@ -78,7 +78,9 @@ const Content = ({ isOther, post }: Props) => {
               {post.profileUrl ? (
                 <Image
                   src={createImageUrl(post.profileUrl as string)}
-                  fill
+                  priority
+                  width={80}
+                  height={80}
                   alt="profile"
                   style={{ objectFit: 'cover' }}
                 />
