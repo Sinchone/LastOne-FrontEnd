@@ -26,7 +26,7 @@ const Content = ({ other, user, sbd, gym }: Props) => {
   const fitnesPartner = (
     <S.FitnesPartner>
       <span className="title">운동 파트너 목록</span>
-      <span className="more">
+      <span className="more" onClick={() => router.push('/mypage/partners')}>
         전체보기 <ArrowIcon />
       </span>
     </S.FitnesPartner>
