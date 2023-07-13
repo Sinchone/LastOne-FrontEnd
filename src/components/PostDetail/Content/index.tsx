@@ -17,7 +17,7 @@ import { useRouter } from 'next/router';
 interface Props {
   isOther: boolean;
   post: PostDetailType;
-  applyStatus: ApplyStatusType | undefined;
+  applyStatus?: ApplyStatusType;
 }
 
 const Content = ({ isOther, post, applyStatus }: Props) => {
