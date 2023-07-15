@@ -4,6 +4,7 @@ export const queryKeys = {
   other: ['other'],
   postDetail: ['postDetail'],
   requestedApplications: ['requestedApplications'],
+  receivedApplications: ['receivedApplications'],
   partner: ['partner'],
   mainPost: ['mainPost'],
 } as const;

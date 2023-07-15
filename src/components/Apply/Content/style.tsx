@@ -13,7 +13,7 @@ export const Wrapper = styled.section`
 
 export const MenuTab = styled.ul`
   position: sticky;
-  top: 75px;
+  top: 60px;
 
   width: 100%;
   padding: 20px;
@@ -23,6 +23,10 @@ export const MenuTab = styled.ul`
   display: flex;
   align-items: center;
   gap: 15px;
+
+  ${theme.media.laptop} {
+    top: 75px;
+  }
 `;
 
 export const Tab = styled.li<{ isSelected: boolean }>`

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import moment from 'moment';
 
 import { PostDetailType } from '@typing/post';
-import { Application } from '@typing/application';
+import { RequestedApplication } from '@typing/application';
 
 import { Map, Modal } from '@components/Common';
 import ProfileIcon from '@assets/icon/profilelarge.svg';
@@ -33,7 +33,7 @@ const Content = ({ isOther, post }: Props) => {
     const recruitmentId = post.recruitmentId;
     const applications = requestedApplications?.data || [];
     const filteredApplication = applications.filter(
-      (application: Application) => application.recruitmentId === recruitmentId
+      (application: RequestedApplication) => application.recruitmentId === recruitmentId
     );
     const applicationId = filteredApplication.length ? filteredApplication[0].applicationId : null;
 
