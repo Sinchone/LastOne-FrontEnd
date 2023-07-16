@@ -4,8 +4,7 @@ import * as S from './style';
 import Image from 'next/image';
 import moment from 'moment';
 
-import { PostDetailType } from '@typing/post';
-import { RequestedApplication } from '@typing/application';
+import { ApplyStatusType, PostDetailType } from '@typing/post';
 
 import { Map, Modal } from '@components/Common';
 import ProfileIcon from '@assets/icon/profilelarge.svg';
@@ -13,44 +12,45 @@ import Marker from '@assets/icon/mapmarker.svg';
 
 import { createImageUrl } from '@utils/createImageUrl';
 import { createApplication, deleteApplication } from '@apis/application';
-import { useGetRequestedApplications } from '@hooks/application/queries';
+import { useRouter } from 'next/router';
 
 interface Props {
   isOther: boolean;
   post: PostDetailType;
+  applyStatus?: ApplyStatusType;
 }
 
-const Content = ({ isOther, post }: Props) => {
-  const { data: requestedApplications } = useGetRequestedApplications();
-  const [applicationId, setApplicationId] = useState();
+const Content = ({ isOther, post, applyStatus }: Props) => {
+  const router = useRouter();
+
+  const [applicationId, setApplicationId] = useState<number | null>();
   const [isPartner, setIsPartner] = useState<boolean>();
+  const [isRequestPossible] = useState(moment().isBefore(moment(post.startedAt, 'yyyy.MM.DD HH:mm')));
 
   const [isPartnerRequested, setIsPartnerRequested] = useState(false);
   const [isPartnerCancelRequested, setIsPartnerCancelRequested] = useState(false);
   const [isPartnerCancel, setIsPartnerCancel] = useState(false);
 
-  useEffect(() => {
-    const recruitmentId = post.recruitmentId;
-    const applications = requestedApplications?.data || [];
-    const filteredApplication = applications.filter(
-      (application: RequestedApplication) => application.recruitmentId === recruitmentId
-    );
-    const applicationId = filteredApplication.length ? filteredApplication[0].applicationId : null;
+  console.log(post);
 
-    setApplicationId(applicationId);
-    setIsPartner(applicationId ? true : false);
-  }, [post, requestedApplications]);
+  useEffect(() => {
+    if (applyStatus) {
+      setApplicationId(applyStatus.applicationId);
+      setIsPartner(applyStatus.isApply);
+    }
+  }, [applyStatus]);
 
   const handleCreateApplication = () => {
-    createApplication(post.recruitmentId)
-      .then((response) => {
-        console.log(response);
-        setIsPartnerRequested(true);
-        setIsPartner(true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    isRequestPossible &&
+      createApplication(post.recruitmentId)
+        .then((response) => {
+          console.log(response);
+          setIsPartnerRequested(true);
+          setIsPartner(true);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   };
 
   const handleCancelApplication = () => {
@@ -74,41 +74,44 @@ const Content = ({ isOther, post }: Props) => {
 
         <S.Writer>
           <div>
-            <S.ImageBox>
-              {post.profileUrl ? (
+            {post.profileUrl ? (
+              <S.ImageBox>
                 <Image
                   src={createImageUrl(post.profileUrl as string)}
-                  fill
+                  priority
+                  width={80}
+                  height={80}
                   alt="profile"
                   style={{ objectFit: 'cover' }}
                 />
-              ) : (
-                <ProfileIcon />
-              )}
-            </S.ImageBox>
+              </S.ImageBox>
+            ) : (
+              <ProfileIcon />
+            )}
+
             <S.WriterInfo>
               <div>
                 <span>{post.nickname}</span>
                 <S.Gender>{post.gender}</S.Gender>
               </div>
-              <span>{moment(post.createdAt.date).format('yyyy.MM.DD')}</span>
+              <span>{moment(post.createdAt, 'yyyy.MM.DD HH:mm').format('yyyy.MM.DD')}</span>
             </S.WriterInfo>
           </div>
-          <S.ProfileButton onClick={() => alert('프로필 상세 페이지로 이동')}>프로필 상세</S.ProfileButton>
+          <S.ProfileButton onClick={() => router.push(`/mypage/${post.memberId}`)}>프로필 상세</S.ProfileButton>
         </S.Writer>
 
         <S.HealthInfoWrapper>
           <div>
             <span>데드리프트</span>
-            <span>{post.sbd.deadLift ? `${post.sbd.deadLift} kg` : '-'}</span>
+            <span>{post.sbd?.deadLift ? `${post.sbd.deadLift} kg` : '-'}</span>
           </div>
           <div>
             <span>스쿼트</span>
-            <span>{post.sbd.squat ? `${post.sbd.squat} kg` : '-'}</span>
+            <span>{post.sbd?.squat ? `${post.sbd.squat} kg` : '-'}</span>
           </div>
           <div>
             <span>벤치</span>
-            <span>{post.sbd.benchPress ? `${post.sbd.benchPress} kg` : '-'}</span>
+            <span>{post.sbd?.benchPress ? `${post.sbd.benchPress} kg` : '-'}</span>
           </div>
           <div>
             <span>운동목표</span>
@@ -120,7 +123,7 @@ const Content = ({ isOther, post }: Props) => {
       <S.HealthCondition>
         <div>
           <span>운동날짜</span>
-          <span>{moment(post.startedAt.date).format('yyyy.MM.DD HH:mm')}</span>
+          <span>{moment(post.startedAt, 'yyyy.MM.DD HH:mm').format('yyyy.MM.DD HH:mm')}</span>
         </div>
         <div>
           <span>선호 성별</span>
@@ -144,7 +147,7 @@ const Content = ({ isOther, post }: Props) => {
           <S.ImageWrapper>
             {post.imgUrls.map((imgUrl) => (
               <div key={imgUrl}>
-                <Image src={imgUrl} fill alt="image" style={{ objectFit: 'cover' }} />
+                <Image src={createImageUrl(imgUrl as string)} fill alt="image" style={{ objectFit: 'cover' }} />
               </div>
             ))}
           </S.ImageWrapper>
@@ -168,7 +171,7 @@ const Content = ({ isOther, post }: Props) => {
               취소하기
             </S.CancelButton>
           ) : (
-            <S.PrimaryButton onClick={handleCreateApplication}>신청하기</S.PrimaryButton>
+            <S.PrimaryButton onClick={handleCreateApplication} isPossible={isRequestPossible}></S.PrimaryButton>
           )}
         </S.ButtonsWrapper>
       ) : (

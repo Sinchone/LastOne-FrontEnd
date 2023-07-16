@@ -9,15 +9,26 @@ export const Wrapper = styled.main`
 export const WriterWrapper = styled.div``;
 
 export const Writer = styled.div`
+  width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
   margin-top: 24px;
   margin-bottom: 32px;
 
-  > div {
+  & > div:first-of-type {
+    flex-grow: 1;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+  }
+
+  svg {
+    width: 80px;
+    height: 80px;
   }
 `;
 
@@ -27,51 +38,55 @@ export const ImageBox = styled.div`
   border-radius: 50%;
   position: relative;
   background-color: var(--color-secondary-main);
-  margin-right: 24px;
   overflow: hidden;
-
-  svg {
-    width: 80px;
-    height: 80px;
-  }
 `;
 
 export const WriterInfo = styled.div`
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 4px;
 
-  & div {
+  & > div {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 8px;
-  }
-  & :first-of-type span {
-    font-size: 18px;
-    font-weight: 700;
+
+    span {
+      flex-basis: auto;
+      display: block;
+      max-width: 16em;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      font-size: 18px;
+      font-weight: 700;
+    }
   }
 `;
 
 export const Gender = styled.div`
-  width: 41px;
-  height: 28px;
   border-radius: 4px;
   padding: 6px 8px 6px 8px;
   background-color: var(--color-primary-main);
   color: var(--color-white);
   font-size: 14px;
+  white-space: nowrap;
   display: flex;
   align-items: center;
 `;
 
 export const ProfileButton = styled.div`
-  width: 106px;
-  height: 48px;
+  width: fit-content;
   border-radius: 6px;
   padding: 12px 16px;
   background-color: var(--color-primary-main);
   color: var(--color-white);
   font-size: 16px;
+  white-space: nowrap;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -235,10 +250,21 @@ export const ChatButton = styled(Button)`
   color: var(--color-primary-main);
 `;
 
-export const PrimaryButton = styled(Button)`
+export const PrimaryButton = styled(Button)<{ isPossible: boolean }>`
   background-color: var(--color-primary-main);
   color: var(--color-white);
   border: none;
+
+  ${(props) =>
+    !props.isPossible &&
+    `
+    filter: grayscale(100%) contrast(50%) brightness(200%);
+    cursor: default;
+    `};
+
+  &::after {
+    content: ${(props) => (props.isPossible ? `'신청하기'` : `'신청마감'`)};
+  }
 `;
 
 export const CancelButton = styled(Button)`
