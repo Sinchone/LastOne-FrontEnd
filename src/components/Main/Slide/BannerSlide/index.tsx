@@ -1,7 +1,7 @@
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+import { Autoplay } from 'swiper';
 
 import * as S from './style';
 import SlideItem from '../SlideItem';
