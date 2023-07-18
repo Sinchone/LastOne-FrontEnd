@@ -48,7 +48,7 @@ const Content = ({ profile }: Props) => {
   const [gymName, setGymName] = useState(gymState.length !== 0 ? gymState[0].name : '');
 
   const [isNicknameChecked, setIsNicknameChecked] = useState(false);
-  const [isUsableNickname, setIsUsableNickname] = useState(false);
+  const [isUsableNickname, setIsUsableNickname] = useState(!!profileState.nickname);
   const [warningText, setWarningText] = useState('이미 사용중인 닉네임입니다.');
 
   const [isSubmitModal, setIsSubmitModal] = useState(false);
