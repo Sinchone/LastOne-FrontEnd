@@ -37,7 +37,7 @@ const Header = ({ nickname }: Props) => {
         {!nickname && (
           <>
             <S.LogoutButton onClick={() => setIsLogoutModal(true)}>로그아웃</S.LogoutButton>
-            <Link href={MY_PAGE_EDIT}>
+            <Link replace href={MY_PAGE_EDIT}>
               <PenCilIcon />
             </Link>
           </>
