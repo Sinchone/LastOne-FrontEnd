@@ -1,42 +1,36 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Card } from '@components/Common';
 import * as S from './style';
+import { useGetPostList } from '@hooks/matching/queries';
 
 const MatchingPosts = () => {
-  const dummy_data = [
-    {
-      gym: '판교 헬스장',
-      id: 30,
-      imgUrl: 'all-main.jpg',
-      startedAt: '2023.06.30 13:00',
-      title: '3대 250 이상 보조구해요!! ',
-      workoutPart: '전신',
-    },
-    {
-      gym: '판교 헬스장',
-      id: 30,
-      imgUrl: 'all-main.jpg',
-      startedAt: '2023.06.30 13:00',
-      title: '3대 250 이상 보조구해요!! ',
-      workoutPart: '전신',
-    },
-    {
-      gym: '판교 헬스장',
-      id: 30,
-      imgUrl: 'all-main.jpg',
-      startedAt: '2023.06.30 13:00',
-      title: '3대 250 이상 보조구해요!! ',
-      workoutPart: '전신',
-    },
-  ];
+  const { data, fetchNextPage } = useGetPostList({});
+  const bottom = useRef(null);
+
+  useEffect(() => {
+    let observer: IntersectionObserver;
+
+    if (bottom.current) {
+      observer = new IntersectionObserver(([entry]) => entry.isIntersecting && fetchNextPage());
+      observer.observe(bottom.current);
+    }
+
+    return () => observer && observer.disconnect();
+  }, [bottom, fetchNextPage]);
 
   return (
     <S.Wrapper>
       <S.CardList>
-        {dummy_data.map((el) => (
-          <Card key={el.id} size={'matching'} status={'모집중'} preferGender={'성별무관'} {...el} />
-        ))}
+        {data?.pages &&
+          data.pages.map((page: any, idx) => (
+            <div key={idx}>
+              {page.data.data.content.map((content: any) => (
+                <Card key={content.id} size={'matching'} status={'모집중'} preferGender={'성별무관'} {...content} />
+              ))}
+            </div>
+          ))}
       </S.CardList>
+      <div ref={bottom} />
     </S.Wrapper>
   );
 };
