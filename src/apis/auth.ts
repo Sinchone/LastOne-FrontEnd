@@ -37,6 +37,8 @@ const createAuthApi = () => {
               await axios(originalRequest);
             }
           }
+
+          return Promise.reject(error);
         }
       }
     }

@@ -25,6 +25,7 @@ export type AppPropsWithLayout = AppProps & {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const loginRequiredPages = ['/post/write', '/mypage', '/mypage/edit'];
+  const [isLoginModal, setIsLoginModal] = React.useState(false);
   const [queryClient] = React.useState(
     () =>
       new QueryClient({
@@ -37,20 +38,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
             onError: (err: unknown) => {
               if (err instanceof AxiosError && loginRequiredPages.includes(router.pathname)) {
-                return (
-                  <Modal
-                    hasArrow
-                    isOpen={true}
-                    handleClose={() => null}
-                    handleConfirm={() => router.push('/login')}
-                    handleCancel={() => router.push('/')}
-                    text={{
-                      label: '로그인 시간이 만료되었어요!\n해당 페이지는 로그인을 해야 이용이 가능해요',
-                      confirm: '로그인 하러가기',
-                      cancel: '홈으로 가기',
-                    }}
-                  />
-                );
+                setIsLoginModal(true);
               }
             },
           },
@@ -68,7 +56,24 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <GlobalStyle />
         <ThemeProvider theme={theme}>
           <RecoilRoot>
-            <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
+            <Layout>
+              {isLoginModal ? (
+                <Modal
+                  hasArrow
+                  isOpen={true}
+                  handleClose={() => null}
+                  handleConfirm={() => router.push('/login')}
+                  handleCancel={() => router.push('/')}
+                  text={{
+                    label: '로그인 시간이 만료되었어요!\n해당 페이지는 로그인을 해야 이용이 가능해요',
+                    confirm: '로그인 하러가기',
+                    cancel: '홈으로 가기',
+                  }}
+                />
+              ) : (
+                getLayout(<Component {...pageProps} />)
+              )}
+            </Layout>
           </RecoilRoot>
         </ThemeProvider>
         <ReactQueryDevtools initialIsOpen={false} />
