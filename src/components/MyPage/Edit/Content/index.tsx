@@ -159,7 +159,7 @@ const Content = ({ profile }: Props) => {
         })
         .then(() => {
           setTimeout(() => {
-            router.push('/mypage');
+            router.replace('/mypage');
           }, 2000);
         });
     } else {
