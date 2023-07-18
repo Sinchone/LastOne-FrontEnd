@@ -8,4 +8,5 @@ export const queryKeys = {
   receivedApplications: ['receivedApplications'],
   partner: ['partner'],
   mainPost: ['mainPost'],
+  postList: ['postList'],
 } as const;

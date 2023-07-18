@@ -1,6 +1,7 @@
 import api from '@apis/base';
 import { getAccessTokenFromCookie } from '@utils/token';
 import authApi from './auth';
+import { SearchParam } from '@typing/post';
 
 export const createPost = (formData: FormData) => {
   const accessToken = getAccessTokenFromCookie();
@@ -14,8 +15,10 @@ export const createPost = (formData: FormData) => {
   });
 };
 
-export const getAllPosts = () => {
-  return api.get({ url: 'api/recruitment' });
+export const getPostList = (pageParam: number, params: SearchParam) => {
+  if (pageParam) params.lastId = pageParam;
+
+  return api.get({ url: 'api/recruitment?', params });
 };
 
 export const getPostById = (id: number) => {
