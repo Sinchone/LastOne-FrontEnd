@@ -34,7 +34,8 @@ const createAuthApi = () => {
 
               originalRequest.headers.Authorization = `Bearer ${getAccessTokenFromCookie()}`;
 
-              await axios(originalRequest);
+              const originalResponse = await axios(originalRequest);
+              return originalResponse.data;
             }
           }
         }
