@@ -5,19 +5,19 @@ import BottomArrowWhiteIcon from '@assets/icon/bottom-arrow-white.svg';
 import { useRouter } from 'next/router';
 import { useBottomSheet } from '@hooks/common';
 
-const Gender = () => {
+const WorkoutPart = () => {
   const router = useRouter();
   const { showBottomSheet } = useBottomSheet();
-  const gender = router.query.gender as string | undefined;
+  const workoutPart = router.query.workoutPart as string | undefined;
 
   return (
-    <FilterContainer isSelected={gender !== undefined}>
-      <span onClick={() => showBottomSheet('Gender')}>
-        {gender ? gender : '성별'}
-        {gender ? <BottomArrowWhiteIcon /> : <BottomArrowIcon />}
+    <FilterContainer isSelected={workoutPart !== undefined}>
+      <span onClick={() => showBottomSheet('WorkoutPart')}>
+        {workoutPart ? workoutPart : '운동부위'}
+        {workoutPart ? <BottomArrowWhiteIcon /> : <BottomArrowIcon />}
       </span>
     </FilterContainer>
   );
 };
 
-export default Gender;
+export default WorkoutPart;

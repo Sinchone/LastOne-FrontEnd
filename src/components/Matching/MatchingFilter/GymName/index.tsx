@@ -4,17 +4,17 @@ import BottomArrowIcon from '@assets/icon/bottom-arrow.svg';
 import { useBottomSheet } from '@hooks/common';
 import { useRouter } from 'next/router';
 
-const FitnessClub = () => {
+const GymName = () => {
   const { showBottomSheet } = useBottomSheet();
   const router = useRouter();
-  const fitnessClub = router.query.fitnessclub as string | undefined;
+  const gymName = router.query.gymName as string | undefined;
 
   return (
-    <S.Wrapper onClick={() => showBottomSheet('FitnessClub')}>
-      <span className="location">{fitnessClub ? fitnessClub : '전체'}</span>
+    <S.Wrapper onClick={() => showBottomSheet('GymName')}>
+      <span className="location">{gymName ? gymName : '전체'}</span>
       <BottomArrowIcon className="arrow_icon" />
     </S.Wrapper>
   );
 };
 
-export default FitnessClub;
+export default GymName;

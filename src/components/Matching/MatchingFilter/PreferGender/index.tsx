@@ -5,19 +5,19 @@ import BottomArrowWhiteIcon from '@assets/icon/bottom-arrow-white.svg';
 import { useRouter } from 'next/router';
 import { useBottomSheet } from '@hooks/common';
 
-const ExerciseArea = () => {
+const PreferGender = () => {
   const router = useRouter();
   const { showBottomSheet } = useBottomSheet();
-  const exerciseArea = router.query.exercisearea as string | undefined;
+  const preferGender = router.query.preferGender as string | undefined;
 
   return (
-    <FilterContainer isSelected={exerciseArea !== undefined}>
-      <span onClick={() => showBottomSheet('ExerciseArea')}>
-        {exerciseArea ? exerciseArea : '운동부위'}
-        {exerciseArea ? <BottomArrowWhiteIcon /> : <BottomArrowIcon />}
+    <FilterContainer isSelected={preferGender !== undefined}>
+      <span onClick={() => showBottomSheet('PreferGender')}>
+        {preferGender ? preferGender : '성별'}
+        {preferGender ? <BottomArrowWhiteIcon /> : <BottomArrowIcon />}
       </span>
     </FilterContainer>
   );
 };
 
-export default ExerciseArea;
+export default PreferGender;
