@@ -1,5 +1,5 @@
 import React from 'react';
-import FilterContainer from '@components/Matching/MatchingFilter/FiterContainer';
+import FilterContainer from '@components/Matching/MatchingFilter/FilterContainer';
 import BottomArrowIcon from '@assets/icon/bottom-arrow-small.svg';
 import BottomArrowWhiteIcon from '@assets/icon/bottom-arrow-white.svg';
 import { useRouter } from 'next/router';
