@@ -6,7 +6,7 @@ import { MATCHING_PAGE } from '@constants/route';
 
 const dummy = ['무관', '남성', '여성'];
 
-const Gender = () => {
+const PreferGender = () => {
   const { closeBottomSheet } = useBottomSheet();
   const [select, setSelect] = useState('');
   const router = useRouter();
@@ -18,7 +18,7 @@ const Gender = () => {
   const handleClickApply = () => {
     router.push({
       pathname: MATCHING_PAGE,
-      query: { ...router.query, gender: select },
+      query: { ...router.query, preferGender: select },
     });
     closeBottomSheet();
   };
@@ -43,4 +43,4 @@ const Gender = () => {
   );
 };
 
-export default Gender;
+export default PreferGender;

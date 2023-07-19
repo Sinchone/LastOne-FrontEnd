@@ -8,9 +8,9 @@ import { useBottomSheet } from '@hooks/common';
 const BottomSheetContainer = () => {
   const { bottomsheet, closeBottomSheet } = useBottomSheet();
   const bottomSheetComp = {
-    FitnessClub: BottomSheet['FitnessClub'],
-    ExerciseArea: BottomSheet['ExerciseArea'],
-    Gender: BottomSheet['Gender'],
+    GymName: BottomSheet['GymName'],
+    WorkoutPart: BottomSheet['WorkoutPart'],
+    PreferGender: BottomSheet['PreferGender'],
     Calendar: BottomSheet['Calendar'],
     CalendarTime: BottomSheet['CalendarTime'],
     '': <></>,

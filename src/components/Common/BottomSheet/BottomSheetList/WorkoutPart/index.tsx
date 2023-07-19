@@ -6,7 +6,7 @@ import { MATCHING_PAGE } from '@constants/route';
 
 const dummy = ['전신', '가슴', '등', '어깨', '하체', '코어'];
 
-const ExerciseArea = () => {
+const WorkoutPart = () => {
   const { closeBottomSheet } = useBottomSheet();
   const [select, setSelect] = useState('');
   const router = useRouter();
@@ -18,7 +18,7 @@ const ExerciseArea = () => {
   const handleClickApply = () => {
     router.push({
       pathname: MATCHING_PAGE,
-      query: { ...router.query, exercisearea: select },
+      query: { ...router.query, workoutPart: select },
     });
     closeBottomSheet();
   };
@@ -43,4 +43,4 @@ const ExerciseArea = () => {
   );
 };
 
-export default ExerciseArea;
+export default WorkoutPart;

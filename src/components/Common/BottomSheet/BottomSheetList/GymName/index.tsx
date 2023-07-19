@@ -7,7 +7,7 @@ import { MATCHING_PAGE } from '@constants/route';
 
 const dummy = ['전체', '스포애니 성산점', '수원 바디파트'];
 
-const FitnessClub = () => {
+const GymName = () => {
   const [select, setSelect] = useState('');
   const { closeBottomSheet } = useBottomSheet();
   const router = useRouter();
@@ -17,11 +17,11 @@ const FitnessClub = () => {
   };
 
   const handleClickApply = () => {
-    if (select === '전체') router.push({ pathname: MATCHING_PAGE, query: { ...router.query, fitnessclub: undefined } });
+    if (select === '전체') router.push({ pathname: MATCHING_PAGE, query: { ...router.query, gymName: undefined } });
     else
       router.push({
         pathname: MATCHING_PAGE,
-        query: { ...router.query, fitnessclub: select },
+        query: { ...router.query, gymName: select },
       });
     closeBottomSheet();
   };
@@ -50,4 +50,4 @@ const FitnessClub = () => {
   );
 };
 
-export default FitnessClub;
+export default GymName;
