@@ -1,1 +1,1 @@
-export { default as SlideItemList } from './SlideItemList';
+export { default as BannerSlide } from './BannerSlide';

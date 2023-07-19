@@ -14,7 +14,7 @@ const SlideItem = ({ order, label, destination }: Props) => {
   const router = useRouter();
 
   return (
-    <S.Wrapper imgUrl={`images/banner-${order}.png`}>
+    <S.Wrapper imgUrl={`/images/banner-${order}.png`}>
       <S.Label>{label}</S.Label>
       <S.Button onClick={() => router.push(destination)}>
         {order === 1 ? '헬스장 등록' : '파트너 찾기'}
