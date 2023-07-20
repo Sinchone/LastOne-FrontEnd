@@ -12,7 +12,17 @@ const Kakao = () => {
     onSuccess: (response) => {
       setAccessTokenToCookie(response.data.data.accessToken);
       setRefreshTokenToCookie(response.data.data.refreshToken);
-      router.replace(MAIN_PAGE);
+
+      router.replace(
+        {
+          pathname: MAIN_PAGE,
+          query: {
+            isFirstSignUp: response.data.data.isFirstSignUp,
+          },
+        },
+        MAIN_PAGE,
+        { shallow: true }
+      );
     },
     onError: (response) => {
       console.log(response);

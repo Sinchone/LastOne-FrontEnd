@@ -3,6 +3,7 @@ export const queryKeys = {
   me: ['me'],
   other: ['other'],
   postDetail: ['postDetail'],
+  applyStatus: ['applyStatus'],
   requestedApplications: ['requestedApplications'],
   receivedApplications: ['receivedApplications'],
   partner: ['partner'],

@@ -28,9 +28,15 @@ export interface PostDetailType {
   description: string;
   preferGender: string;
   imgUrls: string[];
-  startedAt: StartedAtDate;
-  createdAt: CreatedAtDate;
+  startedAt: string;
+  createdAt: string;
 }
+
+export interface ApplyStatusType {
+  isApply: boolean;
+  applicationId: number | null;
+}
+
 export interface TimeType {
   meridiem: '' | '오전' | '오후';
   time: '' | (typeof times)[number];
@@ -39,7 +45,6 @@ export interface TimeType {
 export interface StartedAtDate extends TimeType {
   date: string;
 }
-
 
 export interface CreatedAtDate extends TimeType {
   date: string;
