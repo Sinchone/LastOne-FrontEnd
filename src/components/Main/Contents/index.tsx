@@ -56,7 +56,9 @@ const Contents = () => {
         </S.Title>
         <S.CardList>
           {mainPostArray && mainPostArray.length > 0
-            ? mainPostArray.map((post: MainPost) => <Card key={post.id} size={'main'} {...post} />)
+            ? mainPostArray.map((post: MainPost) =>
+                post.id ? <Card key={post.id} size={'main'} id={post.id} {...post} /> : null
+              )
             : '모집중인 파트너가 없습니다.'}
         </S.CardList>
       </S.Content>
