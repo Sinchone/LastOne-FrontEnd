@@ -4,7 +4,6 @@ import CalendarIcon from '@assets/icon/calendar.svg';
 import ClockIcon from '@assets/icon/clock.svg';
 import BottomArrowIcon from '@assets/icon/bottom-arrow.svg';
 import SearchIcon from '@assets/icon/search.svg';
-import AddImgIcon from '@assets/icon/addImg.svg';
 import SearchGym from '../SearchGym';
 import { useBottomSheet } from '@hooks/common';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -12,11 +11,12 @@ import { isMapShowState } from '@recoil/postWrite';
 import { selectedDateState, selectedTimeState } from '@recoil/bottomsheet/calendarTime';
 import moment from 'moment';
 import { Post } from '@typing/post';
-import { exercisePartArray } from '@constants/post';
+import { exercisePartArray, genderArray } from '@constants/post';
 import { createPost } from '@apis/post';
-import { createImageUrl } from '@utils/createImageUrl';
 import { checkAllKeysHaveValues } from '@utils/checkAllKeysHaveValues';
 import { Map } from '@components/Common';
+import Images from '../Image';
+import { useRouter } from 'next/router';
 
 const Content = () => {
   const initialData: Post = {
@@ -40,11 +40,12 @@ const Content = () => {
   const selectedDate = useRecoilValue(selectedDateState);
   const selectedTime = useRecoilValue(selectedTimeState);
   const [isMapShow, setIsMapShow] = useRecoilState(isMapShowState);
-  const [image, setImage] = useState<any>('');
+  const [showImages, setShowImages] = useState<any>('');
+  const [imgFiles, setImgFiles] = useState<any>('');
   const inputRef = useRef<HTMLInputElement>(null);
-
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { showBottomSheet } = useBottomSheet();
+  const router = useRouter();
 
   useEffect(() => {
     if (inputRef.current) {
@@ -94,7 +95,7 @@ const Content = () => {
       title: data.title,
       description: data.description,
       workoutPart: data.workoutPart,
-      preferGender: '무관',
+      preferGender: data.preferGender,
       gym: data.gym,
       startedAt: {
         date: moment(selectedDate).format('yyyy.MM.DD'),
@@ -116,13 +117,25 @@ const Content = () => {
         type: 'application/json',
       })
     );
-    if (image) {
-      formData.append('profileImg', image);
+
+    if (imgFiles) {
+      console.log('imgFiles', imgFiles);
+      for (let i = 0; i < imgFiles.length; i++) {
+        if (imgFiles[i]) {
+          formData.append('imgFiles', imgFiles[i]);
+        }
+      }
     }
 
+    for (const pair of formData.entries()) {
+      console.log('test', pair[0] + ', ' + pair[1]);
+    }
     createPost(formData).then((res) => {
       console.log(res);
     });
+
+    await router.push('/');
+    router.reload();
   };
 
   return (
@@ -163,6 +176,23 @@ const Content = () => {
             </S.SelectArea>
           </S.SelectWrapper>
 
+          {/* 선호 성별 선택 버튼 */}
+          <S.GenderArea>
+            <S.Subject>성별</S.Subject>
+            <S.GenderWrapper>
+              {genderArray.map((gender, idx) => (
+                <S.Gender
+                  key={idx}
+                  onClick={() => setData({ ...data, preferGender: gender })}
+                  selected={data.preferGender}
+                  gender={gender}
+                >
+                  {gender}
+                </S.Gender>
+              ))}
+            </S.GenderWrapper>
+          </S.GenderArea>
+
           {/* 운동 부위 선택 버튼*/}
           <S.ExercisePartArea>
             <S.Subject>운동 부위</S.Subject>
@@ -194,17 +224,7 @@ const Content = () => {
           {/* 상세설명 */}
           <S.DescriptionArea>
             <S.Subject>상세설명</S.Subject>
-            <S.DescriptionImageWrapper>
-              <AddImgIcon />
-              {/* 사진 없으면 아이콘 + 사진추가 버튼? */}
-              {/* 사진 있으면 사진 3장까지? */}
-              <div></div>
-              <div>
-                <S.DescriptionImage></S.DescriptionImage>
-                <S.DescriptionImage></S.DescriptionImage>
-                <S.DescriptionImage></S.DescriptionImage>
-              </div>
-            </S.DescriptionImageWrapper>
+            <Images setImgFiles={setImgFiles} />
             <S.DescriptionTextAreaWrapper>
               <span>{data.description.length}/100</span>
               <textarea

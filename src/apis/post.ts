@@ -10,6 +10,7 @@ export const createPost = (formData: FormData) => {
     data: formData,
     headers: {
       Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'multipart/form-data',
     },
   });
 };
