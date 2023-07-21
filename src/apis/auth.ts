@@ -38,6 +38,8 @@ const createAuthApi = () => {
               return originalResponse.data;
             }
           }
+
+          return Promise.reject(error);
         }
       }
     }
