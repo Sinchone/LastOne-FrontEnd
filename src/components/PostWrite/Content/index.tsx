@@ -13,10 +13,10 @@ import moment from 'moment';
 import { Post } from '@typing/post';
 import { exercisePartArray, genderArray } from '@constants/post';
 import { createPost } from '@apis/post';
-import { createImageUrl } from '@utils/createImageUrl';
 import { checkAllKeysHaveValues } from '@utils/checkAllKeysHaveValues';
 import { Map } from '@components/Common';
 import Images from '../Image';
+import { useRouter } from 'next/router';
 
 const Content = () => {
   const initialData: Post = {
@@ -40,11 +40,12 @@ const Content = () => {
   const selectedDate = useRecoilValue(selectedDateState);
   const selectedTime = useRecoilValue(selectedTimeState);
   const [isMapShow, setIsMapShow] = useRecoilState(isMapShowState);
-  const [image, setImage] = useState<any>([]);
+  const [showImages, setShowImages] = useState<any>('');
+  const [imgFiles, setImgFiles] = useState<any>('');
   const inputRef = useRef<HTMLInputElement>(null);
-
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { showBottomSheet } = useBottomSheet();
+  const router = useRouter();
 
   useEffect(() => {
     if (inputRef.current) {
@@ -53,10 +54,6 @@ const Content = () => {
       }
     }
   }, [isMapShow, inputRef]);
-
-  useEffect(() => {
-    console.log('image', image);
-  }, [image]);
 
   const titleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, title: e.target.value });
@@ -92,16 +89,6 @@ const Content = () => {
     textareaResizeHandler();
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files as any;
-    const images = [];
-    for (const img of files) {
-      images.push(URL.createObjectURL(img));
-    }
-
-    setImage(images);
-  };
-
   const handleSubmitForm = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const postData = {
@@ -117,8 +104,6 @@ const Content = () => {
       },
     };
 
-    console.log(postData);
-
     if (!checkAllKeysHaveValues(postData)) {
       alert('항목을 모두 작성해주세요.');
       return;
@@ -132,10 +117,13 @@ const Content = () => {
         type: 'application/json',
       })
     );
-    if (image) {
-      console.log('imgFiles', image);
-      for (let i = 0; i < image.length; i++) {
-        formData.append('imgFiles', image[i]);
+
+    if (imgFiles) {
+      console.log('imgFiles', imgFiles);
+      for (let i = 0; i < imgFiles.length; i++) {
+        if (imgFiles[i]) {
+          formData.append('imgFiles', imgFiles[i]);
+        }
       }
     }
 
@@ -145,6 +133,9 @@ const Content = () => {
     createPost(formData).then((res) => {
       console.log(res);
     });
+
+    await router.push('/');
+    router.reload();
   };
 
   return (
@@ -233,21 +224,7 @@ const Content = () => {
           {/* 상세설명 */}
           <S.DescriptionArea>
             <S.Subject>상세설명</S.Subject>
-
-            <S.ImageAreaWrapper>
-              <label htmlFor="image-input">
-                {image.length > 0 ? image.length : <Images />}
-                {/* <span>사진 추가</span> */}
-                <input
-                  type="file"
-                  id="image-input"
-                  name="image"
-                  multiple
-                  accept=".gif, .jpg, .png, .jpeg"
-                  onChange={handleImageChange}
-                />
-              </label>
-            </S.ImageAreaWrapper>
+            <Images setImgFiles={setImgFiles} />
             <S.DescriptionTextAreaWrapper>
               <span>{data.description.length}/100</span>
               <textarea
