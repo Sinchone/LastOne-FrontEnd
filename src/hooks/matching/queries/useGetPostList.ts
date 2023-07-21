@@ -10,9 +10,7 @@ const useGetPostList = (params: SearchParam) => {
       const last = response.last;
       const lastId = response.content.at(-1).id;
 
-      if (last) return false;
-
-      return lastId;
+      return !last && lastId;
     },
   });
 };
