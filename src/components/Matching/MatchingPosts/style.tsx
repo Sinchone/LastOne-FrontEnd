@@ -9,11 +9,8 @@ export const Wrapper = styled.section`
 
 export const CardList = styled.div`
   width: 100%;
-
-  > div {
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 25px;
-    gap: 20px;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 25px;
+  gap: 20px;
 `;
