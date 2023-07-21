@@ -1,40 +1,38 @@
 import styled from 'styled-components';
-export const Wrapper = styled.div``;
+import Close from '@assets/icon/close.svg';
 
-export const DescriptionImageWrapper = styled.div`
+export const Wrapper = styled.div`
   width: 100%;
-  border-radius: 8px;
-  margin-top: 10px;
-  margin-bottom: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-
-  & svg {
-    z-index: 2;
-    position: absolute;
-  }
-
-  > div:first-of-type {
-    width: 100%;
-    height: 180px;
-    background-color: rgba(0, 0, 0, 0.2);
-    position: absolute;
-  }
-  > div:nth-of-type(2) {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    gap: 16px;
-  }
 `;
 
-export const DescriptionImage = styled.div`
-  width: 230px;
+export const ImagesArea = styled.div`
+  margin-top: 10px;
+  width: 100%;
   height: 180px;
-  background-color: var(--color-gray2);
+  display: flex;
+  gap: 16px;
+`;
+
+export const CardWrapper = styled.div`
+  width: 100%;
+  height: 100%;
   border-radius: 8px;
+  overflow: hidden;
+  background-color: green;
+  position: relative;
+`;
+
+export const CloseIcon = styled(Close)`
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+`;
+
+export const TestWrapper = styled.div`
+  margin-top: 10px;
+  width: 100%;
+  height: 180px;
+  display: flex;
+  gap: 16px;
 `;

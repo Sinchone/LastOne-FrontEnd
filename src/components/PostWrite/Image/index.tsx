@@ -1,19 +1,46 @@
 import * as S from './style';
-import AddImgIcon from '@assets/icon/addImg.svg';
+import SelectImage from './Select';
+import { useEffect, useState } from 'react';
 
-const Image = () => {
+interface Props {
+  setImgFiles: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+const Image = ({ setImgFiles }: Props) => {
+  const [images, setImages] = useState(['', '', '']);
+
+  const handleChange = (index: number, image: string) => {
+    const newImages = [...images];
+    newImages[index] = image;
+    setImages(newImages);
+    setImgFiles(newImages);
+  };
+
+  const handleDeleteImage = (index: number) => {
+    const newImages = [...images];
+    newImages[index] = '';
+    setImages(newImages);
+    setImgFiles(newImages);
+  };
+
+  useEffect(() => {
+    console.log('images', images);
+  }, [images]);
+
   return (
-    <S.Wrapper>
-      <S.DescriptionImageWrapper>
-        <AddImgIcon />
-        <div></div>
-        <div>
-          <S.DescriptionImage></S.DescriptionImage>
-          <S.DescriptionImage></S.DescriptionImage>
-          <S.DescriptionImage></S.DescriptionImage>
-        </div>
-      </S.DescriptionImageWrapper>
-    </S.Wrapper>
+    <S.TestWrapper>
+      {Array.from({ length: 3 }).map((_, index) => {
+        return (
+          <SelectImage
+            key={index}
+            onChange={(image) => handleChange(index, image)}
+            onDelete={() => handleDeleteImage(index)}
+            image={images[index]}
+            index={index}
+          />
+        );
+      })}
+    </S.TestWrapper>
   );
 };
 
