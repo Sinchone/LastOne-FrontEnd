@@ -13,6 +13,10 @@ const Content = ({partnerList}) => {
   };
 
   const executeSearch = () => {
+    if (searchPartner.trim() === '') {
+      setFilteredPartnerList(partnerList); // 검색어가 없는 경우, 전체 파트너 목록을 보여줍니다.
+      return;
+    }
     const filteredList = partnerList.filter((partner) => {
       return partner.nickname.toLowerCase().includes(searchPartner.toLowerCase());
     });
@@ -22,6 +26,10 @@ const Content = ({partnerList}) => {
   useEffect(() => {
     executeSearch();
   }, [searchPartner]);
+
+  useEffect(() => {
+    setFilteredPartnerList(partnerList);
+  }, [partnerList]);
 
   return (
     <S.Wrapper>
