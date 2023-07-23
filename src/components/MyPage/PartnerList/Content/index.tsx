@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as S from './style';
 import SearchIcon from '@assets/icon/search.svg';
 import ProfileIcon from '@assets/icon/profilelarge.svg';
@@ -6,10 +6,22 @@ import ProfileIcon from '@assets/icon/profilelarge.svg';
 
 const Content = ({partnerList}) => {
   const [searchPartner, setSearchPartner] = useState('');
+  const [filteredPartnerList, setFilteredPartnerList] = useState<PartnerListType[]>(partnerList);
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchPartner(e.target.value);
   };
+
+  const executeSearch = () => {
+    const filteredList = partnerList.filter((partner) => {
+      return partner.nickname.toLowerCase().includes(searchPartner.toLowerCase());
+    });
+    setFilteredPartnerList(filteredList);
+  }
+
+  useEffect(() => {
+    executeSearch();
+  }, [searchPartner]);
 
   return (
     <S.Wrapper>
@@ -19,7 +31,7 @@ const Content = ({partnerList}) => {
       </S.Input>
 
       <S.PartnerList>
-        {partnerList.map((p) => (
+        {filteredPartnerList.map((p) => (
           <S.Partner key={p.id}>
             <ProfileIcon />
 
