@@ -1,20 +1,30 @@
 import { Content, Header } from '@components/MyPage/PartnerList';
-import { NextPageWithLayout } from '@pages/_app';
-import React, { ReactElement } from 'react';
+import { useEffect, useState } from 'react';
+import { getPartnerList } from '@apis/partner';
 
-const PartnerList: NextPageWithLayout = () => {
-  return (
-    <>
-      <Content />
-    </>
-  );
-};
 
-PartnerList.getLayout = function getLayout(page: ReactElement) {
+
+const PartnerList = () => {
+  const [partnerList, setPartnerList] = useState([]);
+
+  useEffect(() => {
+    getPartnerList()
+      .then((res) => {
+        console.log(res.data);
+        setPartnerList(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+
+
+
   return (
     <>
       <Header />
-      {page}
+      <Content partnerList={partnerList} />
     </>
   );
 };
