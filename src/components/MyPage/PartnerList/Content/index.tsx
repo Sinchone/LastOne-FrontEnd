@@ -3,7 +3,8 @@ import * as S from './style';
 import SearchIcon from '@assets/icon/search.svg';
 import ProfileIcon from '@assets/icon/profilelarge.svg';
 
-const Content = () => {
+
+const Content = ({partnerList}) => {
   const [searchPartner, setSearchPartner] = useState('');
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,21 +19,20 @@ const Content = () => {
       </S.Input>
 
       <S.PartnerList>
-        {Array.from({ length: 10 }, (v, i) => i).map((i) => (
-          <S.Partner key={i}>
+        {partnerList.map((p) => (
+          <S.Partner key={p.id}>
             <ProfileIcon />
 
             <S.PartnerInfo>
               <div>
-                <span>운동광</span>
-                <S.Gender>남성</S.Gender>
+                <span>{p.nickname}</span>
+                <S.Gender>{p.gender}</S.Gender>
               </div>
-              <span>2023.04.12</span>
+              <span>{p.workoutDate}</span>
             </S.PartnerInfo>
 
             <S.ButtonContainer>
               <S.ProfileButton onClick={() => alert('프로필 상세 페이지로 이동')}>프로필 상세</S.ProfileButton>
-              <S.ChattingButton onClick={() => alert('채팅 페이지로 이동')}>채팅하기</S.ChattingButton>
             </S.ButtonContainer>
           </S.Partner>
         ))}
