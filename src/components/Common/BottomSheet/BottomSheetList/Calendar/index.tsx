@@ -8,21 +8,47 @@ import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import { MATCHING_PAGE } from '@constants/route';
+import { useRecoilState } from 'recoil';
+import { selectedDateState } from '@recoil/bottomsheet/calendarTime';
 
 const Calendar = () => {
   const { closeBottomSheet } = useBottomSheet();
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
+  const [currentDate, setCurrentDate] = useState<Date | null>(null);
+  const [changeState, setChangeState] = useState(false);
   const router = useRouter();
 
   const handleDateChange = (date: Date) => {
+    const formattedSelectedDate = moment(selectedDate).format('YYYY.MM.DD');
+    const formattedDate = moment(date).format('YYYY.MM.DD');
+    setChangeState(true);
+    setCurrentDate(date);
     setSelectedDate(date);
+    if (formattedSelectedDate === formattedDate) {
+      setSelectedDate(null);
+    }
   };
 
   const handleApply = () => {
-    router.push({
-      pathname: MATCHING_PAGE,
-      query: { ...router.query, date: moment(selectedDate).format('YYYY.MM.DD') },
-    });
+    const { date, ...data } = router.query;
+    const formattedCurrentDate = moment(currentDate).format('YYYY.MM.DD');
+
+    if (currentDate === null || formattedCurrentDate === date) {
+      if (changeState) {
+        setSelectedDate(null);
+        router.push({
+          pathname: MATCHING_PAGE,
+          query: { ...data },
+        });
+      }
+    } else {
+      const newDate = formattedCurrentDate;
+      router.push({
+        pathname: MATCHING_PAGE,
+        query: { ...data, date: newDate },
+      });
+      setSelectedDate(currentDate);
+    }
     closeBottomSheet();
   };
 
@@ -39,8 +65,8 @@ const Calendar = () => {
         <S.CalendarWrapper>
           <ReactCalendar
             onChange={handleDateChange as any}
-            value={selectedDate ? selectedDate : new Date()}
-            calendarType={'US'}
+            value={selectedDate}
+            calendarType={'gregory'}
             formatMonthYear={(locale, date) => moment(date).format('YYYY.MM')}
             formatDay={(locale, date) => moment(date).format('D')}
           />
