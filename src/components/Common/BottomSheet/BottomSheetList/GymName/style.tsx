@@ -30,12 +30,12 @@ export const BottomSheetHeader = styled.div`
     font-size: 16px;
     line-height: 30px;
     letter-spacing: -2%;
+    cursor: pointer;
   }
 `;
 
 export const Content = styled.div`
   display: flex;
-  flex-wrap: wrap;
   padding: 35px 0px;
   width: 100%;
   gap: 13px;
@@ -43,7 +43,7 @@ export const Content = styled.div`
 `;
 
 export const ContentBox = styled.div<{ isSelected: boolean }>`
-  width: 180px;
+  flex: 1 0 calc(100% / 3 - 26px);
   height: 110px;
   border-radius: 8px;
   padding: 8px;
@@ -60,6 +60,7 @@ export const ContentBox = styled.div<{ isSelected: boolean }>`
     font-size: 16px;
     line-height: 30px;
     letter-spacing: -2%;
+    text-align: center;
   }
 `;
 
@@ -68,11 +69,14 @@ export const ButtonGroup = styled.div`
   align-items: center;
   width: 100%;
   gap: 25px;
+
+  button {
+    flex-grow: 1;
+  }
 `;
 
 export const CancelButton = styled.button`
   color: #001b36;
-  width: 252px;
   height: 46px;
   padding: 8px;
   border-radius: 6px;
@@ -86,7 +90,6 @@ export const CancelButton = styled.button`
 export const Button = styled.button`
   color: var(--color-white);
   border-radius: 6px;
-  width: 252px;
   height: 46px;
   padding: 8px;
   background-color: var(--color-primary-main);
