@@ -3,8 +3,7 @@ import * as S from './style';
 import { useBottomSheet } from '@hooks/common';
 import { useRouter } from 'next/router';
 import { MATCHING_PAGE } from '@constants/route';
-
-const dummy = ['전신', '가슴', '등', '어깨', '하체', '코어'];
+import { exercisePartArray } from '@constants/post';
 
 const WorkoutPart = () => {
   const router = useRouter();
@@ -32,7 +31,7 @@ const WorkoutPart = () => {
         <span className="select_fitness">운동부위</span>
       </S.BottomSheetHeader>
       <S.Content>
-        {dummy.map((el) => (
+        {exercisePartArray.map((el) => (
           <S.ContentBox key={el} onClick={handleSelectItem(el)} isSelected={el === select}>
             <span>{el}</span>
           </S.ContentBox>

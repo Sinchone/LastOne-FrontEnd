@@ -14,3 +14,4 @@ export const times = [
 ];
 
 export const exercisePartArray = ['전신', '가슴', '등', '어깨', '하체', '코어'];
+export const genderArray = ['성별무관', '남성만', '여성만'];
