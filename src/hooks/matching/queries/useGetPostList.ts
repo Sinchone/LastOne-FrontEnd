@@ -4,11 +4,13 @@ import { getPostList } from '@apis/post';
 import { SearchParam } from '@typing/post';
 
 const useGetPostList = (params: SearchParam) => {
-  return useInfiniteQuery(queryKeys.postList, ({ pageParam }) => getPostList(pageParam, params), {
+  const { lastId, ...filter } = params;
+
+  return useInfiniteQuery([...queryKeys.postList, { filter }], ({ pageParam }) => getPostList(filter, pageParam), {
     getNextPageParam: (lastPage) => {
       const response = lastPage.data.data;
       const last = response.last;
-      const lastId = response.content.at(-1).id;
+      const lastId = response.content.at(-1)?.id;
 
       return !last && lastId;
     },

@@ -15,10 +15,10 @@ export const createPost = (formData: FormData) => {
   });
 };
 
-export const getPostList = (pageParam: number, params: SearchParam) => {
+export const getPostList = (params: SearchParam, pageParam?: number) => {
   if (pageParam) params.lastId = pageParam;
 
-  return api.get({ url: 'api/recruitment?', params });
+  return api.get({ url: 'api/recruitment', params });
 };
 
 export const getPostById = (id: number) => {
