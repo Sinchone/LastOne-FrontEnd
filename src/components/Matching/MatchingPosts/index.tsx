@@ -1,11 +1,27 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Card } from '@components/Common';
 import * as S from './style';
 import { useGetPostList } from '@hooks/matching/queries';
+import { useRouter } from 'next/router';
 
 const MatchingPosts = () => {
-  const { data, fetchNextPage, hasNextPage } = useGetPostList({});
+  const router = useRouter();
+  const [params, setParams] = useState({});
+  const { data, fetchNextPage, hasNextPage } = useGetPostList(params);
   const bottom = useRef(null);
+
+  useEffect(() => {
+    const searchParams = {
+      title: router.query.title,
+      workoutPart: router.query.workoutPart,
+      preferGender: router.query.preferGender,
+      date: router.query.date,
+      gymName: router.query.gymName,
+      isRecruiting: router.query.isRecruiting,
+    };
+
+    setParams(searchParams);
+  }, [router.query]);
 
   useEffect(() => {
     let observer: IntersectionObserver;
