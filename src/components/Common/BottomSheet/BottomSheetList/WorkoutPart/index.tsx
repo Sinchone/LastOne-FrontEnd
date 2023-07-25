@@ -7,18 +7,21 @@ import { MATCHING_PAGE } from '@constants/route';
 const dummy = ['전신', '가슴', '등', '어깨', '하체', '코어'];
 
 const WorkoutPart = () => {
-  const { closeBottomSheet } = useBottomSheet();
-  const [select, setSelect] = useState('');
   const router = useRouter();
+  const { closeBottomSheet } = useBottomSheet();
+  const [select, setSelect] = useState(router.query.workoutPart || '');
 
   const handleSelectItem = (el: string) => () => {
-    setSelect(el);
+    setSelect(el === select ? '' : el);
   };
 
   const handleClickApply = () => {
+    const { workoutPart, ...prevQuery } = router.query;
+    const query = select ? { ...router.query, workoutPart: select } : prevQuery;
+
     router.push({
       pathname: MATCHING_PAGE,
-      query: { ...router.query, workoutPart: select },
+      query,
     });
     closeBottomSheet();
   };

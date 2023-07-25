@@ -4,21 +4,24 @@ import { useBottomSheet } from '@hooks/common';
 import { useRouter } from 'next/router';
 import { MATCHING_PAGE } from '@constants/route';
 
-const dummy = ['무관', '남성', '여성'];
+const dummy = ['성별무관', '남성만', '여성만'];
 
 const PreferGender = () => {
-  const { closeBottomSheet } = useBottomSheet();
-  const [select, setSelect] = useState('');
   const router = useRouter();
+  const { closeBottomSheet } = useBottomSheet();
+  const [select, setSelect] = useState(router.query.preferGender || '');
 
   const handleSelectItem = (el: string) => () => {
-    setSelect(el);
+    setSelect(el === select ? '' : el);
   };
 
   const handleClickApply = () => {
+    const { preferGender, ...prevQuery } = router.query;
+    const query = select ? { ...router.query, preferGender: select } : prevQuery;
+
     router.push({
       pathname: MATCHING_PAGE,
-      query: { ...router.query, preferGender: select },
+      query,
     });
     closeBottomSheet();
   };
