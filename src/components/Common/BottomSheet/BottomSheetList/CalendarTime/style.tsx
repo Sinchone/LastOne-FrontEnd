@@ -73,6 +73,7 @@ export const ContentBox = styled.div<{ isSelected: boolean }>`
 export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   gap: 25px;
   margin-top: 22px;

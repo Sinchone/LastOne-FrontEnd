@@ -15,6 +15,8 @@ export const BottomSheetHeader = styled.div`
   width: 100%;
   border-bottom: 1px solid var(--color-gray3);
   padding-bottom: 15px;
+  margin-bottom: 12px;
+  cursor: pointer;
 
   .select_fitness {
     font-weight: 700;
@@ -40,7 +42,6 @@ export const BottomSheetHeader = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-wrap: wrap;
-  padding: 35px 0px;
   width: 100%;
   gap: 13px;
   margin-bottom: 20px;
@@ -72,8 +73,10 @@ export const ContentBox = styled.div<{ isSelected: boolean }>`
 export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   gap: 25px;
+  margin-top: 22px;
 `;
 
 export const CancelButton = styled.button`
@@ -111,6 +114,8 @@ export const CalendarWrapper = styled.div`
     border: none;
     padding-bottom: 10px;
     .react-calendar__navigation {
+      justify-content: center;
+      align-items: center;
       width: 200px;
       margin: 0 auto;
       margin-bottom: 25px;
@@ -122,6 +127,7 @@ export const CalendarWrapper = styled.div`
         background-color: var(--color-white);
       }
     }
+
     .react-calendar__navigation__prev2-button {
       display: none;
     }
@@ -134,17 +140,19 @@ export const CalendarWrapper = styled.div`
       }
     }
 
-    .react-calendar__navigation__next-button {
+    .react-calendar__navigation__next-button,
+    .react-calendar__navigation__prev-button {
       font-size: 25px;
+      padding-bottom: 4px;
     }
 
     .react-calendar__navigation__label > span {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: bold;
       color: #000000;
       font-family: 'Pretendard';
     }
-
+    
     .react-calendar__month-view {
       display: flex;
       justify-content: center;
@@ -159,6 +167,7 @@ export const CalendarWrapper = styled.div`
       font-family: 'Pretendard';
       font-weight: 400;
       min-width: 497px;
+
     }
 
     .react-calendar__month-view__days {
@@ -198,6 +207,7 @@ export const CalendarWrapper = styled.div`
     .react-calendar__tile--active {
       background: #001b36 !important;
     }
+    
     .react-calendar__tile:enabled:focus {
       background-color: white;
     }

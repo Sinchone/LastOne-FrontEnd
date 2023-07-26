@@ -1,7 +1,7 @@
 import { TimeType } from '@typing/post';
 import { atom } from 'recoil';
 
-export const selectedDateState = atom<Date>({
+export const selectedDateState = atom<Date | null>({
   key: 'selectedDateState',
   default: undefined,
 });
