@@ -1,6 +1,7 @@
 import React from 'react';
 import MapMarkerIcon from '@assets/icon/mapmarker.svg';
 import * as S from './style';
+import { useRouter } from 'next/router';
 
 interface Props {
   size: 'main' | 'matching';
@@ -10,11 +11,17 @@ interface Props {
   gym: string;
   startedAt: string;
   imgUrl: string;
+  id: number;
 }
 
-const Card = ({ size, status, preferGender, title, gym, startedAt, imgUrl }: Props) => {
+const Card = ({ size, status, preferGender, title, gym, startedAt, imgUrl, id }: Props) => {
+  const router = useRouter();
+  const handleClick = (id: number) => {
+    router.push(`/post/${id}`);
+  };
+
   return (
-    <S.Wrapper size={size}>
+    <S.Wrapper size={size} onClick={() => handleClick(id)}>
       <S.ImgBox imgUrl={imgUrl}>
         <S.Badge>
           <S.Recruit>{status}</S.Recruit>

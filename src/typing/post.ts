@@ -51,7 +51,7 @@ export interface CreatedAtDate extends TimeType {
 }
 
 export interface MainPost {
-  id?: number;
+  id: number;
   status: '모집중' | '모집완료' | '기간만료';
   preferGender: '남성만' | '여성만' | '성별무관';
   workoutPart: typeof exercisePartArray;
