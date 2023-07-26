@@ -5,7 +5,7 @@ export const Wrapper = styled.header`
   height: 60px;
   padding: 10px 24px 10px 24px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border-bottom: 1px solid var(--color-gray3);
   background-color: var(--color-white);
@@ -15,10 +15,11 @@ export const Wrapper = styled.header`
 
   svg {
     cursor: pointer;
+    position: absolute;
+    left: 20px;
   }
 
   span {
-    flex: 0.63;
     font-weight: 700;
     font-size: 18px;
     line-height: 34px;
