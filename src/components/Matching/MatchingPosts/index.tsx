@@ -8,6 +8,7 @@ const MatchingPosts = () => {
   const router = useRouter();
   const [params, setParams] = useState({});
   const { data, fetchNextPage, hasNextPage } = useGetPostList(params);
+  const isEmpty = !data?.pages[0].data.data.content.length;
   const bottom = useRef(null);
 
   useEffect(() => {
@@ -36,14 +37,17 @@ const MatchingPosts = () => {
 
   return (
     <S.Wrapper>
-      <S.CardList>
-        {data?.pages &&
-          data.pages.map((page: any) => {
+      {isEmpty ? (
+        <S.EmptyList />
+      ) : (
+        <S.CardList>
+          {data.pages.map((page: any) => {
             return page.data.data.content.map((content: any) => (
               <Card key={content.id} size={'matching'} {...content} />
             ));
           })}
-      </S.CardList>
+        </S.CardList>
+      )}
       <div ref={bottom} />
     </S.Wrapper>
   );
