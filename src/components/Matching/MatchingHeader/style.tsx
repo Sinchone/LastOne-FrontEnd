@@ -22,6 +22,7 @@ export const CheckboxContainer = styled.div`
 export const FilterAndCheckbox = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const FilterContainer = styled.div`
