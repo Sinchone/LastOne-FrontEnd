@@ -5,6 +5,9 @@ export const BottomSheetContent = styled.div`
   padding: 50px 16px;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  gap: 35px;
+  user-select: none;
 `;
 
 export const BottomSheetHeader = styled.div`
@@ -36,10 +39,8 @@ export const BottomSheetHeader = styled.div`
 
 export const Content = styled.div`
   display: flex;
-  padding: 35px 0px;
   width: 100%;
   gap: 13px;
-  margin-bottom: 13px;
 `;
 
 export const ContentBox = styled.div<{ isSelected: boolean }>`
@@ -52,6 +53,7 @@ export const ContentBox = styled.div<{ isSelected: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 13px;
   cursor: pointer;
 
   span {
@@ -64,14 +66,31 @@ export const ContentBox = styled.div<{ isSelected: boolean }>`
   }
 `;
 
+export const TextBox = styled.div`
+  width: 100%;
+  height: 110px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+  filter: drop-shadow(0px 0px rgba(61, 64, 72, 0.1));
+
+  color: var(--color-gray8);
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+`;
+
 export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 25px;
+  gap: 13px;
 
   button {
-    flex-grow: 1;
+    width: 50%;
   }
 `;
 
