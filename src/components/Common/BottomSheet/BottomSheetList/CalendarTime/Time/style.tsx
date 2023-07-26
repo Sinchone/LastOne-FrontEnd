@@ -10,7 +10,7 @@ export const Subject = styled.span`
 `;
 
 export const TimesWrapper = styled.div`
-  width: 590px;
+  width: 100%;
   height: fit-content;
   display: flex;
   flex-wrap: wrap;
@@ -21,7 +21,7 @@ export const TimesWrapper = styled.div`
 `;
 
 export const Time = styled.div<{ isSelected: boolean }>`
-  width: 80px;
+  width: 12%;
   height: 54px;
   display: flex;
   justify-content: center;
