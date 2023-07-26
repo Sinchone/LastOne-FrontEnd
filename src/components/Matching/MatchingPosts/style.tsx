@@ -15,14 +15,14 @@ export const CardList = styled.div`
   min-height: 100%;
 
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 20px;
 `;
 
 export const EmptyList = styled.div`
   width: 100%;
-  height: calc(100vh - 450px);
+  height: calc(100vh - 350px);
 
   display: flex;
   align-items: center;
