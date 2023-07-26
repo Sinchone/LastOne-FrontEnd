@@ -1,6 +1,12 @@
 import React from 'react';
-import BottomArrowSmallIcon from '@assets/icon/bottom-arrow-small.svg';
-import { WorkoutPart, PreferGender, GymName, IsRecruiting, SearchInput } from '@components/Matching/MatchingFilter';
+import {
+  WorkoutPart,
+  PreferGender,
+  GymName,
+  IsRecruiting,
+  SearchInput,
+  Date,
+} from '@components/Matching/MatchingFilter';
 import * as S from './style';
 
 const MatchingHeader = () => {
@@ -12,9 +18,7 @@ const MatchingHeader = () => {
         <S.FilterContainer>
           <WorkoutPart />
           <PreferGender />
-          <S.Filter>
-            <span>날짜 설정</span> <BottomArrowSmallIcon />
-          </S.Filter>
+          <Date />
         </S.FilterContainer>
         <S.CheckboxContainer>
           <IsRecruiting />
