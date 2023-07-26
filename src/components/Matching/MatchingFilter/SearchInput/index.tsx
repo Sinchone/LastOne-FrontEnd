@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import * as S from './style';
 import SearchIcon from '@assets/icon/search.svg';
@@ -6,8 +6,7 @@ import { MATCHING_PAGE } from '@constants/route';
 
 const SearchInput = () => {
   const router = useRouter();
-  const title = router.query.title as string | undefined;
-  const [searchInput, setSearchInput] = useState(title || '');
+  const [searchInput, setSearchInput] = useState(router.query.title);
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value.slice(0, 20));
@@ -20,6 +19,10 @@ const SearchInput = () => {
         query: { ...router.query, title: searchInput },
       });
   };
+
+  useEffect(() => {
+    setSearchInput(router.query.title);
+  }, [router.query]);
 
   return (
     <S.SearchInput>
