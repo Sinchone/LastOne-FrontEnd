@@ -18,7 +18,7 @@ const MatchingPosts = () => {
       preferGender: router.query.preferGender,
       date: router.query.date,
       gymName: router.query.gymName,
-      isRecruiting: router.query.isRecruiting,
+      isRecruiting: router.query.isRecruiting || false,
     };
 
     setParams(searchParams);
