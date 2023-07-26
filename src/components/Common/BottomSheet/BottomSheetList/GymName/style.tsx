@@ -8,6 +8,11 @@ export const BottomSheetContent = styled.div`
   justify-content: space-around;
   gap: 35px;
   user-select: none;
+  width: 100%;
+
+  ${theme.media.mobile2} {
+    padding: 30px 16px;
+  }
 `;
 
 export const BottomSheetHeader = styled.div`
@@ -87,7 +92,7 @@ export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 13px;
+  gap: 16px;
 
   button {
     width: 50%;
