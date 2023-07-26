@@ -46,9 +46,9 @@ const MatchingPosts = () => {
               <Card key={content.id} size={'matching'} {...content} />
             ));
           })}
+          <div ref={bottom} />
         </S.CardList>
       )}
-      <div ref={bottom} />
     </S.Wrapper>
   );
 };
