@@ -5,7 +5,7 @@ export const Wrapper = styled.header`
   height: 60px;
   padding: 10px 24px 10px 24px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border-bottom: 1px solid var(--color-gray3);
   background-color: var(--color-white);
@@ -14,8 +14,10 @@ export const Wrapper = styled.header`
   z-index: 100;
   user-select: none;
 
-  svg {
+  > svg {
     cursor: pointer;
+    position: absolute;
+    left: 20px;
   }
 
   & > span {
@@ -27,15 +29,21 @@ export const Wrapper = styled.header`
 `;
 
 export const ButtonContainer = styled.div`
-  position: relative;
+  position: absolute;
+  right: 20px;
+
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  a {
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const LogoutButton = styled.span`
-  position: absolute;
-  left: -70px;
-
   font-weight: 500;
   font-size: 14px;
   color: var(--color-gray7);

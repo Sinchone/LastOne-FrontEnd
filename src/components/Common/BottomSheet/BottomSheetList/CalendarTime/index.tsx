@@ -18,11 +18,12 @@ const CalendarTime = () => {
 
   const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
   const [selectedTime, setSelectedTime] = useRecoilState(selectedTimeState);
-  const [currentDate, setCurrentDate] = useState(selectedDate);
+  const [currentDate, setCurrentDate] = useState<Date | null>(selectedDate);
   const [currentTime, setCurrentTime] = useState<TimeType>(selectedTime);
   const [selectMenu, setSelectMenu] = useState('calendar');
 
   const handleDateChange = (date: Date) => {
+    setSelectedDate(date);
     setCurrentDate(date);
   };
 
@@ -51,8 +52,8 @@ const CalendarTime = () => {
           <S.CalendarWrapper>
             <ReactCalendar
               onChange={handleDateChange as any}
-              value={selectedDate ? selectedDate : new Date()}
-              calendarType={'US'}
+              value={selectedDate}
+              calendarType={'gregory'}
               formatMonthYear={(locale, date) => moment(date).format('YYYY.MM')}
               formatDay={(locale, date) => moment(date).format('D')}
             />

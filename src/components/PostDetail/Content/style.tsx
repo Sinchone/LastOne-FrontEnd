@@ -219,8 +219,6 @@ export const ImageWrapper = styled.div`
     height: 180px;
 
     border-radius: 8px;
-    background-color: var(--color-secondary-main);
-
     overflow: hidden;
   }
 `;
