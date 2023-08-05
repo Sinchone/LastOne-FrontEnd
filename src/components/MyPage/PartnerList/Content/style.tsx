@@ -122,8 +122,7 @@ const Button = styled.button`
 `;
 
 export const ProfileButton = styled(Button)`
-  background-color: var(--color-primary-main);
-  color: var(--color-white);
+  background-color: transparent;
 `;
 
 export const ChattingButton = styled(Button)`
