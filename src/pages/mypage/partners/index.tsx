@@ -1,8 +1,7 @@
 import { Content, Header } from '@components/MyPage/PartnerList';
 import { useEffect, useState } from 'react';
 import { getPartnerList } from '@apis/partner';
-
-
+import { Navigation } from '@components/Common';
 
 const PartnerList = () => {
   const [partnerList, setPartnerList] = useState([]);
@@ -18,13 +17,11 @@ const PartnerList = () => {
       });
   }, []);
 
-
-
-
   return (
     <>
       <Header />
       <Content partnerList={partnerList} />
+      <Navigation />
     </>
   );
 };
