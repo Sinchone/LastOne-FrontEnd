@@ -45,25 +45,29 @@ const Content = ({ partnerList }: Props) => {
         <input value={searchPartner} onChange={handleChangeInput} placeholder="파트너를 검색해보세요." />
       </S.Input>
       <S.PartnerList>
-        {filteredPartnerList.map((p) => (
-          <S.Partner key={p.id}>
-            <S.ProfileButton onClick={() => {router.push(`/mypage/${p.id}`);}}>
-              {p.profileUrl ? (
-                <S.ImageWrapper>
-                  <img src={createImageUrl(p.profileUrl as string)} alt='profileImg'/>
-                </S.ImageWrapper> ) :(
-                <ProfileIcon/>
-              )}
-            </S.ProfileButton>
-            <S.PartnerInfo>
-              <div>
-                <span>{p.nickname}</span>
-                <S.Gender>{p.gender}</S.Gender>
-              </div>
-              <span>{p.workoutDate}</span>
-            </S.PartnerInfo>
-          </S.Partner>
-        ))}
+        {filteredPartnerList !== undefined ? (
+          filteredPartnerList.map((p) => (
+            <S.Partner key={p.id}>
+              <S.ProfileButton onClick={() => {router.push(`/mypage/${p.id}`);}}>
+                {p.profileUrl ? (
+                  <S.ImageWrapper>
+                    <img src={createImageUrl(p.profileUrl as string)} alt='profileImg'/>
+                  </S.ImageWrapper> ) :(
+                  <ProfileIcon/>
+                )}
+              </S.ProfileButton>
+              <S.PartnerInfo>
+                <div>
+                  <span>{p.nickname}</span>
+                  <S.Gender>{p.gender}</S.Gender>
+                </div>
+                <span>{p.workoutDate}</span>
+              </S.PartnerInfo>
+            </S.Partner>
+          ))
+        ) : (
+          <S.NoPartner>운동 파트너가 존재하지 않습니다.</S.NoPartner>
+        )}
       </S.PartnerList>
     </S.Wrapper>
   );

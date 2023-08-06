@@ -63,6 +63,12 @@ export const Partner = styled.div`
   }
 `;
 
+export const NoPartner = styled.div`
+  margin: auto;
+  font-size: 20px;
+  font-weight: bold;
+`;
+
 export const ImageWrapper = styled.div`
   width: 80px;
   height: 80px;

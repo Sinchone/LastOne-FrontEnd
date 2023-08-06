@@ -7,7 +7,7 @@ const useGetPartnerList = () => {
 
     return {
         data: queryResult.data,
-        isLoading: queryResult.isLoading,
+        isError: queryResult.isError,
         refetch: queryResult.refetch,
     };
 };
