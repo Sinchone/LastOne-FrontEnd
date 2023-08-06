@@ -69,6 +69,12 @@ export const ImageWrapper = styled.div`
   border-radius: 50%;
   background-color: var(--color-secondary-main);
   overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 2164.5px;
+  }
 `;
 
 export const PartnerInfo = styled.div`
@@ -111,7 +117,7 @@ export const ButtonContainer = styled.div`
 
 const Button = styled.button`
   width: 106px;
-  padding: 10px 0;
+  padding: 10px 10px;
 
   border: none;
   border-radius: 6px;
