@@ -41,6 +41,7 @@ export const PartnerList = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  min-height: calc(100vh - 60px - 190px);
 `;
 
 export const Partner = styled.div`
