@@ -1,26 +1,22 @@
 import { Content, Header } from '@components/MyPage/PartnerList';
-import { useEffect, useState } from 'react';
-import { getPartnerList } from '@apis/partner';
+import { useGetPartnerList } from '@hooks/MyPage/queries';
 import { Navigation } from '@components/Common';
+import { Loader } from '@components/Common';
 
 const PartnerList = () => {
-  const [partnerList, setPartnerList] = useState([]);
+  const { data: partnerListData, isLoading, refetch } = useGetPartnerList();
 
-  useEffect(() => {
-    getPartnerList()
-      .then((res) => {
-        console.log(res.data);
-        setPartnerList(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  if (isLoading || !partnerListData) {
+    if (!partnerListData) {
+      refetch();
+    }
+    return <Loader />;
+  }
 
   return (
     <>
       <Header />
-      <Content partnerList={partnerList} />
+      <Content partnerList={partnerListData.data} />
       <Navigation />
     </>
   );
