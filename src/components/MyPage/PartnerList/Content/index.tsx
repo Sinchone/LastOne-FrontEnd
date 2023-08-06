@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'react';
 import * as S from './style';
 import SearchIcon from '@assets/icon/search.svg';
-import ProfileIcon from '@assets/icon/profilelarge.svg';
 import { useRouter } from 'next/router';
+import { PartnerListType } from '@typing/Partner';
+import { createImageUrl } from '@utils/createImageUrl';
+import ProfileIcon from '@assets/icon/profilelarge.svg';
 
-const Content = ({partnerList}) => {
+interface Props {
+  partnerList: PartnerListType[];
+}
+
+const Content = ({ partnerList }: Props) => {
   const router = useRouter();
   const [searchPartner, setSearchPartner] = useState('');
   const [filteredPartnerList, setFilteredPartnerList] = useState<PartnerListType[]>(partnerList);
@@ -22,7 +28,7 @@ const Content = ({partnerList}) => {
       return partner.nickname.toLowerCase().includes(searchPartner.toLowerCase());
     });
     setFilteredPartnerList(filteredList);
-  }
+  };
 
   useEffect(() => {
     executeSearch();
@@ -41,8 +47,13 @@ const Content = ({partnerList}) => {
       <S.PartnerList>
         {filteredPartnerList.map((p) => (
           <S.Partner key={p.id}>
-            <S.ProfileButton>
-              <ProfileIcon onClick={() => {router.push(`/mypage/${p.id}`);}} />
+            <S.ProfileButton onClick={() => {router.push(`/mypage/${p.id}`);}}>
+              {p.profileUrl ? (
+                <S.ImageWrapper>
+                  <img src={createImageUrl(p.profileUrl as string)} alt='profileImg'/>
+                </S.ImageWrapper> ) :(
+                <ProfileIcon/>
+              )}
             </S.ProfileButton>
             <S.PartnerInfo>
               <div>
@@ -59,3 +70,4 @@ const Content = ({partnerList}) => {
 };
 
 export default Content;
+//<svg width="55" height="55" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="24" fill="#E5E5E7"></rect><mask id="profilelarge_svg__a" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48" style="mask-type: alpha;"><rect width="48" height="48" rx="24" fill="#000C4A"></rect></mask><g mask="url(#profilelarge_svg__a)" fill="#000C4A"><rect x="16" y="12" width="16" height="16" rx="8"></rect><rect x="8" y="30" width="32" height="25" rx="12.5"></rect></g></svg>
