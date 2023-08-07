@@ -83,6 +83,11 @@ const Content = ({ profile }: Props) => {
       return false;
     }
 
+    if (/\s/.test(changedNickname)) {
+      setWarningText('닉네임에는 띄어쓰기를 사용할 수 없습니다.');
+      return false;
+    }
+
     if (!nicknameRegex.test(changedNickname)) {
       setWarningText('닉네임은 영어, 한글, 숫자만 가능합니다.');
       return false;
