@@ -9,25 +9,6 @@ export const Wrapper = styled.section`
   gap: 20px;
 `;
 
-export const LocationAndSearch = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10px;
-
-  .arrow_icon {
-    margin-right: 12px;
-  }
-
-  .location {
-    ${theme.font.ko.subTitle1}
-  }
-  .checkbox_title {
-    ${theme.font.ko.body1}
-  }
-`;
-
 export const CheckboxContainer = styled.div`
   display: flex;
   align-items: center;
@@ -38,58 +19,14 @@ export const CheckboxContainer = styled.div`
   }
 `;
 
-export const Checkbox = styled.div`
-  width: 18px;
-  height: 18px;
-  border: solid var(--color-gray8);
-  display: flex;
-`;
-
-export const SearchInput = styled.div`
-  width: 100%;
-  height: 38px;
-  padding: 1px 8px 1px 20px;
-  border-radius: 6px;
-  background-color: #eeeeee;
-  display: flex;
-  align-items: center;
-  gap: 13px;
-
-  input {
-    background-color: #eeeeee;
-    border: none;
-    outline: none;
-    width: 100%;
-    height: 100%;
-
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 30px;
-    letter-spacing: -2%;
-    color: var(--color-gray8);
-  }
-`;
-
 export const FilterAndCheckbox = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
+
 export const FilterContainer = styled.div`
   display: flex;
   gap: 15px;
   width: 83%;
-`;
-
-export const Filter = styled.div`
-  width: 80px;
-  height: 30px;
-  border-radius: 6px;
-  background-color: #eeeeee;
-  ${theme.font.ko.body1}
-  font-size: 12px;
-  color: var(--color-gray9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
 `;

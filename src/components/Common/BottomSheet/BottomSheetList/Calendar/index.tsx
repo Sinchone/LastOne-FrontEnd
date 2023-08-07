@@ -8,15 +8,14 @@ import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import { MATCHING_PAGE } from '@constants/route';
-import { useRecoilState } from 'recoil';
-import { selectedDateState } from '@recoil/bottomsheet/calendarTime';
 
 const Calendar = () => {
   const { closeBottomSheet } = useBottomSheet();
-  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
+  const router = useRouter();
+  const date = router.query.date as string;
+  const [selectedDate, setSelectedDate] = useState<Date | null>(date ? new Date(date) : null);
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const [changeState, setChangeState] = useState(false);
-  const router = useRouter();
 
   const handleDateChange = (date: Date) => {
     const formattedSelectedDate = moment(selectedDate).format('YYYY.MM.DD');

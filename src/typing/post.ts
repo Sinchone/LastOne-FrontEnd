@@ -60,3 +60,16 @@ export interface MainPost {
   startedAt: string;
   imgUrl: string;
 }
+
+interface SearchParamType {
+  [key: string]: any;
+  title: string;
+  workoutPart: '전신' | '가슴' | '등' | '어깨' | '하체' | '코어';
+  preferGender: '성별무관' | '남성만' | '여성만';
+  date: string;
+  gymName: string;
+  isRecruiting: boolean;
+  lastId: number;
+}
+
+export type SearchParam = Partial<SearchParamType>;

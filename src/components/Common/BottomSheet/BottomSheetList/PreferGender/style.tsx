@@ -5,6 +5,12 @@ export const BottomSheetContent = styled.div`
   padding: 50px 16px;
   display: flex;
   flex-direction: column;
+  gap: 35px;
+  width: 100%;
+
+  ${theme.media.mobile2} {
+    padding: 30px 16px;
+  }
 `;
 
 export const BottomSheetHeader = styled.div`
@@ -36,14 +42,12 @@ export const BottomSheetHeader = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-wrap: wrap;
-  padding: 35px 0px;
   width: 100%;
   gap: 13px;
-  margin-bottom: 13px;
 `;
 
 export const ContentBox = styled.div<{ isSelected: boolean }>`
-  width: 180px;
+  flex: 1 0 calc(100% / 3 - 26px);
   height: 110px;
   border-radius: 8px;
   padding: 8px;
@@ -67,12 +71,15 @@ export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 25px;
+  gap: 16px;
+
+  button {
+    flex: 1;
+  }
 `;
 
 export const CancelButton = styled.button`
   color: #001b36;
-  width: 252px;
   height: 46px;
   padding: 8px;
   border-radius: 6px;
@@ -86,7 +93,6 @@ export const CancelButton = styled.button`
 export const Button = styled.button`
   color: var(--color-white);
   border-radius: 6px;
-  width: 252px;
   height: 46px;
   padding: 8px;
   background-color: var(--color-primary-main);

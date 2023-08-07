@@ -77,11 +77,14 @@ export const ButtonGroup = styled.div`
   width: 100%;
   gap: 25px;
   margin-top: 22px;
+
+  button {
+    flex: 1;
+  }
 `;
 
 export const CancelButton = styled.button`
   color: #001b36;
-  width: 252px;
   height: 46px;
   padding: 8px;
   border-radius: 6px;
@@ -95,7 +98,6 @@ export const CancelButton = styled.button`
 export const Button = styled.button`
   color: var(--color-white);
   border-radius: 6px;
-  width: 252px;
   height: 46px;
   padding: 8px;
   background-color: var(--color-primary-main);
@@ -152,7 +154,7 @@ export const CalendarWrapper = styled.div`
       color: #000000;
       font-family: 'Pretendard';
     }
-    
+
     .react-calendar__month-view {
       display: flex;
       justify-content: center;
@@ -167,7 +169,6 @@ export const CalendarWrapper = styled.div`
       font-family: 'Pretendard';
       font-weight: 400;
       min-width: 497px;
-
     }
 
     .react-calendar__month-view__days {
@@ -207,7 +208,7 @@ export const CalendarWrapper = styled.div`
     .react-calendar__tile--active {
       background: #001b36 !important;
     }
-    
+
     .react-calendar__tile:enabled:focus {
       background-color: white;
     }

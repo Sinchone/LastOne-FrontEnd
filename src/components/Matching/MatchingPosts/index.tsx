@@ -1,42 +1,54 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Card } from '@components/Common';
 import * as S from './style';
+import { useGetPostList } from '@hooks/matching/queries';
+import { useRouter } from 'next/router';
 
 const MatchingPosts = () => {
-  const dummy_data = [
-    {
-      gym: '판교 헬스장',
-      id: 30,
-      imgUrl: 'all-main.jpg',
-      startedAt: '2023.06.30 13:00',
-      title: '3대 250 이상 보조구해요!! ',
-      workoutPart: '전신',
-    },
-    {
-      gym: '판교 헬스장',
-      id: 30,
-      imgUrl: 'all-main.jpg',
-      startedAt: '2023.06.30 13:00',
-      title: '3대 250 이상 보조구해요!! ',
-      workoutPart: '전신',
-    },
-    {
-      gym: '판교 헬스장',
-      id: 30,
-      imgUrl: 'all-main.jpg',
-      startedAt: '2023.06.30 13:00',
-      title: '3대 250 이상 보조구해요!! ',
-      workoutPart: '전신',
-    },
-  ];
+  const router = useRouter();
+  const [params, setParams] = useState({});
+  const { data, fetchNextPage, hasNextPage } = useGetPostList(params);
+  const isEmpty = !data?.pages[0].data.data.content.length;
+  const bottom = useRef(null);
+
+  useEffect(() => {
+    const searchParams = {
+      title: router.query.title,
+      workoutPart: router.query.workoutPart,
+      preferGender: router.query.preferGender,
+      date: router.query.date,
+      gymName: router.query.gymName,
+      isRecruiting: router.query.isRecruiting || false,
+    };
+
+    setParams(searchParams);
+  }, [router.query]);
+
+  useEffect(() => {
+    let observer: IntersectionObserver;
+
+    if (bottom.current && hasNextPage) {
+      observer = new IntersectionObserver(([entry]) => entry.isIntersecting && fetchNextPage());
+      observer.observe(bottom.current);
+    }
+
+    return () => observer && observer.disconnect();
+  }, [bottom, hasNextPage, fetchNextPage]);
 
   return (
     <S.Wrapper>
-      <S.CardList>
-        {dummy_data.map((el) => (
-          <Card key={el.id} size={'matching'} status={'모집중'} preferGender={'성별무관'} {...el} />
-        ))}
-      </S.CardList>
+      {isEmpty ? (
+        <S.EmptyList />
+      ) : (
+        <S.CardList>
+          {data.pages.map((page: any) => {
+            return page.data.data.content.map((content: any) => (
+              <Card key={content.id} size={'matching'} {...content} />
+            ));
+          })}
+          <div ref={bottom} />
+        </S.CardList>
+      )}
     </S.Wrapper>
   );
 };

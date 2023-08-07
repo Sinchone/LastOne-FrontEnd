@@ -1,42 +1,37 @@
 import React, { useState } from 'react';
 import * as S from './style';
-import PlusIcon from '@assets/icon/plus.svg';
 import { useBottomSheet } from '@hooks/common';
 import { useRouter } from 'next/router';
 import { MATCHING_PAGE } from '@constants/route';
+import { exercisePartArray } from '@constants/post';
 
-const dummy = ['전체', '스포애니 성산점', '수원 바디파트'];
-
-const FitnessClub = () => {
-  const [select, setSelect] = useState('');
-  const { closeBottomSheet } = useBottomSheet();
+const WorkoutPart = () => {
   const router = useRouter();
+  const { closeBottomSheet } = useBottomSheet();
+  const [select, setSelect] = useState(router.query.workoutPart || '');
 
   const handleSelectItem = (el: string) => () => {
-    setSelect(el);
+    setSelect(el === select ? '' : el);
   };
 
   const handleClickApply = () => {
-    if (select === '전체') router.push({ pathname: MATCHING_PAGE, query: { ...router.query, fitnessclub: undefined } });
-    else
-      router.push({
-        pathname: MATCHING_PAGE,
-        query: { ...router.query, fitnessclub: select },
-      });
+    const { workoutPart, ...prevQuery } = router.query;
+    const query = select ? { ...router.query, workoutPart: select } : prevQuery;
+
+    router.push({
+      pathname: MATCHING_PAGE,
+      query,
+    });
     closeBottomSheet();
   };
 
   return (
     <S.BottomSheetContent>
       <S.BottomSheetHeader>
-        <span className="select_fitness">헬스장 선택</span>
-        <span className="register_fitness">
-          <PlusIcon />
-          헬스장 등록
-        </span>
+        <span className="select_fitness">운동부위</span>
       </S.BottomSheetHeader>
       <S.Content>
-        {dummy.map((el) => (
+        {exercisePartArray.map((el) => (
           <S.ContentBox key={el} onClick={handleSelectItem(el)} isSelected={el === select}>
             <span>{el}</span>
           </S.ContentBox>
@@ -50,4 +45,4 @@ const FitnessClub = () => {
   );
 };
 
-export default FitnessClub;
+export default WorkoutPart;

@@ -3,22 +3,24 @@ import * as S from './style';
 import { useBottomSheet } from '@hooks/common';
 import { useRouter } from 'next/router';
 import { MATCHING_PAGE } from '@constants/route';
+import { genderArray } from '@constants/post';
 
-const dummy = ['전신', '가슴', '등', '어깨', '하체', '코어'];
-
-const ExerciseArea = () => {
-  const { closeBottomSheet } = useBottomSheet();
-  const [select, setSelect] = useState('');
+const PreferGender = () => {
   const router = useRouter();
+  const { closeBottomSheet } = useBottomSheet();
+  const [select, setSelect] = useState(router.query.preferGender || '');
 
   const handleSelectItem = (el: string) => () => {
-    setSelect(el);
+    setSelect(el === select ? '' : el);
   };
 
   const handleClickApply = () => {
+    const { preferGender, ...prevQuery } = router.query;
+    const query = select ? { ...router.query, preferGender: select } : prevQuery;
+
     router.push({
       pathname: MATCHING_PAGE,
-      query: { ...router.query, exercisearea: select },
+      query,
     });
     closeBottomSheet();
   };
@@ -26,10 +28,10 @@ const ExerciseArea = () => {
   return (
     <S.BottomSheetContent>
       <S.BottomSheetHeader>
-        <span className="select_fitness">운동부위</span>
+        <span className="select_fitness">성별</span>
       </S.BottomSheetHeader>
       <S.Content>
-        {dummy.map((el) => (
+        {genderArray.map((el) => (
           <S.ContentBox key={el} onClick={handleSelectItem(el)} isSelected={el === select}>
             <span>{el}</span>
           </S.ContentBox>
@@ -43,4 +45,4 @@ const ExerciseArea = () => {
   );
 };
 
-export default ExerciseArea;
+export default PreferGender;
