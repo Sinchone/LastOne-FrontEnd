@@ -71,7 +71,7 @@ const GymName = () => {
           {contentType === 'gyms' ? (
             <S.Button onClick={handleClickApply}>적용</S.Button>
           ) : (
-            <S.Button onClick={() => router.push('/login')}>로그인 하러가기</S.Button>
+            <S.Button onClick={() => router.push('/login')}>로그인하러 가기</S.Button>
           )}
         </S.ButtonGroup>
       )}
