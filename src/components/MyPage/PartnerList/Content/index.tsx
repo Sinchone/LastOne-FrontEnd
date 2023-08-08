@@ -74,4 +74,3 @@ const Content = ({ partnerList }: Props) => {
 };
 
 export default Content;
-//<svg width="55" height="55" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="24" fill="#E5E5E7"></rect><mask id="profilelarge_svg__a" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48" style="mask-type: alpha;"><rect width="48" height="48" rx="24" fill="#000C4A"></rect></mask><g mask="url(#profilelarge_svg__a)" fill="#000C4A"><rect x="16" y="12" width="16" height="16" rx="8"></rect><rect x="8" y="30" width="32" height="25" rx="12.5"></rect></g></svg>

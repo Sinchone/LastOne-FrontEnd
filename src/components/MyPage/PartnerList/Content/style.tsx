@@ -79,7 +79,6 @@ export const ImageWrapper = styled.div`
   img {
     width: 100%;
     height: 100%;
-    border-radius: 2164.5px;
   }
 `;
 
@@ -123,7 +122,7 @@ export const ButtonContainer = styled.div`
 
 const Button = styled.button`
   width: 106px;
-  padding: 10px 10px;
+  padding: 10px;
 
   border: none;
   border-radius: 6px;
