@@ -9,4 +9,5 @@ export const queryKeys = {
   partner: ['partner'],
   mainPost: ['mainPost'],
   postList: ['postList'],
+  chatting: ['chatting'],
 } as const;
