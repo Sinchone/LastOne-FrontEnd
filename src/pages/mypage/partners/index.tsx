@@ -1,20 +1,36 @@
 import { Content, Header } from '@components/MyPage/PartnerList';
-import { NextPageWithLayout } from '@pages/_app';
-import React, { ReactElement } from 'react';
+import { useGetPartnerList } from '@hooks/MyPage/queries';
+import { Navigation } from '@components/Common';
+import { Loader } from '@components/Common';
+import { useEffect, useState } from 'react';
 
-const PartnerList: NextPageWithLayout = () => {
-  return (
-    <>
-      <Content />
-    </>
-  );
-};
+const PartnerList = () => {
+  const { data: partnerListData, isError, refetch } = useGetPartnerList();
+  const [isPossibleToRendering, setIsPossibleToRendering] = useState(false);
+  
+  useEffect(() => {
+    if (isError) {
+      setIsPossibleToRendering(true);
+    }
+    if (partnerListData) {
+      setIsPossibleToRendering(true);
+    } 
+    if (!isPossibleToRendering) {
+      refetch();
+    }
+  }, [isError, partnerListData, isPossibleToRendering, refetch]);
 
-PartnerList.getLayout = function getLayout(page: ReactElement) {
+  if (!isPossibleToRendering) {
+    return <Loader />;
+  }
+
+  const partners = partnerListData?.data;
+
   return (
     <>
       <Header />
-      {page}
+      <Content partnerList={partners} />
+      <Navigation />
     </>
   );
 };

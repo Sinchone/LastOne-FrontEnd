@@ -41,6 +41,7 @@ export const PartnerList = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  min-height: calc(100vh - 60px - 190px);
 `;
 
 export const Partner = styled.div`
@@ -62,12 +63,23 @@ export const Partner = styled.div`
   }
 `;
 
+export const NoPartner = styled.div`
+  margin: auto;
+  font-size: 20px;
+  font-weight: bold;
+`;
+
 export const ImageWrapper = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50%;
   background-color: var(--color-secondary-main);
   overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const PartnerInfo = styled.div`
@@ -110,7 +122,7 @@ export const ButtonContainer = styled.div`
 
 const Button = styled.button`
   width: 106px;
-  padding: 10px 0;
+  padding: 10px;
 
   border: none;
   border-radius: 6px;
@@ -122,8 +134,7 @@ const Button = styled.button`
 `;
 
 export const ProfileButton = styled(Button)`
-  background-color: var(--color-primary-main);
-  color: var(--color-white);
+  background-color: transparent;
 `;
 
 export const ChattingButton = styled(Button)`
