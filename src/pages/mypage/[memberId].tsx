@@ -17,7 +17,7 @@ const OtherPage = () => {
     if (memberId) setMemberId(memberId as string);
   }, [router.query]);
 
-  if (isLoading) {
+  if (isLoading || !memberId) {
     return <Loader />;
   }
 
