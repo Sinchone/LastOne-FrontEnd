@@ -40,7 +40,7 @@ export const ProfileImgWrapper = styled.form`
   }
 `;
 
-export const EditForm = styled.form`
+export const EditForm = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;

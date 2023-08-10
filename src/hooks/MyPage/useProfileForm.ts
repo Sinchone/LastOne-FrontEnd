@@ -5,6 +5,7 @@ const useProfileForm = (initialState: MyPageField) => {
   const { member, gyms, sbd } = initialState;
   const [profileState, setProfileState] = useState<Partial<ProfileType>>({
     ...member,
+    nickname: member.isEdited ? member.nickname : '',
   });
   const [gymState, setGymsState] = useState<GymInfoType[]>([...gyms]);
   const [fitness, setFitness] = useState<FitnessType>({
