@@ -1,15 +1,14 @@
+import React from 'react';
 import { MainLayout } from '@components/Common';
 import { ChattingList } from '@components/Chatting';
 import { useGetChattingList } from '@hooks/chatting';
 import { useState, useEffect } from 'react';
 import { Loader } from '@components/Common';
-import React from 'react';
 
 const Chatting = () => {
-
   const { data: chattingListData, isError, refetch } = useGetChattingList();
   const [isPossibleToRendering, setIsPossibleToRendering] = useState(false);
-  
+
   useEffect(() => {
     if (isError) {
       setIsPossibleToRendering(true);
@@ -30,7 +29,7 @@ const Chatting = () => {
 
   return (
     <MainLayout>
-      <ChattingList chattingList={chattingList} />
+        <ChattingList chattingList={chattingList} />
     </MainLayout>
   );
 };
