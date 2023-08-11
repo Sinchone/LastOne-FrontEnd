@@ -5,31 +5,29 @@ import { useRouter } from 'next/router';
 import MenuIcon from '@assets/icon/list.svg';
 import { ChattingListType } from '@typing/chatting';
 import { createImageUrl } from '@utils/createImageUrl';
+import { useState } from 'react';
+import { ChattingBottomSheet } from '@components/Chatting/BottomSheet';
+import { calDate } from '@utils/calDate';
 
 interface Props {
   chattingList: ChattingListType[];
 }
 
-const isToday = (chatDate: Date, currentDate: Date) => {
-  return chatDate.getDate() === currentDate.getDate() &&
-         chatDate.getMonth() === currentDate.getMonth() &&
-         chatDate.getFullYear() === currentDate.getFullYear();
-}
-
-const calDate = (input: string) => {
-  const chatDate = new Date(input);
-  const currentDate = new Date();
-  if (isToday(chatDate, currentDate)) {
-    const hour = Number(chatDate.getHours());
-    const hourInfo = hour < 12 ? `오전 ${hour}` : `오후 ${hour - 12}`;
-    return `${hourInfo}:${chatDate.getMinutes().toString().padStart(2, '0')}`;
-  }
-  return `${chatDate.getFullYear()}-${(chatDate.getMonth() + 1).toString().padStart(2, '0')}-${chatDate.getDate().toString().padStart(2, '0')}`; 
-}
-
-const ChattingList = ({ chattingList }: Props) => {
-
+const ChattingList = ({ chattingList: initialChattingList }: Props) => {
   const router = useRouter();
+  const [chattingList, setChattingList] = useState<ChattingListType[]>(initialChattingList || []);
+  const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
+  const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
+
+  
+  const handleDeleteChatRoom = (roomId: string) => {
+    setChattingList(prevList => prevList.filter(chat => chat.roomId !== roomId));
+    setBottomSheetVisible(false); // 바텀시트를 숨깁니다.
+  };
+
+  const closeBottomSheet = () => {
+    setBottomSheetVisible(false);
+  }
 
   return (
     <S.Wrapper>
@@ -49,16 +47,24 @@ const ChattingList = ({ chattingList }: Props) => {
               </S.NameAndMessage>
             </S.ProfileWrapper>
             <S.MenuWrapper>
-              <S.TimeAndMenu>
+              <S.TimeAndNotRead>
                 <span>{calDate(c.lastChatTime)}</span>
-                <MenuIcon />
-              </S.TimeAndMenu>
-              <S.NotRead>{c.notReadCount}</S.NotRead>
+                <S.NotRead>{c.notReadCount}</S.NotRead>
+              </S.TimeAndNotRead>
+              <S.MenuIconWrapper onClick={() => {
+                  setSelectedRoomId(c.roomId);
+                  setBottomSheetVisible(true);
+                }}>
+                  <MenuIcon />
+                </S.MenuIconWrapper>
             </S.MenuWrapper>
           </S.ChatItemWrapper>
         ))
       ) : (
-        <div>채팅 리스트가 존재하지 않습니다.</div>
+        <S.NoChattingRoom>채팅방이 존재하지 않습니다.</S.NoChattingRoom>
+      )}
+      {isBottomSheetVisible && selectedRoomId && (
+        <ChattingBottomSheet onDelete={handleDeleteChatRoom} roomId={selectedRoomId} onClose={closeBottomSheet} />
       )}
     </S.Wrapper>
   );
