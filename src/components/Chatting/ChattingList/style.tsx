@@ -41,16 +41,19 @@ export const NameAndMessage = styled.div`
 
 export const MenuWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 6px;
   padding-right: 20px;
   align-items: flex-end;
 `;
 
-export const TimeAndMenu = styled.div`
+export const TimeAndNotRead = styled.div`
+  margin-right: 10px;
   display: flex;
-  align-items: center;
-  gap: 20px;
+  flex-direction: column;
+  align-items: flex-end; 
+  gap: 10px;
+
 
   span {
     ${theme.font.ko.body2}
@@ -66,7 +69,6 @@ export const NotRead = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 3px;
-  margin-right: 25px;
 `;
 
 export const ChatItemWrapper = styled.div`
@@ -111,6 +113,17 @@ export const ImageWrapper = styled.div`
   }
 `;
 
+export const MenuIconWrapper = styled.div`
+  margin-bottom: 20px;
+  padding:10px;
+  cursor: pointer;
+`;
+
+export const NoChattingRoom = styled.div`
+  margin: auto;
+  font-size: 20px;
+  font-weight: bold;
+`;
 
 
 
