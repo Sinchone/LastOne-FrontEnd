@@ -3,11 +3,12 @@ import SelectImage from './Select';
 import { useEffect, useState } from 'react';
 
 interface Props {
+  imgFiles: string[];
   setImgFiles: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const Image = ({ setImgFiles }: Props) => {
-  const [images, setImages] = useState(['', '', '']);
+const Image = ({ imgFiles, setImgFiles }: Props) => {
+  const [images, setImages] = useState(imgFiles);
 
   const handleChange = (index: number, image: string) => {
     const newImages = [...images];
