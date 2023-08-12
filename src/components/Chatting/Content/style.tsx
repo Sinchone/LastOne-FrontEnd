@@ -1,14 +1,12 @@
 import theme from '@styles/theme';
 import styled from 'styled-components';
 
-
-
-export const Wrapper = styled.main`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  min-height: calc(100vh - 60px - 80px);
+  min-height: calc(100vh - 60px);
 `;
 
 export const ChattingMessage = styled.div`
@@ -124,6 +122,3 @@ export const NoChattingRoom = styled.div`
   font-size: 20px;
   font-weight: bold;
 `;
-
-
-

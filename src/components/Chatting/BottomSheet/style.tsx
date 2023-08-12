@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 const SlideUp = keyframes`
   from {
     opacity:0;
-    transform: translateY(20%);
+    transform: translateY(0%);
   }
   to {
     opacity: 1;
@@ -25,7 +25,7 @@ export const ModalBackground = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  opacity: 0.5;
+  opacity: 1;
   z-index: 101;
 `;
 
@@ -76,6 +76,7 @@ export const BottomSheetContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  z-index: 105;
 `;
 
 export const BottomSheetHeader = styled.div`
