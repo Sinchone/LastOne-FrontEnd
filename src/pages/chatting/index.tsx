@@ -1,8 +1,9 @@
 import React from 'react';
-import { ChattingList } from '@components/Chatting';
+import { Loader,Header, Navigation } from '@components/Common';
+import { ChatMain, ChatContent } from '@components/Chatting';
 import { useGetChattingList } from '@hooks/chatting';
 import { useState, useEffect } from 'react';
-import { Loader, MainLayout } from '@components/Common';
+
 
 const Chatting = () => {
   const { data: chattingListData, isError, refetch } = useGetChattingList();
@@ -27,10 +28,12 @@ const Chatting = () => {
   const chattingList = chattingListData?.data;
 
   return (
-    <MainLayout>
-      <ChattingList chattingList={chattingList} />
+    <ChatMain>
+      <Header />
+      <ChatContent chattingList={chattingList} />
+      <Navigation />
       <div id="bottomsheet"></div>
-    </MainLayout>
+    </ChatMain>
   );
 };
 

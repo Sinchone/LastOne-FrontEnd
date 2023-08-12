@@ -1,1 +1,2 @@
-export { default as ChattingList } from './Content';
+export { default as ChatContent } from './Content';
+export { default as ChatMain } from './Main';
