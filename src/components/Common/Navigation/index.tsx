@@ -28,10 +28,12 @@ const Navigation = () => {
             <span>파트너 찾기</span>
           </S.Nav>
         </Link>
-        <S.Nav isLocated={pathName === CHATTING_PAGE}>
-          <ChattingIcon />
-          <span>채팅</span>
-        </S.Nav>
+        <Link href={CHATTING_PAGE}>
+          <S.Nav isLocated={pathName === CHATTING_PAGE}>
+            <ChattingIcon />
+            <span>채팅</span>
+          </S.Nav>
+        </Link>
         <Link href={APPLY_PAGE}>
           <S.Nav isLocated={pathName === APPLY_PAGE}>
             <ApplyIcon />
