@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import theme from '@styles/theme';
-import { MenuIcon } from '@assets/icon/list.svg';
 
 export const Wrapper = styled.header`
   width: 100%;
