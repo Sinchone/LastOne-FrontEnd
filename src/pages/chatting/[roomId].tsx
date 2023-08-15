@@ -4,11 +4,15 @@ import { ChatRoomHeader, ChatRoomContent, ChatRoomBottom } from '@components/Cha
 import { useGetChatRoom } from '@hooks/chatting';
 import { useRouter } from 'next/router';
 import { Loader } from '@components/Common';
+import { ChatRoomType } from '@typing/chatting';
 
 const ChatRoom = () => {
     const router = useRouter();
     const [roomId, setRoomId] = useState<string>('');
-    const { data: chatRoomData, isLoading } = useGetChatRoom(roomId);
+    const { data: chatRoomData, isLoading } = useGetChatRoom(roomId) as {
+        data: ChatRoomType | null;
+        isLoading: boolean;
+    };
 
     useEffect(() => {
         if (router.isReady && router.query.roomId) {
@@ -25,7 +29,7 @@ const ChatRoom = () => {
     if (chatRoomData) {
         return (
             <ChatMain>
-                <ChatRoomHeader />
+                <ChatRoomHeader gender={chatRoomData.gender} nickname={chatRoomData.nickname} />
                 <ChatRoomContent />
                 <ChatRoomBottom />
             </ChatMain>
