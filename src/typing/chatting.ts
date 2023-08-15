@@ -17,9 +17,9 @@ export interface MessageType {
 }
 
 export interface ChatRoomType {
-    otherUserId: string;
+    otherUserId: number;
     profileUrl: string;
     nickname: string;
     gender: string;
-    message: MessageType[];
+    messages: MessageType[];
 }
