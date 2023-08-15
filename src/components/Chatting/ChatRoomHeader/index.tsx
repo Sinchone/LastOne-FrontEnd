@@ -7,11 +7,11 @@ import { useRouter } from 'next/router';
 
 
 interface Props {
-    nickname: string;
-    gender: string;
+  gender: string;
+  nickname: string;
 }
 
-const Header = () => {
+const Header = ({ gender, nickname }: Props) => {
   const router = useRouter();
 
   const handleRouteBack = () => {
@@ -24,8 +24,8 @@ const Header = () => {
       <S.LeftArrowIconWrapper>
         <LeftArrowIcon onClick={handleRouteBack} />
       </S.LeftArrowIconWrapper>
-      <S.Nickname>운동관</S.Nickname>
-      <S.Gender>남성</S.Gender>
+      <S.Nickname>{nickname}</S.Nickname>
+      <S.Gender>{gender}</S.Gender>
       <S.MenuIconWrapper>
         <MenuIcon/>
       </S.MenuIconWrapper>
