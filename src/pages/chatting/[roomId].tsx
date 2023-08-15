@@ -20,12 +20,16 @@ const ChatRoom = () => {
         }
     }, [router.isReady, router.query.roomId]);
 
+    useEffect(() => {
+        if (chatRoomData) {
+            // chatRoomData가 있을 때 (모든 데이터가 로드된 후) 스크롤을 아래로 이동
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    }, [chatRoomData]);
+
     if (isLoading || !roomId) {
         return <Loader />;
     }
-
-    console.log(chatRoomData);
-     
 
     if (chatRoomData) {
         return (
