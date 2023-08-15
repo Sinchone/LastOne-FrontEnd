@@ -7,3 +7,7 @@ export const getChattingList = () => {
 export const deleteChattingRoom = (roomId: string) => {
     return authApi.delete(`/chat/room/${roomId}`);
 }
+
+export const getChatRoomDetail = (roomId: string) => {
+    return authApi.get(`/chat/room/${roomId}`);
+}
