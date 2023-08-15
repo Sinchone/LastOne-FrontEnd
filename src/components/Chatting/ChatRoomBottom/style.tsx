@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
 export const BottomWrapper = styled.div`
+    position: sticky;
+    bottom: 0;       // 페이지 하단에 고정
     display: flex;
     min-height: 85px;
     justify-content: center;
     align-items: center; 
+    background-color: white;
+    z-index: 105;
 `;
 
 
