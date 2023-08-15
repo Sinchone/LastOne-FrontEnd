@@ -3,7 +3,9 @@ import styled from 'styled-components';
 export const MessageWrapper = styled.div`
     display: flex;
     justify-content: flex-end; 
-    margin-top: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
 `
 
 export const Message = styled.div`
