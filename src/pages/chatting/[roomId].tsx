@@ -25,12 +25,13 @@ const ChatRoom = () => {
     }
 
     console.log(chatRoomData);
+     
 
     if (chatRoomData) {
         return (
             <ChatMain>
                 <ChatRoomHeader gender={chatRoomData.gender} nickname={chatRoomData.nickname} />
-                <ChatRoomContent />
+                <ChatRoomContent chatRoomData={chatRoomData}/>
                 <ChatRoomBottom />
             </ChatMain>
         );

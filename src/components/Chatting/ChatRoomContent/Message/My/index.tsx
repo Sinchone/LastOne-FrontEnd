@@ -1,11 +1,16 @@
 import * as S from './style';
+import { MessageType } from '@typing/chatting';
+import { calDateForMessage } from '@utils/calDate';
 
+interface Props {
+    message: MessageType;
+}
 
-const MyMessage = () => {
+const MyMessage = ({ message }: Props) => {
     return (
         <S.MessageWrapper>
-            <S.SendTime>오후 10:30</S.SendTime>
-            <S.Message>안녕하세요최대글자테스ㅁㄴ어ㅏ리먼아ㅣ;럼ㄴ;ㅇ러미어림어리;멍라ㅣ먼아ㅣㄹ;ㅏ머ㅏㅇ;럼ㄴ;ㅇ럼ㄴ;아러;ㅁ얼미얼;ㅁ</S.Message>
+            <S.SendTime>{calDateForMessage(message.sendTime)}</S.SendTime>
+            <S.Message>{message.content}</S.Message>
         </S.MessageWrapper>
     )
 }
