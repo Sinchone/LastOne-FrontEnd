@@ -34,9 +34,10 @@ const ChatRoom = () => {
     if (chatRoomData) {
         return (
             <ChatMain>
-                <ChatRoomHeader gender={chatRoomData.gender} nickname={chatRoomData.nickname} />
+                <ChatRoomHeader gender={chatRoomData.gender} nickname={chatRoomData.nickname} roomId={roomId} />
                 <ChatRoomContent chatRoomData={chatRoomData}/>
                 <ChatRoomBottom />
+                <div id="bottomsheet"></div>
             </ChatMain>
         );
     }
