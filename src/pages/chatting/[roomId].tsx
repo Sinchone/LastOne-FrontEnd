@@ -5,10 +5,16 @@ import { useGetChatRoom } from '@hooks/chatting';
 import { useRouter } from 'next/router';
 import { Loader } from '@components/Common';
 import { ChatRoomType } from '@typing/chatting';
+import { subscribe } from '@apis/chatting';
+import { SubscribeMessageType } from '@typing/chatting';
+import { useGetUserInfo } from '@hooks/common/queries';
 
 const ChatRoom = () => {
     const router = useRouter();
+    const { currentUserId } = useGetUserInfo();
     const [roomId, setRoomId] = useState<string>('');
+    const [chatRoomDataState, setChatRoomDataState] = useState<ChatRoomType | null>(null);
+
     const { data: chatRoomData, isLoading } = useGetChatRoom(roomId) as {
         data: ChatRoomType | null;
         isLoading: boolean;
@@ -22,21 +28,39 @@ const ChatRoom = () => {
 
     useEffect(() => {
         if (chatRoomData) {
-            // chatRoomData가 있을 때 (모든 데이터가 로드된 후) 스크롤을 아래로 이동
-            window.scrollTo(0, document.body.scrollHeight);
+            setChatRoomDataState(chatRoomData);
         }
     }, [chatRoomData]);
+
+    useEffect(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+    }, [chatRoomDataState]);
+
+    useEffect(() => {
+        if (roomId) {
+            subscribe(roomId, (message: SubscribeMessageType) => {
+                setChatRoomDataState(prevState => {
+                    if (!prevState) return null;
+                    return {
+                        ...prevState,
+                        messages: [...prevState.messages, message] // messages는 예시입니다. 실제 구조에 따라 조정 필요
+                    };
+                });
+            });
+        }
+    }, [roomId]);
+
 
     if (isLoading || !roomId) {
         return <Loader />;
     }
 
-    if (chatRoomData) {
+    if (chatRoomDataState) {
         return (
             <ChatMain>
-                <ChatRoomHeader gender={chatRoomData.gender} nickname={chatRoomData.nickname} roomId={roomId} />
-                <ChatRoomContent chatRoomData={chatRoomData}/>
-                <ChatRoomBottom />
+                <ChatRoomHeader gender={chatRoomDataState.gender} nickname={chatRoomDataState.nickname} roomId={roomId} />
+                <ChatRoomContent chatRoomData={chatRoomDataState}/>
+                <ChatRoomBottom roomId={roomId} otherId={chatRoomDataState.otherUserId} myId={currentUserId} />
                 <div id="bottomsheet"></div>
             </ChatMain>
         );
