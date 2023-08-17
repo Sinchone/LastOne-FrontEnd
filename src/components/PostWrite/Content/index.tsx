@@ -17,6 +17,7 @@ import { checkAllKeysHaveValues } from '@utils/checkAllKeysHaveValues';
 import { Map } from '@components/Common';
 import Images from '../Image';
 import { useRouter } from 'next/router';
+import NoImage from '../Image/None';
 
 const Content = () => {
   const initialData: Post = {
@@ -40,8 +41,7 @@ const Content = () => {
   const selectedDate = useRecoilValue(selectedDateState);
   const selectedTime = useRecoilValue(selectedTimeState);
   const [isMapShow, setIsMapShow] = useRecoilState(isMapShowState);
-  const [showImages, setShowImages] = useState<any>('');
-  const [imgFiles, setImgFiles] = useState<any>('');
+  const [imgFiles, setImgFiles] = useState<any>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { showBottomSheet } = useBottomSheet();
@@ -138,6 +138,8 @@ const Content = () => {
     router.reload();
   };
 
+  console.log('imgFiles:', imgFiles);
+
   return (
     <>
       {!isMapShow ? (
@@ -224,7 +226,12 @@ const Content = () => {
           {/* 상세설명 */}
           <S.DescriptionArea>
             <S.Subject>상세설명</S.Subject>
-            <Images setImgFiles={setImgFiles} />
+            {imgFiles.join('') ? (
+              <Images setImgFiles={setImgFiles} imgFiles={imgFiles} />
+            ) : (
+              <NoImage setImgFiles={setImgFiles} />
+            )}
+
             <S.DescriptionTextAreaWrapper>
               <span>{data.description.length}/100</span>
               <textarea

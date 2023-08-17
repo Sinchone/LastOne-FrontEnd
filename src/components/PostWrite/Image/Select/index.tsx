@@ -11,7 +11,8 @@ interface Props {
 }
 
 const SelectImage = ({ onChange, onDelete, image, index }: Props) => {
-  const [showImage, setShowImage] = useState<any>('');
+  const uploadedImageURL = image && URL.createObjectURL(image as any);
+  const [showImage, setShowImage] = useState<any>(uploadedImageURL);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] as any;
