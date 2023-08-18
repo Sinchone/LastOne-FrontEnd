@@ -12,6 +12,7 @@ import Script from 'next/script';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { getAccessTokenFromCookie } from '@utils/token';
+import { socketConnect } from '@apis/chatting';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -46,6 +47,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       })
   );
   const getLayout = Component.getLayout ?? ((page) => page);
+
+  React.useEffect(() => {
+    const token = getAccessTokenFromCookie();
+    if (token) {
+      socketConnect();
+    }
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
