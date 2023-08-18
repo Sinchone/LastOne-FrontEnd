@@ -3,7 +3,6 @@ import { Loader,Header, Navigation } from '@components/Common';
 import { ChatMain, ChatContent } from '@components/Chatting';
 import { useGetChattingList } from '@hooks/chatting';
 import { useState, useEffect } from 'react';
-import { connect } from '@apis/chatting';
 
 
 const Chatting = () => {
@@ -21,10 +20,6 @@ const Chatting = () => {
       refetch();
     }
   }, [isError, chattingListData, isPossibleToRendering, refetch]);
-  
-  useEffect(() => {
-    connect();
-  }, []);
 
   if (!isPossibleToRendering) {
     return <Loader />;
