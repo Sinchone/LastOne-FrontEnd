@@ -18,8 +18,20 @@ export const getChatRoomDetail = (roomId: string) => {
   return authApi.get(`/chat/room/${roomId}`);
 };
 
-export const connect = () => {
+export const socketConnect = () => {
+
+  if (stompClient && stompClient.connected) {
+    console.log('Stomp Client is already connected.');
+    return;
+  }
+
   const socket = new SockJS(`${baseURL}chat/stomp`);
+
+  socket.addEventListener('open', function () {
+    const url = (socket as any)._transport?.url;
+    console.log('Connected to', url);
+  });
+  
 
   stompClient = new Client({
     webSocketFactory: () => socket,
@@ -28,6 +40,13 @@ export const connect = () => {
     },
   });
   stompClient.activate();   
+};
+
+export const socketClose = () => {
+  if (stompClient && stompClient.connected) {
+    stompClient.deactivate();
+    console.log('Stomp Client disconnected.');
+  }
 };
 
 export const subscribe = (roomId: string, onMessageReceived: (message: SubscribeMessageType) => void) => {
