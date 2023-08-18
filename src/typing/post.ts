@@ -27,6 +27,7 @@ export interface PostDetailType {
   title: string;
   description: string;
   preferGender: string;
+  workoutPart: string;
   imgUrls: string[];
   startedAt: string;
   createdAt: string;
