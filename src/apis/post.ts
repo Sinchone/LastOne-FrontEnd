@@ -16,6 +16,19 @@ export const createPost = (formData: FormData) => {
   });
 };
 
+export const editPost = (id: number, formData: FormData) => {
+  const accessToken = getAccessTokenFromCookie();
+
+  return api.put({
+    url: `api/recruitment/${id}`,
+    data: formData,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};
+
 export const getPostList = (params: SearchParam, pageParam?: number) => {
   if (pageParam) params.lastId = pageParam;
 
