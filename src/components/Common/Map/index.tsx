@@ -105,8 +105,8 @@ export default function SearchMap({ searchPlace, handleClickLocation }: Props) {
 
     const content =
       `<div style="position:relative; bottom: 40px; display: flex; flex-direction: column; align-items: center; width: 180px; height: 66px;  border-radius: 8px; padding: 12px 16px 12px 16px;  gap: 4px; background-color: #000C4A;">` +
-      `<span style="font-weight: 700; font-size: 16px; line-height: 22px; color:#00DB80">${selectedPlace.place_name}</span>` +
-      `<span style="font-weight: 400; font-size: 12px; line-height: 16px; color:#EEEEEE">${selectedPlace.road_address_name}</span>` +
+      `<span style="width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; text-align: center; font-weight: 700; font-size: 16px; line-height: 22px; color:#00DB80">${selectedPlace.place_name}</span>` +
+      `<span style="width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; text-align: center; font-weight: 400; font-size: 12px; line-height: 16px; color:#EEEEEE">${selectedPlace.road_address_name}</span>` +
       '</div>';
 
     customOverLay.current = new window.kakao.maps.CustomOverlay({
@@ -114,6 +114,7 @@ export default function SearchMap({ searchPlace, handleClickLocation }: Props) {
       position: new window.kakao.maps.LatLng(selectedPlace?.y, selectedPlace?.x),
       content: content,
       yAnchor: 1,
+      zIndex: 3,
     });
   }, [selectedPlace]);
 
