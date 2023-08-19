@@ -14,7 +14,7 @@ import { Post, PostDetailType } from '@typing/post';
 import { exercisePartArray, genderArray } from '@constants/post';
 import { createPost, editPost } from '@apis/post';
 import { checkAllKeysHaveValues } from '@utils/checkAllKeysHaveValues';
-import { Map } from '@components/Common';
+import { Map, Modal } from '@components/Common';
 import Images from '../Image';
 import { useRouter } from 'next/router';
 import NoImage from '../Image/None';
@@ -51,6 +51,7 @@ const Content = ({ isEdit, originalPost }: Props) => {
     },
   };
   const [data, setData] = useState<Post>(initialData);
+  const [isEditSuccess, setIsEditSuccess] = useState(false);
   const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
   const [selectedTime, setSelectedTime] = useRecoilState(selectedTimeState);
   const [isMapShow, setIsMapShow] = useRecoilState(isMapShowState);
@@ -175,8 +176,9 @@ const Content = ({ isEdit, originalPost }: Props) => {
     const postId = originalPost?.recruitmentId;
 
     if (!postId) return;
-    editPost(postId, formData);
-    await router.replace(`/post/${postId}`);
+    editPost(postId, formData).then(() => {
+      setIsEditSuccess(true);
+    });
   };
 
   const uploadImages = img.urls.join('') ? <Images setImg={setImg} img={img} /> : <NoImage setImg={setImg} />;
@@ -299,6 +301,16 @@ const Content = ({ isEdit, originalPost }: Props) => {
 
           {/* 업로드 버튼 */}
           <S.UploadBtn onClick={handleSubmitForm}>업로드</S.UploadBtn>
+          {isEditSuccess && (
+            <Modal
+              isOpen={isEditSuccess}
+              handleClose={() => {
+                setIsEditSuccess(false);
+                router.replace(`/post/${originalPost?.recruitmentId}`);
+              }}
+              text={{ success: '성공적으로\n수정 되었습니다!' }}
+            />
+          )}
         </S.Wrapper>
       ) : (
         <SearchGym setChangeSearchPlace={setChangeSearchPlace} handleCloseSearch={handleCloseSearch} />
