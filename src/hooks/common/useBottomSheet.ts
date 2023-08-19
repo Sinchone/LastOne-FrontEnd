@@ -6,10 +6,11 @@ import { BottomSheetName } from '@typing/bottomSheet';
 const useBottomSheet = () => {
   const [bottomsheet, setBottomSheet] = useRecoilState(bottomSheetState);
 
-  const showBottomSheet = (name: BottomSheetName) => {
+  const showBottomSheet = (name: BottomSheetName, initialMenu?: 'calendar' | 'time') => {
     setBottomSheet({
       isOpen: true,
       name,
+      initialMenu,
     });
   };
 
