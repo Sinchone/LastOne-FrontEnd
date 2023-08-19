@@ -1,6 +1,5 @@
 import { BottomSheet, Loader } from '@components/Common';
-import { Header } from '@components/PostDetail';
-import { Content } from '@components/PostWrite';
+import { Header, Content } from '@components/PostWrite';
 import useGetPostById from '@hooks/Post/queries/useGetPostById';
 import { useBottomSheet } from '@hooks/common';
 import { useGetUserInfo } from '@hooks/common/queries';
@@ -35,7 +34,7 @@ const PostEdit = () => {
 
   return (
     <>
-      <Header isOther={isOther} postId={postId} />
+      <Header isEdit postId={postId} />
       <Content isEdit originalPost={post.data.data} />
       <div id="bottomsheet">{bottomsheet.isOpen && <BottomSheet />}</div>
     </>
