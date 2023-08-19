@@ -53,11 +53,19 @@ export default function SearchMap({ searchPlace, handleClickLocation }: Props) {
     // 검색어따라 지도에서 찾기
     const placesSearchCB = (data: any, status: any) => {
       if (status === window.kakao.maps.services.Status.OK) {
+        const filteredData = data.filter((d: any) => d.category_name.includes('헬스클럽'));
+
+        if (!filteredData.length) {
+          const center = new window.kakao.maps.LatLng(33.450701, 126.570667);
+          kakaoMap.setCenter(center);
+          return;
+        }
+
         const bounds = new window.kakao.maps.LatLngBounds();
 
-        for (let i = 0; i < data.length; i++) {
-          displayMarker(data[i]);
-          bounds.extend(new window.kakao.maps.LatLng(data[i].y, data[i].x));
+        for (let i = 0; i < filteredData.length; i++) {
+          displayMarker(filteredData[i]);
+          bounds.extend(new window.kakao.maps.LatLng(filteredData[i].y, filteredData[i].x));
         }
 
         kakaoMap.setBounds(bounds);
