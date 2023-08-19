@@ -1,23 +1,26 @@
+import { ImageType } from '@components/PostWrite/Content';
 import * as S from './style';
 import AddImgIcon from '@assets/icon/addImg.svg';
 
 interface Props {
-  setImgFiles: React.Dispatch<React.SetStateAction<string[]>>;
+  setImg: React.Dispatch<React.SetStateAction<ImageType>>;
 }
 
-const NoImage = ({ setImgFiles }: Props) => {
+const NoImage = ({ setImg }: Props) => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files as any;
-    const maxLength = files.length > 3 ? 3 : files.length;
-    const images: string[] = [];
+    const uploadFiles = e.target.files as any;
+    const maxLength = uploadFiles.length > 3 ? 3 : uploadFiles.length;
+    const files: File[] = [];
+    const urls: string[] = [];
 
-    if (files.length > 3) alert('최대 3장까지 첨부할 수 있습니다.');
+    if (uploadFiles.length > 3) alert('최대 3장까지 첨부할 수 있습니다.');
 
     for (let i = 0; i < maxLength; i++) {
-      images.push(files[i]);
+      files.push(uploadFiles[i]);
+      urls.push(URL.createObjectURL(uploadFiles[i]));
     }
 
-    setImgFiles(images);
+    setImg({ files, urls });
   };
 
   return (

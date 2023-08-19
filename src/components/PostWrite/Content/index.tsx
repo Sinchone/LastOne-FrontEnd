@@ -6,26 +6,38 @@ import BottomArrowIcon from '@assets/icon/bottom-arrow.svg';
 import SearchIcon from '@assets/icon/search.svg';
 import SearchGym from '../SearchGym';
 import { useBottomSheet } from '@hooks/common';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { isMapShowState } from '@recoil/postWrite';
 import { selectedDateState, selectedTimeState } from '@recoil/bottomsheet/calendarTime';
 import moment from 'moment';
-import { Post } from '@typing/post';
+import { Post, PostDetailType } from '@typing/post';
 import { exercisePartArray, genderArray } from '@constants/post';
-import { createPost } from '@apis/post';
+import { createPost, editPost } from '@apis/post';
 import { checkAllKeysHaveValues } from '@utils/checkAllKeysHaveValues';
 import { Map } from '@components/Common';
 import Images from '../Image';
 import { useRouter } from 'next/router';
 import NoImage from '../Image/None';
+import 'moment/locale/ko';
+import { createImageUrl } from '@utils/createImageUrl';
 
-const Content = () => {
+interface Props {
+  isEdit?: boolean;
+  originalPost?: PostDetailType;
+}
+
+export interface ImageType {
+  files: (File | string)[];
+  urls: string[];
+}
+
+const Content = ({ isEdit, originalPost }: Props) => {
   const initialData: Post = {
-    title: '',
-    description: '',
-    workoutPart: '',
-    preferGender: '',
-    gym: {
+    title: originalPost?.title || '',
+    description: originalPost?.description || '',
+    workoutPart: originalPost?.workoutPart || '',
+    preferGender: originalPost?.preferGender || '',
+    gym: originalPost?.gym || {
       name: '',
       location: '',
       latitude: '',
@@ -38,10 +50,13 @@ const Content = () => {
     },
   };
   const [data, setData] = useState<Post>(initialData);
-  const selectedDate = useRecoilValue(selectedDateState);
-  const selectedTime = useRecoilValue(selectedTimeState);
+  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
+  const [selectedTime, setSelectedTime] = useRecoilState(selectedTimeState);
   const [isMapShow, setIsMapShow] = useRecoilState(isMapShowState);
-  const [imgFiles, setImgFiles] = useState<any>([]);
+  const [img, setImg] = useState<ImageType>({
+    files: [],
+    urls: [],
+  });
   const inputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { showBottomSheet } = useBottomSheet();
@@ -54,6 +69,22 @@ const Content = () => {
       }
     }
   }, [isMapShow, inputRef]);
+
+  useEffect(() => {
+    if (originalPost) {
+      const startedAtDate = new Date(originalPost.startedAt);
+      setSelectedDate(startedAtDate);
+      setSelectedTime({
+        meridiem: moment(startedAtDate).format('a') as '오전' | '오후',
+        time: moment(startedAtDate).format('hh:mm'),
+      });
+
+      const originalImages = originalPost.imgUrls.map((imgUrl) => createImageUrl(imgUrl as string));
+      setImg((prev) => {
+        return { ...prev, urls: originalImages };
+      });
+    }
+  }, [originalPost, setSelectedDate, setSelectedTime]);
 
   const titleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, title: e.target.value });
@@ -118,11 +149,11 @@ const Content = () => {
       })
     );
 
-    if (imgFiles) {
-      console.log('imgFiles', imgFiles);
-      for (let i = 0; i < imgFiles.length; i++) {
-        if (imgFiles[i]) {
-          formData.append('imgFiles', imgFiles[i]);
+    if (img.files) {
+      console.log('imgFiles', img.files);
+      for (let i = 0; i < img.files.length; i++) {
+        if (img.files[i]) {
+          formData.append('imgFiles', img.files[i]);
         }
       }
     }
@@ -130,15 +161,25 @@ const Content = () => {
     for (const pair of formData.entries()) {
       console.log('test', pair[0] + ', ' + pair[1]);
     }
-    createPost(formData).then((res) => {
-      console.log(res);
-    });
 
-    await router.push('/');
-    router.reload();
+    if (!isEdit) {
+      createPost(formData).then((res) => {
+        console.log(res);
+      });
+
+      await router.push('/');
+      router.reload();
+    }
+
+    const postId = originalPost?.recruitmentId;
+
+    if (!postId) return;
+    editPost(postId, formData);
+    await router.replace(`/post/${postId}`);
   };
 
-  console.log('imgFiles:', imgFiles);
+  console.log('imgFiles:', img.files);
+  console.log('imgUrls', img.urls);
 
   return (
     <>
@@ -226,11 +267,7 @@ const Content = () => {
           {/* 상세설명 */}
           <S.DescriptionArea>
             <S.Subject>상세설명</S.Subject>
-            {imgFiles.join('') ? (
-              <Images setImgFiles={setImgFiles} imgFiles={imgFiles} />
-            ) : (
-              <NoImage setImgFiles={setImgFiles} />
-            )}
+            {img.urls.join('') ? <Images setImg={setImg} img={img} /> : <NoImage setImg={setImg} />}
 
             <S.DescriptionTextAreaWrapper>
               <span>{data.description.length}/100</span>
