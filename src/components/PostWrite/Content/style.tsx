@@ -205,6 +205,24 @@ export const ImageAreaWrapper = styled.div`
   }
 `;
 
+export const ImageWrapper = styled.div`
+  width: 100%;
+  height: 180px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+
+  & > div {
+    position: relative;
+    width: 100%;
+    height: 180px;
+
+    border-radius: 8px;
+    overflow: hidden;
+  }
+`;
+
 export const DescriptionTextAreaWrapper = styled.div`
   width: 100%;
   margin-top: 16px;

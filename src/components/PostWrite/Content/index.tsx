@@ -20,6 +20,7 @@ import { useRouter } from 'next/router';
 import NoImage from '../Image/None';
 import 'moment/locale/ko';
 import { createImageUrl } from '@utils/createImageUrl';
+import Image from 'next/image';
 
 interface Props {
   isEdit?: boolean;
@@ -76,7 +77,7 @@ const Content = ({ isEdit, originalPost }: Props) => {
       setSelectedDate(startedAtDate);
       setSelectedTime({
         meridiem: moment(startedAtDate).format('a') as '오전' | '오후',
-        time: moment(startedAtDate).format('hh:mm'),
+        time: moment(startedAtDate).format('h:mm'),
       });
 
       const originalImages = originalPost.imgUrls.map((imgUrl) => createImageUrl(imgUrl as string));
@@ -178,6 +179,19 @@ const Content = ({ isEdit, originalPost }: Props) => {
     await router.replace(`/post/${postId}`);
   };
 
+  const uploadImages = img.urls.join('') ? <Images setImg={setImg} img={img} /> : <NoImage setImg={setImg} />;
+  const viewImages = img.urls.join('') ? (
+    <S.ImageWrapper>
+      {img.urls.map((imgUrl) => (
+        <div key={imgUrl}>
+          <Image src={imgUrl} fill alt="image" style={{ objectFit: 'contain' }} />
+        </div>
+      ))}
+    </S.ImageWrapper>
+  ) : (
+    <></>
+  );
+
   console.log('imgFiles:', img.files);
   console.log('imgUrls', img.urls);
 
@@ -198,15 +212,15 @@ const Content = ({ isEdit, originalPost }: Props) => {
           </S.TitleInputWrapper>
 
           {/* 운동 날짜와 운동 시간 BottomSheet 사용 */}
-          <S.SelectWrapper onClick={() => showBottomSheet('CalendarTime')}>
-            <S.SelectArea>
+          <S.SelectWrapper>
+            <S.SelectArea onClick={() => showBottomSheet('CalendarTime', 'calendar')}>
               <div>
                 <CalendarIcon />
                 <S.Subject>{selectedDate ? moment(selectedDate).format('MM/DD') : '운동 날짜'}</S.Subject>
               </div>
               <BottomArrowIcon />
             </S.SelectArea>
-            <S.SelectArea>
+            <S.SelectArea onClick={() => showBottomSheet('CalendarTime', 'time')}>
               <div>
                 <ClockIcon />
                 <S.Subject>
@@ -267,7 +281,7 @@ const Content = ({ isEdit, originalPost }: Props) => {
           {/* 상세설명 */}
           <S.DescriptionArea>
             <S.Subject>상세설명</S.Subject>
-            {img.urls.join('') ? <Images setImg={setImg} img={img} /> : <NoImage setImg={setImg} />}
+            {isEdit ? viewImages : uploadImages}
 
             <S.DescriptionTextAreaWrapper>
               <span>{data.description.length}/100</span>
