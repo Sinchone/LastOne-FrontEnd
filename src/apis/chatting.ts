@@ -10,6 +10,10 @@ export const getChattingList = () => {
   return authApi.get('/chat/room');
 };
 
+export const createChattingRoom = (participationId: number) => {
+  return authApi.post('/chat/room', { participationId });
+};
+
 export const deleteChattingRoom = (roomId: string) => {
   return authApi.delete(`/chat/room/${roomId}`);
 };
