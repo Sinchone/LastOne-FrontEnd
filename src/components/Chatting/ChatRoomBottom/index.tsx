@@ -29,6 +29,11 @@ const ChatRoomBottom = ({ roomId, otherId, myId }: Props) => {
       <S.Input
         value={messageContent}
         onChange={(e) => setMessageContent(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            sendMessage();
+          }
+        }}
         placeholder="메세지를 입력하세요."
       />
       <S.SendButton onClick={sendMessage}>
