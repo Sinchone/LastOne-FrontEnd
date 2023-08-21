@@ -1,18 +1,15 @@
 import { useEffect, useState } from 'react';
 import * as S from './style';
-
 import Image from 'next/image';
 import moment from 'moment';
-
 import { ApplyStatusType, PostDetailType } from '@typing/post';
-
 import { Map, Modal } from '@components/Common';
 import ProfileIcon from '@assets/icon/profilelarge.svg';
 import Marker from '@assets/icon/mapmarker.svg';
-
 import { createImageUrl } from '@utils/createImageUrl';
 import { createApplication, deleteApplication } from '@apis/application';
 import { useRouter } from 'next/router';
+import { createChattingRoom } from '@apis/chatting';
 
 interface Props {
   isOther: boolean;
@@ -65,6 +62,16 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
           console.log(error);
         });
     }
+  };
+
+  const handleChatButton = () => {
+    const chatRoomId = createChattingRoom(post.memberId);
+    chatRoomId.then((response) => {
+      const roomId = response.data;
+      router.push(`/chatting/${roomId}`)
+    }).catch((error) => {
+      console.log("채팅방 생성 에러", error);
+    });
   };
 
   return (
@@ -160,7 +167,7 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
 
       {isOther ? (
         <S.ButtonsWrapper>
-          <S.ChatButton onClick={() => alert('구현 예정입니다.')}>채팅하기</S.ChatButton>
+          <S.ChatButton onClick={() => handleChatButton()}>채팅하기</S.ChatButton>
           {isPartner ? (
             <S.CancelButton
               onClick={() => {
