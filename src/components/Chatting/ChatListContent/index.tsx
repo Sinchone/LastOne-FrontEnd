@@ -69,7 +69,7 @@ const ChattingList = ({ chattingList: initialChattingList }: Props) => {
             <S.MenuWrapper>
               <S.TimeAndNotRead>
                 <span>{calDate(c.lastChatTime)}</span>
-                <S.NotRead>{c.notReadCount}</S.NotRead>
+                {c.notReadCount > 0 && <S.NotRead>{c.notReadCount}</S.NotRead>}
               </S.TimeAndNotRead>
               <S.MenuIconWrapper
                 onClick={(e) => {
