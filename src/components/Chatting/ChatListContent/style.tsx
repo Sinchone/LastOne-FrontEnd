@@ -49,9 +49,8 @@ export const TimeAndNotRead = styled.div`
   margin-right: 10px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end; 
+  align-items: flex-end;
   gap: 10px;
-
 
   span {
     ${theme.font.ko.body2}
@@ -76,11 +75,10 @@ export const ChatItemWrapper = styled.div`
   width: 100%;
   padding: 20px;
   border-bottom: 1px solid var(--color-gray3);
-  cursor: pointer;  
-
+  cursor: pointer;
 
   &:hover {
-    background-color: #f0f0f0; 
+    background-color: #f0f0f0;
   }
 `;
 
@@ -113,7 +111,7 @@ export const ImageWrapper = styled.div`
 
 export const MenuIconWrapper = styled.div`
   margin-bottom: 20px;
-  padding:10px;
+  padding: 10px;
   cursor: pointer;
 `;
 
