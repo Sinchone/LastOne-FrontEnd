@@ -30,6 +30,10 @@ const ChattingList = ({ chattingList: initialChattingList }: Props) => {
     setBottomSheetVisible(false);
   };
 
+  useEffect(() => {
+    setChattingList(initialChattingList);
+  }, [initialChattingList])
+
   const mainAreaRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
