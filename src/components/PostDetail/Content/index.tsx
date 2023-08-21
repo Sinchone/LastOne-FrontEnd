@@ -65,8 +65,8 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
   };
 
   const handleChatButton = () => {
-    const chatRoomId = createChattingRoom(post.memberId);
-    chatRoomId.then((response) => {
+    const promise = createChattingRoom(post.memberId);
+    promise.then((response) => {
       const roomId = response.data;
       router.push(`/chatting/${roomId}`)
     }).catch((error) => {
