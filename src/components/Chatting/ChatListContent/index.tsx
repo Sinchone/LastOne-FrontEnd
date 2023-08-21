@@ -40,7 +40,12 @@ const ChattingList = ({ chattingList: initialChattingList }: Props) => {
     <S.Wrapper>
       {chattingList.length > 0 ? (
         chattingList.map((c) => (
-          <S.ChatItemWrapper key={c.roomId} onClick={() => {router.push(`/chatting/${c.roomId}`)}}>
+          <S.ChatItemWrapper
+            key={c.roomId}
+            onClick={() => {
+              router.push(`/chatting/${c.roomId}`);
+            }}
+          >
             <S.ProfileWrapper>
               <S.ProfileButton
                 onClick={(e) => {
@@ -50,12 +55,7 @@ const ChattingList = ({ chattingList: initialChattingList }: Props) => {
               >
                 <S.ImageWrapper>
                   {c.profileUrl ? (
-                    <Image
-                      src={createImageUrl(c.profileUrl as string)}
-                      width={500}
-                      height={500}
-                      alt='profileImg'
-                    />
+                    <Image src={createImageUrl(c.profileUrl as string)} width={500} height={500} alt="profileImg" />
                   ) : (
                     <ProfileIcon />
                   )}

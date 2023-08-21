@@ -21,7 +21,6 @@ export const calDate = (input: string) => {
 };
 
 export const calDateForMessage = (input: string) => {
-
   const matchedStr = input.match(/(\d{2}):(\d{2}):(\d{2})/);
   if (!matchedStr) {
     return;
@@ -32,4 +31,4 @@ export const calDateForMessage = (input: string) => {
   const convertedHour = numericHour > 12 ? numericHour - 12 : numericHour;
 
   return `${period} ${convertedHour}:${minute}`;
-}
+};

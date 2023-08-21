@@ -1,9 +1,8 @@
 import React from 'react';
-import { Loader,Header, Navigation } from '@components/Common';
+import { Loader, Header, Navigation } from '@components/Common';
 import { ChatMain, ChatContent } from '@components/Chatting';
 import { useGetChattingList } from '@hooks/chatting';
 import { useState, useEffect } from 'react';
-
 
 const Chatting = () => {
   const { data: chattingListData, isError, refetch } = useGetChattingList();
@@ -15,7 +14,7 @@ const Chatting = () => {
     }
     if (chattingListData) {
       setIsPossibleToRendering(true);
-    } 
+    }
     if (!isPossibleToRendering) {
       refetch();
     }
