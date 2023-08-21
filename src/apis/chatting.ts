@@ -61,6 +61,18 @@ export const subscribe = (roomId: string, onMessageReceived: (message: Subscribe
     }
 }
 
+export const subscribForList = (userId: number, callback: () => void) => {
+    if (stompClient && stompClient.connected) {
+        return stompClient.subscribe(`/topic/${userId}`, (message) => {
+            console.log("message => " + message.body);
+            console.log("콜백확인");
+            callback();
+        });
+    } else {
+        console.log('STOMP client is not connected.');
+    }
+}
+
 export const publishMessage = (roomId: string, message: string) => {
     if (message && stompClient && stompClient.connected) {
         console.log(`publishMessage => ${message}`);
