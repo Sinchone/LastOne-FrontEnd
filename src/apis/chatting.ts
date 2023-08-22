@@ -70,7 +70,9 @@ export const subscribForList = (userId: number, callback: () => void) => {
         return stompClient.subscribe(`/topic/${userId}`, (message) => {
             console.log("message => " + message.body);
             console.log("콜백확인");
-            callback();
+            if (callback) {
+              callback();
+            }
         });
     } else {
         console.log('STOMP client is not connected.');
