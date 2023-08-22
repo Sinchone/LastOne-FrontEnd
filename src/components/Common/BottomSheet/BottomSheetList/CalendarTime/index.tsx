@@ -13,14 +13,18 @@ import { useRecoilState } from 'recoil';
 import { selectedDateState, selectedTimeState } from '@recoil/bottomsheet/calendarTime';
 import { TimeType } from '@typing/post';
 
-const CalendarTime = () => {
+interface Props {
+  initialMenu?: 'calendar' | 'time';
+}
+
+const CalendarTime = ({ initialMenu = 'calendar' }: Props) => {
   const { closeBottomSheet } = useBottomSheet();
 
   const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
   const [selectedTime, setSelectedTime] = useRecoilState(selectedTimeState);
   const [currentDate, setCurrentDate] = useState<Date | null>(selectedDate);
   const [currentTime, setCurrentTime] = useState<TimeType>(selectedTime);
-  const [selectMenu, setSelectMenu] = useState('calendar');
+  const [selectMenu, setSelectMenu] = useState(initialMenu);
 
   const handleDateChange = (date: Date) => {
     setSelectedDate(date);

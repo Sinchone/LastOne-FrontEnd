@@ -16,6 +16,10 @@ export const createPost = (formData: FormData) => {
   });
 };
 
+export const editPost = (id: number, formData: FormData) => {
+  return authApi.put(`/api/recruitment/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+};
+
 export const getPostList = (params: SearchParam, pageParam?: number) => {
   if (pageParam) params.lastId = pageParam;
 

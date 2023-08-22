@@ -1,26 +1,36 @@
 import * as S from './style';
 import SelectImage from './Select';
 import { useEffect, useState } from 'react';
+import { ImageType } from '../Content';
 
 interface Props {
-  setImgFiles: React.Dispatch<React.SetStateAction<string[]>>;
+  img: ImageType;
+  setImg: React.Dispatch<React.SetStateAction<ImageType>>;
 }
 
-const Image = ({ setImgFiles }: Props) => {
-  const [images, setImages] = useState(['', '', '']);
+const Image = ({ img, setImg }: Props) => {
+  const [images, setImages] = useState(img);
 
-  const handleChange = (index: number, image: string) => {
-    const newImages = [...images];
-    newImages[index] = image;
+  const handleChange = (index: number, image: File) => {
+    const newImages = {
+      files: [...images.files],
+      urls: [...images.urls],
+    };
+    newImages.files[index] = image;
+    newImages.urls[index] = URL.createObjectURL(image);
     setImages(newImages);
-    setImgFiles(newImages);
+    setImg(newImages);
   };
 
   const handleDeleteImage = (index: number) => {
-    const newImages = [...images];
-    newImages[index] = '';
+    const newImages = {
+      files: [...images.files],
+      urls: [...images.urls],
+    };
+    newImages.files[index] = '';
+    newImages.urls[index] = '';
     setImages(newImages);
-    setImgFiles(newImages);
+    setImg(newImages);
   };
 
   useEffect(() => {
@@ -35,7 +45,7 @@ const Image = ({ setImgFiles }: Props) => {
             key={index}
             onChange={(image) => handleChange(index, image)}
             onDelete={() => handleDeleteImage(index)}
-            image={images[index]}
+            imgUrl={images.urls[index]}
             index={index}
           />
         );

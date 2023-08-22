@@ -12,18 +12,27 @@ export const Wrapper = styled.div`
   overflow: hidden;
   position: relative;
 
-  & svg {
-    z-index: 2;
-    position: absolute;
-  }
-
-  > div:first-of-type {
+  label {
     width: 100%;
     height: 180px;
     background-color: rgba(0, 0, 0, 0.2);
     position: absolute;
+    cursor: pointer;
+
+    svg {
+      z-index: 2;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
-  > div:nth-of-type(2) {
+
+  input {
+    visibility: hidden;
+  }
+
+  > div {
     width: 100%;
     height: 100%;
     display: flex;

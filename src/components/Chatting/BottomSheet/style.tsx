@@ -18,9 +18,9 @@ export const Container = styled.div`
 `;
 
 export const ModalBackground = styled.div`
-  position: fixed;       // fixed로 변경
-  bottom: 0;             // 화면의 맨 아래까지
-  left: 50%;  // 화면 중앙으로 이동
+  position: fixed; // fixed로 변경
+  bottom: 0; // 화면의 맨 아래까지
+  left: 50%; // 화면 중앙으로 이동
   transform: translateX(-50%); // 중앙 정렬을 위한 트랜스폼
   /* position: sticky;
   bottom: 0;       // 페이지 하단에 고정 */
@@ -40,7 +40,7 @@ export const OutsideArea = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100vh - 225px); 
+  height: calc(100vh - 225px);
   z-index: 102;
 `;
 
@@ -48,7 +48,7 @@ export const Wrapper = styled.div`
   z-index: 110;
   position: fixed;
   bottom: 0;
-  left: 50%;  // 화면 중앙으로 이동
+  left: 50%; // 화면 중앙으로 이동
   transform: translate(-50%, 0); // 중앙 정렬을 위한 트랜스폼
   width: 100%;
   max-width: 620px;
@@ -79,7 +79,6 @@ export const Wrapper = styled.div`
   }
 `;
 
-
 export const BottomSheetContent = styled.div`
   padding: 30px 16px;
   display: flex;
@@ -96,7 +95,7 @@ export const BottomSheetHeader = styled.div`
   border-bottom: 1px solid var(--color-gray3);
   padding-bottom: 15px;
   font-weight: bold;
-`; 
+`;
 
 export const ButtonWrapper = styled.div`
   display: flex;
@@ -110,15 +109,11 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const ExitButton = styled.button`
-    width: 100%;
-    height: 50px;
-    border-radius: 8px;
-    background-color: var(--color-white);
-    border: 1px solid var(--color-gray3);
-    font-weight: bold;
-    cursor: pointer;
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray3);
+  font-weight: bold;
+  cursor: pointer;
 `;
-
-
-
-

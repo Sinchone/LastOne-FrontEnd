@@ -25,6 +25,7 @@ const SearchGym = ({ setChangeSearchPlace, handleCloseSearch }: Props) => {
   };
 
   const handleClickLocation = (place: any) => {
+    setSearchPlace(place.place_name);
     setClickedLocation({
       name: place.place_name,
       location: place.address_name,

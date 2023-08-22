@@ -10,7 +10,6 @@ interface Props {
 }
 
 export const ChattingBottomSheet = ({ onDelete, roomId, onClose }: Props) => {
-  
   const exitChattingRoom = async () => {
     if (!roomId) {
       return;
@@ -20,7 +19,7 @@ export const ChattingBottomSheet = ({ onDelete, roomId, onClose }: Props) => {
       console.log(response);
       onDelete(roomId);
     } catch (error) {
-      console.error("Error deleting chat room:", error);
+      console.error('Error deleting chat room:', error);
     }
   };
 
