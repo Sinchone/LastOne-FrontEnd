@@ -32,7 +32,7 @@ const ChattingList = ({ chattingList: initialChattingList }: Props) => {
 
   useEffect(() => {
     setChattingList(initialChattingList);
-  }, [initialChattingList])
+  }, [initialChattingList]);
 
   const mainAreaRef = useRef<HTMLElement | null>(null);
 

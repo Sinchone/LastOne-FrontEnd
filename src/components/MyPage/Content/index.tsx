@@ -33,15 +33,23 @@ const Content = ({ other, user, sbd, gym }: Props) => {
     </S.FitnesPartner>
   );
 
-  const chattingButton = <S.ChattingButton onClick={() => {
-    const promise = createChattingRoom(user.id);
-    promise.then((response) => {
-      const roomId = response.data;
-      router.push(`/chatting/${roomId}`)
-    }).catch((error) => {
-      console.log("채팅방 생성 에러", error);
-    });
-  }}>채팅하기</S.ChattingButton>;
+  const chattingButton = (
+    <S.ChattingButton
+      onClick={() => {
+        const promise = createChattingRoom(user.id);
+        promise
+          .then((response) => {
+            const roomId = response.data;
+            router.push(`/chatting/${roomId}`);
+          })
+          .catch((error) => {
+            console.log('채팅방 생성 에러', error);
+          });
+      }}
+    >
+      채팅하기
+    </S.ChattingButton>
+  );
 
   return (
     <S.Wrapper>

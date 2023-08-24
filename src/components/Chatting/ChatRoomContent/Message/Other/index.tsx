@@ -16,7 +16,11 @@ const OtherMessage = ({ profileUrl, message }: Props) => {
 
   return (
     <S.MessageWrapper>
-      <S.ProfileButton onClick={() => {router.push(`/mypage/${message.senderId}`);}}>
+      <S.ProfileButton
+        onClick={() => {
+          router.push(`/mypage/${message.senderId}`);
+        }}
+      >
         <S.ImageWrapper>
           {profileUrl ? (
             <Image src={createImageUrl(profileUrl)} width={500} height={500} alt="profileImg" />
@@ -26,9 +30,7 @@ const OtherMessage = ({ profileUrl, message }: Props) => {
           <ProfileIcon />
         </S.ImageWrapper>
       </S.ProfileButton>
-      <S.Message>
-        {message.content}
-      </S.Message>
+      <S.Message>{message.content}</S.Message>
       <S.SendTime>{calDateForMessage(message.sendTime)}</S.SendTime>
     </S.MessageWrapper>
   );

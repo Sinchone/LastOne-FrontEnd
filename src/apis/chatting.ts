@@ -23,7 +23,6 @@ export const getChatRoomDetail = (roomId: string) => {
 };
 
 export const socketConnect = () => {
-
   if (stompClient && stompClient.connected) {
     console.log('Stomp Client is already connected.');
     return;
@@ -35,7 +34,6 @@ export const socketConnect = () => {
     const url = (socket as any)._transport?.url;
     console.log('Connected to', url);
   });
-  
 
   stompClient = new Client({
     webSocketFactory: () => socket,
@@ -43,7 +41,7 @@ export const socketConnect = () => {
       console.log('Connected to WSS server');
     },
   });
-  stompClient.activate();   
+  stompClient.activate();
 };
 
 export const socketClose = () => {
@@ -54,36 +52,36 @@ export const socketClose = () => {
 };
 
 export const subscribe = (roomId: string, onMessageReceived: (message: SubscribeMessageType) => void) => {
-    console.log(`roomId 확인 => ${roomId}`);
-    if (stompClient && stompClient.connected) {
-        return stompClient.subscribe(`/topic/${roomId}`, (message) => {
-            console.log(message);
-            onMessageReceived(JSON.parse(message.body));
-        });
-    } else {
-        console.log('STOMP client is not connected.');
-    }
-}
+  console.log(`roomId 확인 => ${roomId}`);
+  if (stompClient && stompClient.connected) {
+    return stompClient.subscribe(`/topic/${roomId}`, (message) => {
+      console.log(message);
+      onMessageReceived(JSON.parse(message.body));
+    });
+  } else {
+    console.log('STOMP client is not connected.');
+  }
+};
 
 export const subscribForList = (userId: number, callback: () => void) => {
-    if (stompClient && stompClient.connected) {
-        return stompClient.subscribe(`/topic/${userId}`, (message) => {
-            console.log("message => " + message.body);
-            console.log("콜백확인");
-            if (callback) {
-              callback();
-            }
-        });
-    } else {
-        console.log('STOMP client is not connected.');
-    }
-}
+  if (stompClient && stompClient.connected) {
+    return stompClient.subscribe(`/topic/${userId}`, (message) => {
+      console.log('message => ' + message.body);
+      console.log('콜백확인');
+      if (callback) {
+        callback();
+      }
+    });
+  } else {
+    console.log('STOMP client is not connected.');
+  }
+};
 
 export const publishMessage = (roomId: string, message: string) => {
-    if (message && stompClient && stompClient.connected) {
-        console.log(`publishMessage => ${message}`);
-        stompClient.publish({ destination: `/pub/chat.message.test.${roomId}`, body: message });
-    } else {
-        console.log("메세지 보낼 준비가 안된 상태입니다.");
-    }
-}
+  if (message && stompClient && stompClient.connected) {
+    console.log(`publishMessage => ${message}`);
+    stompClient.publish({ destination: `/pub/chat.message.test.${roomId}`, body: message });
+  } else {
+    console.log('메세지 보낼 준비가 안된 상태입니다.');
+  }
+};

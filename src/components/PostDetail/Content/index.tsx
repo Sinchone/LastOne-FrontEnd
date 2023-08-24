@@ -66,12 +66,14 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
 
   const handleChatButton = () => {
     const promise = createChattingRoom(post.memberId);
-    promise.then((response) => {
-      const roomId = response.data;
-      router.push(`/chatting/${roomId}`)
-    }).catch((error) => {
-      console.log("채팅방 생성 에러", error);
-    });
+    promise
+      .then((response) => {
+        const roomId = response.data;
+        router.push(`/chatting/${roomId}`);
+      })
+      .catch((error) => {
+        console.log('채팅방 생성 에러', error);
+      });
   };
 
   return (

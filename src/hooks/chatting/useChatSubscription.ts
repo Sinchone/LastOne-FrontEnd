@@ -7,12 +7,12 @@ const useChatSubscription = (currentUserId: number, callback?: () => void) => {
   const [isRead, setIsRead] = useRecoilState(isReadChattingState);
 
   useEffect(() => {
-		subscribForList(currentUserId, () => {
-			setIsRead(false);
-			if (callback) {
-				callback();
-			}
-		});
+    subscribForList(currentUserId, () => {
+      setIsRead(false);
+      if (callback) {
+        callback();
+      }
+    });
   }, [currentUserId, callback]);
 };
 

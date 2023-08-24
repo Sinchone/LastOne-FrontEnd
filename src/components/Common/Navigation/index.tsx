@@ -11,7 +11,7 @@ import { MAIN_PAGE, MATCHING_PAGE, CHATTING_PAGE, APPLY_PAGE } from '@constants/
 import * as S from './style';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
-import { isReadChattingState } from '@recoil/chatting'
+import { isReadChattingState } from '@recoil/chatting';
 
 const Navigation = () => {
   const [isRead, setIsRead] = useRecoilState(isReadChattingState);
@@ -34,11 +34,8 @@ const Navigation = () => {
         </Link>
         <Link href={CHATTING_PAGE}>
           <S.Nav isLocated={pathName === CHATTING_PAGE}>
-            {isRead? 
-              <ChattingIcon /> :
-              <ChattingIconUnread />
-            }
-            <span>채팅</span> : 
+            {isRead ? <ChattingIcon /> : <ChattingIconUnread />}
+            <span>채팅</span>
           </S.Nav>
         </Link>
         <Link href={APPLY_PAGE}>

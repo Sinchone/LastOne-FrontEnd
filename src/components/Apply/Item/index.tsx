@@ -34,12 +34,14 @@ const Item = ({ recruitmentId, data }: Props) => {
 
   const handleChatButton = (memberId: number) => {
     const promise = createChattingRoom(memberId);
-    promise.then((response) => {
-      const roomId = response.data;
-      router.push(`/chatting/${roomId}`)
-    }).catch((error) => {
-      console.log("채팅방 생성 에러", error);
-    });
+    promise
+      .then((response) => {
+        const roomId = response.data;
+        router.push(`/chatting/${roomId}`);
+      })
+      .catch((error) => {
+        console.log('채팅방 생성 에러', error);
+      });
   };
 
   return (
@@ -64,8 +66,14 @@ const Item = ({ recruitmentId, data }: Props) => {
       <span className="time">{moment(data.applicationDate, 'YYYY.MM.DD HH:mm').format('MM.DD HH:mm')}</span>
       <S.ButtonGroup>
         <S.Button menu={menu} type={data.status} onClick={() => data.status !== 'FAILURE' && setIsModal(true)} />
-        <S.Button type={'chatting'} onClick={() => handleChatButton(menu === 'received'? 
-        (data as ReceivedApplication).applicantId : (data as RequestedApplication).memberId)} />
+        <S.Button
+          type={'chatting'}
+          onClick={() =>
+            handleChatButton(
+              menu === 'received' ? (data as ReceivedApplication).applicantId : (data as RequestedApplication).memberId
+            )
+          }
+        />
       </S.ButtonGroup>
       {isModal && (
         <ApplicationModal

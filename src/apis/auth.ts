@@ -35,8 +35,7 @@ const createAuthApi = () => {
               const accessToken = getAccessTokenFromCookie();
               if (accessToken?.includes('test')) {
                 originalRequest.headers.Authorization = accessToken;
-              }
-              else {
+              } else {
                 originalRequest.headers.Authorization = `Bearer ${getAccessTokenFromCookie()}`;
               }
 
