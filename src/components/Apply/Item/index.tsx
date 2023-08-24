@@ -33,7 +33,7 @@ const Item = ({ recruitmentId, data }: Props) => {
   };
 
   const handleChatButton = (memberId: number) => {
-    const promise = createChattingRoom(data.memberId);
+    const promise = createChattingRoom(memberId);
     promise.then((response) => {
       const roomId = response.data;
       router.push(`/chatting/${roomId}`)
@@ -64,7 +64,8 @@ const Item = ({ recruitmentId, data }: Props) => {
       <span className="time">{moment(data.applicationDate, 'YYYY.MM.DD HH:mm').format('MM.DD HH:mm')}</span>
       <S.ButtonGroup>
         <S.Button menu={menu} type={data.status} onClick={() => data.status !== 'FAILURE' && setIsModal(true)} />
-        <S.Button type={'chatting'} onClick={() => handleChatButton(data.memberId)} />
+        <S.Button type={'chatting'} onClick={() => handleChatButton(menu === 'received'? 
+        (data as ReceivedApplication).applicantId : (data as RequestedApplication).memberId)} />
       </S.ButtonGroup>
       {isModal && (
         <ApplicationModal
