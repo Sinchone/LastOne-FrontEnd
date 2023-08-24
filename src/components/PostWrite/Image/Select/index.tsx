@@ -4,14 +4,15 @@ import AddImgIcon from '@assets/icon/addImg.svg';
 import Image from 'next/image';
 
 interface Props {
-  onChange: (image: string) => void;
+  onChange: (image: File) => void;
   onDelete: () => void;
-  image: string;
+  imgUrl: string;
   index: number;
 }
 
-const SelectImage = ({ onChange, onDelete, image, index }: Props) => {
-  const [showImage, setShowImage] = useState<any>('');
+const SelectImage = ({ onChange, onDelete, index, imgUrl }: Props) => {
+  const uploadedImageURL = imgUrl;
+  const [showImage, setShowImage] = useState<any>(uploadedImageURL);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] as any;
@@ -51,7 +52,6 @@ const SelectImage = ({ onChange, onDelete, image, index }: Props) => {
                 name="image"
                 accept=".gif, .jpg, .png, .jpeg"
                 onChange={handleImageChange}
-                value={image}
               />
             </label>
           </>

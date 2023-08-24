@@ -53,11 +53,19 @@ export default function SearchMap({ searchPlace, handleClickLocation }: Props) {
     // 검색어따라 지도에서 찾기
     const placesSearchCB = (data: any, status: any) => {
       if (status === window.kakao.maps.services.Status.OK) {
+        const filteredData = data.filter((d: any) => d.category_name.includes('헬스클럽'));
+
+        if (!filteredData.length) {
+          const center = new window.kakao.maps.LatLng(33.450701, 126.570667);
+          kakaoMap.setCenter(center);
+          return;
+        }
+
         const bounds = new window.kakao.maps.LatLngBounds();
 
-        for (let i = 0; i < data.length; i++) {
-          displayMarker(data[i]);
-          bounds.extend(new window.kakao.maps.LatLng(data[i].y, data[i].x));
+        for (let i = 0; i < filteredData.length; i++) {
+          displayMarker(filteredData[i]);
+          bounds.extend(new window.kakao.maps.LatLng(filteredData[i].y, filteredData[i].x));
         }
 
         kakaoMap.setBounds(bounds);
@@ -97,8 +105,8 @@ export default function SearchMap({ searchPlace, handleClickLocation }: Props) {
 
     const content =
       `<div style="position:relative; bottom: 40px; display: flex; flex-direction: column; align-items: center; width: 180px; height: 66px;  border-radius: 8px; padding: 12px 16px 12px 16px;  gap: 4px; background-color: #000C4A;">` +
-      `<span style="font-weight: 700; font-size: 16px; line-height: 22px; color:#00DB80">${selectedPlace.place_name}</span>` +
-      `<span style="font-weight: 400; font-size: 12px; line-height: 16px; color:#EEEEEE">${selectedPlace.road_address_name}</span>` +
+      `<span style="width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; text-align: center; font-weight: 700; font-size: 16px; line-height: 22px; color:#00DB80">${selectedPlace.place_name}</span>` +
+      `<span style="width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; text-align: center; font-weight: 400; font-size: 12px; line-height: 16px; color:#EEEEEE">${selectedPlace.road_address_name}</span>` +
       '</div>';
 
     customOverLay.current = new window.kakao.maps.CustomOverlay({
@@ -106,6 +114,7 @@ export default function SearchMap({ searchPlace, handleClickLocation }: Props) {
       position: new window.kakao.maps.LatLng(selectedPlace?.y, selectedPlace?.x),
       content: content,
       yAnchor: 1,
+      zIndex: 3,
     });
   }, [selectedPlace]);
 

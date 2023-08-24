@@ -23,3 +23,15 @@ export const Wrapper = styled.header`
     letter-spacing: -1%;
   }
 `;
+
+export const DeleteButton = styled.div`
+  position: absolute;
+  right: 24px;
+
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-gray8);
+
+  user-select: none;
+  cursor: pointer;
+`;

@@ -183,7 +183,7 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
         </S.ButtonsWrapper>
       ) : (
         <S.ButtonsWrapper>
-          <S.EditButton onClick={() => alert('수정 페이지로 이동')}>수정하기</S.EditButton>
+          <S.EditButton onClick={() => router.push(`/post/${post.recruitmentId}/edit`)}>수정하기</S.EditButton>
         </S.ButtonsWrapper>
       )}
 
