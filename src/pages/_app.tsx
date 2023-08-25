@@ -53,7 +53,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     if (token) {
       socketConnect();
     }
-  }, []);
+  }, [router.pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -24,7 +24,6 @@ export const getChatRoomDetail = (roomId: string) => {
 
 export const socketConnect = () => {
   if (stompClient && stompClient.connected) {
-    console.log('Stomp Client is already connected.');
     return;
   }
 
