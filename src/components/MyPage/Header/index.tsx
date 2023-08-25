@@ -8,6 +8,7 @@ import { MY_PAGE_EDIT } from '@constants/route';
 import { logout } from '@apis/user';
 import { removeAccessTokenToCookie, removeRefreshTokenToCookie } from '@utils/token';
 import { Modal } from '@components/Common';
+import { socketClose } from '@apis/chatting';
 
 interface Props {
   nickname?: string;
@@ -26,6 +27,7 @@ const Header = ({ nickname }: Props) => {
     router.push('/login');
     removeAccessTokenToCookie();
     removeRefreshTokenToCookie();
+    socketClose();
   };
 
   return (

@@ -4,6 +4,7 @@ import { login } from '@apis/user';
 import { MAIN_PAGE } from '@constants/route';
 import { queryKeys } from '@constants/querykeys';
 import { setAccessTokenToCookie, setRefreshTokenToCookie } from '@utils/token';
+import { socketConnect } from '@apis/chatting';
 
 const Kakao = () => {
   const router = useRouter();
@@ -12,6 +13,7 @@ const Kakao = () => {
     onSuccess: (response) => {
       setAccessTokenToCookie(response.data.data.accessToken);
       setRefreshTokenToCookie(response.data.data.refreshToken);
+      socketConnect();
 
       router.replace(
         {

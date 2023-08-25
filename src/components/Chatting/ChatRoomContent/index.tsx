@@ -12,7 +12,6 @@ interface Props {
 const ChatRoomContent = ({ chatRoomData }: Props) => {
   const { profileUrl, otherUserId } = chatRoomData;
   const messageList: MessageType[] = chatRoomData.messages;
-  messageList.sort((m1, m2) => new Date(m1.sendTime).getTime() - new Date(m2.sendTime).getTime());
 
   const renderMessages = () => {
     const elements = [];

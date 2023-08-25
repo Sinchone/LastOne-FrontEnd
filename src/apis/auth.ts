@@ -32,7 +32,12 @@ const createAuthApi = () => {
               const { config } = error;
               const originalRequest = config as InternalAxiosRequestConfig<any>;
 
-              originalRequest.headers.Authorization = `Bearer ${getAccessTokenFromCookie()}`;
+              const accessToken = getAccessTokenFromCookie();
+              if (accessToken?.includes('test')) {
+                originalRequest.headers.Authorization = accessToken;
+              } else {
+                originalRequest.headers.Authorization = `Bearer ${getAccessTokenFromCookie()}`;
+              }
 
               const originalResponse = await axios(originalRequest);
               return originalResponse.data;
@@ -48,7 +53,8 @@ const createAuthApi = () => {
     const accessToken = getAccessTokenFromCookie();
 
     if (accessToken && config.headers) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+      if (accessToken.includes('test')) config.headers.Authorization = accessToken;
+      else config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   });
