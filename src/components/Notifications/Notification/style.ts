@@ -13,11 +13,18 @@ const text = {
   `,
 };
 
-export const Wrapper = styled.section<{ isCanceled: boolean; isRead: boolean }>`
+const colors: { [key: string]: string } = {
+  REQUEST: '--color-primary-main',
+  CANCEL: '--color-error',
+  SUCCESS: '--color-secondary-main',
+};
+
+export const Wrapper = styled.section<{ type: string; isRead: boolean }>`
   width: 100%;
-  border-left: 4px solid var(${(props) => (props.isCanceled ? '--color-error' : '--color-primary-main')});
+  border-left: 4px solid var(${(props) => colors[props.type]});
   display: grid;
   grid-template-columns: 128px 1fr 50px;
+  cursor: pointer;
 
   ${(props) => props.isRead && `filter: contrast(0%) brightness(1.5);`}
 `;
@@ -28,7 +35,7 @@ export const IconWrapper = styled.div`
   margin: 0 24px;
 `;
 
-export const Main = styled.div<{ isCanceled: boolean }>`
+export const Main = styled.div<{ type: string }>`
   width: 100%;
   padding: 4px 0;
 
@@ -39,7 +46,7 @@ export const Main = styled.div<{ isCanceled: boolean }>`
   p {
     ${text.bold};
     font-size: 18px;
-    color: var(${(props) => (props.isCanceled ? '--color-error' : '--color-primary-main')});
+    color: var(${(props) => colors[props.type]});
   }
 `;
 

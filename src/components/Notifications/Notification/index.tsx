@@ -3,6 +3,7 @@ import * as S from './style';
 import { NotificationType } from '@typing/notification';
 import RequestIcon from '@assets/icon/matching-request.svg';
 import CancelIcon from '@assets/icon/matching-cancel.svg';
+import SuccessIcon from '@assets/icon/matching-success.svg';
 import Checked from '@assets/icon/checked.svg';
 import UnChecked from '@assets/icon/unchecked.svg';
 
@@ -13,8 +14,29 @@ interface Props {
 }
 
 const Notification = ({ data, isSelecting, setSelected }: Props) => {
-  const isCanceled = data.notificationType === 'MATCHING_CANCEL';
+  const type = data.notificationType.split('_')[1];
   const [isChecked, setIsChecked] = useState(false);
+
+  const content: { [key: string]: { [key: string]: string | JSX.Element } } = {
+    REQUEST: {
+      icon: <RequestIcon />,
+      title: '매칭신청 알림',
+      description: `${data.recruitmentTitle} 매칭 요청`,
+      info: `${data.senderNickname}님의 신청 | ${data.requestDate}`,
+    },
+    CANCEL: {
+      icon: <CancelIcon />,
+      title: '매칭취소 요청 알림',
+      description: `${data.recruitmentTitle} 매칭 요청 취소`,
+      info: `${data.senderNickname}님의 신청 | ${data.requestDate}`,
+    },
+    SUCCESS: {
+      icon: <SuccessIcon />,
+      title: '매칭성공 알림',
+      description: `${data.recruitmentTitle} 매칭 성공!`,
+      info: `${data.senderNickname}님의 신청 | ${data.requestDate}`,
+    },
+  };
 
   useEffect(() => {
     isChecked
@@ -23,24 +45,25 @@ const Notification = ({ data, isSelecting, setSelected }: Props) => {
   }, [isChecked, data.notificationId, setSelected]);
 
   return (
-    <S.Wrapper isCanceled={isCanceled} isRead={data.isRead}>
-      <S.IconWrapper>{isCanceled ? <CancelIcon /> : <RequestIcon />}</S.IconWrapper>
-      <S.Main isCanceled={isCanceled}>
-        <p>{isCanceled ? '매칭취소 요청 알림' : '매칭신청 알림'}</p>
+    <S.Wrapper type={type} isRead={data.isRead}>
+      <S.IconWrapper>{content[type].icon}</S.IconWrapper>
+      <S.Main type={type}>
+        <p>{content[type].title}</p>
         <S.Description>
-          <p>
-            {data.recruitmentTitle} 매칭 요청{isCanceled && ' 취소'}
-          </p>
-          <p>
-            {data.senderNickname}님의 {isCanceled ? '요청' : '신청'} | {data.requestDate}
-          </p>
+          <p>{content[type].description}</p>
+          <p>{content[type].info}</p>
         </S.Description>
       </S.Main>
       <S.Side>
-        {isSelecting ? (
-          <div onClick={() => setIsChecked((prev) => !prev)}>{isChecked ? <Checked /> : <UnChecked />}</div>
-        ) : (
-          <p>58분전</p>
+        {isSelecting && (
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsChecked((prev) => !prev);
+            }}
+          >
+            {isChecked ? <Checked /> : <UnChecked />}
+          </div>
         )}
       </S.Side>
     </S.Wrapper>
