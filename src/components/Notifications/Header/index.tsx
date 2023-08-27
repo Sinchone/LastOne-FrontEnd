@@ -49,7 +49,7 @@ const Header = ({ isSelecting, setIsSelecting, selectedList }: Props) => {
   return (
     <S.Wrapper>
       <S.BackButton>
-        <LeftArrowIcon onClick={() => (isSelecting ? setIsSelecting(false) : handleRouteBack)} />
+        <LeftArrowIcon onClick={() => (isSelecting ? setIsSelecting(false) : handleRouteBack())} />
       </S.BackButton>
       <S.Title>알림</S.Title>
       <S.DeleteButton onClick={handleIsSelecting}>{isSelecting ? '선택완료' : '삭제'}</S.DeleteButton>
