@@ -9,5 +9,5 @@ export const readNotification = (id: number) => {
 };
 
 export const deleteNotification = (deleteIdList: number[]) => {
-  return authApi.delete(`/api/notification`, { data: deleteIdList });
+  return authApi.delete(`/api/notification`, { data: { deleteIdList: deleteIdList } });
 };
