@@ -32,3 +32,16 @@ export const calDateForMessage = (input: string) => {
 
   return `${period} ${convertedHour}:${minute}`;
 };
+
+export const calHour = (hour: number) => {
+  if (hour < 12) {
+    return {
+      meridiem: '오전',
+      time: hour,
+    };
+  }
+  return {
+    meridiem: '오후',
+    time: hour - 12,
+  };
+};
