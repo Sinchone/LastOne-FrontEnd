@@ -42,6 +42,7 @@ const Header = ({ isSelecting, setIsSelecting, selectedList }: Props) => {
 
     deleteNotification(selectedList).then(() => {
       setIsToast(true);
+      router.reload();
       console.log(`deleted list: ${selectedList}`);
     });
   };

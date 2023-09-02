@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from './style';
 import Notification from '../Notification';
 import Checked from '@assets/icon/checked.svg';
@@ -18,6 +18,7 @@ interface Props {
 
 const Content = ({ notificationList, isSelecting, setIsSelecting, setSelectedList }: Props) => {
   const router = useRouter();
+  const [filteredNotificationList, setFilteredNotificationList] = useState<NotificationType[]>(notificationList);
   const [isRequestOnly, setIsRequestOnly] = useState(false);
   const [isCancelOnly, setIsCancelOnly] = useState(false);
 
@@ -36,13 +37,14 @@ const Content = ({ notificationList, isSelecting, setIsSelecting, setSelectedLis
 
   // 전체 삭제
   const handleConfirm = () => {
-    const deletedList = getFilteredNotificationList().map((notification) => notification.notificationId);
+    const deletedList = filteredNotificationList.map((notification) => notification.notificationId);
 
     setIsSelecting(false);
     setIsModal(false);
 
     deleteNotification(deletedList).then(() => {
       setIsToast(true);
+      router.reload();
       console.log(`deleted list: ${deletedList}`);
     });
   };
@@ -65,10 +67,13 @@ const Content = ({ notificationList, isSelecting, setIsSelecting, setSelectedLis
     setFilterOption(null);
   };
 
-  const getFilteredNotificationList = () => {
-    if (!filterOption) return notificationList;
-    return notificationList.filter((notification) => notification.notificationType === filterOption);
-  };
+  useEffect(() => {
+    if (!filterOption) setFilteredNotificationList(notificationList);
+    else
+      setFilteredNotificationList(
+        notificationList.filter((notification) => notification.notificationType === filterOption)
+      );
+  }, [notificationList, filterOption]);
 
   return (
     <S.Wrapper>
@@ -89,8 +94,8 @@ const Content = ({ notificationList, isSelecting, setIsSelecting, setSelectedLis
         )}
       </S.Option>
       <S.NotificationContainer>
-        {getFilteredNotificationList().length ? (
-          getFilteredNotificationList().map((notification) => (
+        {filteredNotificationList.length ? (
+          filteredNotificationList.map((notification) => (
             <div key={notification.notificationId} onClick={() => handleClickNotification(notification)}>
               <Notification data={notification} isSelecting={isSelecting} setSelected={setSelectedList} />
             </div>
