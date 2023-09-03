@@ -203,6 +203,10 @@ export const DescriptionWrapper = styled.div`
     font-size: 18px;
     font-weight: 700;
   }
+
+  p {
+    white-space: pre-line;
+  }
 `;
 
 export const ImageWrapper = styled.div`

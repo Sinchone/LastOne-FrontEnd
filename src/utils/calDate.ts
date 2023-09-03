@@ -19,3 +19,29 @@ export const calDate = (input: string) => {
     .toString()
     .padStart(2, '0')}`;
 };
+
+export const calDateForMessage = (input: string) => {
+  const matchedStr = input.match(/(\d{2}):(\d{2}):(\d{2})/);
+  if (!matchedStr) {
+    return;
+  }
+  const [_, hour, minute] = matchedStr;
+  const numericHour = parseInt(hour, 10);
+  const period = numericHour >= 12 ? '오후' : '오전';
+  const convertedHour = numericHour > 12 ? numericHour - 12 : numericHour;
+
+  return `${period} ${convertedHour}:${minute}`;
+};
+
+export const calHour = (hour: number) => {
+  if (hour < 12) {
+    return {
+      meridiem: '오전',
+      time: hour,
+    };
+  }
+  return {
+    meridiem: '오후',
+    time: hour - 12,
+  };
+};

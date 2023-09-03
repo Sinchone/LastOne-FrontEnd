@@ -9,6 +9,8 @@ import { currentMenuState } from '@recoil/application';
 import { cancelMatching, completeMatching, deleteApplication } from '@apis/application';
 import { createImageUrl } from '@utils/createImageUrl';
 import Image from 'next/image';
+import { createChattingRoom } from '@apis/chatting';
+import { useRouter } from 'next/router';
 
 interface Props {
   recruitmentId: number;
@@ -16,6 +18,7 @@ interface Props {
 }
 
 const Item = ({ recruitmentId, data }: Props) => {
+  const router = useRouter();
   const menu = useRecoilValue(currentMenuState);
   const [isModal, setIsModal] = useState(false);
 
@@ -27,6 +30,18 @@ const Item = ({ recruitmentId, data }: Props) => {
 
     // TODO: 요청한 신청 중, status가 SUCCESS인 경우 API 수정
     return data.status === 'WAITING' ? deleteApplication(data.applicationId) : deleteApplication(data.applicationId);
+  };
+
+  const handleChatButton = (memberId: number) => {
+    const promise = createChattingRoom(memberId);
+    promise
+      .then((response) => {
+        const roomId = response.data;
+        router.push(`/chatting/${roomId}`);
+      })
+      .catch((error) => {
+        console.log('채팅방 생성 에러', error);
+      });
   };
 
   return (
@@ -51,7 +66,14 @@ const Item = ({ recruitmentId, data }: Props) => {
       <span className="time">{moment(data.applicationDate, 'YYYY.MM.DD HH:mm').format('MM.DD HH:mm')}</span>
       <S.ButtonGroup>
         <S.Button menu={menu} type={data.status} onClick={() => data.status !== 'FAILURE' && setIsModal(true)} />
-        <S.Button type={'chatting'} />
+        <S.Button
+          type={'chatting'}
+          onClick={() =>
+            handleChatButton(
+              menu === 'received' ? (data as ReceivedApplication).applicantId : (data as RequestedApplication).memberId
+            )
+          }
+        />
       </S.ButtonGroup>
       {isModal && (
         <ApplicationModal

@@ -66,6 +66,7 @@ const Calendar = () => {
             onChange={handleDateChange as any}
             value={selectedDate}
             calendarType={'gregory'}
+            minDate={new Date()}
             formatMonthYear={(locale, date) => moment(date).format('YYYY.MM')}
             formatDay={(locale, date) => moment(date).format('D')}
           />

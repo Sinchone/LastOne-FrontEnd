@@ -1,31 +1,45 @@
 import React from 'react';
-import { Loader,Header, Navigation } from '@components/Common';
+import { Loader, Header, Navigation } from '@components/Common';
 import { ChatMain, ChatContent } from '@components/Chatting';
-import { useGetChattingList } from '@hooks/chatting';
+import { useGetChattingList, useChatSubscription } from '@hooks/chatting';
 import { useState, useEffect } from 'react';
-
+import { useGetUserInfo } from '@hooks/common/queries';
+import { useRecoilState } from 'recoil';
+import { isReadChattingState } from '@recoil/chatting';
 
 const Chatting = () => {
-  const { data: chattingListData, isError, refetch } = useGetChattingList();
+  const { data: chattingListData, isError, refetch, isFetching } = useGetChattingList();
   const [isPossibleToRendering, setIsPossibleToRendering] = useState(false);
+  const [isRead, setIsRead] = useRecoilState(isReadChattingState);
+  const [chattingList, setChattingList] = useState([]);
+  const { currentUserId } = useGetUserInfo();
+
+  useChatSubscription(currentUserId, () => {
+    setIsPossibleToRendering(false);
+  });
+
+  useEffect(() => {
+    setIsRead(true);
+  }, [chattingList, setIsRead]);
 
   useEffect(() => {
     if (isError) {
       setIsPossibleToRendering(true);
     }
     if (chattingListData) {
+      setChattingList(chattingListData.data);
       setIsPossibleToRendering(true);
-    } 
+    }
     if (!isPossibleToRendering) {
       refetch();
     }
-  }, [isError, chattingListData, isPossibleToRendering, refetch]);
+  }, [isError, chattingListData, isPossibleToRendering, refetch, isFetching]);
 
-  if (!isPossibleToRendering) {
+  if (!isPossibleToRendering || isFetching) {
     return <Loader />;
   }
 
-  const chattingList = chattingListData?.data;
+  console.log(chattingList);
 
   return (
     <ChatMain>

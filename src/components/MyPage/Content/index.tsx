@@ -6,6 +6,7 @@ import { ProfileType, GymInfoType, FitnessType } from '@typing/user';
 import { createImageUrl } from '@utils/createImageUrl';
 import { Map, Modal } from '@components/Common';
 import { useRouter } from 'next/router';
+import { createChattingRoom } from '@apis/chatting';
 
 interface Props {
   other?: boolean;
@@ -32,7 +33,23 @@ const Content = ({ other, user, sbd, gym }: Props) => {
     </S.FitnesPartner>
   );
 
-  const chattingButton = <S.ChattingButton onClick={() => console.log(`채팅하러 가기`)}>채팅하기</S.ChattingButton>;
+  const chattingButton = (
+    <S.ChattingButton
+      onClick={() => {
+        const promise = createChattingRoom(user.id);
+        promise
+          .then((response) => {
+            const roomId = response.data;
+            router.push(`/chatting/${roomId}`);
+          })
+          .catch((error) => {
+            console.log('채팅방 생성 에러', error);
+          });
+      }}
+    >
+      채팅하기
+    </S.ChattingButton>
+  );
 
   return (
     <S.Wrapper>

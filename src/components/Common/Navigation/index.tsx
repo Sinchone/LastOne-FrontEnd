@@ -5,12 +5,16 @@ import UnClickedHome from '@assets/icon/unclick-home.svg';
 import MatchingIcon from '@assets/icon/matching.svg';
 import PartnerIcon from '@assets/icon/partner.svg';
 import ChattingIcon from '@assets/icon/chatting.svg';
+import ChattingIconUnread from '@assets/icon/chattingUnread.svg';
 import ApplyIcon from '@assets/icon/apply.svg';
 import { MAIN_PAGE, MATCHING_PAGE, CHATTING_PAGE, APPLY_PAGE } from '@constants/route';
 import * as S from './style';
 import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { isReadChattingState } from '@recoil/chatting';
 
 const Navigation = () => {
+  const [isRead, setIsRead] = useRecoilState(isReadChattingState);
   const router = useRouter();
   const pathName = router.pathname;
   return (
@@ -30,7 +34,7 @@ const Navigation = () => {
         </Link>
         <Link href={CHATTING_PAGE}>
           <S.Nav isLocated={pathName === CHATTING_PAGE}>
-            <ChattingIcon />
+            {isRead ? <ChattingIcon /> : <ChattingIconUnread />}
             <span>채팅</span>
           </S.Nav>
         </Link>
