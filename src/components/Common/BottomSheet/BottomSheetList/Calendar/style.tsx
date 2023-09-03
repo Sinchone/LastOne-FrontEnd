@@ -115,6 +115,7 @@ export const CalendarWrapper = styled.div`
     width: 100%;
     border: none;
     padding-bottom: 10px;
+    background: none;
     .react-calendar__navigation {
       justify-content: center;
       align-items: center;
@@ -123,10 +124,10 @@ export const CalendarWrapper = styled.div`
       margin-bottom: 25px;
       align-items: center;
       &:hover {
-        background-color: var(--color-white);
+        background: none;
       }
       button {
-        background-color: var(--color-white);
+        background: none;
       }
     }
 
@@ -138,7 +139,7 @@ export const CalendarWrapper = styled.div`
     }
     .react-calendar__navigation__label {
       &:hover {
-        background-color: var(--color-white);
+        background: none;
       }
     }
 
@@ -169,6 +170,11 @@ export const CalendarWrapper = styled.div`
       font-family: 'Pretendard';
       font-weight: 400;
       min-width: 497px;
+
+      abbr {
+        text-decoration: none;
+        user-select: none;
+      }
     }
 
     .react-calendar__month-view__days {
@@ -211,6 +217,11 @@ export const CalendarWrapper = styled.div`
 
     .react-calendar__tile:enabled:focus {
       background-color: white;
+    }
+
+    .react-calendar__tile:disabled {
+      color: var(--color-gray5) !important;
+      background: none;
     }
   }
 `;

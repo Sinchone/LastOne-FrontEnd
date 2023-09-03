@@ -20,7 +20,23 @@ export const TimesWrapper = styled.div`
   margin-bottom: 24px;
 `;
 
-export const Time = styled.div<{ isSelected: boolean }>`
+const disabled = `
+  cursor: default;
+  background-color: var(--color-gray2);
+  color: var(--color-gray5);
+`;
+
+const selected = `
+  background-color: var(--color-primary-main);
+  color: var(--color-white);
+`;
+
+const normal = `
+  background-color: var(--color-white);
+  color: var(--color-gray8);
+`;
+
+export const Time = styled.div<{ isSelected: boolean; isDisabled: boolean }>`
   width: 12%;
   height: 54px;
   display: flex;
@@ -30,6 +46,10 @@ export const Time = styled.div<{ isSelected: boolean }>`
   border-radius: 8px;
   cursor: pointer;
   font-weight: 400;
-  background-color: ${(props) => (props.isSelected ? 'var(--color-primary-main)' : 'var(--color-white)')};
-  color: ${(props) => (props.isSelected ? 'var(--color-white)' : 'var(--color-gray8)')};
+  user-select: none;
+  background-color: var(--color-white);
+  color: var(--color-gray8);
+
+  ${(props) => (props.isSelected ? selected : normal)}
+  ${(props) => props.isDisabled && disabled}
 `;
