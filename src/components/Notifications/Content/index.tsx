@@ -1,214 +1,79 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from './style';
 import Notification from '../Notification';
 import Checked from '@assets/icon/checked.svg';
 import UnChecked from '@assets/icon/unchecked.svg';
 import CheckModal from '../CheckModal';
 import Toast from '../Toast';
+import { NotificationType } from '@typing/notification';
+import { deleteNotification, readNotification } from '@apis/notification';
+import { useRouter } from 'next/router';
 
 interface Props {
+  notificationList: NotificationType[];
   isSelecting: boolean;
   setIsSelecting: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedList: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-const dummy = [
-  {
-    notificationId: 1,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_CANCEL',
-    isRead: false,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 2,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_REQUEST',
-    isRead: false,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 3,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_REQUEST',
-    isRead: false,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 4,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_CANCEL',
-    isRead: true,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 5,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_CANCEL',
-    isRead: true,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 6,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_CANCEL',
-    isRead: false,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 7,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_REQUEST',
-    isRead: false,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 8,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_CANCEL',
-    isRead: true,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 9,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_REQUEST',
-    isRead: true,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 10,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_CANCEL',
-    isRead: true,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 11,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_CANCEL',
-    isRead: false,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 12,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_CANCEL',
-    isRead: false,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 13,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_CANCEL',
-    isRead: false,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 14,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_REQUEST',
-    isRead: true,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 15,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_REQUEST',
-    isRead: false,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 16,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_REQUEST',
-    isRead: false,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 17,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_REQUEST',
-    isRead: false,
-    requestDate: '2023.05.07',
-  },
-  {
-    notificationId: 18,
-    recruitmentId: 148,
-    recruitmentTitle: '수정내',
-    senderNickname: 'test4',
-    notificationType: 'MATCHING_CANCEL',
-    isRead: false,
-    requestDate: '2023.05.07',
-  },
-];
-
-const Content = ({ isSelecting, setIsSelecting, setSelectedList }: Props) => {
+const Content = ({ notificationList, isSelecting, setIsSelecting, setSelectedList }: Props) => {
+  const router = useRouter();
+  const [filteredNotificationList, setFilteredNotificationList] = useState<NotificationType[]>(notificationList);
   const [isRequestOnly, setIsRequestOnly] = useState(false);
   const [isCancelOnly, setIsCancelOnly] = useState(false);
 
   const [isModal, setIsModal] = useState(false);
   const [isToast, setIsToast] = useState(false);
 
-  const requestOnly = dummy.filter((item) => item.notificationType === 'MATCHING_REQUEST');
-  const cancelOnly = dummy.filter((item) => item.notificationType === 'MATCHING_CANCEL');
-  const notifications = isRequestOnly ? requestOnly : isCancelOnly ? cancelOnly : dummy;
+  const [filterOption, setFilterOption] = useState<'MATCHING_REQUEST' | 'MATCHING_CANCEL' | null>(null);
 
+  const handleClickNotification = (notification: NotificationType) => {
+    readNotification(notification.notificationId);
+
+    if (notification.notificationType === 'MATCHING_SUCCESS')
+      router.push({ pathname: '/apply', query: { menu: 'requested' } });
+    else router.push({ pathname: '/apply', query: { menu: 'received' } });
+  };
+
+  // 전체 삭제
   const handleConfirm = () => {
+    const deletedList = filteredNotificationList.map((notification) => notification.notificationId);
+
     setIsSelecting(false);
     setIsModal(false);
 
-    // 삭제가 완료되었다면,
-    const deletedList = notifications.map((item) => item.notificationId);
-    setIsToast(true);
-    console.log(`deleted list: ${deletedList}`);
+    deleteNotification(deletedList).then(() => {
+      setIsToast(true);
+      router.reload();
+      console.log(`deleted list: ${deletedList}`);
+    });
   };
 
   const handleOption = (option: string) => {
     if (option === 'request') {
       setIsRequestOnly((prev) => !prev);
       setIsCancelOnly(false);
+      setFilterOption(isRequestOnly ? null : 'MATCHING_REQUEST');
+      return;
     }
 
     if (option === 'cancel') {
       setIsCancelOnly((prev) => !prev);
       setIsRequestOnly(false);
+      setFilterOption(isCancelOnly ? null : 'MATCHING_CANCEL');
+      return;
     }
+
+    setFilterOption(null);
   };
+
+  useEffect(() => {
+    if (!filterOption) setFilteredNotificationList(notificationList);
+    else
+      setFilteredNotificationList(
+        notificationList.filter((notification) => notification.notificationType === filterOption)
+      );
+  }, [notificationList, filterOption]);
 
   return (
     <S.Wrapper>
@@ -229,10 +94,10 @@ const Content = ({ isSelecting, setIsSelecting, setSelectedList }: Props) => {
         )}
       </S.Option>
       <S.NotificationContainer>
-        {notifications.length ? (
-          notifications.map((item) => (
-            <div key={item.notificationId} onClick={() => console.log('read')}>
-              <Notification data={item} isSelecting={isSelecting} setSelected={setSelectedList} />
+        {filteredNotificationList.length ? (
+          filteredNotificationList.map((notification) => (
+            <div key={notification.notificationId} onClick={() => handleClickNotification(notification)}>
+              <Notification data={notification} isSelecting={isSelecting} setSelected={setSelectedList} />
             </div>
           ))
         ) : (

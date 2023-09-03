@@ -10,5 +10,6 @@ export const queryKeys = {
   mainPost: ['mainPost'],
   postList: ['postList'],
   chatting: ['chatting'],
+  notification: ['notification'],
   chatRoom: ['chatRoom'],
 } as const;

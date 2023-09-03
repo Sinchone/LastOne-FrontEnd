@@ -4,6 +4,7 @@ import LeftArrowIcon from '@assets/icon/left-arrow.svg';
 import { useRouter } from 'next/router';
 import CheckModal from '../CheckModal';
 import Toast from '../Toast';
+import { deleteNotification } from '@apis/notification';
 
 interface Props {
   isSelecting: boolean;
@@ -21,22 +22,35 @@ const Header = ({ isSelecting, setIsSelecting, selectedList }: Props) => {
   };
 
   const handleIsSelecting = () => {
-    isSelecting ? setIsModal(true) : setIsSelecting(true);
+    if (!isSelecting) {
+      setIsSelecting(true);
+      return;
+    }
+
+    if (!selectedList.length) {
+      setIsSelecting(false);
+      alert('선택한 알림이 없습니다.');
+      return;
+    }
+
+    setIsModal(true);
   };
 
   const handleConfirm = () => {
     setIsSelecting(false);
     setIsModal(false);
 
-    // 삭제가 완료되었다면,
-    setIsToast(true);
-    console.log(`deleted list: ${selectedList}`);
+    deleteNotification(selectedList).then(() => {
+      setIsToast(true);
+      router.reload();
+      console.log(`deleted list: ${selectedList}`);
+    });
   };
 
   return (
     <S.Wrapper>
       <S.BackButton>
-        <LeftArrowIcon onClick={handleRouteBack} />
+        <LeftArrowIcon onClick={() => (isSelecting ? setIsSelecting(false) : handleRouteBack())} />
       </S.BackButton>
       <S.Title>알림</S.Title>
       <S.DeleteButton onClick={handleIsSelecting}>{isSelecting ? '선택완료' : '삭제'}</S.DeleteButton>
