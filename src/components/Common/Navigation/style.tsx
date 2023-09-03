@@ -28,6 +28,10 @@ export const NavList = styled.ul`
   justify-content: space-around;
   align-items: center;
   width: 100%;
+
+  a {
+    width: 25%;
+  }
 `;
 export const HomeNav = styled.li<{ isLocated: boolean }>`
   display: flex;
