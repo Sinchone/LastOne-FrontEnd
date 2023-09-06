@@ -286,16 +286,18 @@ const Content = ({ isEdit, originalPost }: Props) => {
             {isEdit ? viewImages : uploadImages}
 
             <S.DescriptionTextAreaWrapper>
-              <span>{data.description.length}/100</span>
-              <textarea
-                ref={textareaRef}
-                name="description"
-                value={data.description}
-                onChange={textareaOnChangeHandler}
-                maxLength={100}
-                rows={1}
-                placeholder="내용을 입력해주세요."
-              ></textarea>
+              <div>{data.description.length}/100</div>
+              <S.TextAreaWrapper>
+                <textarea
+                  ref={textareaRef}
+                  name="description"
+                  value={data.description}
+                  onChange={textareaOnChangeHandler}
+                  maxLength={100}
+                  rows={1}
+                  placeholder="내용을 입력해주세요."
+                ></textarea>
+              </S.TextAreaWrapper>
             </S.DescriptionTextAreaWrapper>
           </S.DescriptionArea>
 
