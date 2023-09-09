@@ -68,7 +68,7 @@ const useProfileForm = (initialState: MyPageField) => {
   };
 
   const setChangeGymState = (place: any) => {
-    if (gymState.length > 2) return;
+    if (gymState.length >= 2) return;
 
     setGymsState([
       ...gymState,
