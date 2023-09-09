@@ -16,6 +16,8 @@ import PlusIcon from '@assets/icon/plus.svg';
 import Usable from '@assets/icon/usable.svg';
 import Unusable from '@assets/icon/unusable.svg';
 import { useQueryClient } from '@tanstack/react-query';
+import { useRecoilState } from 'recoil';
+import { isMapShowState } from '@recoil/postWrite';
 
 interface Props {
   profile: {
@@ -28,7 +30,7 @@ interface Props {
 const Content = ({ profile }: Props) => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const [isMapShow, setIsMapShow] = useState(false);
+  const [isMapShow, setIsMapShow] = useRecoilState(isMapShowState);
   const [image, setImage] = useState<any>('');
   const {
     profileState,

@@ -4,12 +4,16 @@ import LeftArrowIcon from '@assets/icon/left-arrow.svg';
 import PenCilIcon from '@assets/icon/pencil.svg';
 import { useRouter } from 'next/router';
 import { MY_PAGE } from '@constants/route';
+import { useRecoilState } from 'recoil';
+import { isMapShowState } from '@recoil/postWrite';
 
 const Header = () => {
   const router = useRouter();
+  const [isMapShow, setIsMapShow] = useRecoilState(isMapShowState);
 
   const handleRouteBack = () => {
-    router.replace(MY_PAGE);
+    if (isMapShow) setIsMapShow(false);
+    else router.replace(MY_PAGE);
   };
 
   return (
