@@ -374,7 +374,7 @@ const Content = ({ profile }: Props) => {
               </S.InputContainer>
             </S.WorkTime>
             <S.ButtonGroup>
-              <S.CancelButton onClick={() => router.push('/mypage')}>취소</S.CancelButton>
+              <S.CancelButton onClick={() => router.replace('/mypage')}>취소</S.CancelButton>
               <S.Button onClick={handleClickSubmit}>등록</S.Button>
             </S.ButtonGroup>
           </S.EditForm>
@@ -398,7 +398,7 @@ const Content = ({ profile }: Props) => {
               isOpen={isWarningModal}
               handleClose={() => setIsWarningModal(false)}
               handleConfirm={() => setIsWarningModal(false)}
-              handleCancel={() => router.push('/mypage')}
+              handleCancel={() => router.replace('/mypage')}
               text={{
                 label: '필수 정보를 입력해주세요!',
                 confirm: '입력하러가기',
