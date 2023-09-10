@@ -16,6 +16,8 @@ import PlusIcon from '@assets/icon/plus.svg';
 import Usable from '@assets/icon/usable.svg';
 import Unusable from '@assets/icon/unusable.svg';
 import { useQueryClient } from '@tanstack/react-query';
+import { useRecoilState } from 'recoil';
+import { isMapShowState } from '@recoil/postWrite';
 
 interface Props {
   profile: {
@@ -28,7 +30,7 @@ interface Props {
 const Content = ({ profile }: Props) => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const [isMapShow, setIsMapShow] = useState(false);
+  const [isMapShow, setIsMapShow] = useRecoilState(isMapShowState);
   const [image, setImage] = useState<any>('');
   const {
     profileState,
@@ -374,7 +376,7 @@ const Content = ({ profile }: Props) => {
               </S.InputContainer>
             </S.WorkTime>
             <S.ButtonGroup>
-              <S.CancelButton onClick={() => router.push('/mypage')}>취소</S.CancelButton>
+              <S.CancelButton onClick={() => router.replace('/mypage')}>취소</S.CancelButton>
               <S.Button onClick={handleClickSubmit}>등록</S.Button>
             </S.ButtonGroup>
           </S.EditForm>
@@ -398,7 +400,7 @@ const Content = ({ profile }: Props) => {
               isOpen={isWarningModal}
               handleClose={() => setIsWarningModal(false)}
               handleConfirm={() => setIsWarningModal(false)}
-              handleCancel={() => router.push('/mypage')}
+              handleCancel={() => router.replace('/mypage')}
               text={{
                 label: '필수 정보를 입력해주세요!',
                 confirm: '입력하러가기',
