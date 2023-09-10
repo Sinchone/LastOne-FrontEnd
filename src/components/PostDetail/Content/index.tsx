@@ -193,7 +193,7 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
         <Modal
           isOpen={isPartnerRequested}
           handleClose={() => setIsPartnerRequested(false)}
-          handleConfirm={() => alert('요청한 신청 탭으로 이동')}
+          handleConfirm={() => router.push({ pathname: '/apply', query: { menu: 'requested' } })}
           text={{
             label: '파트너가 신청되었습니다.\n확정은 신청 목록을 확인해주세요.',
             confirm: '신청목록 확인',
