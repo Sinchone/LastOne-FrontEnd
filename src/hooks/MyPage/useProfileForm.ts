@@ -54,9 +54,13 @@ const useProfileForm = (initialState: MyPageField) => {
   };
 
   const handleChangeFitnessInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputEvent = e.nativeEvent as InputEvent;
+
+    if (inputEvent.data && !/\d/.test(inputEvent.data)) return;
+    if (+e.target.value > 999) return;
     setFitness({
       ...fitness,
-      [e.target.name]: e.target.value,
+      [e.target.name]: +e.target.value,
     });
   };
 
@@ -68,7 +72,7 @@ const useProfileForm = (initialState: MyPageField) => {
   };
 
   const setChangeGymState = (place: any) => {
-    if (gymState.length > 2) return;
+    if (gymState.length >= 2) return;
 
     setGymsState([
       ...gymState,
