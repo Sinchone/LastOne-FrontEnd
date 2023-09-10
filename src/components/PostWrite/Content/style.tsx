@@ -229,17 +229,23 @@ export const DescriptionTextAreaWrapper = styled.div`
   margin-bottom: 36px;
   position: relative;
 
-  & span {
-    position: absolute;
-    right: 0;
+  & div {
+    width: 100%;
+    text-align: right;
     font-weight: 400;
     color: var(--color-gray7);
   }
+`;
+
+export const TextAreaWrapper = styled.div`
+  width: 100%;
+  padding: 10px 0;
 
   & textarea {
     width: 100%;
-    margin-top: 15px;
-    border: none;
+    padding: 10px;
+    border: 1px solid var(--color-gray3);
+    border-radius: 8px;
     outline: none;
     resize: none;
     background-color: inherit;
