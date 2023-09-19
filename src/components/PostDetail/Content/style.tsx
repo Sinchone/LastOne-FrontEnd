@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.main`
   width: 100%;
   height: fit-content;
-  padding: 30px 15px 50px 15px;
+  padding: 30px 24px 50px 24px;
 `;
 
 export const WriterWrapper = styled.div``;
