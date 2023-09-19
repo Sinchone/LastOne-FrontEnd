@@ -46,20 +46,18 @@ const Item = ({ recruitmentId, data }: Props) => {
 
   return (
     <S.Wrapper>
-      <S.Profile>
-        {data.profileUrl ? (
-          <Image
-            src={createImageUrl(data.profileUrl as string)}
-            width={64}
-            height={64}
-            alt="profile"
-            style={{ objectFit: 'cover' }}
-          />
-        ) : (
-          <ProfileIcon />
-        )}
-        <span>{data.nickname}</span>
-      </S.Profile>
+      {data.profileUrl ? (
+        <Image
+          src={createImageUrl(data.profileUrl as string)}
+          width={64}
+          height={64}
+          alt="profile"
+          style={{ objectFit: 'cover' }}
+        />
+      ) : (
+        <ProfileIcon />
+      )}
+      <S.Nickname>{data.nickname}</S.Nickname>
       <S.Contour />
       <S.Gender>{data.gender}</S.Gender>
       <S.Contour />
