@@ -20,9 +20,7 @@ const MatchingHeader = () => {
           <PreferGender />
           <Date />
         </S.FilterContainer>
-        <S.CheckboxContainer>
-          <IsRecruiting />
-        </S.CheckboxContainer>
+        <IsRecruiting />
       </S.FilterAndCheckbox>
     </S.Wrapper>
   );
