@@ -46,6 +46,7 @@ export const Tab = styled.li<{ isSelected: boolean }>`
 `;
 
 export const ApplyPostList = styled.ul`
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 50px;
@@ -60,4 +61,13 @@ export const ApplyPost = styled.ul`
   flex-direction: column;
   width: 100%;
   gap: 21px;
+`;
+
+export const EmptyList = styled.div`
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
