@@ -2,7 +2,6 @@ import theme from '@styles/theme';
 import styled from 'styled-components';
 
 export const Wrapper = styled.footer`
-  max-width: 620px;
   width: 100%;
   height: 80px;
   padding: 20px 40px 20px 40px;
@@ -10,7 +9,7 @@ export const Wrapper = styled.footer`
   background-color: var(--color-white);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  position: fixed;
+  position: sticky;
   bottom: 0;
   z-index: 100;
 

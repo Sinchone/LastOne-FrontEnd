@@ -12,7 +12,8 @@ export const Wrapper = styled.main`
 
   ${theme.media.tablet} {
     box-shadow: none;
-    min-width: 768px;
+    width: 100%;
+    min-width: 500px;
     max-width: 768px;
   }
 
