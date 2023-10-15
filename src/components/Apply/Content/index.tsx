@@ -24,18 +24,27 @@ const Content = ({ requestedApplications, receivedApplications }: Props) => {
     ) : (
       <>요청한 신청이 없습니다.</>
     ),
-    received: receivedApplications.length ? (
-      receivedApplications.map((recruitment, idx) => (
-        <S.ApplyPost key={idx}>
-          <PostInfo data={recruitment} recruitmentId={recruitment.id} />
-          {recruitment.applications.map((application, idx) => (
-            <Item key={idx} data={application} recruitmentId={recruitment.id} />
-          ))}
-        </S.ApplyPost>
-      ))
-    ) : (
-      <>받은 신청이 없습니다.</>
-    ),
+    received:
+      receivedApplications.length &&
+      receivedApplications.flatMap((recruitment) =>
+        recruitment.applications.filter((application) => application.status !== 'CANCEL')
+      ).length ? (
+        receivedApplications.map((recruitment, idx) =>
+          recruitment.applications.filter((application) => application.status !== 'CANCEL').length ? (
+            <S.ApplyPost key={idx}>
+              <PostInfo data={recruitment} recruitmentId={recruitment.id} />
+              {recruitment.applications.map(
+                (application, idx) =>
+                  application.status !== 'CANCEL' && (
+                    <Item key={idx} data={application} recruitmentId={recruitment.id} />
+                  )
+              )}
+            </S.ApplyPost>
+          ) : null
+        )
+      ) : (
+        <S.EmptyList>받은 신청이 없습니다.</S.EmptyList>
+      ),
   };
 
   return (
@@ -48,7 +57,6 @@ const Content = ({ requestedApplications, receivedApplications }: Props) => {
           <span>요청한 신청</span>
         </S.Tab>
       </S.MenuTab>
-
       <S.ApplyPostList>{applications[currentMenu]}</S.ApplyPostList>
     </S.Wrapper>
   );

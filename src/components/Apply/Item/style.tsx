@@ -12,36 +12,35 @@ export const Wrapper = styled.section`
 
   box-shadow: 0px 0px 7px rgba(102, 109, 117, 0.1);
   border-radius: 8px;
+  white-space: nowrap;
 
   .time {
     ${theme.font.ko.body1}
     color: var(--color-gray8);
-    flex: 1;
+    flex: 1 0;
   }
-`;
-
-export const Profile = styled.div`
-  display: flex;
-  gap: 20px;
-  align-items: center;
 
   svg {
-    width: 64px;
-    height: 64px;
+    min-width: 64px;
+    min-height: 64px;
   }
 
   img {
     border-radius: 50%;
   }
+`;
 
-  span {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: -2.2%;
-    color: var(--color-gray9);
-    margin-top: 3px;
-  }
+export const Nickname = styled.div`
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -2.2%;
+  color: var(--color-gray9);
+  margin-top: 3px;
+  flex: 0 1 fit-content;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 export const Contour = styled.div`
