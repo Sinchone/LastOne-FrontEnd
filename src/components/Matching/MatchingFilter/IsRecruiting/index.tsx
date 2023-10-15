@@ -21,10 +21,10 @@ const IsRecruiting = () => {
   }, [isRecruiting]);
 
   return (
-    <>
-      <S.CheckBoxWrapper onClick={handleToggleCheckbox}>{isChecked ? <Checked /> : <S.UnChecked />}</S.CheckBoxWrapper>
+    <S.CheckBoxWrapper onClick={handleToggleCheckbox}>
+      {isChecked ? <Checked /> : <S.UnChecked />}
       <span className="checkbox_title">모집중만 보기</span>
-    </>
+    </S.CheckBoxWrapper>
   );
 };
 
