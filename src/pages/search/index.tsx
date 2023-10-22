@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Header, Content } from '@components/Search';
+import { Content } from '@components/Search';
+import { Header } from '@components/Common';
 
 const Search = () => {
   return (
     <>
-      <Header />
+      <Header text="검색" />
       <Content />
     </>
   );
