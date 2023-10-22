@@ -8,15 +8,17 @@ import { useGetMyProfile } from '@hooks/MyPage/queries';
 import { getRefreshTokenFromCookie } from '@utils/token';
 import { createImageUrl } from '@utils/createImageUrl';
 
-const Header = () => {
+const MainHeader = () => {
   const { data: user } = useGetMyProfile();
   const token = getRefreshTokenFromCookie();
 
   return (
     <S.Header>
-      <S.NavContainer>
-        <Logo />
-      </S.NavContainer>
+      <Link href={'/'}>
+        <S.NavContainer>
+          <Logo />
+        </S.NavContainer>
+      </Link>
       {token ? (
         <S.UserNav>
           <Link href={'/post/write'}>
@@ -46,4 +48,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default MainHeader;
