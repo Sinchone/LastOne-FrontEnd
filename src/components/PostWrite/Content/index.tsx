@@ -21,6 +21,7 @@ import NoImage from '../Image/None';
 import 'moment/locale/ko';
 import { createImageUrl } from '@utils/createImageUrl';
 import Image from 'next/image';
+import { useGetUserInfo } from '@hooks/common/queries';
 
 interface Props {
   isEdit?: boolean;
@@ -63,6 +64,7 @@ const Content = ({ isEdit, originalPost }: Props) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { showBottomSheet } = useBottomSheet();
   const router = useRouter();
+  const { currentUserIsEdited } = useGetUserInfo();
 
   useEffect(() => {
     if (inputRef.current) {
@@ -316,6 +318,20 @@ const Content = ({ isEdit, originalPost }: Props) => {
         </S.Wrapper>
       ) : (
         <SearchGym setChangeSearchPlace={setChangeSearchPlace} handleCloseSearch={handleCloseSearch} />
+      )}
+      {!currentUserIsEdited && (
+        <Modal
+          isOpen={!currentUserIsEdited}
+          handleClose={() => router.back()}
+          handleConfirm={() => router.push('/mypage')}
+          handleCancel={() => router.push('/')}
+          hasArrow
+          text={{
+            label: '회원 정보를 입력해야 글을 작성할 수 있어요.',
+            confirm: '정보 입력하기',
+            cancel: '홈으로 가기',
+          }}
+        />
       )}
     </>
   );
