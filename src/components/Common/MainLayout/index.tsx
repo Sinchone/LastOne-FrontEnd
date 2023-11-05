@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Header, Navigation } from '@components/Common';
+import { MainHeader, Navigation } from '@components/Common';
 
 interface Props {
   children: ReactNode;
@@ -8,7 +8,7 @@ interface Props {
 const MainLayout = ({ children }: Props) => {
   return (
     <>
-      <Header />
+      <MainHeader />
       {children}
       <Navigation />
     </>
