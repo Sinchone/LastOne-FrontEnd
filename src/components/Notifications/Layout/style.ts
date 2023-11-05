@@ -9,3 +9,8 @@ export const Wrapper = styled.section`
     overflow: hidden;
   }
 `;
+
+export const DeleteButton = styled.div<{ onClick: () => void }>`
+  ${theme.font.ko.subTitle1}
+  cursor: pointer;
+`;

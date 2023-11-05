@@ -1,72 +1,53 @@
-import theme from '@styles/theme';
 import styled from 'styled-components';
 
-export const Header = styled.div`
+export const Header = styled.header`
   width: 100%;
   height: 60px;
-  padding: 10px 24px 10px 24px;
+  padding: 16px 24px;
+
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  border-bottom: 1px solid var(--color-gray3);
-  background-color: var(--color-white);
+
   position: sticky;
   top: 0;
   z-index: 100;
 
-  ${theme.media.laptop} {
-    height: 75px;
-  }
+  border-bottom: 1px solid var(--color-gray3);
+  background-color: var(--color-white);
 `;
 
-export const NavContainer = styled.ul`
-  display: flex;
-  gap: 20px;
-`;
-
-export const Nav = styled.li`
-  font-weight: 500;
-  font-size: 14px;
-`;
-
-export const UserNav = styled.div`
+const Item = styled.div`
   display: flex;
   align-items: center;
-  gap: 30px;
+  user-select: none;
+`;
+
+export const Left = styled(Item)`
+  position: absolute;
+  left: 20px;
+  cursor: pointer;
+`;
+
+export const Center = styled(Item)`
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 34px;
+  letter-spacing: -1%;
 
   span {
-    font-weight: 500;
+    margin-left: 5px;
+    font-size: 13px;
+    line-height: 16px;
+    padding: 5px 8px;
+    border-radius: 5px;
+    background-color: #000c4a;
+    color: #fefefe;
   }
 `;
 
-export const Button = styled.button`
-  width: 60px;
-  height: 38px;
-  border-radius: 6px;
-
-  background-color: var(--color-primary-main);
-  color: var(--color-white);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    background-color: var(--color-primary-light);
-  }
-
-  &:active {
-    background-color: var(--color-primary-dark);
-  }
-`;
-
-export const ImgWrapper = styled.div`
-  width: 38px;
-  height: 38px;
-
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 2164.5px;
-  }
+export const Right = styled(Item)`
+  position: absolute;
+  right: 20px;
+  white-space: nowrap;
 `;

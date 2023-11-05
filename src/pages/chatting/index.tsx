@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loader, Header, Navigation } from '@components/Common';
+import { Loader, MainHeader, Navigation } from '@components/Common';
 import { ChatMain, ChatContent } from '@components/Chatting';
 import { useGetChattingList, useChatSubscription } from '@hooks/chatting';
 import { useState, useEffect } from 'react';
@@ -43,7 +43,7 @@ const Chatting = () => {
 
   return (
     <ChatMain>
-      <Header />
+      <MainHeader />
       <ChatContent chattingList={chattingList} />
       <Navigation />
       <div id="bottomsheet"></div>
