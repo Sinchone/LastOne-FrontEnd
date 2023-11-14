@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import * as S from './style';
 import { createPortal } from 'react-dom';
 
@@ -9,11 +10,15 @@ interface Modal {
 }
 
 const ModalLayout = ({ children, isOpen, handleClose }: Modal) => {
+  const [portalDiv, setportalDiv] = useState<Element | null>(null);
   const handleClick = () => {
     handleClose();
   };
 
-  const portalDiv = document.querySelector('#modal-root');
+  useEffect(() => {
+    setportalDiv(document.querySelector('#modal-root'));
+  }, []);
+
   if (!portalDiv) return null;
 
   return (
