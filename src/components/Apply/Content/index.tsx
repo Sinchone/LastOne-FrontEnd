@@ -22,7 +22,7 @@ const Content = ({ requestedApplications, receivedApplications }: Props) => {
         </S.ApplyPost>
       ))
     ) : (
-      <>요청한 신청이 없습니다.</>
+      <S.EmptyList>요청한 신청이 없습니다.</S.EmptyList>
     ),
     received:
       receivedApplications.length &&
