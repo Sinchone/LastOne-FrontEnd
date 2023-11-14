@@ -22,7 +22,7 @@ const OtherPage = () => {
   }
 
   if (isError) {
-    return router.push('/_error');
+    return router.push('/404');
   }
 
   if (currentUserEmail === user.data.member.email) {
