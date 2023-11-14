@@ -24,12 +24,10 @@ const PartnerList = () => {
     return <Loader />;
   }
 
-  const partners = partnerListData?.data;
-
   return (
     <>
       <Header text="운동 파트너 목록" />
-      <Content partnerList={partners} />
+      <Content partnerList={partnerListData?.data} />
       <Navigation />
     </>
   );
