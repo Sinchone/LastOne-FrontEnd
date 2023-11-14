@@ -39,8 +39,6 @@ const Chatting = () => {
     return <Loader />;
   }
 
-  console.log(chattingList);
-
   return (
     <ChatMain>
       <MainHeader />

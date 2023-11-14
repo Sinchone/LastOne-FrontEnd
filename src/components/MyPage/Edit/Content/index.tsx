@@ -59,12 +59,6 @@ const Content = ({ profile }: Props) => {
   const [isWarningModal, setIsWarningModal] = useState(false);
   const [isNicknameCheckModal, setIsNicknameCheckModal] = useState(false);
 
-  console.log(gymState);
-  console.log(fitness);
-  console.log(profileState);
-  console.log(days);
-  console.log(time);
-
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files as any;
     const url = URL.createObjectURL(files[0]);
@@ -117,8 +111,7 @@ const Content = ({ profile }: Props) => {
           setIsUsableNickname(!isDuplicated);
           setWarningText(isDuplicated ? '이미 사용중인 닉네임입니다.' : '');
         })
-        .catch((error) => {
-          console.error('닉네임 체크 중 오류가 발생했습니다:', error);
+        .catch(() => {
           setIsUsableNickname(false);
           setWarningText('닉네임 체크 중 오류가 발생했습니다.');
         });
@@ -138,11 +131,9 @@ const Content = ({ profile }: Props) => {
         setIsSubmitModal(true);
         return;
       }
-
       setIsNicknameCheckModal(true);
       return;
     }
-
     setIsWarningModal(true);
   };
 
@@ -173,8 +164,7 @@ const Content = ({ profile }: Props) => {
 
     if (isUsableNickname) {
       editProfile(formData)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           queryClient.invalidateQueries(['me']);
           setIsSubmitSuccess(true);
         })
@@ -191,7 +181,7 @@ const Content = ({ profile }: Props) => {
   const handleSelectGym = (name: string) => {
     setGymName(name);
   };
-  console.log(profileState.profileUrl?.slice(5));
+
   return (
     <>
       {!isMapShow ? (

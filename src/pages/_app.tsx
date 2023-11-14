@@ -8,7 +8,6 @@ import { RecoilRoot } from 'recoil';
 import { Layout, Modal } from '@components/Common';
 import { ThemeProvider } from 'styled-components';
 import { NextPage } from 'next';
-import Script from 'next/script';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { getAccessTokenFromCookie } from '@utils/token';

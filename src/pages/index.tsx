@@ -1,12 +1,14 @@
 import React from 'react';
-import { Header, Navigation, MainLayout } from '@components/Common';
+import { MainLayout } from '@components/Common';
 import { Banner, Contents } from '@components/Main';
 
 const Main = () => {
   const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
     setMounted(true);
   }, []);
+
   return (
     mounted && (
       <MainLayout>

@@ -1,6 +1,6 @@
 import * as S from './style';
 import SelectImage from './Select';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ImageType } from '../Content';
 
 interface Props {
@@ -32,10 +32,6 @@ const Image = ({ img, setImg }: Props) => {
     setImages(newImages);
     setImg(newImages);
   };
-
-  useEffect(() => {
-    console.log('images', images);
-  }, [images]);
 
   return (
     <S.TestWrapper>

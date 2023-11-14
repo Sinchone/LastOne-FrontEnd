@@ -35,7 +35,6 @@ const Content = ({ notificationList, isSelecting, setIsSelecting, setSelectedLis
     else router.push({ pathname: '/apply', query: { menu: 'received' } });
   };
 
-  // 전체 삭제
   const handleConfirm = () => {
     const deletedList = filteredNotificationList.map((notification) => notification.notificationId);
 
@@ -45,7 +44,6 @@ const Content = ({ notificationList, isSelecting, setIsSelecting, setSelectedLis
     deleteNotification(deletedList).then(() => {
       setIsToast(true);
       router.reload();
-      console.log(`deleted list: ${deletedList}`);
     });
   };
 

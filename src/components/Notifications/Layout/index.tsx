@@ -36,7 +36,6 @@ const Notifications = () => {
     deleteNotification(selectedList).then(() => {
       setIsToast(true);
       router.reload();
-      console.log(`deleted list: ${selectedList}`);
     });
   };
 

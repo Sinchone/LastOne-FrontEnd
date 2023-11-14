@@ -28,8 +28,6 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
   const [isPartnerCancelRequested, setIsPartnerCancelRequested] = useState(false);
   const [isPartnerCancel, setIsPartnerCancel] = useState(false);
 
-  console.log(post);
-
   useEffect(() => {
     if (applyStatus) {
       setApplicationId(applyStatus.applicationId);
@@ -39,41 +37,27 @@ const Content = ({ isOther, post, applyStatus }: Props) => {
 
   const handleCreateApplication = () => {
     isRequestPossible &&
-      createApplication(post.recruitmentId)
-        .then((response) => {
-          console.log(response);
-          setIsPartnerRequested(true);
-          setIsPartner(true);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      createApplication(post.recruitmentId).then(() => {
+        setIsPartnerRequested(true);
+        setIsPartner(true);
+      });
   };
 
   const handleCancelApplication = () => {
     if (applicationId) {
-      deleteApplication(applicationId)
-        .then((response) => {
-          console.log(response);
-          setIsPartnerCancel(true);
-          setIsPartner(false);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      deleteApplication(applicationId).then(() => {
+        setIsPartnerCancel(true);
+        setIsPartner(false);
+      });
     }
   };
 
   const handleChatButton = () => {
     const promise = createChattingRoom(post.memberId);
-    promise
-      .then((response) => {
-        const roomId = response.data;
-        router.push(`/chatting/${roomId}`);
-      })
-      .catch((error) => {
-        console.log('채팅방 생성 에러', error);
-      });
+    promise.then((response) => {
+      const roomId = response.data;
+      router.push(`/chatting/${roomId}`);
+    });
   };
 
   return (

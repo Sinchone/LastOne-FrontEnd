@@ -152,7 +152,6 @@ const Content = ({ isEdit, originalPost }: Props) => {
     );
 
     if (img.files) {
-      console.log('imgFiles', img.files);
       for (let i = 0; i < img.files.length; i++) {
         if (img.files[i]) {
           formData.append('imgFiles', img.files[i]);
@@ -160,15 +159,8 @@ const Content = ({ isEdit, originalPost }: Props) => {
       }
     }
 
-    for (const pair of formData.entries()) {
-      console.log('test', pair[0] + ', ' + pair[1]);
-    }
-
     if (!isEdit) {
-      createPost(formData).then((res) => {
-        console.log(res);
-      });
-
+      createPost(formData);
       await router.push('/');
       router.reload();
     }
@@ -193,9 +185,6 @@ const Content = ({ isEdit, originalPost }: Props) => {
   ) : (
     <></>
   );
-
-  console.log('imgFiles:', img.files);
-  console.log('imgUrls', img.urls);
 
   return (
     <>

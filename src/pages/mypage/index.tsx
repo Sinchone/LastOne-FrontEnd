@@ -7,8 +7,6 @@ import { ProfileType } from '@typing/user';
 const MyPage: NextPageWithLayout = () => {
   const { data: user } = useGetMyProfile();
 
-  console.log(user?.data);
-
   return <>{user && <Content user={user.data.member} sbd={user.data.sbd} gym={user.data.gyms} />}</>;
 };
 

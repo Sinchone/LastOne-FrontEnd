@@ -62,8 +62,7 @@ const ApplicationModal = ({ isOpen, handleClose, handleButtonClick, data }: Prop
 
   const handleConfirm = () => {
     handleButtonClick()
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         setIsSuccess(true);
       })
       .catch((error) => console.log(error));
